@@ -39,7 +39,7 @@
             $username = $_POST['usernames'];
             $password = sha1($_POST['passwords']);
 
-            $mysqli = new mysqli("localhost", "root", "", "AMS_SAMPLE_DB");
+            $mysqli = new mysqli("localhost", "root", "", "AMS_SEMIFINAL_DB");
 
             if ($mysqli->connect_errno) 
             {
@@ -50,9 +50,9 @@
 
             $row = $res->fetch_assoc();
 
-            $fname = $row['EP_FIRST_NAME'];
-            $mname = $row['EP_MIDDLE_NAME'];
-            $lname = $row['EP_LAST_NAME'];
+            $fname = $row['EP_FNAME'];
+            $mname = $row['EP_MNAME'];
+            $lname = $row['EP_LNAME'];
             $myid = $row['EP_ID'];
             $myoffice = $row['O_ID'];
 
