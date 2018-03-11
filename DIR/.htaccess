@@ -1,0 +1,5 @@
+DirectoryIndex login.php
+
+ErrorDocument 404 /AMS_PUPQC/404.html
+
+ErrorDocument 500 /AMS_PUPQC/500.html
