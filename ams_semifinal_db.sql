@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2018 at 11:18 AM
+-- Generation Time: Mar 12, 2018 at 02:50 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -48,7 +48,7 @@ CREATE TABLE `ams_r_asset` (
 
 INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQUISITION_TYPE`, `A_AVAILABILITY`, `A_DISPOSAL_STATUS`, `AL_ID`, `C_ID`, `URS_ID`, `PPMP_ID`) VALUES
 (1, 'Fujidenzo', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
-(2, 'ASUS ROG', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL);
+(2, 'ASUS ROG', '2018-03-02', 'Serviceable', 'Donation', 'Assigned', 0, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -206,8 +206,8 @@ CREATE TABLE `ams_r_user` (
 
 INSERT INTO `ams_r_user` (`U_USERNAME`, `U_PASSWORD`, `U_ROLE_CODE`, `EP_ID`) VALUES
 ('admin', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Administrator', 1),
-('DU20180001', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Departmental User', 2),
-('DU20180002', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Departmental User', 4),
+('du1', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Departmental User', 2),
+('du2', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Departmental User', 4),
 ('po', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'Property Officer', 3);
 
 -- --------------------------------------------------------
@@ -278,9 +278,15 @@ CREATE TABLE `ams_t_par` (
   `PAR_ID` int(11) NOT NULL,
   `PAR_NO` varchar(15) NOT NULL,
   `PAR_DATE` date NOT NULL,
-  `PAR_ISSUED_BY` varchar(120) NOT NULL,
-  `EP_ID` int(11) NOT NULL
+  `PAR_ISSUED_BY` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_par`
+--
+
+INSERT INTO `ams_t_par` (`PAR_ID`, `PAR_NO`, `PAR_DATE`, `PAR_ISSUED_BY`) VALUES
+(1, 'PAR-2018-0001', '2018-03-01', 'Shiela Mae Velga');
 
 -- --------------------------------------------------------
 
@@ -294,8 +300,16 @@ CREATE TABLE `ams_t_par_sub` (
   `PARS_CANCEL_DATE` date DEFAULT NULL,
   `PARS_CANCEL_BY` varchar(120) DEFAULT NULL,
   `A_ID` int(11) NOT NULL,
-  `PAR_ID` int(11) NOT NULL
+  `PAR_ID` int(11) NOT NULL,
+  `EP_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_par_sub`
+--
+
+INSERT INTO `ams_t_par_sub` (`PARS_ID`, `PARS_CANCEL`, `PARS_CANCEL_DATE`, `PARS_CANCEL_BY`, `A_ID`, `PAR_ID`, `EP_ID`) VALUES
+(1, 0, NULL, NULL, 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -590,8 +604,7 @@ ALTER TABLE `ams_t_job_order_sub`
 --
 ALTER TABLE `ams_t_par`
   ADD PRIMARY KEY (`PAR_ID`),
-  ADD UNIQUE KEY `PAR_NO` (`PAR_NO`),
-  ADD KEY `EP_ID` (`EP_ID`);
+  ADD UNIQUE KEY `PAR_NO` (`PAR_NO`);
 
 --
 -- Indexes for table `ams_t_par_sub`
@@ -599,7 +612,8 @@ ALTER TABLE `ams_t_par`
 ALTER TABLE `ams_t_par_sub`
   ADD PRIMARY KEY (`PARS_ID`),
   ADD KEY `A_ID` (`A_ID`),
-  ADD KEY `PAR_ID` (`PAR_ID`);
+  ADD KEY `PAR_ID` (`PAR_ID`),
+  ADD KEY `EP_ID` (`EP_ID`);
 
 --
 -- Indexes for table `ams_t_ppmp`
@@ -776,13 +790,13 @@ ALTER TABLE `ams_t_job_order_sub`
 -- AUTO_INCREMENT for table `ams_t_par`
 --
 ALTER TABLE `ams_t_par`
-  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_par_sub`
 --
 ALTER TABLE `ams_t_par_sub`
-  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_ppmp`
@@ -915,17 +929,12 @@ ALTER TABLE `ams_t_job_order_sub`
   ADD CONSTRAINT `ams_t_job_order_sub_ibfk_2` FOREIGN KEY (`RODS_ID`) REFERENCES `ams_t_report_of_damage_sub` (`RODS_ID`);
 
 --
--- Constraints for table `ams_t_par`
---
-ALTER TABLE `ams_t_par`
-  ADD CONSTRAINT `ams_t_par_ibfk_1` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
-
---
 -- Constraints for table `ams_t_par_sub`
 --
 ALTER TABLE `ams_t_par_sub`
   ADD CONSTRAINT `ams_t_par_sub_ibfk_1` FOREIGN KEY (`A_ID`) REFERENCES `ams_r_asset` (`A_ID`),
-  ADD CONSTRAINT `ams_t_par_sub_ibfk_2` FOREIGN KEY (`PAR_ID`) REFERENCES `ams_t_par` (`PAR_ID`);
+  ADD CONSTRAINT `ams_t_par_sub_ibfk_2` FOREIGN KEY (`PAR_ID`) REFERENCES `ams_t_par` (`PAR_ID`),
+  ADD CONSTRAINT `ams_t_par_sub_ibfk_3` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
 
 --
 -- Constraints for table `ams_t_ppmp`

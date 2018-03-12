@@ -270,7 +270,9 @@
 <div class="row">
     <div class="col-sm-12">
         <section class="panel">
-            <header class="panel-heading">Assets</header>
+            <header class="panel-heading">
+                Assets
+            </header>
 
             <div class="panel-body">
                 <div class="adv-table">
@@ -278,24 +280,53 @@
                         <thead>
                             <tr>
                                 <th style="">ID</th>
-                                <th style="">Select</th>
+                                <th style="width: 90px">Select</th>
                                 <th style="">Acquisition Type</th>
                                 <th style="word-wrap: break-word;">Description</th> 
                                 <th style="">Date Acquired</th>
-                                <th style="">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+
+                        <?php  
+
+                            $sql = "SELECT * FROM `ams_r_asset` ORDER BY A_DATE DESC";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            $i = 0;
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $i++;
+                                $a_id = $row['A_ID'];
+                                $a_description = $row['A_DESCRIPTION'];    
+                                $a_acquistion_type = $row['A_ACQUISITION_TYPE'];                           
+                                $a_date = $row['A_DATE'];
+                                $a_availability = $row['A_AVAILABILITY'];
+                        ?>
+
                             <tr class="gradeX">
-                                <td>a</td>
-                                <td>b</td>
-                                <td>c</td>
-                                <td>d</td>
-                                <td>e</td>
-                                <td>f</td>
+                                <td id="getid<?php echo $i ?>"> <?php echo $a_id; ?> </td>
+                                <td>
+                                    <center>                
+                                        <input type="checkbox" id="chkvals<?php echo $i ?>" class="checkbox form-control" style="width: 20px">
+                                    </center>     
+                                </td>
+                                <td> <?php echo $a_acquistion_type; ?> </td>
+                                <td> <?php echo $a_description; ?> </td>
+                                <td> <?php echo $a_date; ?> </td>                                
                             </tr>
+
+                        <?php 
+                            }                        
+                        ?>    
+
+                        <a class="btn btn-success" id="assignbtn">Assign</a>
                         </tbody>
+
                     </table>
+
                 </div>
             </div>
         </section>
@@ -374,6 +405,7 @@
     <script src="../../js/advanced-form.js"></script>
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
+
 <!--script for this page-->
 </body>
 </html>
@@ -411,4 +443,28 @@ $(document).ready(function(){
  }, 1000);
  
 });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+
+        var countreq = 4;
+
+        $('#assignbtn').click(function() {
+            
+        });
+
+        // $('#save').click(function () {
+        //     $('#dynamic-table').find('tr').each(function () {
+        //         var row = $(this);
+        //         if (row.find('input[type="checkbox"]').is(':checked')) 
+        //         {
+        //             var e = document.getElementById('chkvals[]').value;
+        //             alert(e);
+        //         }
+        //     });
+        // });
+
+    });
 </script>
