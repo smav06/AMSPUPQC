@@ -279,11 +279,12 @@
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
                         <thead>
                             <tr>
-                                <th style="">ID</th>
+                                <th style="width: 70px;">ID</th>
                                 <th style="width: 90px">Select</th>
-                                <th style="">Acquisition Type</th>
-                                <th style="word-wrap: break-word;">Description</th> 
-                                <th style="">Date Acquired</th>
+                                <th style="width: 140px;">Acquisition Type</th>
+                                <th style="width: 100px;">Status</th> 
+                                <th style="word-wrap: break-word;">Description</th>                                
+                                <th style="width: 130px;">Date Acquired</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -298,31 +299,80 @@
 
                             while($row = mysqli_fetch_assoc($result))
                             {
-                                $i++;
+                                $i++;                                
                                 $a_id = $row['A_ID'];
                                 $a_description = $row['A_DESCRIPTION'];    
                                 $a_acquistion_type = $row['A_ACQUISITION_TYPE'];                           
                                 $a_date = $row['A_DATE'];
+                                $a_status = $row['A_STATUS'];
                                 $a_availability = $row['A_AVAILABILITY'];
                         ?>
 
-                            <tr class="gradeX">
-                                <td id="getid<?php echo $i ?>"> <?php echo $a_id; ?> </td>
-                                <td>
-                                    <center>                
-                                        <input type="checkbox" id="chkvals<?php echo $i ?>" class="checkbox form-control" style="width: 20px">
-                                    </center>     
-                                </td>
-                                <td> <?php echo $a_acquistion_type; ?> </td>
-                                <td> <?php echo $a_description; ?> </td>
-                                <td> <?php echo $a_date; ?> </td>                                
+                            <tr class="gradeX" id="hahaha1<?php echo $i; ?>">
+
+                                <?php
+                                    if ($a_availability == 'Available') 
+                                    {
+                                ?>
+                                        <td>
+                                            <a id="getid<?php echo $i; ?>">
+                                                <?php echo $a_id; ?>
+                                            </a> 
+                                        </td>                                
+
+                                        <td>
+                                            <center>                
+                                                <input type="checkbox" id="chkvals<?php echo $i; ?>" class="checkbox form-control" style="width: 20px">
+                                            </center>     
+                                        </td>
+                                <?php
+                                    }
+                                    elseif ($a_availability == 'Assigned') 
+                                    {
+                                ?>
+
+                                        <td>
+                                            <a id="getid<?php echo $i; ?>">
+                                                <?php echo $a_id; ?>
+                                            </a> 
+                                        </td>                                
+
+                                        <td>
+                                            <center>                
+                                                <input type="checkbox" id="chkvals<?php echo $i; ?>" class="checkbox form-control" style="width: 20px" disabled>
+                                            </center>     
+                                        </td>
+                                <?php
+                                    }
+                                ?>
+
+                                <td id="origtype<?php echo $i; ?>"> <?php echo $a_acquistion_type; ?> </td>
+                                <td id="origstat<?php echo $i; ?>"> <?php echo $a_status; ?> </td>
+                                <td id="origdesc<?php echo $i; ?>"> <?php echo $a_description; ?> </td>                                
+                                <td id="origdate<?php echo $i; ?>"> <?php echo $a_date; ?> </td>                                
                             </tr>
 
                         <?php 
                             }                        
                         ?>    
 
-                        <a class="btn btn-success" id="assignbtn">Assign</a>
+                        <?php
+                            $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_r_asset`";
+
+                            $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+
+                            while($row1 = mysqli_fetch_assoc($result1))
+                            {
+                                $cnt = $row1['AAA'];
+                        ?>
+
+                            <input type="text" class="hidden" id="countthetable" value="<?php echo $cnt; ?>">
+
+                        <?php
+                            }
+                        ?>
+
+                        <a class="btn btn-success" id="assignbtn" data-toggle="modal" href="#ModalAssign">Assign</a>
                         </tbody>
 
                     </table>
@@ -363,6 +413,100 @@
 </div>
 <!--right sidebar end-->
 </section>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="ModalAssign" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #8C1C1C; color: white">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Assign Asset (PAR)</h4>
+            </div>
+
+            <div class="modal-body">
+                
+                <form role="form" method="POST" id="form-data3">
+                    <div class="form-group">
+                        <div class="adv-table">
+                            <table  class="display table table-bordered table-striped" id="dynamic-table tblmodal">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 70px;">ID</th>
+                                        <th style="width: 140px;">Acquisition Type</th>
+                                        <th style="width: 100px;">Status</th> 
+                                        <th style="word-wrap: break-word;">Description</th>                                
+                                        <th style="width: 130px;">Date Acquired</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="newmodalget">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">                                                             
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Assign To:</label>
+                            <select class="form-control" style="color: black;">
+                                <option value="" disabled selected></option>
+
+                                <?php  
+
+                                    $sqlforemployee = "SELECT *, EP.EP_ID FROM `ams_r_employee_profile` AS EP LEFT JOIN `ams_r_user` AS U ON U.EP_ID = EP.EP_ID WHERE EP.EP_STATUS = 'Active' AND U.U_ROLE_CODE != 'Administrator' OR EP.EP_STATUS = 'Active' AND U.U_ROLE_CODE IS NULL";
+
+                                    $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                                    while($row = mysqli_fetch_assoc($results))
+                                    {
+                                        $fname = $row['EP_FNAME'];
+                                        $mname = $row['EP_MNAME'];
+                                        $lname = $row['EP_LNAME'];
+                                        $wholename = $fname.' '.$mname.' '.$lname;
+                                        $epid = $row['EP_ID'];
+
+                                ?>
+
+                                <option value="<?php echo $epid ?>"><?php echo "$wholename"; ?></option>
+                                
+                                <?php
+                                    }
+                                ?>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date Assign:</label>
+                            <input type="date" name="" class="form-control" style="color: black;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">                                                             
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" id="" type="button">Assign</button>
+                <button data-dismiss="modal" class="btn btn-default" id="" type="button">Close</button>                   
+
+            </div>    
+
+        </div>
+    </div>
+</div>
+
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--Core js-->
     <script src="../../js/jquery.js"></script>
@@ -449,22 +593,80 @@ $(document).ready(function(){
 <script>
     $(document).ready(function() {
 
-        var countreq = 4;
-
         $('#assignbtn').click(function() {
+
+            document.getElementById('newmodalget').innerHTML = '';
+
+            var getthecnt = document.getElementById('countthetable').value;
+            var getcheckedconcat = '';
+            var final = '';
+
+            for (var i=1; i <=getthecnt; i++) {
             
+                if (document.getElementById('chkvals'+i).checked) {
+
+                    // var abc = document.getElementById('getid'+i).innerText;                    
+
+                    // var getcheckedconcat = getcheckedconcat + abc + ',';
+
+                    // var gege = '<tr>' + document.getElementById('hahaha1'+i).innerHTML + '</tr>';
+
+
+
+
+
+                    var azxc = '<td id="modid' +i+ '">' + document.getElementById('getid'+i).innerText + '</td>';
+                    // alert(azxc);
+
+                    var bzxc = '<td id="modtype$i">' + document.getElementById('origtype'+i).innerText + '</td>';
+                    // alert(bzxc);
+
+                    var czxc = '<td id="modstat$i">' + document.getElementById('origstat'+i).innerText + '</td>';
+                    // alert(czxc);
+
+                    var dzxc = '<td id="moddesc$i">' + document.getElementById('origdesc'+i).innerText + '</td>';
+                    // alert(dzxc);
+
+                    var ezxc = '<td id="moddate$i">' + document.getElementById('origdate'+i).innerText + '</td>';                    
+                    // alert(ezxc);
+
+                    // alert('<tr>' + azxc + bzxc + czxc + dzxc + ezxc + '</tr>');
+                    document.getElementById('newmodalget').innerHTML = document.getElementById('newmodalget').innerHTML + '<tr>' + azxc + bzxc + czxc + dzxc + ezxc + '</tr>'; 
+
+
+                    // var final = final + gege;
+
+                    // document.getElementById('newmodalget').innerHTML = final;
+
+                    // alert(gege);
+
+                    // alert('['+getcheckedconcat+']'); 
+
+                    //START
+                    // $.ajax({
+                    //     type: "GET",
+                    //     url: 'POAsset/AjaxGetDataPO.php',
+                    //     dataType: 'json',
+                    //     data: {
+                    //         _getcheckedconcat: getcheckedconcat
+                    //     },
+                    //     success: function (data) {
+                    //         document.getElementById('modrelqrcode').value = data.gg;
+                    //     },
+                    //     error: function (response) {
+                    //         swal("Please naman!", "Gumana kana!", "error");
+                    //     }
+
+                    // });
+                    //END
+
+
+                }
+            }
+
         });
 
-        // $('#save').click(function () {
-        //     $('#dynamic-table').find('tr').each(function () {
-        //         var row = $(this);
-        //         if (row.find('input[type="checkbox"]').is(':checked')) 
-        //         {
-        //             var e = document.getElementById('chkvals[]').value;
-        //             alert(e);
-        //         }
-        //     });
-        // });
+
 
     });
 </script>
