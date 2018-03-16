@@ -231,12 +231,13 @@
             <div class="col-md-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Request an asset
+                        Request asset
                           <span class="tools pull-right">
                             <a class="fa fa-chevron-down" href="javascript:;"></a>
                          </span>
                     </header>
-                    <div class="panel-body">
+                    <!-- REMEMBER -->
+                    <div class="panel-body"> 
                         <div class="adv-table">
                             <table class="display table table-bordered table-striped">                                
                                 <tr>
@@ -420,6 +421,74 @@
                     </div>
                 </section>
             </div>
+
+            <div class="col-md-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Pending Request
+                          <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                         </span>
+                    </header>
+
+                    <div class="panel-body">
+                        <div class="adv-table">
+                            <table class="display table table-bordered table-striped classtbl2" id="dynamic-table">
+                                <thead>
+                                    <tr>
+                                        <th style="display: none;">URS ID</th>
+                                        <th style="width: 130px;">Request No.</th>
+                                        <th style="width: 130px;">Request Date</th> 
+                                        <th style="">Purpose</th>
+                                        <th style="width: 120px;">Status</th>
+                                        <th style="width: 120px;"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <?php
+                                    
+                                    $getuseid = $_SESSION['myoid'];
+
+                                    $retrievereqs = "SELECT URS.URS_ID, URS.URS_NO, URS.URS_REQUEST_DATE, URS.URS_PURPOSE, URS.URS_STATUS_TO_PO FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE EP.O_ID = $getuseid GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
+
+                                    $dispdata = mysqli_query($connection, $retrievereqs);
+
+                                    while ($rowdispreq = mysqli_fetch_assoc($dispdata)) 
+                                    {
+                                        $ursdispid = $rowdispreq['URS_ID'];
+                                        $ursdispno = $rowdispreq['URS_NO'];
+                                        $ursdispreqdate = $rowdispreq['URS_REQUEST_DATE'];
+                                        $ursdisppurpose = $rowdispreq['URS_PURPOSE'];
+                                        $ursdispstatus = $rowdispreq['URS_STATUS_TO_PO'];
+
+                                ?>
+
+                                    <tr>
+                                        <td style="display: none;"> <?php echo $ursdispid; ?> </td>
+                                        <td> <?php echo $ursdispno; ?> </td>
+                                        <td> <?php echo $ursdispreqdate; ?> </td>
+                                        <td> <?php echo $ursdisppurpose; ?> </td>
+                                        <td> <?php echo $ursdispstatus; ?> </td>
+                                        <td>
+                                            <a href="#" class="btn btn-success"><i class="fa fa-eye"></i></a>
+
+                                            <a class="btn btn-danger"><i class="fa fa-times-circle"></i></a>
+                                        </td>
+                                    </tr>
+
+                                <?php
+                                    }
+                                ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
         </div>                        
 
         <!-- page end-->
