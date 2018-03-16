@@ -268,14 +268,23 @@
 
                                                     $finalid = $last + 1;
 
+                                                    echo '<input type="hidden" value="'.$finalid.'" name="getthefinalid">';
+
+
+                                                    $result2 = mysqli_query($connection, "SELECT CONCAT( 'REQ-2018-', RIGHT( 10000 +( SELECT IFNULL( ( SELECT COUNT(*) FROM `ams_t_user_request_summary` ), 1 ) + 1 ), 4 ) ) AS GETROD");
+                                                    $row2 = mysqli_fetch_array($result2);
+
+                                                    $last2 = $row2['GETROD'];
+
+                                                     echo '<input type="hidden" value="'.$last2.'" name="getthefinalno">';
+
                                                 ?>
 
                                                 <div class="form-group">
-                                                    <label>Purpose Of Request</label>
-                                                    <input type="hidden" name="currentdate" value="<?php echo date('Y-m-d') ?>">
-                                                    <!-- <input type="text" name="urs_purpose" class="form-control" required="" maxlength="200" style="color: black;" /> -->
+                                                    <label>Purpose Of Request</label>                                                    
+                                                    
                                                     <textarea class="form-control" name="urs_purpose" required="" style="resize: none; color: black;" maxlength="200"></textarea>
-                                                    <input type="hidden" name="currentempid" value="<?php echo $_SESSION['myid'] ?>">
+                                                    
                                                 </div>
 
                                                 <div class="row">
@@ -286,96 +295,29 @@
                                                 </div>
                                             
                                                 <div class="row group">                                                        
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-7">
                                                         <div class="form-group">
-                                                            <label>Asset Description</label>
-                                                            <input maxlength="150" type="text" name="UR_DESCRIPTION[]" class="form-control" required="" style="color: black;" maxlength="150" />
-                                                        </div>
-                                                    </div>
+                                                            <label>Asset</label>
+                                                            <select name="AL_ID[]" class="form-control" style="color: black;" required="">
 
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Asset Type</label>
-                                                            <select name="AT_ID[]" class="form-control" style="color: black;" required="">
+                                                           <!--  <select name="AL_ID[]" class="form-control" style="color: black;" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();' required=""> -->
+
                                                                 <option selected disabled value=""></option>
 
                                                             <?php  
-                                                                $sqlgetasttype = "SELECT * FROM `ams_r_asset_type` ";
 
-                                                                $results = mysqli_query($connection, $sqlgetasttype) or die("Bad Query: $sql");
+                                                                $alibrary = "SELECT * FROM `ams_r_asset_library`";
 
-                                                                while($row = mysqli_fetch_assoc($results))
-                                                                {
-                                                                    $asttypeid = $row['AT_ID'];
-                                                                    $asttypename = $row['AT_NAME'];
-
-                                                            ?>
-
-                                                                <option value="<?php echo $asttypeid ?>"><?php echo "$asttypename"; ?></option>
-
-                                                            <?php 
-                                                                } 
-                                                            ?>
-
-                                                            </select>
-
-                                                            <!-- <label>Logic ko asset type with id</label>
-                                                            <input name="asttypesss" value="" class="form-control" style="color: black;"/> -->
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label>Unit</label>
-                                                            <select name="UR_UNIT[]" class="form-control" style="color: black;" required="">
-                                                                <option selected disabled value=""></option>
-                                                                <option value="<?php echo $finalid.$_SESSION['myid'] ?>Piece">Piece</option>
-                                                                <option value="<?php echo $finalid.$_SESSION['myid'] ?>Set">Set</option>
-                                                                <option value="<?php echo $finalid.$_SESSION['myid'] ?>Bundle">Bundle</option>
-                                                            </select>
-
-                                                            <!-- <label>Logic ko sa unit</label>
-                                                            <input name="place" value="" class="form-control" style="color: black;"/> -->
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label>Quantity</label>
-                                                            <input style="color: black; padding-right: 2px;" type="number" name="UR_QUANTITY[]" class="form-control" required="" minlength="3" min="1" max="100" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Request By</label>
-                                                            <select name="EP_ID[]" class="form-control" style="color: black;" required="">
-                                                                <option selected disabled value=""></option>
-                                                                <!-- <option value="<?php echo $finalid.$_SESSION['myid'] ?>Piece">Piece</option>
-                                                                <option value="<?php echo $finalid.$_SESSION['myid'] ?>Set">Set</option>
-                                                                <option value="<?php echo $finalid.$_SESSION['myid'] ?>Bundle">Bundle</option> -->
-
-                                                            <?php  
-
-                                                                $getoffice = $_SESSION['myoid'];
-
-                                                                $sqlforemployee = "SELECT * FROM `ams_r_employee_profile` WHERE O_ID = $getoffice";
-
-                                                                $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+                                                                $results = mysqli_query($connection, $alibrary) or die("Bad Query: $sql");
 
                                                                 while($row = mysqli_fetch_assoc($results))
                                                                 {
-                                                                    $fname = $row['EP_FIRST_NAME'];
-                                                                    $mname = $row['EP_MIDDLE_NAME'];
-                                                                    $lname = $row['EP_LAST_NAME'];
-                                                                    $wholename = $fname.' '.$mname.' '.$lname;
-                                                                    $epid = $row['EP_ID'];
+                                                                    $libraryname = $row['AL_NAME'];
+                                                                    $libraryid = $row['AL_ID'];
 
                                                             ?>
 
-                                                                <option value="<?php echo $epid ?>"><?php echo "$wholename"; ?></option>
+                                                                <option value="<?php echo $libraryid; ?>"><?php echo "$libraryname"; ?></option>
 
                                                             <?php 
                                                                 } 
@@ -391,6 +333,69 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <label>Unit</label>
+                                                            <select name="UR_UNIT[]" class="form-control" style="color: black;" required="">
+                                                                <option selected disabled value=""></option>
+
+                                                                <option value="Piece">Piece</option>
+
+                                                                <option value="Set">Set</option>
+
+                                                            </select>
+
+                                                            <!-- <label>Logic ko sa unit</label>
+                                                            <input name="place" value="" class="form-control" style="color: black;"/> -->
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Quantity</label>
+                                                            <input style="color: black; padding-right: 2px;" type="number" name="UR_QUANTITY[]" class="form-control" required="" minlength="3" min="1" max="100" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Request By</label>
+                                                            <select name="EP_ID[]" class="form-control" style="color: black;" required="">
+                                                                <option selected disabled value=""></option>
+
+                                                            <?php  
+
+                                                                $getoffice = $_SESSION['myoid'];
+
+                                                                $sqlforemployee = "SELECT * FROM `ams_r_employee_profile` WHERE O_ID = $getoffice";
+
+                                                                $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                                                                while($row = mysqli_fetch_assoc($results))
+                                                                {
+                                                                    $fname = $row['EP_FNAME'];
+                                                                    $mname = $row['EP_MNAME'];
+                                                                    $lname = $row['EP_LNAME'];
+                                                                    $wholename = $fname.' '.$mname.' '.$lname;
+                                                                    $epid = $row['EP_ID'];
+
+                                                            ?>
+
+                                                                <option value="<?php echo $epid; ?>"><?php echo "$wholename"; ?></option>
+
+                                                            <?php 
+                                                                } 
+                                                            ?>
+
+                                                            </select>
+
+                                                            <!-- <label>Logic ko get epid ng nagrequest</label>
+                                                            <input name="reqperson" value="" class="form-control" style="color: black;"/> -->
+
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <button type="button" class="btn btn-danger btnRemove" style="margin-top: 23px;">Remove</button>
@@ -398,21 +403,14 @@
                                                     </div>
                                                     
                                                     <div class="col-md-12">
-                                                        <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">                                                 
+                                                        <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">                                                 
                                                         </div>
                                                     </div>
 
                                                 </div>  
                                             </div>
-
-                                            <!-- <div class="row group">
-                                                <div class="col-md-12">
-                                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #E0E1E7;">                                                             
-                                                    </div>
-                                                </div>
-                                            </div> -->
                                             
-                                            <p><button type="submit" class="btn btn-success" name="insertonly">Submit</button></p>
+                                            <p><button type="submit" class="btn btn-success">Submit</button></p>
 
                                         </form>  
                                     </td> 

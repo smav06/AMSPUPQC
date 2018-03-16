@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2018 at 04:49 AM
+-- Generation Time: Mar 16, 2018 at 07:45 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -495,11 +495,22 @@ CREATE TABLE `ams_t_user_request` (
   `UR_UNIT` varchar(25) NOT NULL,
   `UR_QUANTITY` int(11) NOT NULL,
   `UR_STATUS` varchar(25) NOT NULL DEFAULT 'Pending',
-  `UR_APPROVED_DATE_BY_PO` date NOT NULL,
-  `UR_REJECT_DATE_BY_PO` date NOT NULL,
+  `UR_APPROVED_DATE_BY_PO` date DEFAULT NULL,
+  `UR_REJECT_DATE_BY_PO` date DEFAULT NULL,
   `URS_ID` int(11) NOT NULL,
-  `AL_ID` int(11) NOT NULL
+  `AL_ID` int(11) NOT NULL,
+  `EP_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_user_request`
+--
+
+INSERT INTO `ams_t_user_request` (`UR_ID`, `UR_UNIT`, `UR_QUANTITY`, `UR_STATUS`, `UR_APPROVED_DATE_BY_PO`, `UR_REJECT_DATE_BY_PO`, `URS_ID`, `AL_ID`, `EP_ID`) VALUES
+(1, 'Piece', 1, 'Pending', NULL, NULL, 1, 4, 2),
+(2, 'Piece', 1, 'Pending', NULL, NULL, 1, 5, 5),
+(3, 'Piece', 1, 'Pending', NULL, NULL, 2, 1, 2),
+(4, 'Set', 2, 'Pending', NULL, NULL, 2, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -561,9 +572,16 @@ CREATE TABLE `ams_t_user_request_summary` (
   `URS_REMARKS` varchar(350) DEFAULT NULL,
   `URS_VIEW_BY_USER` int(11) NOT NULL DEFAULT '0',
   `URS_VIEW_BY_PO` int(11) NOT NULL DEFAULT '0',
-  `URS_VIEW_BY_USER_MAIN` int(11) NOT NULL DEFAULT '0',
-  `EP_ID` int(11) NOT NULL
+  `URS_VIEW_BY_USER_MAIN` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_user_request_summary`
+--
+
+INSERT INTO `ams_t_user_request_summary` (`URS_ID`, `URS_NO`, `URS_REQUEST_DATE`, `URS_PURPOSE`, `URS_STATUS_TO_PO`, `URS_APPROVED_DATE`, `URS_REVISE_DATE`, `URS_REJECT_DATE`, `URS_REMARKS`, `URS_VIEW_BY_USER`, `URS_VIEW_BY_PO`, `URS_VIEW_BY_USER_MAIN`) VALUES
+(1, 'REQ-2018-0001', '2018-03-16', 'Need for teaching.', 'Pending', NULL, NULL, NULL, NULL, 0, 1, 0),
+(2, 'REQ-2018-0002', '2018-03-16', 'HEHEHE', 'Pending', NULL, NULL, NULL, NULL, 0, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -736,7 +754,8 @@ ALTER TABLE `ams_t_transfer_out_ptr_sub`
 ALTER TABLE `ams_t_user_request`
   ADD PRIMARY KEY (`UR_ID`),
   ADD KEY `AL_ID` (`AL_ID`),
-  ADD KEY `URS_ID` (`URS_ID`);
+  ADD KEY `URS_ID` (`URS_ID`),
+  ADD KEY `EP_ID` (`EP_ID`);
 
 --
 -- Indexes for table `ams_t_user_request_approved_by_main`
@@ -765,8 +784,7 @@ ALTER TABLE `ams_t_user_request_status_to_main`
 --
 ALTER TABLE `ams_t_user_request_summary`
   ADD PRIMARY KEY (`URS_ID`),
-  ADD UNIQUE KEY `URS_NO` (`URS_NO`),
-  ADD KEY `EP_ID` (`EP_ID`);
+  ADD UNIQUE KEY `URS_NO` (`URS_NO`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -896,7 +914,7 @@ ALTER TABLE `ams_t_transfer_out_ptr_sub`
 -- AUTO_INCREMENT for table `ams_t_user_request`
 --
 ALTER TABLE `ams_t_user_request`
-  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_main`
@@ -920,7 +938,7 @@ ALTER TABLE `ams_t_user_request_status_to_main`
 -- AUTO_INCREMENT for table `ams_t_user_request_summary`
 --
 ALTER TABLE `ams_t_user_request_summary`
-  MODIFY `URS_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `URS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -1032,7 +1050,8 @@ ALTER TABLE `ams_t_transfer_out_ptr_sub`
 --
 ALTER TABLE `ams_t_user_request`
   ADD CONSTRAINT `ams_t_user_request_ibfk_1` FOREIGN KEY (`AL_ID`) REFERENCES `ams_r_asset_library` (`AL_ID`),
-  ADD CONSTRAINT `ams_t_user_request_ibfk_2` FOREIGN KEY (`URS_ID`) REFERENCES `ams_t_user_request_summary` (`URS_ID`);
+  ADD CONSTRAINT `ams_t_user_request_ibfk_2` FOREIGN KEY (`URS_ID`) REFERENCES `ams_t_user_request_summary` (`URS_ID`),
+  ADD CONSTRAINT `ams_t_user_request_ibfk_3` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
 
 --
 -- Constraints for table `ams_t_user_request_approved_by_main`
@@ -1052,12 +1071,6 @@ ALTER TABLE `ams_t_user_request_approved_by_po`
 --
 ALTER TABLE `ams_t_user_request_status_to_main`
   ADD CONSTRAINT `ams_t_user_request_status_to_main_ibfk_1` FOREIGN KEY (`URS_ID`) REFERENCES `ams_t_user_request_summary` (`URS_ID`);
-
---
--- Constraints for table `ams_t_user_request_summary`
---
-ALTER TABLE `ams_t_user_request_summary`
-  ADD CONSTRAINT `ams_t_user_request_summary_ibfk_1` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

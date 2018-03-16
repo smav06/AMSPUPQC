@@ -2,7 +2,7 @@
 
     $user2 = 'root';
     $pass2 = '';
-    $dbnm2 = 'ams_sample_db';
+    $dbnm2 = 'ams_semifinal_db';
 
     try 
     {
@@ -14,20 +14,22 @@
         die();
     }
 
-    $stmt2 = $dbh2->prepare("INSERT INTO ams_t_user_request_summary(URS_REQUEST_DATE, URS_PURPOSE, EP_ID) VALUES (?, ?, ?)");
+    $currentdate = date('Y-m-d');
+
+    $stmt2 = $dbh2->prepare("INSERT INTO ams_t_user_request_summary(URS_REQUEST_DATE, URS_PURPOSE, URS_NO) VALUES (?, ?, ?)");
     $stmt2->bindParam(1, $getdate);
     $stmt2->bindParam(2, $purpose);
-    $stmt2->bindParam(3, $epid);
+    $stmt2->bindParam(3, $ursno);
 
     $arr2 = $_POST;
-    $getdate = $arr2['currentdate'];
+    $getdate = $currentdate;
     $purpose = $arr2['urs_purpose'];
-    $epid = $arr2['currentempid'];  
+    $ursno = $arr2['getthefinalno'];  
     $stmt2->execute();
 
     echo $getdate;
     echo $purpose;
-    echo $epid;
+    echo $ursno;
     echo "<br>";
 
     $dbh2 = null;
@@ -39,7 +41,7 @@
 
     $user = 'root';
     $pass = '';
-    $dbnm = 'ams_sample_db';
+    $dbnm = 'ams_semifinal_db';
 
     try 
     {
@@ -51,32 +53,29 @@
         die();
     }
 
-    $stmt = $dbh->prepare("INSERT INTO ams_t_user_request(UR_DESCRIPTION, UR_UNIT, UR_QUANTITY, URS_ID, EP_ID, AT_ID) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bindParam(1, $description);
-    $stmt->bindParam(2, $unit);
-    $stmt->bindParam(3, $qty);
-    $stmt->bindParam(4, $ursid);
-    $stmt->bindParam(5, $reqepid);
-    $stmt->bindParam(6, $atid);
+    $stmt = $dbh->prepare("INSERT INTO ams_t_user_request(UR_UNIT, UR_QUANTITY, URS_ID, EP_ID, AL_ID) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bindParam(1, $unit);
+    $stmt->bindParam(2, $qty);
+    $stmt->bindParam(3, $ursid);
+    $stmt->bindParam(4, $reqepid);
+    $stmt->bindParam(5, $alid);
 
 
     $arr = $_POST; 
-    for($i = 0; $i <= count($arr['UR_DESCRIPTION'])-1;$i++)
+    for($i = 0; $i <= count($arr['EP_ID'])-1;$i++)
     {
-        $description = $arr['UR_DESCRIPTION'][$i];
-        $unit = substr($arr['UR_UNIT'][$i], 2);
+        $unit = $arr['UR_UNIT'][$i];
         $qty = $arr['UR_QUANTITY'][$i]; 
-        $ursid = substr($arr['UR_UNIT'][$i], 0,1);   
+        $ursid = $arr2['getthefinalid'];   
         $reqepid = $arr['EP_ID'][$i];   
-        $atid = $arr['AT_ID'][$i];   
+        $alid = $arr['AL_ID'][$i];   
         $stmt->execute();
 
-        echo $description;
-        echo $unit;
-        echo $qty;
-        echo $ursid;
-        echo $reqepid;
-        echo $atid;
+        echo $unit.', ';
+        echo $qty.', ';
+        echo $ursid.', ';
+        echo $reqepid.', ';
+        echo $alid;
         echo "<br>";
     }
 
