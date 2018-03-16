@@ -19,34 +19,16 @@ if(isset($_POST["view"]))
   {
     $id = $row['URS_ID'];
 
-    // if($row["URS_VIEW_BY_PO"] == 0) 
-    // {
-      $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'">
-                      <li style="margin-top: 10px;">
-                        <div class="alert alert-success clearfix">
-                          Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
-                          Request No. : <strong> '.$row["URS_NO"].' </strong><br/>
-                          Request By: <strong> '.$row["O_NAME"].' </strong>
-                        </div>
-                      </li>
-                    </a>
-                    <li class="divider"></li>';
-    // }
-    // else
-    // {
-    //   $output .= '
-    //   <a href="POViewRequestFromDU.php?viewrequests='.$id.'">
-    //     <li style="margin-top: 10px;">
-    //       <div class="alert clearfix" style="background-color: #EEEEEE;">
-    //         Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
-    //         Request No. : <strong> '.$row["URS_NO"].' </strong><br/>
-    //         Request By: <strong> '.$row["O_NAME"].' </strong>
-    //       </div>
-    //     </li>
-    //   </a>
-    //   <li class="divider"></li>
-    //    ';
-    // }
+    $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'">
+                    <li style="margin-top: 10px;">
+                      <div class="alert alert-success clearfix">
+                        Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
+                        Request No. : <strong> '.$row["URS_NO"].' </strong><br/>
+                        Request By: <strong> '.$row["O_NAME"].' </strong>
+                      </div>
+                    </li>
+                </a>
+                <li class="divider"></li>';
   }
  }
  else

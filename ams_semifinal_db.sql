@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2018 at 03:32 PM
+-- Generation Time: Mar 16, 2018 at 04:49 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -47,11 +47,27 @@ CREATE TABLE `ams_r_asset` (
 --
 
 INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQUISITION_TYPE`, `A_AVAILABILITY`, `A_DISPOSAL_STATUS`, `AL_ID`, `C_ID`, `URS_ID`, `PPMP_ID`) VALUES
-(1, 'Fujidenzo', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
-(2, 'ASUS ROG', '2018-03-02', 'Serviceable', 'Donation', 'Assigned', 0, 1, NULL, NULL, NULL),
-(3, 'A4Tech', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
-(4, 'Acer Predator', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
-(5, 'Hanabishi Stand Fan', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL);
+(1, 'Fujidenzo Aircon', '2018-03-01', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
+(2, 'ASUS ROG Computer', '2018-03-02', 'Serviceable', 'Donation', 'Assigned', 0, 1, NULL, NULL, NULL),
+(3, 'A4Tech Office Keyboard', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
+(4, 'Acer Predator Gaming Laptop', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
+(5, 'Hanabishi Stand Fan', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
+(6, 'A4Tech Home Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
+(7, 'LG LED TV', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(8, 'Gambel 2MP CCTV', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
+(9, 'Silvertee Home Speaker', '2018-03-09', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(10, 'EPSON Projector', '2018-03-10', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(11, 'Epson Printer', '2018-03-11', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
+(12, 'Dell Laptop', '2018-03-15', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
+(13, 'Standard Wall Fan', '2018-03-14', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
+(14, 'Keymatt Mechanical Keyboard', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
+(15, 'Logitech Gaming Mouse', '2018-03-12', 'Serviceable', 'Donation', 'Assigned', 0, 5, NULL, NULL, NULL),
+(16, 'Iwata Aircool Aircon', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
+(17, 'SONY Bravia TV', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(18, 'Cube Cory CCTV', '2018-03-18', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
+(19, 'Crown Home Speaker', '2018-03-19', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(20, 'APPO YG Projector', '2018-03-20', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(21, 'Canon Pixma', '2018-03-21', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -289,7 +305,8 @@ CREATE TABLE `ams_t_par` (
 --
 
 INSERT INTO `ams_t_par` (`PAR_ID`, `PAR_NO`, `PAR_DATE`, `PAR_ISSUED_BY`) VALUES
-(1, 'PAR-2018-0001', '2018-03-01', 'Shiela Mae Velga');
+(1, 'PAR-2018-0001', '2018-03-01', 'Shiela Mae Velga'),
+(2, 'PAR-2018-0002', '2018-03-16', 'Shiela Mae Velga');
 
 -- --------------------------------------------------------
 
@@ -312,7 +329,10 @@ CREATE TABLE `ams_t_par_sub` (
 --
 
 INSERT INTO `ams_t_par_sub` (`PARS_ID`, `PARS_CANCEL`, `PARS_CANCEL_DATE`, `PARS_CANCEL_BY`, `A_ID`, `PAR_ID`, `EP_ID`) VALUES
-(1, 0, NULL, NULL, 2, 1, 2);
+(1, 0, NULL, NULL, 1, 1, 2),
+(2, 0, NULL, NULL, 2, 2, 5),
+(3, 1, '2018-03-16', 'James Vincent Nicolas', 7, 2, 5),
+(4, 0, NULL, NULL, 15, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -360,8 +380,15 @@ CREATE TABLE `ams_t_release_of_asset` (
   `ROA_REASON` varchar(350) NOT NULL,
   `ROA_DATE` date NOT NULL,
   `ROA_VIEW_BY_PO` int(11) NOT NULL DEFAULT '0',
-  `EP_ID` int(11) NOT NULL
+  `ROA_RELEASED_BY` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_release_of_asset`
+--
+
+INSERT INTO `ams_t_release_of_asset` (`ROA_ID`, `ROA_REASON`, `ROA_DATE`, `ROA_VIEW_BY_PO`, `ROA_RELEASED_BY`) VALUES
+(1, 'Di naman po ginagamit.', '2018-03-16', 0, 'James Vincent Nicolas');
 
 -- --------------------------------------------------------
 
@@ -372,9 +399,15 @@ CREATE TABLE `ams_t_release_of_asset` (
 CREATE TABLE `ams_t_release_of_asset_sub` (
   `ROAS_ID` int(11) NOT NULL,
   `A_ID` int(11) NOT NULL,
-  `ROA_ID` int(11) NOT NULL,
-  `PARS_ID` int(11) DEFAULT NULL
+  `ROA_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_release_of_asset_sub`
+--
+
+INSERT INTO `ams_t_release_of_asset_sub` (`ROAS_ID`, `A_ID`, `ROA_ID`) VALUES
+(1, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -389,9 +422,15 @@ CREATE TABLE `ams_t_report_of_damage` (
   `ROD_DATE` date NOT NULL,
   `ROD_VIEW_BY_PO` int(11) DEFAULT '0',
   `ROD_VIEW_BY_USER` int(11) NOT NULL DEFAULT '0',
-  `ROD_REMARKS` varchar(350) DEFAULT NULL,
-  `EP_ID` int(11) NOT NULL
+  `ROD_REMARKS` varchar(350) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_report_of_damage`
+--
+
+INSERT INTO `ams_t_report_of_damage` (`ROD_ID`, `ROD_NO`, `ROD_REASON`, `ROD_DATE`, `ROD_VIEW_BY_PO`, `ROD_VIEW_BY_USER`, `ROD_REMARKS`) VALUES
+(1, 'ROD-2018-0001', 'Sira yung blower.', '2018-03-16', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -408,6 +447,13 @@ CREATE TABLE `ams_t_report_of_damage_sub` (
   `ROD_ID` int(11) NOT NULL,
   `A_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_report_of_damage_sub`
+--
+
+INSERT INTO `ams_t_report_of_damage_sub` (`RODS_ID`, `RODS_CANCEL_DATE`, `RODS_DATE_INSPECT`, `RODS_STATUS`, `RODS_SHOW`, `ROD_ID`, `A_ID`) VALUES
+(1, NULL, NULL, 'Pending', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -641,8 +687,7 @@ ALTER TABLE `ams_t_ppmp_sub`
 -- Indexes for table `ams_t_release_of_asset`
 --
 ALTER TABLE `ams_t_release_of_asset`
-  ADD PRIMARY KEY (`ROA_ID`),
-  ADD KEY `EP_ID` (`EP_ID`);
+  ADD PRIMARY KEY (`ROA_ID`);
 
 --
 -- Indexes for table `ams_t_release_of_asset_sub`
@@ -650,16 +695,14 @@ ALTER TABLE `ams_t_release_of_asset`
 ALTER TABLE `ams_t_release_of_asset_sub`
   ADD PRIMARY KEY (`ROAS_ID`),
   ADD KEY `A_ID` (`A_ID`),
-  ADD KEY `ROA_ID` (`ROA_ID`),
-  ADD KEY `PARS_ID` (`PARS_ID`);
+  ADD KEY `ROA_ID` (`ROA_ID`);
 
 --
 -- Indexes for table `ams_t_report_of_damage`
 --
 ALTER TABLE `ams_t_report_of_damage`
   ADD PRIMARY KEY (`ROD_ID`),
-  ADD UNIQUE KEY `ROD_NO` (`ROD_NO`),
-  ADD KEY `EP_ID` (`EP_ID`);
+  ADD UNIQUE KEY `ROD_NO` (`ROD_NO`);
 
 --
 -- Indexes for table `ams_t_report_of_damage_sub`
@@ -733,7 +776,7 @@ ALTER TABLE `ams_t_user_request_summary`
 -- AUTO_INCREMENT for table `ams_r_asset`
 --
 ALTER TABLE `ams_r_asset`
-  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ams_r_asset_library`
@@ -793,13 +836,13 @@ ALTER TABLE `ams_t_job_order_sub`
 -- AUTO_INCREMENT for table `ams_t_par`
 --
 ALTER TABLE `ams_t_par`
-  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_par_sub`
 --
 ALTER TABLE `ams_t_par_sub`
-  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ams_t_ppmp`
@@ -817,25 +860,25 @@ ALTER TABLE `ams_t_ppmp_sub`
 -- AUTO_INCREMENT for table `ams_t_release_of_asset`
 --
 ALTER TABLE `ams_t_release_of_asset`
-  MODIFY `ROA_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ROA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_release_of_asset_sub`
 --
 ALTER TABLE `ams_t_release_of_asset_sub`
-  MODIFY `ROAS_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ROAS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_report_of_damage`
 --
 ALTER TABLE `ams_t_report_of_damage`
-  MODIFY `ROD_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ROD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_report_of_damage_sub`
 --
 ALTER TABLE `ams_t_report_of_damage_sub`
-  MODIFY `RODS_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RODS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_transfer_out_ptr`
@@ -956,24 +999,11 @@ ALTER TABLE `ams_t_ppmp_sub`
   ADD CONSTRAINT `ams_t_ppmp_sub_ibfk_4` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
 
 --
--- Constraints for table `ams_t_release_of_asset`
---
-ALTER TABLE `ams_t_release_of_asset`
-  ADD CONSTRAINT `ams_t_release_of_asset_ibfk_1` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
-
---
 -- Constraints for table `ams_t_release_of_asset_sub`
 --
 ALTER TABLE `ams_t_release_of_asset_sub`
   ADD CONSTRAINT `ams_t_release_of_asset_sub_ibfk_1` FOREIGN KEY (`A_ID`) REFERENCES `ams_r_asset` (`A_ID`),
-  ADD CONSTRAINT `ams_t_release_of_asset_sub_ibfk_2` FOREIGN KEY (`ROA_ID`) REFERENCES `ams_t_release_of_asset` (`ROA_ID`),
-  ADD CONSTRAINT `ams_t_release_of_asset_sub_ibfk_3` FOREIGN KEY (`PARS_ID`) REFERENCES `ams_t_par_sub` (`PARS_ID`);
-
---
--- Constraints for table `ams_t_report_of_damage`
---
-ALTER TABLE `ams_t_report_of_damage`
-  ADD CONSTRAINT `ams_t_report_of_damage_ibfk_1` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
+  ADD CONSTRAINT `ams_t_release_of_asset_sub_ibfk_2` FOREIGN KEY (`ROA_ID`) REFERENCES `ams_t_release_of_asset` (`ROA_ID`);
 
 --
 -- Constraints for table `ams_t_report_of_damage_sub`

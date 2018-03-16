@@ -242,9 +242,7 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">ID</th>
-                                            <th style="width: 120px;">QR Code</th>
-                                            <th style="width: 300px;">Asset Description</th> 
+                                            <th style="width: 300px;">Asset</th> 
                                             <th style="width: ">Reason Of Release</th>
                                             <!-- <th style="width: 50px;">Action</th> -->
                                         </tr>
@@ -256,28 +254,19 @@
 
                                             $getuserid = $_SESSION['myoid'];
 
-                                            $sql = "SELECT * FROM `ams_t_report_for_availability_of_asset` AS RFAOA INNER JOIN `ams_r_asset` AS A ON RFAOA.A_ID = A.A_ID";
+                                            $sql = "SELECT * FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID WHERE O.O_ID = $getuserid";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                                             while($row = mysqli_fetch_assoc($result))
                                             {
-                                                $rodno1 = $row['A_ID'];
-                                                $rodno2 = $row['A_CODE'];
-                                                $rodno3 = $row['A_DESCRIPTION'];
-                                                $rodno4 = $row['RFAOA_REASON'];
+                                                $reldesc = $row['A_DESCRIPTION'];
+                                                $relreason = $row['ROA_REASON'];
                                         ?>
 
                                         <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $rodno1; ?> </td>
-                                            <td> <?php echo $rodno2; ?> </td>
-                                            <td> <?php echo $rodno3; ?> </td>
-                                            <td> <?php echo $rodno4; ?> </td>
-                                            <!-- <td>
-                                                <center>
-                                                    <a data-toggle="modal" class="btn btn-success" href="#">View</a>
-                                                </center>
-                                            </td> -->
+                                            <td> <?php echo $reldesc; ?> </td>
+                                            <td> <?php echo $relreason; ?> </td>
                                         </tr>
 
                                         <?php
@@ -286,27 +275,6 @@
 
                                     </tbody>
                                 </table>
-
-                                <?php  
-
-                                    include('../Connection/db.php');
-
-                                    if (isset($_POST['updateasset'])) {
-
-                                        $updescription = $_POST['updatedescription'];
-                                        $update = $_POST['updatedate'];
-                                        $uniqueid = $_POST['updateid'];
-
-                                        $upquery = "UPDATE `ams_r_asset` SET A_DESCRIPTION = '$updescription', A_DATE = '$update' WHERE A_ID = $uniqueid";
-                                        
-                                        mysqli_query($connection, $upquery);
-
-                                        echo "<p style='color: green;'>Succesfully Updated!</p>";
-
-                                    }
-
-
-                                ?>
 
                             </div>
                         </div>
@@ -448,132 +416,6 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
-    <script type="text/javascript">
-    $(document).ready(function(){
-        "use strict";
-        
-        $('.btn-message').click(function(){
-            swal("Here's a message!");
-        });
-        
-        $('.btn-title-text').click(function(){
-            swal("Here's a message!", "It's pretty, isn't it?")
-        });
-
-        $('.btn-timer').click(function(){
-            swal({
-                title: "Auto close alert!",
-                text: "I will close in 2 seconds.",
-                timer: 2000,
-                showConfirmButton: false
-            });
-        });
-        
-        $('.btn-successs').click(function(){
-            swal("Good job!", "You clicked the button!", "success");
-        });
-        
-        $('.btn-warning-confirm').click(function(){
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes, delete it!',
-                closeOnConfirm: false
-            },
-            function(){
-                swal("Deleted!", "Your imaginary file has been deleted!", "success");
-            });
-        });
-        
-        $('.btn-warning-cancel').click(function(){
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: "No, cancel plx!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function(isConfirm){
-            if (isConfirm){
-              swal("Deleted!", "Your imaginary file has been deleted!", "success");
-            } else {
-              swal("Cancelled", "Your imaginary file is safe :)", "error");
-            }
-            });
-        });
-        
-        $('.btn-custom-icon').click(function(){
-            swal({
-                title: "Sweet!",
-                text: "Here's a custom image.",
-                imageUrl: 'images/favicon/apple-touch-icon-152x152.png'
-            });
-        });
-        
-        $('.btn-message-html').click(function(){
-            swal({
-                title: "HTML <small>Title</small>!",
-                text: 'A custom <span style="color:#F8BB86">html<span> message.',
-                html: true
-            });
-        });
-        
-        $('.btn-input').click(function(){
-            swal({
-                title: "An input!",
-                text: 'Write something interesting:',
-                type: 'input',
-                showCancelButton: true,
-                closeOnConfirm: false,
-                animation: "slide-from-top",
-                inputPlaceholder: "Write something",
-            },
-            function(inputValue){
-                if (inputValue === false) return false;
-        
-                if (inputValue === "") {
-                    swal.showInputError("You need to write something!");
-                    return false;
-                }
-            
-                swal("Nice!", 'You wrote: ' + inputValue, "success");
-        
-            });
-        });
-        
-        $('.btn-theme').click(function(){
-            swal({
-                title: "Themes!",
-                text: "Here's the Twitter theme for SweetAlert!",
-                confirmButtonText: "Cool!",
-                customClass: 'twitter'
-            });
-        });
-        
-        $('.btn-ajax').click(function(){
-          swal({
-            title: 'Ajax request example',
-            text: 'Submit to run ajax request',
-            type: 'info',
-            showCancelButton: true,
-            closeOnConfirm: false,
-            showLoaderOnConfirm: true,
-          }, function(){
-            setTimeout(function() {
-              swal('Ajax request finished!');
-            }, 2000);
-          });
-        });
-        
-    });
-    </script>
 
 </body>
 </html>

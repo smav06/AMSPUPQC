@@ -93,18 +93,16 @@ $('.classtbl a.damagedmodal').click(function (e) {
     e.preventDefault();
     
     var id = $(this).closest('tr').children('td:first').text();
-    var final = id.substring(1, 11);
-    document.getElementById('qrcodeheredam').value = final;
+    alert(id);
 
     $.ajax({
         type: "GET",
         url: 'DUDashboard/AjaxGetDataDamage.php',
         dataType: 'json',
         data: {
-            _final: final
+            _id: id
         },
         success: function (data) {
-            document.getElementById('moddamqrcode').value = data.qrcode;
             document.getElementById('moddamastdesc').value = data.descrip;
             document.getElementById('moddamempid').value = data.empid;
             document.getElementById('moddamastid').value = data.astid;

@@ -242,12 +242,12 @@
                                 <table class="display table table-bordered table-striped classtbl2" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">ROD Number</th>
+                                            <th style="display: none;">RODS ID</th>
                                             <th style="width: 135px;">Date Reported</th>
                                             <th style="">Asset</th> 
                                             <th style="width: 105px;">Status</th>
                                             <th style="width: 205px;">Accountable Person</th>
-                                            <th style="width: 155px;">Action</th>
+                                            <th style="width: 120px;"></th>
                                         </tr>
                                     </thead>
 
@@ -257,7 +257,7 @@
 
                                             $getuserid = $_SESSION['myoid'];
 
-                                            $sql = "SELECT * FROM `ams_t_maintenance_report_of_damage` AS ROD INNER JOIN ams_r_employee_profile AS EP ON ROD.EP_ID = EP.EP_ID INNER JOIN `ams_r_asset` AS A ON ROD.A_ID = A.A_ID WHERE ROD.ROD_STATUS = 'Pending' AND ROD.ROD_CANCEL_DATE IS NULL ORDER BY ROD.ROD_DATE DESC";
+                                            $sql = "SELECT ROD.ROD_DATE, ROD.ROD_NO, RODS.RODS_ID, RODS.RODS_STATUS, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, A.A_DESCRIPTION, ROD.ROD_REASON, RODS.RODS_CANCEL_DATE FROM `ams_r_asset` AS A INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID  WHERE RODS.RODS_STATUS = 'Pending' AND RODS.RODS_CANCEL_DATE IS NULL AND O.O_ID = $getuserid ORDER BY ROD.ROD_DATE DESC";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -265,25 +265,26 @@
                                             {
                                                 $rodno = $row['ROD_NO'];
                                                 $dates = $row['ROD_DATE'];
-                                                $stats = $row['ROD_STATUS'];
-                                                $fnames = $row['EP_FIRST_NAME'];
-                                                $mnames = $row['EP_MIDDLE_NAME'];
-                                                $lnames = $row['EP_LAST_NAME'];
+                                                $stats = $row['RODS_STATUS'];
+                                                $fnames = $row['EP_FNAME'];
+                                                $mnames = $row['EP_MNAME'];
+                                                $lnames = $row['EP_LNAME'];
                                                 $wholenames = $fnames.' '.$mnames.' '.$lnames;
                                                 $descriptions = $row['A_DESCRIPTION'];
                                                 $report = $row['ROD_REASON'];
+                                                $rodsid = $row['RODS_ID'];
                                         ?>
 
                                         <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $rodno; ?> </td>
+                                            <td style="display: none;"> <?php echo $rodsid; ?> </td>
                                             <td> <?php echo $dates; ?> </td>
                                             <td> <?php echo $descriptions; ?> </td>
                                             <td> <?php echo $stats; ?></td>
                                             <td> <?php echo $wholenames; ?> </td>
                                             <td>
                                                 <center>
-                                                    <a data-toggle="modal" class="btn btn-success" href="#myModal<?php echo $rodno; ?>">View</a>
-                                                    <a class="btn btn-danger btncancels" href="javascript:;">Cancel</a>
+                                                    <a data-toggle="modal" class="btn btn-success" href="#myModal<?php echo $rodno; ?>"><i class="fa fa-eye"></i></a>
+                                                    <a class="btn btn-danger btncancels" href="javascript:;"><i class="fa fa-times-circle"></i></a>
                                                 </center>
                                             </td>
                                         </tr>
@@ -299,28 +300,24 @@
 
                                                         <form role="form" method="POST">
                                                             <div class="form-group">
-                                                                <label>Date Reported</label>
-                                                                <input style="color: black;" type="date" value="<?php echo $dates; ?>" class="form-control" disabled />
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label>Accountable Person</label>
-                                                                <input style="color: black; word-wrap: break-word;" type="text" value="<?php echo $wholenames; ?>" class="form-control" disabled />
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label>Asset</label>
-                                                                <textarea class="form-control" required="" style="resize: none; color: black; word-wrap: break-word;" maxlength="200" disabled=""><?php echo $descriptions; ?></textarea>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label>Reported Damage</label>
-                                                                <textarea class="form-control" required="" style="resize: none; color: black; word-wrap: break-word; height: 120px;" maxlength="200" disabled><?php echo $report; ?></textarea>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label>Status</label>
-                                                                <input style="color: black;" type="text" value="<?php echo $stats; ?>" class="form-control" disabled />
+                                                                <label style="color: black;">ROD NO :</label>
+                                                                <label style="font-size: 15px;"> <?php echo $rodno; ?> </label>
+                                                                    <br>
+                                                                <label style="color: black;">Date Reported :</label>
+                                                                <label style="font-size: 15px;"> <?php echo $dates; ?> </label>
+                                                                    <br>
+                                                                <label style="color: black;">Accountable Person :</label>
+                                                                <label style="font-size: 15px;"> <?php echo $wholenames; ?> </label>
+                                                                    <br>
+                                                                <label style="color: black;">Asset :</label>
+                                                                <label style="font-size: 15px;"> <?php echo $descriptions; ?> </label>
+                                                                    <br>
+                                                                    <br>
+                                                                <label style="color: black;">Reported Damage :</label>
+                                                                <label style="font-size: 15px;"> <?php echo $report; ?> </label>
+                                                                    <br>
+                                                                <label style="color: black;">Status :</label>
+                                                                <label style="font-size: 15px;"> <?php echo $stats; ?> </label>
                                                             </div>
 
                                                             <div class="row">
@@ -505,7 +502,6 @@
                     $('#updcourse').removeClass('hidden');
                 else
                     $('#updcourse').addClass('hidden');
-
 
             });
             $('.btncancels').click(function() {
