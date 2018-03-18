@@ -16,6 +16,6 @@
                                         VALUES ('$getrod', '$report', '$currdate') ");            
 
     echo "INSERT INTO `ams_t_report_of_damage` (ROD_NO, ROD_REASON, ROD_DATE) 
-                                        VALUES ('$getrod', '$report', '$currdate')";
+                                        VALUES ('$getrod', '$report', '$currdate') ";
 
 ?>

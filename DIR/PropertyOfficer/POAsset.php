@@ -335,7 +335,7 @@
                 </div>
 
                 <!-- ERROR PUTA -->
-                <div id="clone" style="">
+                <div id="clone" style="display: none;">
                     <div class="row">
                         <div class="col-sm-12">
                             <section class="panel">
@@ -620,7 +620,7 @@
     <!-- END JAVASCRIPTS -->
     <script type="text/javascript" src="../../js/sweetalert/sweetalert.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
 
             $('#assignbtn').click(function() {
@@ -692,7 +692,7 @@
                                     _date: gdate
                                 },
                                 success: function(data2) {
-                                    alert(data2);                                    
+                                    // alert(data2);                                    
                                 },
                                 error: function(response2) {
                                     // alert(response2);                                    
@@ -711,13 +711,14 @@
                                         _epid: get
                                     },
                                     success: function(data2) {
-                                        alert(data2);
+                                        // alert(data2);
+
                                         swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
 
                                         setTimeout(function() 
                                         {
                                             window.location=window.location;
-                                        },3500);
+                                        },2000);
                                     },
                                     error: function(response2) {
                                         // alert(response2);

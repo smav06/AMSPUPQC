@@ -235,6 +235,7 @@
                           <span class="tools pull-right">
                             <a class="fa fa-chevron-down" href="javascript:;"></a>
                          </span>
+                         <input type="text" id="officeid2" class="hidden" value="<?php echo $_SESSION['myoid']; ?>">
                     </header>
                     <!-- REMEMBER -->
                     <div class="panel-body"> 
@@ -433,7 +434,7 @@
 
                     <div class="panel-body">
                         <div class="adv-table">
-                            <table class="display table table-bordered table-striped classtbl2" id="dynamic-table">
+                            <table class="display table table-bordered table-striped classtbl" id="dynamic-table">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">URS ID</th>
@@ -441,7 +442,7 @@
                                         <th style="width: 130px;">Request Date</th> 
                                         <th style="">Purpose</th>
                                         <th style="width: 120px;">Status</th>
-                                        <th style="width: 120px;"></th>
+                                        <th style="width: 120px;" class="hidden"></th>
                                     </tr>
                                 </thead>
 
@@ -471,11 +472,11 @@
                                         <td> <?php echo $ursdispreqdate; ?> </td>
                                         <td> <?php echo $ursdisppurpose; ?> </td>
                                         <td> <?php echo $ursdispstatus; ?> </td>
-                                        <td>
-                                            <a href="#" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                        <td class="hidden">
+                                            <a data-toggle="modal" class="btn btn-success releasemodal" href="#ViewModal" href="javascript:;"><i class="fa fa-eye"></i></a>
 
                                             <a class="btn btn-danger"><i class="fa fa-times-circle"></i></a>
-                                        </td>
+                                        </td>       
                                     </tr>
 
                                 <?php
@@ -581,6 +582,54 @@
 
 </section>
 
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="ViewModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #8C1C1C; color: white">
+                    <button aria-hidden="true" data-dismiss="modal" style="color: white" class="close" type="button">×</button>
+                    <h4 class="modal-title">Request Information</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form role="form" method="POST" id="form-data3">
+                        <div class="form-group">
+                            <div class="adv-table">
+                                <table class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Request</th>
+                                            <th style="width: 50px;">Unit</th>
+                                            <th style="width: 50px;">Quantity</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td id="alname"></td>
+                                            <td id="urunit"></td>
+                                            <td id="urqty"></td>  
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success" id="btnsend" type="button">Submit</button>
+                    <button data-dismiss="modal" class="btn btn-default" id="" type="button">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
@@ -623,178 +672,7 @@
 
     <script src="../../js/advanced-form.js"></script>
 
-    <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
-
-    <script src="../../js/jquery.multifield.min.js"></script>
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-        "use strict";
-        
-        $('.btn-message').click(function(){
-            swal("Here's a message!");
-        });
-        
-        $('.btn-title-text').click(function(){
-            swal("Here's a message!", "It's pretty, isn't it?")
-        });
-
-        $('.btn-timer').click(function(){
-            swal({
-                title: "Auto close alert!",
-                text: "I will close in 2 seconds.",
-                timer: 2000,
-                showConfirmButton: false
-            });
-        });
-        
-        $('.btn-successs').click(function(){
-            swal("Good job!", "You clicked the button!", "success");
-        });
-
-
-        $('#qweqwe').click(function(){
-
-            var getpurposerequest = document.getElementById('getpurposerequest').value;
-            var getdesc = document.getElementById('getdesc').value;
-            var gettype = document.getElementById('gettype').value;
-            var getunit = document.getElementById('getunit').value;
-            var getqty = document.getElementById('getqty').value;
-            var getreqby = document.getElementById('getreqby').value;
-
-            if ((getpurposerequest == "")) 
-            {
-                
-            }
-            else if((getdesc == ""))
-            {
-                
-            }
-            else if((gettype == ""))
-            {
-                
-            }
-            else if((getunit == ""))
-            {
-                
-            }
-            else if((getqty == ""))
-            {
-                
-            }
-            else if((getreqby == ""))
-            {
-                
-            }
-            else
-            {
-                swal("", "You clicked the button!", "success");
-            }
-            
-        });
-
-        
-        $('.btn-warning-confirm').click(function(){
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes, delete it!',
-                closeOnConfirm: false
-            },
-            function(){
-                swal("Deleted!", "Your imaginary file has been deleted!", "success");
-            });
-        });
-        
-        $('.btn-warning-cancel').click(function(){
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: "No, cancel plx!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function(isConfirm){
-            if (isConfirm){
-              swal("Deleted!", "Your imaginary file has been deleted!", "success");
-            } else {
-              swal("Cancelled", "Your imaginary file is safe :)", "error");
-            }
-            });
-        });
-        
-        $('.btn-custom-icon').click(function(){
-            swal({
-                title: "Sweet!",
-                text: "Here's a custom image.",
-                imageUrl: '../../images/favicon/apple-touch-icon-152x152.png'
-            });
-        });
-        
-        $('.btn-message-html').click(function(){
-            swal({
-                title: "HTML <small>Title</small>!",
-                text: 'A custom <span style="color:#F8BB86">html<span> message.',
-                html: true
-            });
-        });
-        
-        $('.btn-input').click(function(){
-            swal({
-                title: "An input!",
-                text: 'Write something interesting:',
-                type: 'input',
-                showCancelButton: true,
-                closeOnConfirm: false,
-                animation: "slide-from-top",
-                inputPlaceholder: "Write something",
-            },
-            function(inputValue){
-                if (inputValue === false) return false;
-        
-                if (inputValue === "") {
-                    swal.showInputError("You need to write something!");
-                    return false;
-                }
-            
-                swal("Nice!", 'You wrote: ' + inputValue, "success");
-        
-            });
-        });
-        
-        $('.btn-theme').click(function(){
-            swal({
-                title: "Themes!",
-                text: "Here's the Twitter theme for SweetAlert!",
-                confirmButtonText: "Cool!",
-                customClass: 'twitter'
-            });
-        });
-        
-        $('.btn-ajax').click(function(){
-          swal({
-            title: 'Ajax request example',
-            text: 'Submit to run ajax request',
-            type: 'info',
-            showCancelButton: true,
-            closeOnConfirm: false,
-            showLoaderOnConfirm: true,
-          }, function(){
-            setTimeout(function() {
-              swal('Ajax request finished!');
-            }, 2000);
-          });
-        });
-        
-    });
-    </script>
+    <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script> 
 
     <script src="../../js/jquery.multifield.min.js"></script>
     <script>
@@ -821,6 +699,33 @@
             $('select').on('change',function(){                        
                 $('input[name=asttypesss]').val($(this).val());            
             });
+        });
+
+        $('.classtbl a.releasemodal').click(function (e) {
+
+            var id = $(this).closest('tr').children('td:first').text();
+
+            var oid = document.getElementById("officeid2").value;
+
+            $.ajax({
+                type: "GET",
+                url: 'DUDashboard/AjaxGetData.php',
+                dataType: 'json',
+                data: {
+                    _id: id,
+                    _oid: oid
+                },
+                success: function (data) {
+                    document.getElementById('alname').innerText = data.alname;
+                    document.getElementById('urunit').innerText = data.urunit;
+                    document.getElementById('urqty').innerText = data.urqty;
+                },
+                error: function (response) {
+                    swal("Please naman!", "Gumana kana!", "error");
+                }
+
+            });
+
         });
 
     </script>

@@ -94,8 +94,7 @@
                                   echo '<img alt="" src="../../'.$pic.'" alt="" >';
                                 }
 
-
-                              ?> 
+                            ?> 
 
                             <span class="username" id="getthenameofuser"> <?php echo $_SESSION['mysesi']; ?></span>
                             <b class="caret"></b>
@@ -329,8 +328,7 @@
                     </div>
                 </div>
 
-                <!-- ERROR PUTA -->
-                <div id="clone" style="">
+                <div id="clone" style="display: none;">
                     <div class="row">
                         <div class="col-sm-12">
                             <section class="panel">
@@ -770,7 +768,7 @@
                                         _parid: $(this).closest('tr').children('td:first').next().text()
                                     },
                                     success: function(data2) {
-                                        alert(data2);
+                                        // alert(data2);
 
                                         swal("Asset Successfully Released!", "The asset is successfully released from this department.", "success");
 
@@ -780,7 +778,7 @@
                                         },2000);
                                     },
                                     error: function(response2) {
-                                        alert(response2);
+                                        // alert(response2);
                                       
                                         swal("Error", "May mali bry eh!", "error");
                                     }
