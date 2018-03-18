@@ -63,7 +63,7 @@
                 <i class="fa fa-bell-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
-            <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 375px;">
+            <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
             </ul>
         </li>
         <!-- notification dropdown end -->

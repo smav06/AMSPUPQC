@@ -65,7 +65,6 @@
                             <i class="fa fa-bell-o"></i>
                             <span class="badge bg-warning count"></span>
                         </a>
-                        
                         <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 375px;">
                         </ul>
                     </li>
@@ -261,7 +260,7 @@
                                                 <tr class="gradeX">
 
                                                     <?php
-                                                        if ($a_availability == 'Available') 
+                                                        if ($a_availability == 'Available' && $a_status == 'Serviceable') 
                                                         {
                                                     ?>
                                                         <td class="hidden">
@@ -276,9 +275,18 @@
                                                             </center>
                                                         </td>
 
+                                                        <td id="origtype<?php echo $i; ?>">
+                                                            <?php echo $a_acquistion_type; ?> </td>
+                                                        <td id="origstat<?php echo $i; ?>">
+                                                            <p class="label label-success label-mini" style="font-size: 13px;"> <?php echo $a_availability; ?> </p> </td>
+                                                        <td id="origdesc<?php echo $i; ?>">
+                                                            <?php echo $a_description; ?> </td>
+                                                        <td id="origdate<?php echo $i; ?>">
+                                                            <?php echo $a_date; ?> </td>
+
                                                     <?php
                                                         }
-                                                        elseif ($a_availability=='Assigned') 
+                                                        elseif ($a_availability =='Assigned' && $a_status == 'Serviceable') 
                                                         {
                                                     ?>
 
@@ -294,18 +302,100 @@
                                                             </center>
                                                         </td>
 
-                                                    <?php
-                                                        }
-                                                    ?>
-
                                                         <td id="origtype<?php echo $i; ?>">
                                                             <?php echo $a_acquistion_type; ?> </td>
                                                         <td id="origstat<?php echo $i; ?>">
-                                                            <?php echo $a_status; ?> </td>
+                                                            <p class="label label-primary label-mini" style="font-size: 13px;"> <?php echo $a_availability; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
+
+                                                    <?php
+                                                        }
+                                                        elseif ($a_availability =='Assigned' && $a_status == 'Ready For Disposal' || $a_availability =='Available' && $a_status == 'Ready For Disposal') 
+                                                        {
+                                                    ?>
+
+                                                        <td class="hidden">
+                                                            <a id="getid<?php echo $i; ?>">
+                                                                <?php echo $a_id; ?>
+                                                            </a>
+                                                        </td>
+
+                                                        <td>
+                                                            <center>
+                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
+                                                            </center>
+                                                        </td>
+
+                                                        <td id="origtype<?php echo $i; ?>">
+                                                            <?php echo $a_acquistion_type; ?> </td>
+                                                        <td id="origstat<?php echo $i; ?>">
+                                                            <p class="label label-danger label-mini" style="font-size: 13px;"> <?php echo $a_status; ?> </p> </td>
+                                                        <td id="origdesc<?php echo $i; ?>">
+                                                            <?php echo $a_description; ?> </td>
+                                                        <td id="origdate<?php echo $i; ?>">
+                                                            <?php echo $a_date; ?> </td>
+
+                                                    <?php
+                                                        }
+                                                        elseif ($a_availability =='Assigned' && $a_status == 'For Repair' || $a_availability =='Available' && $a_status == 'For Repair' ) 
+                                                        {
+                                                    ?>
+
+                                                        <td class="hidden">
+                                                            <a id="getid<?php echo $i; ?>">
+                                                                <?php echo $a_id; ?>
+                                                            </a>
+                                                        </td>
+
+                                                        <td>
+                                                            <center>
+                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
+                                                            </center>
+                                                        </td>
+
+                                                        <td id="origtype<?php echo $i; ?>">
+                                                            <?php echo $a_acquistion_type; ?> </td>
+                                                        <td id="origstat<?php echo $i; ?>">
+                                                            <p class="label label-warning label-mini" style="font-size: 13px;"> <?php echo $a_status; ?> </p> </td>
+                                                        <td id="origdesc<?php echo $i; ?>">
+                                                            <?php echo $a_description; ?> </td>
+                                                        <td id="origdate<?php echo $i; ?>">
+                                                            <?php echo $a_date; ?> </td>
+
+                                                    <?php
+                                                        }
+                                                        elseif ($a_availability =='Assigned' && $a_status == 'Disposed' || $a_availability =='Available' && $a_status == 'Disposed' ) 
+                                                        {
+                                                    ?>
+
+                                                        <td class="hidden">
+                                                            <a id="getid<?php echo $i; ?>">
+                                                                <?php echo $a_id; ?>
+                                                            </a>
+                                                        </td>
+
+                                                        <td>
+                                                            <center>
+                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
+                                                            </center>
+                                                        </td>
+
+                                                        <td id="origtype<?php echo $i; ?>">
+                                                            <?php echo $a_acquistion_type; ?> </td>
+                                                        <td id="origstat<?php echo $i; ?>">
+                                                            <p class="label label-default label-mini" style="font-size: 13px;"> <?php echo $a_status; ?> </p> </td>
+                                                        <td id="origdesc<?php echo $i; ?>">
+                                                            <?php echo $a_description; ?> </td>
+                                                        <td id="origdate<?php echo $i; ?>">
+                                                            <?php echo $a_date; ?> </td>
+
+                                                    <?php
+                                                        }
+                                                    ?>
+
                                                 </tr>
 
                                                 <?php 
