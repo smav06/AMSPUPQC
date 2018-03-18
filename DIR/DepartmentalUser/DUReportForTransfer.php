@@ -242,9 +242,10 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                         <tr>
+                                            <th style="width: 140px;">Date Acquired</th> 
                                             <th style="width: 300px;">Asset</th> 
-                                            <th style="width: ">Reason Of Release</th>
-                                            <!-- <th style="width: 50px;">Action</th> -->
+                                            <th style="width: 140px;">Date Released</th> 
+                                            <th style="">Reason Of Release</th>
                                         </tr>
                                     </thead>
 
@@ -252,20 +253,31 @@
 
                                         <?php  
 
-                                            $getuserid = $_SESSION['myoid'];
+                                            $idofuserhere = $_SESSION['myoid'];
+                                            // echo $idofuserhere;
 
-                                            $sql = "SELECT * FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID WHERE O.O_ID = $getuserid";
+                                            $sqldisp = "SELECT A.A_DESCRIPTION, ROA.ROA_REASON, O.O_ID, A.A_DATE, PARS.PARS_CANCEL_DATE FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON ROAS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE PARS.PARS_CANCEL_DATE IS NOT NULL AND O.O_ID = $idofuserhere";
 
-                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+                                            // TESTING
 
-                                            while($row = mysqli_fetch_assoc($result))
+                                            // echo "SELECT A.A_DESCRIPTION, ROA.ROA_REASON, O.O_ID, A.A_DATE, PARS.PARS_CANCEL_DATE FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON ROAS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE PARS.PARS_CANCEL_DATE IS NOT NULL AND O.O_ID = $idofuserhere";
+
+                                            // MAY MULTO TAE
+
+                                            $resultdisp = mysqli_query($connection, $sqldisp) or die("Bad Query: $sqldisp");
+
+                                            while($rows = mysqli_fetch_assoc($resultdisp))
                                             {
-                                                $reldesc = $row['A_DESCRIPTION'];
-                                                $relreason = $row['ROA_REASON'];
+                                                $reldesc = $rows['A_DESCRIPTION'];
+                                                $relreason = $rows['ROA_REASON'];
+                                                $acdate = $rows['A_DATE'];
+                                                $reldate = $rows['PARS_CANCEL_DATE'];
                                         ?>
 
                                         <tr class="gradeX">
+                                            <td> <?php echo $acdate; ?> </td>
                                             <td> <?php echo $reldesc; ?> </td>
+                                            <td> <?php echo $reldate; ?> </td>
                                             <td> <?php echo $relreason; ?> </td>
                                         </tr>
 

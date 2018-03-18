@@ -663,13 +663,13 @@
                 e.preventDefault();
 
                 swal({
-                        title: "Are you sure?",
-                        text: "The record will be save and will be use for Semester",
+                        title: "Are you sure you want to assign this asset?",
+                        text: "The selected assets will be assign to this employee.",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#DD6B55',
-                        confirmButtonText: 'Yes, do it!',
-                        cancelButtonText: "No, cancel it!",
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: "No",
                         closeOnConfirm: false,
                         closeOnCancel: false
                     },
@@ -692,7 +692,7 @@
                                     _date: gdate
                                 },
                                 success: function(data2) {
-                                    // alert(data2);                                    
+                                    alert(data2);                                    
                                 },
                                 error: function(response2) {
                                     // alert(response2);                                    
@@ -711,7 +711,7 @@
                                         _epid: get
                                     },
                                     success: function(data2) {
-                                        // alert(data2);
+                                        alert(data2);
                                         swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
 
                                         setTimeout(function() 

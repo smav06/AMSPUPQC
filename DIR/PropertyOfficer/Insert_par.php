@@ -36,7 +36,7 @@ SELECT
     }
 
 
-     $query = mysqli_query($connection,"INSERT INTO ams_t_par (PAR_NO,PAR_DATE,PAR_ISSUED_BY) 
+    $query = mysqli_query($connection,"INSERT INTO ams_t_par (PAR_NO,PAR_DATE,PAR_ISSUED_BY) 
                                         VALUES ('$getpar','$date','$no')  ");            
 
 

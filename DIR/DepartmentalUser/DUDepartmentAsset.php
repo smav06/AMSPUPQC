@@ -198,6 +198,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="display: none;">ID</th>
+                                                    <th style="display: none;">PARS ID</th>
                                                     <th style="width: 60px"></th>
                                                     <th style="width: 350px;">Asset</th> 
                                                     <th style="width: 90px;">Date Acquired</th>
@@ -211,7 +212,7 @@
                                                 <?php  
 
                                                     $getuserid = $_SESSION['myoid'];
-                                                    $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
+                                                    $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO, PARS.PARS_ID FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
 
                                                     $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -228,6 +229,7 @@
                                                         $epmname = $row['EP_MNAME'];
                                                         $eplname = $row['EP_LNAME'];
                                                         $parno = $row['PAR_NO'];
+                                                        $parsid = $row['PARS_ID'];
                                                         $assignedperson = $epfname.' '.$epmname.' '.$eplname;
                                                 ?>
 
@@ -236,6 +238,12 @@
                                                     <td class="hidden">
                                                         <a id="getid<?php echo $i; ?>">
                                                             <?php echo $id; ?>
+                                                        </a>
+                                                    </td>
+
+                                                    <td class="hidden">
+                                                        <a id="getidqwe<?php echo $i; ?>">
+                                                            <?php echo $parsid; ?>
                                                         </a>
                                                     </td>
 
@@ -351,6 +359,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="display: none;">ID</th>
+                                                        <th style="display: none;">PARS ID</th>
                                                         <th style="width: 60px"></th>
                                                         <th style="width: 350px;">Description</th> 
                                                         <th style="width: 130px;">Date Acquired</th>
@@ -364,7 +373,7 @@
                                                     <?php  
 
                                                         $getuserid = $_SESSION['myoid'];
-                                                        $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
+                                                        $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO, PARS.PARS_ID FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
 
                                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -381,6 +390,7 @@
                                                             $epmname = $row['EP_MNAME'];
                                                             $eplname = $row['EP_LNAME'];
                                                             $parno = $row['PAR_NO'];
+                                                            $parsid = $row['PARS_ID'];
                                                             $assignedperson = $epfname.' '.$epmname.' '.$eplname;
                                                     ?>
 
@@ -389,6 +399,12 @@
                                                         <td class="hidden">
                                                             <a id="getids<?php echo $i; ?>">
                                                                 <?php echo $id; ?>
+                                                            </a>
+                                                        </td>
+
+                                                        <td class="hidden">
+                                                            <a id="getidqwes<?php echo $i; ?>">
+                                                                <?php echo $parsid; ?>
                                                             </a>
                                                         </td>
 
@@ -679,9 +695,10 @@
                     var ck = 'chkvalsz' + z;
                     if (document.getElementById(ck).checked) {
                         var idz = document.getElementById('getids' + z).innerText;
+                        var paridz = document.getElementById('getidqwes' + z).innerText;
                         var statz = document.getElementById('origdescripts' + z).innerText;
                         var descz = document.getElementById('origasstos' + z).innerText;
-                        filltable = filltable + '<tr><td class="hidden">' + idz + '</td><td>' + statz + '</td><td>' + descz + '</tr>';
+                        filltable = filltable + '<tr><td class="hidden">' + idz + '</td><td class="hidden">' + paridz + '</td><td>' + statz + '</td><td>' + descz + '</tr>';
                     }
                     document.getElementById('newmodalget').innerHTML = filltable;
                 }
@@ -712,8 +729,8 @@
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#DD6B55',
-                        confirmButtonText: 'Yes, do it!',
-                        cancelButtonText: "No, cancel it!",
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: "No",
                         closeOnConfirm: false,
                         closeOnCancel: false
                     },
@@ -749,10 +766,11 @@
                                     async: false,
                                     data: {
                                         _nameofcurruser: nameofcurruser,
-                                        _aid: $(this).closest('tr').children('td:first').text()
+                                        _aid: $(this).closest('tr').children('td:first').text(),
+                                        _parid: $(this).closest('tr').children('td:first').next().text()
                                     },
                                     success: function(data2) {
-                                        // alert(data2);
+                                        alert(data2);
 
                                         swal("Asset Successfully Released!", "The asset is successfully released from this department.", "success");
 
@@ -762,7 +780,7 @@
                                         },2000);
                                     },
                                     error: function(response2) {
-                                        // alert(response2);
+                                        alert(response2);
                                       
                                         swal("Error", "May mali bry eh!", "error");
                                     }
@@ -870,8 +888,8 @@
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#DD6B55',
-                        confirmButtonText: 'Yes, do it!',
-                        cancelButtonText: "No, cancel it!",
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: "No",
                         closeOnConfirm: false,
                         closeOnCancel: false
                     },
