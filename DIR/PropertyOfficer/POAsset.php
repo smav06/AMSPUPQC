@@ -424,7 +424,6 @@
                     </div>
                 </div>
 
-                <!-- ERROR PUTA -->
                 <div id="clone" style="display: none;">
                     <div class="row">
                         <div class="col-sm-12">
@@ -532,7 +531,7 @@
                                                 </tr>
 
                                             <?php 
-                                                }                        
+                                                }
                                             ?>
 
                                             <?php

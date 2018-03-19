@@ -250,7 +250,7 @@
                                             <th style="width: 150px;">Request Date</th>
                                             <th style="width: 500px;">Purpose</th> 
                                             <th>Request By</th>
-                                            <th style="width: 100px;">Action</th>
+                                            <th style="width: 90px;"></th>
                                         </tr>
                                     </thead>
 

@@ -426,7 +426,7 @@
             <div class="col-md-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Pending Request
+                        Requests
                           <span class="tools pull-right">
                             <a class="fa fa-chevron-down" href="javascript:;"></a>
                          </span>
@@ -467,16 +467,45 @@
                                 ?>
 
                                     <tr>
+
+                                        <?php 
+                                            if ($ursdispstatus == "Pending") 
+                                            {
+                                            
+                                        ?>
+
                                         <td style="display: none;"> <?php echo $ursdispid; ?> </td>
                                         <td> <?php echo $ursdispno; ?> </td>
                                         <td> <?php echo $ursdispreqdate; ?> </td>
                                         <td> <?php echo $ursdisppurpose; ?> </td>
-                                        <td> <?php echo $ursdispstatus; ?> </td>
+                                        <td> <p class="label label-warning label-mini" style="font-size: 13px;"> <?php echo $ursdispstatus; ?> </p> </td>
                                         <td class="hidden">
                                             <a data-toggle="modal" class="btn btn-success releasemodal" href="#ViewModal" href="javascript:;"><i class="fa fa-eye"></i></a>
 
                                             <a class="btn btn-danger"><i class="fa fa-times-circle"></i></a>
-                                        </td>       
+                                        </td>     
+
+                                        <?php  
+                                            } 
+                                            elseif ($ursdispstatus == "Approved")
+                                            {
+                                        ?>
+
+                                        <td style="display: none;"> <?php echo $ursdispid; ?> </td>
+                                        <td> <?php echo $ursdispno; ?> </td>
+                                        <td> <?php echo $ursdispreqdate; ?> </td>
+                                        <td> <?php echo $ursdisppurpose; ?> </td>
+                                        <td> <p class="label label-success label-mini" style="font-size: 13px;"> <?php echo $ursdispstatus; ?> </p> </td>
+                                        <td class="hidden">
+                                            <a data-toggle="modal" class="btn btn-success releasemodal" href="#ViewModal" href="javascript:;"><i class="fa fa-eye"></i></a>
+
+                                            <a class="btn btn-danger"><i class="fa fa-times-circle"></i></a>
+                                        </td>
+
+                                        <?php  
+                                            }
+                                        ?>                                        
+
                                     </tr>
 
                                 <?php
