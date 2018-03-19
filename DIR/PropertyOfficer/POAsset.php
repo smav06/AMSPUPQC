@@ -278,7 +278,7 @@
                                                         <td id="origtype<?php echo $i; ?>">
                                                             <?php echo $a_acquistion_type; ?> </td>
                                                         <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-success label-mini" style="font-size: 13px;"> <?php echo $a_availability; ?> </p> </td>
+                                                            <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $a_availability; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
                                                         <td id="origdate<?php echo $i; ?>">
@@ -305,7 +305,7 @@
                                                         <td id="origtype<?php echo $i; ?>">
                                                             <?php echo $a_acquistion_type; ?> </td>
                                                         <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-primary label-mini" style="font-size: 13px;"> <?php echo $a_availability; ?> </p> </td>
+                                                            <p class="label label-primary label-mini" style="font-size: 11px;"> <?php echo $a_availability; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
                                                         <td id="origdate<?php echo $i; ?>">
@@ -332,7 +332,7 @@
                                                         <td id="origtype<?php echo $i; ?>">
                                                             <?php echo $a_acquistion_type; ?> </td>
                                                         <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-danger label-mini" style="font-size: 13px;"> <?php echo $a_status; ?> </p> </td>
+                                                            <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
                                                         <td id="origdate<?php echo $i; ?>">
@@ -359,7 +359,7 @@
                                                         <td id="origtype<?php echo $i; ?>">
                                                             <?php echo $a_acquistion_type; ?> </td>
                                                         <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-warning label-mini" style="font-size: 13px;"> <?php echo $a_status; ?> </p> </td>
+                                                            <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
                                                         <td id="origdate<?php echo $i; ?>">
@@ -386,7 +386,7 @@
                                                         <td id="origtype<?php echo $i; ?>">
                                                             <?php echo $a_acquistion_type; ?> </td>
                                                         <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-default label-mini" style="font-size: 13px;"> <?php echo $a_status; ?> </p> </td>
+                                                            <p class="label label-default label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
                                                         <td id="origdate<?php echo $i; ?>">

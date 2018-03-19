@@ -247,10 +247,12 @@
                                     <thead>
                                         <tr>
                                             <th style="display: none;">URS ID</th>
-                                            <th style="width: 150px;">Request Date</th>
-                                            <th style="width: 500px;">Purpose</th> 
-                                            <th>Request By</th>
-                                            <th style="width: 90px;"></th>
+                                            <th style="">Request No.</th>
+                                            <th style="">Purpose</th> 
+                                            <th>Requested By</th>
+                                            <th style=";">Date Requested</th>
+                                            <th style="">Status</th>
+                                            <th style=""></th>
                                         </tr>
                                     </thead>
 
@@ -265,19 +267,62 @@
                                             while($row = mysqli_fetch_assoc($result))
                                             {
                                               $id = $row['URS_ID'];
-                                              $code = $row['URS_REQUEST_DATE'];
-                                              $description = $row['URS_PURPOSE'];    
-                                              $acqtype = $row['O_NAME'];
+                                              $no = $row['URS_NO'];
+                                              $date = $row['URS_REQUEST_DATE'];
+                                              $purpose = $row['URS_PURPOSE'];    
+                                              $officename = $row['O_NAME'];
+                                              $statuz = $row['URS_STATUS_TO_PO'];
                                         ?>
 
                                         <tr class="gradeX">
                                             <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $code; ?> </td>
-                                            <td> <?php echo $description; ?> </td>
-                                            <td> <?php echo $acqtype; ?> </td>
-                                            <td>
-                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success">View</a>
+                                            <td> <?php echo $no; ?> </td>                                        
+                                            <td> <?php echo $purpose; ?> </td>
+                                            <td> <?php echo $officename; ?> </td>
+                                            <td> <?php echo $date; ?> </td>
+
+                                            <?php  
+                                                if ($statuz == 'Pending') 
+                                                {
+                                            ?>
+
+                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
                                             </td>
+
+                                            <td>
+                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;">View</a>
+                                            </td>
+
+                                            <?php  
+                                                }
+                                                elseif ($statuz == 'Approved') 
+                                                {
+                                            ?>
+
+                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
+                                            </td>
+
+                                            <td>
+                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-default" style="margin: -5px;" >View</a>
+                                            </td>
+
+                                            <?php  
+                                                }
+                                                elseif ($statuz == 'Reject') 
+                                                {
+                                            ?>
+
+                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
+                                            </td>
+
+                                            <td>
+                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-default" style="margin: -5px;" >View</a>
+                                            </td>
+
+                                            <?php
+                                                }
+                                            ?>
+                                            
                                         </tr>
 
                                         <?php

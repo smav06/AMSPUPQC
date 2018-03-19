@@ -469,7 +469,7 @@
 
                                 <!-- CLONE END -->
 
-                                <div class="col-md-12 hidden" id="clone">
+                                <div class="col-md-12 hidden" id="clone2">
                                     <label>Requests</label>
                                     <div class="adv-table">
                                         <table  class="display table table-bordered table-striped" id=" ">
@@ -483,6 +483,26 @@
                                             </thead>
 
                                             <tbody id="newmodalget">                                                 
+
+                                            </tbody>                                            
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 hidden" id="clone3">
+                                    <label>Requests</label>
+                                    <div class="adv-table">
+                                        <table  class="display table table-bordered table-striped" id=" ">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">UR ID</th>
+                                                    <th>Request</th>
+                                                    <th style="width: 85px;">Unit</th> 
+                                                    <th style="width: 80px;">Quantity</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="newmodalget2">                                                 
 
                                             </tbody>                                            
                                         </table>
@@ -523,8 +543,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <a href="PODURequests.php" class="btn btn-default">Cancel</a>
-                                        <a id="btnevaluate" class="btn btn-success">Submit</a>                                        
+                                        <a id="btnevaluate" class="btn btn-success">Submit</a>
+                                        <a href="PODURequests.php" class="btn btn-default">Back</a>
                                     </div>
                                 </div>
                             </div>
@@ -696,6 +716,7 @@ $(document).ready(function(){
         var getthecnt = document.getElementById('getcount').value;
         var ck = '';
         var filltable = '';
+        var filltablex = '';
 
         for (var z = getthecnt; z > 0; z--) {
 
@@ -708,6 +729,19 @@ $(document).ready(function(){
                 filltable = filltable + '<tr><td class="">' + idz + '</td><td>' + reqz + '</td><td>' + unitz + '</td><td>' + qtyz + '</td></tr>';
             }
             document.getElementById('newmodalget').innerHTML = filltable;
+        }
+
+        for (var x = getthecnt; x > 0; x--) {
+
+            var ckx = 'chkvalsz' + x;
+            if (document.getElementById(ckx).checked == false) {
+                var idx = document.getElementById('origid' + x).innerText;
+                var reqx = document.getElementById('origreq' + x).innerText;
+                var unitx = document.getElementById('origunit' + x).innerText;
+                var qtyx = document.getElementById('origqty' + x).innerText;
+                filltablex = filltablex + '<tr><td class="">' + idx + '</td><td>' + reqx + '</td><td>' + unitx + '</td><td>' + qtyx + '</td></tr>';
+            }
+            document.getElementById('newmodalget2').innerHTML = filltablex;
         }
 
     });
@@ -777,37 +811,69 @@ $(document).ready(function(){
 
                     });
 
-                    // $('#newmodalget tr').each(function(index, val) {
+                    $('#newmodalget tr').each(function(index, val) {
 
-                    //     var ursid = document.getElementById('pinakaursid').value;
+                        var ursid = document.getElementById('pinakaursid').value;
 
-                    //     $.ajax({
-                    //         type: 'POST',
-                    //         url: 'ApprovedRequestSub.php',
-                    //         async: false,
-                    //         data: {
-                    //             _urid: $(this).closest('tr').children('td:first').text(),
-                    //             _aqty: $(this).closest('tr').children('td:first').next().next().next().text(),
-                    //             _ursid: ursid
-                    //         },
-                    //         success: function(data2) {
-                    //             alert(data2);
+                        $.ajax({
+                            type: 'POST',
+                            url: 'ApprovedRequestSub.php',
+                            async: false,
+                            data: {
+                                _urid: $(this).closest('tr').children('td:first').text(),
+                                _aqty: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                _ursid: ursid
+                            },
+                            success: function(data2) {
+                                // alert(data2);
 
-                    //             // swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
+                                swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
 
-                    //             // setTimeout(function() 
-                    //             // {
-                    //             //     window.location=window.location;
-                    //             // },2000);
-                    //         },
-                    //         error: function(response2) {
-                    //             alert(response2);
+                                setTimeout(function() 
+                                {
+                                    window.location = 'PODURequests.php';
+                                },2500);
+                            },
+                            error: function(response2) {
+                                // alert(response2);
 
-                    //             // swal("Error", "May mali bry eh!", "error");
-                    //         }
+                                swal("Error", "May mali bry eh!", "error");
+                            }
 
-                    //     });
-                    // });
+                        });
+                    });
+
+                    $('#newmodalget2 tr').each(function(index, val) {
+
+                        var ursidx = document.getElementById('pinakaursid').value;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'ApprovedRequestSubReject.php',
+                            async: false,
+                            data: {
+                                _uridx: $(this).closest('tr').children('td:first').text(),
+                                _aqtyx: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                _ursidx: ursidx
+                            },
+                            success: function(data2) {
+                                alert(data2);
+
+                                swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
+
+                                setTimeout(function() 
+                                {
+                                    window.location = 'PODURequests.php';
+                                },2500);
+                            },
+                            error: function(response2) {
+                                alert(response2);
+
+                                swal("Error", "May mali bry eh!", "error");
+                            }
+
+                        });
+                    });
                 } 
                 else
                 {
