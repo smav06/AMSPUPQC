@@ -163,9 +163,9 @@
                 <span>Requests</span>
             </a>
             <ul class="sub">
-                <li class="active"><a href="PODURequests.php">Departmental User Requests</a></li>
+                <li><a href="PODURequests.php">Departmental User Requests</a></li>
                 <li><a href="POPPMP.php">PPMP Request</a></li>  
-                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+                <li class="active"><a href="PORequestToMain.php">Request To Main</a></li>                 
             </ul>
         </li>
         <li>
@@ -225,7 +225,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequisitionRequests.php">Departmental User Requests</a></li>
+                        <li><a href="PORequestToMain.php">Requests To Main</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -235,7 +235,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Requests
+                            .
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
@@ -248,86 +248,77 @@
                                         <tr>
                                             <th style="display: none;">URS ID</th>
                                             <th style="">Request No.</th>
-                                            <th style="">Purpose</th> 
-                                            <th>Requested By</th>
-                                            <th style=";">Date Requested</th>
-                                            <th style="">Status</th>
-                                            <th style=""></th>
+                                            <th style="">Resquested By</th> 
+                                            <th style="width: 140px;">Date Requested</th>
+                                            <th style="width: 110px;">Status</th>
+                                            <th style="width: 90px;"></th>
                                         </tr>
                                     </thead>
 
-                                    <tbody> 
+                                    <tbody>
 
-                                        <?php  
+                                    <?php  
 
-                                            $sql = "SELECT * FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
+                                    $sql = "SELECT URS.URS_ID, URS.URS_NO, URS.URS_REQUEST_DATE, URSTM.URSTM_STATUS_TO_MAIN, O.O_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_APPROVED_DATE DESC";
 
-                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+                                        $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
-                                            while($row = mysqli_fetch_assoc($result))
-                                            {
-                                              $id = $row['URS_ID'];
-                                              $no = $row['URS_NO'];
-                                              $date = $row['URS_REQUEST_DATE'];
-                                              $purpose = $row['URS_PURPOSE'];    
-                                              $officename = $row['O_NAME'];
-                                              $statuz = $row['URS_STATUS_TO_PO'];
-                                        ?>
+                                        while($row = mysqli_fetch_assoc($result))
+                                        {
+                                            $ursid = $row['URS_ID'];
+                                            $ursno = $row['URS_NO'];
+                                            $reqby = $row['O_NAME'];
+                                            $reqdate = $row['URS_REQUEST_DATE'];
+                                            $status = $row['URSTM_STATUS_TO_MAIN'];
+                                    ?>
 
-                                        <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $no; ?> </td>                                        
-                                            <td> <?php echo $purpose; ?> </td>
-                                            <td> <?php echo $officename; ?> </td>
-                                            <td> <?php echo $date; ?> </td>
+                                        <tr>
+                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
+                                            <td> <?php echo $ursno; ?> </td>
+                                            <td> <?php echo $reqby; ?> </td>
+                                            <td> <?php echo $reqdate; ?> </td>
 
                                             <?php  
-                                                if ($statuz == 'Pending') 
+                                                if ($status == 'Pending') 
                                                 {
                                             ?>
 
-                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
+                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
+                                            <td> 
+                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
                                             </td>
 
-                                            <td>
-                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;">Evaluate</a>
-                                            </td>
-
-                                            <?php  
+                                            <?php
                                                 }
-                                                elseif ($statuz == 'Approved') 
+                                                elseif ($status == 'Approved') 
                                                 {
                                             ?>
 
-                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
+                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
+                                            <td> 
+                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
                                             </td>
 
-                                            <td>
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
-                                            </td>
-
-                                            <?php  
+                                            <?php
                                                 }
-                                                elseif ($statuz == 'Reject') 
+                                                elseif ($status == 'Reject') 
                                                 {
                                             ?>
 
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
+                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
+                                            <td> 
+                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
                                             </td>
 
                                             <?php
                                                 }
                                             ?>
-                                            
+
                                         </tr>
 
-                                        <?php
-                                            }
-                                        ?>
+                                    <?php  
+                                        }
+                                    ?>
 
                                     </tbody>
                                 </table>

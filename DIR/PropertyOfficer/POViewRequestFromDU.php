@@ -304,7 +304,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Requests</label>
+                                    <!-- <label>Requests</label> -->
                                     <div class="adv-table">
                                         <table  class="display table table-bordered table-striped" id=" ">
                                             <thead>
@@ -352,22 +352,7 @@
                                                     <td> <?php echo $showunit; ?> </td>
                                                     <td> <p> <?php echo $showqty; ?> </p> </td>
 
-                                                    <?php  
-                                                        if ($showqty > 1) 
-                                                        {
-                                                    ?>
-                                                        <td> <center> <input type="text" value="" class="form-control" style="color: black;" onkeyup="myFunction()" id="chatinput<?php echo $i; ?>" required> </center> </td>
-                                                    <?php
-                                                        }
-                                                        elseif ($showqty = 1) 
-                                                        {
-                                                    ?>
-
-                                                        <td> <center> <input type="text" value="" class="form-control" style="color: black;" onkeyup="myFunction()" id="chatinput<?php echo $i; ?>" required disabled> </center> </td>
-
-                                                    <?php
-                                                        }
-                                                    ?>                                                    
+                                                    <td> <center> <input type="text" value="" class="form-control" style="color: black;" onkeyup="myFunction()" id="chatinput<?php echo $i; ?>" required> </center> </td>                                               
 
                                                     <td> <?php echo $showreqperson; ?> </td>
                                                 </tr>
@@ -857,7 +842,7 @@ $(document).ready(function(){
                                 _ursidx: ursidx
                             },
                             success: function(data2) {
-                                alert(data2);
+                                // alert(data2);
 
                                 swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
 
@@ -867,7 +852,7 @@ $(document).ready(function(){
                                 },2500);
                             },
                             error: function(response2) {
-                                alert(response2);
+                                // alert(response2);
 
                                 swal("Error", "May mali bry eh!", "error");
                             }

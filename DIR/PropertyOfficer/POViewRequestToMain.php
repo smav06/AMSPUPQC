@@ -4,10 +4,15 @@
 
     session_start();
 
-    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Property Officer' && !isset($_SESSION['myuser'])  && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
+    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Property Officer' && !isset($_SESSION['myuser']) && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
     {
       echo "<script>window.location.assign('../login.php')</script>";
 
+    }
+
+    if (isset($_GET['reqmain'])) 
+    {
+        $ids = $_GET['reqmain'];
     }
 
 ?>
@@ -163,9 +168,9 @@
                 <span>Requests</span>
             </a>
             <ul class="sub">
-                <li class="active"><a href="PODURequests.php">Departmental User Requests</a></li>
+                <li><a href="PODURequests.php">Departmental User Requests</a></li>
                 <li><a href="POPPMP.php">PPMP Request</a></li>  
-                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+                <li class="active"><a href="PORequestToMain.php">Request To Main</a></li>                 
             </ul>
         </li>
         <li>
@@ -225,7 +230,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequisitionRequests.php">Departmental User Requests</a></li>
+                        <li><a href="PORequestToMain.php">Requests To Main</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -234,106 +239,171 @@
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            Requests
+                        <header style="color: black;" class="panel-heading">
+                            REQUESTS TO MAIN
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
                         </header>
 
+                        <?php  
+                            $sql = "SELECT URS.URS_PURPOSE, URS.URS_NO, URS.URS_ID, URS.URS_REQUEST_DATE, O.O_NAME, URSTM.URSTM_STATUS_TO_MAIN, URABPO.URA_QUANTITY, ALS.AL_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset_library` AS ALS ON UR.AL_ID = ALS.AL_ID WHERE URS.URS_ID = $ids GROUP BY URS.URS_ID ORDER BY URS.URS_APPROVED_DATE DESC";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {                              
+                                $urspurpose = $row['URS_PURPOSE'];
+                                $ursno = $row['URS_NO'];
+                                $ursdatereq = $row['URS_REQUEST_DATE'];
+                                $ursreqby = $row['O_NAME'];
+                                $ursid = $row['URS_ID'];
+                                $mainstat = $row['URSTM_STATUS_TO_MAIN'];                              
+                        ?>
+
                         <div class="panel-body">
-                            <div class="adv-table">
-                                <table  class="display table table-bordered table-striped" id="dynamic-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="display: none;">URS ID</th>
-                                            <th style="">Request No.</th>
-                                            <th style="">Purpose</th> 
-                                            <th>Requested By</th>
-                                            <th style=";">Date Requested</th>
-                                            <th style="">Status</th>
-                                            <th style=""></th>
-                                        </tr>
-                                    </thead>
+                            <div class="row group">                                                        
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Request No.</label>
+                                        <input type="hidden" id="pinakaursid" value="<?php echo $ursid; ?>">
+                                        <input type="text" value="<?php echo $ursno; ?>" class="form-control" style="color: black;" disabled  />
+                                    </div>
+                                </div>
 
-                                    <tbody> 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Requested By</label>
+                                        <input type="text" value="<?php echo $ursreqby; ?>" class="form-control" style="color: black;" disabled  />
+                                    </div>
+                                </div>
 
-                                        <?php  
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Date Requested</label>
+                                        <input type="Date" value="<?php echo $ursdatereq; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                            $sql = "SELECT * FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label>Purpose</label>
+                                        <input type="text" value="<?php echo $urspurpose; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Status To Main</label>
+                                        <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                            while($row = mysqli_fetch_assoc($result))
-                                            {
-                                              $id = $row['URS_ID'];
-                                              $no = $row['URS_NO'];
-                                              $date = $row['URS_REQUEST_DATE'];
-                                              $purpose = $row['URS_PURPOSE'];    
-                                              $officename = $row['O_NAME'];
-                                              $statuz = $row['URS_STATUS_TO_PO'];
-                                        ?>
+                        
 
-                                        <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $no; ?> </td>                                        
-                                            <td> <?php echo $purpose; ?> </td>
-                                            <td> <?php echo $officename; ?> </td>
-                                            <td> <?php echo $date; ?> </td>
+                                <div class="col-md-12">
+                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">
+                                    </div>
+                                </div>
 
-                                            <?php  
-                                                if ($statuz == 'Pending') 
-                                                {
-                                            ?>
+                                <div class="col-md-12">
+                                    <!-- <label>Requests</label> -->
+                                    <div class="adv-table">
+                                        <table  class="display table table-bordered table-striped" id=" ">
+                                            <thead>
+                                                <tr>
+                                                    <th style="">Request</th>
+                                                    <th style="width: 90px;">Unit</th>
+                                                    <th style="width: 250px;">Approved Quantity By Property Officer</th>
+                                                </tr>
+                                            </thead>
 
-                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
+                                            <tbody>
+                                                <?php  
+                                                    $sqlz = "SELECT URS.URS_PURPOSE, URS.URS_NO, URS.URS_ID, URS.URS_REQUEST_DATE, O.O_NAME, URSTM.URSTM_STATUS_TO_MAIN, UR.UR_UNIT, URABPO.URA_QUANTITY, ALS.AL_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset_library` AS ALS ON UR.AL_ID = ALS.AL_ID WHERE URS.URS_ID = $ids ORDER BY URS.URS_APPROVED_DATE DESC";
 
-                                            <td>
-                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;">Evaluate</a>
-                                            </td>
+                                                    $resultz = mysqli_query($connection, $sqlz) or die("Bad Query: $sql");
 
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Approved') 
-                                                {
-                                            ?>
+                                                    while($rowz = mysqli_fetch_assoc($resultz))
+                                                    {
+                                                        $requestname = $rowz['AL_NAME'];
+                                                        $requestunit = $rowz['UR_UNIT'];
+                                                        $requestqty = $rowz['URA_QUANTITY'];
+                                                ?>
 
-                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
+                                                <tr>
+                                                    <td> <?php echo $requestname; ?> </td>
+                                                    <td> <?php echo $requestunit; ?> </td>
+                                                    <td> <center> <?php echo $requestqty; ?> </center> </td>
+                                                </tr>
 
-                                            <td>
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
-                                            </td>
-
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Reject') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
-                                            </td>
-
-                                            <?php
-                                                }
-                                            ?>
-                                            
-                                        </tr>
-
-                                        <?php
-                                            }
-                                        ?>
-
-                                    </tbody>
-                                </table>
-
+                                                <?php
+                                                    }
+                                                ?>
+                                            </tbody>                                            
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="padding: 1px; margin-bottom: 10px;">                                                             
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="padding: 0.5px; margin-bottom: 10px; background: #757575;">                                                             
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php
+                                if ($mainstat == 'Pending') 
+                                {
+                            ?>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Remarks</label> 
+                                        <textarea name="viewrequestsevaluate" id="viewrequestsevaluate" class="form-control" style="resize: none; color: black; height: 85px;" maxlength="200"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Evaluation Of Main</label>
+                                        <select class="form-control" style="color: black;" id="getsel">
+                                            <option selected disabled value=""></option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Reject">Reject</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <a id="btnevaluate" class="btn btn-success">Submit</a>
+                                        <a href="PORequestToMain.php" class="btn btn-default">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php  
+                                }
+                                else
+                                {
+                            ?>
+
+                            <?php
+                                }
+                            ?>
+
                         </div>
+
+                        <?php
+                            }
+                        ?>
 
                     </section>
                 </div>
