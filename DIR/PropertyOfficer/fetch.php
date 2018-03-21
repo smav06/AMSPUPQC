@@ -9,7 +9,7 @@ if(isset($_POST["view"]))
   $update_query = "UPDATE ams_t_user_request_summary SET URS_VIEW_BY_PO = 1 WHERE URS_VIEW_BY_PO = 0";
   mysqli_query($connect, $update_query);
  }
- $query = "SELECT * FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
+ $query = "SELECT * FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE URS_STATUS_TO_PO = 'Pending' GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
  $result = mysqli_query($connect, $query);
  $output = '';
  

@@ -295,7 +295,34 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Status To Main</label>
-                                        <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: black;" disabled />
+
+                                        <?php  
+                                            if ($mainstat == 'Pending') 
+                                            {
+                                        ?>
+
+                                            <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: black;" disabled />
+
+                                        <?php      # code...
+                                            }
+                                            elseif ($mainstat == 'Approved') 
+                                            {
+                                        ?>
+
+                                            <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: green;" disabled />
+
+                                        <?php      # code...
+                                            }
+                                            elseif ($mainstat == 'Reject') 
+                                            {
+                                        ?>
+
+                                            <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: red;" disabled />
+
+                                        <?php
+                                            }
+                                        ?>
+
                                     </div>
                                 </div>
 
@@ -369,7 +396,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Remarks</label> 
-                                        <textarea name="viewrequestsevaluate" id="viewrequestsevaluate" class="form-control" style="resize: none; color: black; height: 85px;" maxlength="200"></textarea>
+                                        <textarea name="viewrequestsevaluate" id="evalbymainremarks" class="form-control" style="resize: none; color: black; height: 85px;" maxlength="200"></textarea>
                                     </div>
                                 </div>
 
@@ -384,7 +411,7 @@
                                     </div>
                                     <div class="form-group">
                                         <a id="btnevaluate" class="btn btn-success">Submit</a>
-                                        <a href="PORequestToMain.php" class="btn btn-default">Back</a>
+                                        <a href="PORequestToMain.php" class="btn btn-default">Back To Requests</a>
                                     </div>
                                 </div>
                             </div>
@@ -394,7 +421,7 @@
                                 else
                                 {
                             ?>
-
+                                <a href="PORequestToMain.php" class="btn btn-default">Back To Requests</a>
                             <?php
                                 }
                             ?>
@@ -547,35 +574,138 @@
 
 <script>
 $(document).ready(function(){
+
+    $('#getsel').click(function(e) {
+        document.getElementById('getsel').options[0].innerText = "";
+        document.getElementById('getsel').style.borderColor = "#00A8B3";
+        document.getElementById('getsel').style.color = "black";
+    });
+
+    $('#getsel').blur(function(e) {
+        document.getElementById('getsel').options[0].innerText = "";
+        document.getElementById('getsel').style.borderColor = "#E2E2E4";
+        document.getElementById('getsel').style.color = "black";
+    });
+
+    $('#btnevaluate').click(function(e) {
+                
+        e.preventDefault();
+
+        var ursid = document.getElementById('pinakaursid').value;
+
+        var ez = document.getElementById('getsel');
+        var evals = ez.options[ez.selectedIndex].value;
+
+        var remarks = document.getElementById('evalbymainremarks').value;
+
+        if (document.getElementById('getsel').options[ez.selectedIndex].value == '') 
+        {
+            document.getElementById('getsel').options[0].innerText = "Please Select";
+            document.getElementById('getsel').focus();
+            document.getElementById('getsel').style.borderColor = "#B94A48";
+            document.getElementById('getsel').style.color = "#B94A48";
+        }
+        else
+        {
+            swal({
+
+                title: "Are you sure you want to submit?",
+                text: "The request confirmation evaluated \n by main will be recorded.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes',
+                cancelButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'ApprovedRequestByMain.php',
+                        async: false,
+                        data: {
+                            _ursid: ursid,
+                            _evals: evals,
+                            _remarks: remarks
+                        },
+                        success: function(data2) {
+                            // alert(data2); 
+
+                            if (evals == 'Approved') {
+
+                                swal("Request Approved!", "The request is approved by main.", "success");
+
+                                setTimeout(function() 
+                                {
+                                    window.location = window.location;
+                                },2500);  
+                            }   
+                            else if (evals == 'Reject') 
+                            {
+                                swal("Request Rejected!", "The request is rejected by main.", "error");
+
+                                // setTimeout(function() 
+                                // {
+                                //     window.location = 'PORequestToMain.php';
+                                // },2500);  
+                            }
+
+                                                          
+                        },
+                        error: function(response2) {
+                            // alert(response2);      
+
+                            swal("Error", "May mali bry eh!", "error");                              
+                        }
+
+                    });
+                    
+                }
+                else
+                {
+                    swal("Cancelled", "The confirmation of request to main is cancelled", "error");
+                }
+
+            });
+        }        
+
+    });
+
  
- function load_unseen_notification(view = '')
- {
-  $.ajax({
-   url:"fetch.php",
-   method:"POST",
-   data:{view:view},
-   dataType:"json",
-   success:function(data)
-   {
-    $('.dispnotif').html(data.notification);
-    if(data.unseen_notification > 0)
-    {
-     $('.count').html(data.unseen_notification);
+    function load_unseen_notification(view = '') {
+        $.ajax({
+            url:"fetch.php",
+            method:"POST",
+            data:{view:view},
+            dataType:"json",
+       
+        success:function(data)
+        {
+            $('.dispnotif').html(data.notification);
+
+            if(data.unseen_notification > 0)
+            {
+                $('.count').html(data.unseen_notification);
+            }
+        }
+
+        });
     }
-   }
-  });
- }
- 
- load_unseen_notification();
- 
- $(document).on('click', '.dropdown-toggle', function(){
-  $('.count').html('');
-  load_unseen_notification('yes');
- });
- 
- setInterval(function(){ 
-  load_unseen_notification();; 
- }, 1000);
+     
+    load_unseen_notification();
+     
+    $(document).on('click', '.dropdown-toggle', function() {
+        $('.count').html('');
+        load_unseen_notification('yes');
+    });
+     
+    setInterval(function(){ 
+        load_unseen_notification();; 
+    }, 1000);
  
 });
 </script>

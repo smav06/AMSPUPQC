@@ -250,7 +250,7 @@
                                             <th style="">Request No.</th>
                                             <th style="">Resquested By</th> 
                                             <th style="width: 140px;">Date Requested</th>
-                                            <th style="width: 110px;">Status</th>
+                                            <th style="width: 130px;">Status To Main</th>
                                             <th style="width: 90px;"></th>
                                         </tr>
                                     </thead>
