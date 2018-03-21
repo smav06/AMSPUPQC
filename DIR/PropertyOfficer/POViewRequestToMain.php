@@ -411,7 +411,7 @@
                                     </div>
                                     <div class="form-group">
                                         <a id="btnevaluate" class="btn btn-success">Submit</a>
-                                        <a href="PORequestToMain.php" class="btn btn-default">Back To Requests</a>
+                                        <a href="PORequestToMain.php" class="btn btn-default">Go to requests to main</a>
                                     </div>
                                 </div>
                             </div>
@@ -421,7 +421,7 @@
                                 else
                                 {
                             ?>
-                                <a href="PORequestToMain.php" class="btn btn-default">Back To Requests</a>
+                                <a href="PORequestToMain.php" class="btn btn-default">Go to requests to main</a>
                             <?php
                                 }
                             ?>
@@ -648,10 +648,10 @@ $(document).ready(function(){
                             {
                                 swal("Request Rejected!", "The request is rejected by main.", "error");
 
-                                // setTimeout(function() 
-                                // {
-                                //     window.location = 'PORequestToMain.php';
-                                // },2500);  
+                                setTimeout(function() 
+                                {
+                                    window.location = window.location;
+                                },2500);  
                             }
 
                                                           

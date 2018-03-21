@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2018 at 02:46 AM
+-- Generation Time: Mar 21, 2018 at 12:01 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -498,9 +498,9 @@ INSERT INTO `ams_t_user_request` (`UR_ID`, `UR_UNIT`, `UR_QUANTITY`, `UR_STATUS`
 (2, 'Piece', 1, 'Pending', NULL, NULL, 1, 5, 5),
 (3, 'Piece', 1, 'Pending', NULL, NULL, 2, 1, 2),
 (4, 'Set', 2, 'Pending', NULL, NULL, 2, 2, 5),
-(5, 'Set', 4, 'Reject', NULL, '2018-03-20', 3, 9, 4),
-(6, 'Piece', 10, 'Approved', '2018-03-20', NULL, 3, 3, 4),
-(7, 'Piece', 3, 'Approved', '2018-03-20', NULL, 3, 10, 4);
+(5, 'Set', 4, 'Pending', NULL, NULL, 3, 9, 4),
+(6, 'Piece', 10, 'Pending', NULL, NULL, 3, 3, 4),
+(7, 'Piece', 3, 'Pending', NULL, NULL, 3, 10, 4);
 
 -- --------------------------------------------------------
 
@@ -529,14 +529,6 @@ CREATE TABLE `ams_t_user_request_approved_by_po` (
   `URS_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ams_t_user_request_approved_by_po`
---
-
-INSERT INTO `ams_t_user_request_approved_by_po` (`URABPO_ID`, `URABPO_STATUS`, `URABPO_APPROVED_DATE_BY_MAIN`, `URABPO_REJECT_DATE_BY_MAIN`, `URA_QUANTITY`, `UR_ID`, `URS_ID`) VALUES
-(1, 'Pending', NULL, NULL, 1, 7, 3),
-(2, 'Pending', NULL, NULL, 1, 6, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -551,13 +543,6 @@ CREATE TABLE `ams_t_user_request_status_to_main` (
   `URSTM_REMARKS` varchar(350) DEFAULT NULL,
   `URS_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ams_t_user_request_status_to_main`
---
-
-INSERT INTO `ams_t_user_request_status_to_main` (`URSTM_ID`, `URSTM_STATUS_TO_MAIN`, `URSTM_APPROVED_DATE_BY_MAIN`, `URSTM_REJECT_DATE_BY_MAIN`, `URSTM_REMARKS`, `URS_ID`) VALUES
-(1, 'Pending', NULL, NULL, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -586,7 +571,7 @@ CREATE TABLE `ams_t_user_request_summary` (
 INSERT INTO `ams_t_user_request_summary` (`URS_ID`, `URS_NO`, `URS_REQUEST_DATE`, `URS_PURPOSE`, `URS_STATUS_TO_PO`, `URS_APPROVED_DATE`, `URS_REJECT_DATE`, `URS_REMARKS`, `URS_VIEW_BY_USER`, `URS_VIEW_BY_PO`, `URS_VIEW_BY_USER_MAIN`) VALUES
 (1, 'REQ-2018-0001', '2018-03-16', 'Need for teaching.', 'Pending', NULL, NULL, NULL, 0, 1, 0),
 (2, 'REQ-2018-0002', '2018-03-16', 'For Academic Purposes.', 'Pending', NULL, NULL, NULL, 0, 1, 0),
-(3, 'REQ-2018-0003', '2018-03-18', 'For incoming event.', 'Approved', '2018-03-20', NULL, 'Ok, but I removed speaker.', 0, 1, 0);
+(3, 'REQ-2018-0003', '2018-03-18', 'For incoming event.', 'Pending', NULL, NULL, NULL, 0, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -931,13 +916,13 @@ ALTER TABLE `ams_t_user_request_approved_by_main`
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_po`
 --
 ALTER TABLE `ams_t_user_request_approved_by_po`
-  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_status_to_main`
 --
 ALTER TABLE `ams_t_user_request_status_to_main`
-  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_summary`

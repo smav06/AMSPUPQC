@@ -97,8 +97,56 @@
                 <i class="fa fa-bell-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
+            
+            <?php 
+
+                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
+
+                while($rowx = mysqli_fetch_assoc($sqlcntx))
+                {
+                    $cnt = $rowx['XXX'];
+                    echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
+                }
+
+                if ($cnt == 0) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 70px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 1) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 110px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 2) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 220px;">
+            </ul>
+
+            <?php
+                    
+                }
+                elseif ($cnt >= 3) 
+                {                
+            ?>
+
             <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
             </ul>
+
+            <?php 
+                }
+            ?>
+            
         </li>
         <!-- notification dropdown end -->
     </ul>
@@ -235,7 +283,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            .
+                            Requests approved by property officer
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>

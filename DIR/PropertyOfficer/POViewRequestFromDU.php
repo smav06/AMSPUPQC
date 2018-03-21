@@ -102,8 +102,56 @@
                 <i class="fa fa-bell-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
+
+            <?php 
+
+                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
+
+                while($rowx = mysqli_fetch_assoc($sqlcntx))
+                {
+                    $cnt = $rowx['XXX'];
+                    echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
+                }
+
+                if ($cnt == 0) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 70px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 1) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 110px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 2) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 220px;">
+            </ul>
+
+            <?php
+                    
+                }
+                elseif ($cnt >= 3) 
+                {                
+            ?>
+
             <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
             </ul>
+
+            <?php 
+                }
+            ?>
+
         </li>
         <!-- notification dropdown end -->
     </ul>
@@ -238,8 +286,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
-                        <header style="color: #FAFAFA;" class="panel-heading">
-                            .
+                        <header class="panel-heading">
+                            EVALUATION OF REQUEST
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
@@ -346,13 +394,13 @@
                                                 <tr class="gradeX">
                                                     <td style="display: none;"> <?php echo $showurid; ?> </td>
                                                     <td> 
-                                                        <center> <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" checked="true"> </center>
+                                                        <center> <input type="checkbox" id="ebriwer<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" checked="true"> </center>
                                                     </td>
                                                     <td> <?php echo $showlibname; ?> </td>
                                                     <td> <?php echo $showunit; ?> </td>
                                                     <td> <p> <?php echo $showqty; ?> </p> </td>
 
-                                                    <td> <center> <input type="text" value="" class="form-control" style="color: black;" onkeyup="myFunction()" id="chatinput<?php echo $i; ?>" required> </center> </td>                                               
+                                                    <td> <center> <input type="text" value="<?php echo $showqty; ?>" class="form-control" style="color: black;" onkeyup="myFunction()" id="chatinput<?php echo $i; ?>" required> </center> </td>                                               
 
                                                     <td> <?php echo $showreqperson; ?> </td>
                                                 </tr>
@@ -380,7 +428,7 @@
 
                                 <!-- CLONE -->
                                 <div class="col-md-12 hidden" id="clone">
-                                    <label>Requests</label>
+                                    <label>CLONE</label>
                                     <div class="adv-table">
                                         <table  class="display table table-bordered table-striped" id=" ">
                                             <thead>
@@ -455,7 +503,7 @@
                                 <!-- CLONE END -->
 
                                 <div class="col-md-12 hidden" id="clone2">
-                                    <label>Requests</label>
+                                    <label>APPROVED</label>
                                     <div class="adv-table">
                                         <table  class="display table table-bordered table-striped" id=" ">
                                             <thead>
@@ -475,7 +523,7 @@
                                 </div>
 
                                 <div class="col-md-12 hidden" id="clone3">
-                                    <label>Requests</label>
+                                    <label>REJECT</label>
                                     <div class="adv-table">
                                         <table  class="display table table-bordered table-striped" id=" ">
                                             <thead>
@@ -529,7 +577,7 @@
                                     </div>
                                     <div class="form-group">
                                         <a id="btnevaluate" class="btn btn-success">Submit</a>
-                                        <a href="PODURequests.php" class="btn btn-default">Back To Requests</a>
+                                        <a href="PODURequests.php" class="btn btn-default">Go to requests</a>
                                     </div>
                                 </div>
                             </div>
@@ -544,85 +592,85 @@
     <!--main content end-->
 <!--right sidebar start-->
 <div class="right-sidebar">
-	<div class="search-row">
-	    <input type="text" placeholder="Search" class="form-control">
-	</div>
-	<div class="right-stat-bar">
-		<ul class="right-side-accordion">
-		<li class="widget-collapsible">
-		    <ul class="widget-container">
-		        <li>
-		            <div class="prog-row side-mini-stat clearfix">
-		                <div class="side-graph-info">
-		                    <h4>Target sell</h4>
-		                    <p>
-		                        25%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="target-sell">
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="side-graph-info">
-		                    <h4>product delivery</h4>
-		                    <p>
-		                        55%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="p-delivery">
-		                        <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="side-graph-info payment-info">
-		                    <h4>payment collection</h4>
-		                    <p>
-		                        25%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="p-collection">
-								<span class="pc-epie-chart" data-percent="45">
-								<span class="percent"></span>
-								</span>
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="side-graph-info">
-		                    <h4>delivery pending</h4>
-		                    <p>
-		                        44%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="d-pending">
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="col-md-12">
-		                    <h4>total progress</h4>
-		                    <p>
-		                        50%, Deadline 12 june 13
-		                    </p>
-		                    <div class="progress progress-xs mtop10">
-		                        <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
-		                            <span class="sr-only">50% Complete</span>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		        </li>
-		    </ul>
-		</li>
-		</ul>
-	</div>
+    <div class="search-row">
+        <input type="text" placeholder="Search" class="form-control">
+    </div>
+    <div class="right-stat-bar">
+        <ul class="right-side-accordion">
+        <li class="widget-collapsible">
+            <ul class="widget-container">
+                <li>
+                    <div class="prog-row side-mini-stat clearfix">
+                        <div class="side-graph-info">
+                            <h4>Target sell</h4>
+                            <p>
+                                25%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="target-sell">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="side-graph-info">
+                            <h4>product delivery</h4>
+                            <p>
+                                55%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="p-delivery">
+                                <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="side-graph-info payment-info">
+                            <h4>payment collection</h4>
+                            <p>
+                                25%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="p-collection">
+                                <span class="pc-epie-chart" data-percent="45">
+                                <span class="percent"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="side-graph-info">
+                            <h4>delivery pending</h4>
+                            <p>
+                                44%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="d-pending">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="col-md-12">
+                            <h4>total progress</h4>
+                            <p>
+                                50%, Deadline 12 june 13
+                            </p>
+                            <div class="progress progress-xs mtop10">
+                                <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
+                                    <span class="sr-only">50% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        </ul>
+    </div>
 </div>
 <!--right sidebar end-->
 
@@ -631,37 +679,37 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
-	<script src="../../js/jquery.js"></script>
-	<script src="../../bs3/js/bootstrap.min.js"></script>
-	<script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="../../js/jquery.scrollTo.min.js"></script>
-	<script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-	<script src="../../js/jquery.nicescroll.js"></script>
-	<!--Easy Pie Chart-->
-	<script src="../../js/easypiechart/jquery.easypiechart.js"></script>
-	<!--Sparkline Chart-->
-	<script src="../../js/sparkline/jquery.sparkline.js"></script>
-	<!--jQuery Flot Chart-->
-	<script src="../../js/flot-chart/jquery.flot.js"></script>
-	<script src="../../js/flot-chart/jquery.flot.tooltip.min.js"></script>
-	<script src="../../js/flot-chart/jquery.flot.resize.js"></script>
-	<script src="../../js/flot-chart/jquery.flot.pie.resize.js"></script>
+    <script src="../../js/jquery.js"></script>
+    <script src="../../bs3/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="../../js/jquery.scrollTo.min.js"></script>
+    <script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="../../js/jquery.nicescroll.js"></script>
+    <!--Easy Pie Chart-->
+    <script src="../../js/easypiechart/jquery.easypiechart.js"></script>
+    <!--Sparkline Chart-->
+    <script src="../../js/sparkline/jquery.sparkline.js"></script>
+    <!--jQuery Flot Chart-->
+    <script src="../../js/flot-chart/jquery.flot.js"></script>
+    <script src="../../js/flot-chart/jquery.flot.tooltip.min.js"></script>
+    <script src="../../js/flot-chart/jquery.flot.resize.js"></script>
+    <script src="../../js/flot-chart/jquery.flot.pie.resize.js"></script>
 
-	<!--dynamic table-->
-	<script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
-	<!--common script init for all pages-->
-	<script src="../../js/scripts.js"></script>
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
+    <!--common script init for all pages-->
+    <script src="../../js/scripts.js"></script>
 
-	<!--dynamic table initialization -->
-	<script src="../../js/dynamic_table_init.js"></script>
+    <!--dynamic table initialization -->
+    <script src="../../js/dynamic_table_init.js"></script>
 
-	<script src="../../js/iCheck/jquery.icheck.js"></script>
+    <script src="../../js/iCheck/jquery.icheck.js"></script>
 
-	<script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
 
-	<!--icheck init -->
-	<script src="../../js/icheck-init.js"></script>
+    <!--icheck init -->
+    <script src="../../js/icheck-init.js"></script>
 
     <script type="text/javascript" src="../../js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -736,136 +784,373 @@ $(document).ready(function(){
     allNextBtn.click(function() {
         if (this.checked) 
         {
-            var e = document.getElementById('chkvalsz' + this.id).checked
-            document.getElementById('chkvalsz' + this.id).checked = true;
+            // ebriwer
+            // alert('nachecked!');
+            // alert(this.id);
+            var e = this.id;
+            // alert(e);
+            var f = 'chkvalsz' + e.substring(7);
+            document.getElementById(f).checked = true;
             // document.getElementById('chkvalsz' + this.id).disabled = false;
-            document.getElementById("chatinput" + this.id).disabled = false;            
+            document.getElementById("chatinput" + e.substring(7)).disabled = false;            
         } 
         else 
         {
-            var e = document.getElementById('chkvalsz' + this.id).checked
-            document.getElementById('chkvalsz' + this.id).checked = false;
+            // alert('dili!');
+            // alert(this.id);
+            var e = this.id;
+            // alert(e);
+            var f = 'chkvalsz' + e.substring(7);
+            document.getElementById(f).checked = false;
             // document.getElementById('chkvalsz' + this.id).disabled = true;
-            document.getElementById("chatinput" + this.id).disabled = true;
-            document.getElementById("chatinput" + this.id).value = "";
+            document.getElementById("chatinput" + e.substring(7)).disabled = true;
+            // document.getElementById("chatinput" + this.id).value = "";
         }
     });
 
+    $('#getsel').click(function(e) {
+        document.getElementById('getsel').options[0].innerText = "";
+        document.getElementById('getsel').style.borderColor = "#00A8B3";
+        document.getElementById('getsel').style.color = "black";
+    });
+
+    $('#getsel').change(function(e) {
+
+        var e = document.getElementById('getsel');
+
+        if (document.getElementById('getsel').options[e.selectedIndex].value == 'Approved') 
+        {
+            var getthecnt = document.getElementById('getcount').value;
+
+            for (var zx = getthecnt; zx > 0; zx--) 
+            {
+                var ckz = 'chatinput' + zx;
+                // alert(ckz);
+                document.getElementById('chatinput' + zx).disabled = false;                
+            }
+        }
+        else if (document.getElementById('getsel').options[0].value = "Reject") 
+        {
+            var getthecnt = document.getElementById('getcount').value;
+
+            for (var z = getthecnt; z > 0; z--) 
+            {
+                var ck = 'chkvalsz' + z;
+                // alert(ck);
+                document.getElementById('chkvalsz' + z).checked = false;                
+            }
+
+            for (var zx = getthecnt; zx > 0; zx--) 
+            {
+                var ckz = 'chatinput' + zx;
+                // alert(ckz);
+                document.getElementById('chatinput' + zx).disabled = true;                
+            }
+
+            for (var zxw = getthecnt; zxw > 0; zxw--) 
+            {
+                var ckzw = 'ebriwer' + zxw;
+                // alert(ckz);
+                document.getElementById('ebriwer' + zxw).checked = false;                
+            }
+
+        }
+    });
+
+    $('#getsel').blur(function(e) {
+        document.getElementById('getsel').options[0].innerText = "";
+        document.getElementById('getsel').style.borderColor = "#E2E2E4";
+        document.getElementById('getsel').style.color = "black";
+    });
 
     $('#btnevaluate').click(function(e) {
                 
         e.preventDefault();
-        
-        swal({
-                title: "Are you sure you want to assign this asset?",
-                text: "The selected assets will be assign to this employee.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes',
-                cancelButtonText: "No",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
 
-            function(isConfirm) {
-                if (isConfirm) {
+        var ursid = document.getElementById('pinakaursid').value;
 
-                    var ursid = document.getElementById('pinakaursid').value;
+        var e = document.getElementById('getsel');
+        var evals = e.options[e.selectedIndex].value;
 
-                    var e = document.getElementById('getsel');
-                    var evals = e.options[e.selectedIndex].value;
+        var remarks = document.getElementById('viewrequestsevaluate').value;
 
-                    var remarks = document.getElementById('viewrequestsevaluate').value;
+        if (document.getElementById('getsel').options[e.selectedIndex].value == '') 
+        {
+            document.getElementById('getsel').options[0].innerText = "Please Select";
+            document.getElementById('getsel').focus();
+            document.getElementById('getsel').style.borderColor = "#B94A48";
+            document.getElementById('getsel').style.color = "#B94A48";
+        }
+        else
+        {   
 
-                    $.ajax({
-                        type: 'POST',
-                        url: 'ApprovedRequest.php',
-                        async: false,
-                        data: {
-                            _ursid: ursid,
-                            _evals: evals,
-                            _remarks: remarks
-                        },
-                        success: function(data2) {
-                            //alert(data2);                                    
-                        },
-                        error: function(response2) {
-                            //alert(response2);                                    
-                        }
+            if (evals == 'Approved') 
+            {
+                swal({
+                    title: "Are you sure you want to approve this request?",
+                    text: "The departmetal user will notify about this action.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: "No",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
 
-                    });
-
-                    $('#newmodalget tr').each(function(index, val) {
-
-                        var ursid = document.getElementById('pinakaursid').value;
+                function(isConfirm) {
+                    if (isConfirm) {                    
 
                         $.ajax({
                             type: 'POST',
-                            url: 'ApprovedRequestSub.php',
+                            url: 'ApprovedRequest.php',
                             async: false,
                             data: {
-                                _urid: $(this).closest('tr').children('td:first').text(),
-                                _aqty: $(this).closest('tr').children('td:first').next().next().next().text(),
-                                _ursid: ursid
+                                _ursid: ursid,
+                                _evals: evals,
+                                _remarks: remarks
                             },
                             success: function(data2) {
-                                // alert(data2);
-
-                                swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
-
-                                setTimeout(function() 
-                                {
-                                    window.location = 'PODURequests.php';
-                                },2500);
+                                //alert(data2);                                    
                             },
                             error: function(response2) {
-                                // alert(response2);
-
-                                swal("Error", "May mali bry eh!", "error");
+                                //alert(response2);                                    
                             }
 
                         });
-                    });
 
-                    $('#newmodalget2 tr').each(function(index, val) {
+                        $('#newmodalget tr').each(function(index, val) {
 
-                        var ursidx = document.getElementById('pinakaursid').value;
+                            // var ursid = document.getElementById('pinakaursid').value;
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'ApprovedRequestSub.php',
+                                async: false,
+                                data: {
+                                    _urid: $(this).closest('tr').children('td:first').text(),
+                                    _aqty: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                    _ursid: ursid
+                                },
+                                success: function(data2) {
+                                    // alert(data2);
+
+                                    if (evals == 'Approved') 
+                                    {
+                                        swal("Request Approved!", "The request will be process to main.", "success");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    else if (evals == 'Reject')
+                                    {
+                                        swal("Request Rejected!", "", "error");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    
+                                },
+                                error: function(response2) {
+                                    // alert(response2);
+
+                                    swal("Error", "May mali bry eh!", "error");
+                                }
+
+                            });
+                        });
+
+                        $('#newmodalget2 tr').each(function(index, val) {
+
+                            // var ursidx = document.getElementById('pinakaursid').value;
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'ApprovedRequestSubReject.php',
+                                async: false,
+                                data: {
+                                    _uridx: $(this).closest('tr').children('td:first').text(),
+                                    _aqtyx: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                    _ursidx: ursid
+                                },
+                                success: function(data2) {
+                                    // alert(data2);
+
+                                    if (evals == 'Approved') 
+                                    {
+                                        swal("Request Approved!", "The request will be process to main.", "success");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    else if (evals == 'Reject')
+                                    {
+                                        swal("Request Rejected!", "", "error");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    
+                                },
+                                error: function(response2) {
+                                    // alert(response2);
+
+                                    swal("Error", "May mali bry eh!", "error");
+                                }
+
+                            });
+                        });
+                    } 
+                    else
+                    {
+                        swal("Cancelled", "The transaction is cancelled", "error");
+                    }
+
+                });
+            }
+            else if (evals == 'Reject') 
+            {
+                swal({
+
+                    title: "Are you sure you want reject this request?",
+                    text: "The departmetal user will notify about this action.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: "No",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+
+                function(isConfirm) {
+                    if (isConfirm) {                    
 
                         $.ajax({
                             type: 'POST',
-                            url: 'ApprovedRequestSubReject.php',
+                            url: 'ApprovedRequest.php',
                             async: false,
                             data: {
-                                _uridx: $(this).closest('tr').children('td:first').text(),
-                                _aqtyx: $(this).closest('tr').children('td:first').next().next().next().text(),
-                                _ursidx: ursidx
+                                _ursid: ursid,
+                                _evals: evals,
+                                _remarks: remarks
                             },
                             success: function(data2) {
-                                // alert(data2);
-
-                                swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
-
-                                setTimeout(function() 
-                                {
-                                    window.location = 'PODURequests.php';
-                                },2500);
+                                //alert(data2);                                    
                             },
                             error: function(response2) {
-                                // alert(response2);
-
-                                swal("Error", "May mali bry eh!", "error");
+                                //alert(response2);                                    
                             }
 
                         });
-                    });
-                } 
-                else
-                {
-                    swal("Cancelled", "The transaction is cancelled", "error");
-                }
 
-            });
+                        $('#newmodalget tr').each(function(index, val) {
+
+                            // var ursid = document.getElementById('pinakaursid').value;
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'ApprovedRequestSub.php',
+                                async: false,
+                                data: {
+                                    _urid: $(this).closest('tr').children('td:first').text(),
+                                    _aqty: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                    _ursid: ursid
+                                },
+                                success: function(data2) {
+                                    // alert(data2);
+
+                                    if (evals == 'Approved') 
+                                    {
+                                        swal("Request Approved!", "The request will be process to main.", "success");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    else if (evals == 'Reject')
+                                    {
+                                        swal("Request Rejected!", "", "error");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    
+                                },
+                                error: function(response2) {
+                                    // alert(response2);
+
+                                    swal("Error", "May mali bry eh!", "error");
+                                }
+
+                            });
+                        });
+
+                        $('#newmodalget2 tr').each(function(index, val) {
+
+                            // var ursidx = document.getElementById('pinakaursid').value;
+
+                            $.ajax({
+                                type: 'POST',
+                                url: 'ApprovedRequestSubReject.php',
+                                async: false,
+                                data: {
+                                    _uridx: $(this).closest('tr').children('td:first').text(),
+                                    _aqtyx: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                    _ursidx: ursid
+                                },
+                                success: function(data2) {
+                                    // alert(data2);
+
+                                    if (evals == 'Approved') 
+                                    {
+                                        swal("Request Approved!", "The request will be process to main.", "success");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    else if (evals == 'Reject')
+                                    {
+                                        swal("Request Rejected!", "", "error");
+
+                                        setTimeout(function() 
+                                        {
+                                            window.location = 'PODURequests.php';
+                                        },2500);
+                                    }
+                                    
+                                },
+                                error: function(response2) {
+                                    // alert(response2);
+
+                                    swal("Error", "May mali bry eh!", "error");
+                                }
+
+                            });
+                        });
+                    } 
+                    else
+                    {
+                        swal("Cancelled", "The transaction is cancelled", "error");
+                    }
+
+                });
+            }
+            
+        }
 
     });
 

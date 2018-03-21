@@ -97,8 +97,56 @@
                 <i class="fa fa-bell-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
+            
+            <?php 
+
+                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
+
+                while($rowx = mysqli_fetch_assoc($sqlcntx))
+                {
+                    $cnt = $rowx['XXX'];
+                    echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
+                }
+
+                if ($cnt == 0) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 70px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 1) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 110px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 2) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif" style="height: 220px;">
+            </ul>
+
+            <?php
+                    
+                }
+                elseif ($cnt >= 3) 
+                {                
+            ?>
+
             <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
             </ul>
+
+            <?php 
+                }
+            ?>
+
         </li>
         <!-- notification dropdown end -->
     </ul>
@@ -247,12 +295,12 @@
                                     <thead>
                                         <tr>
                                             <th style="display: none;">URS ID</th>
-                                            <th style="">Request No.</th>
+                                            <th style="width: 135px;">Request No.</th>
                                             <th style="">Purpose</th> 
-                                            <th>Requested By</th>
-                                            <th style=";">Date Requested</th>
-                                            <th style="">Status</th>
-                                            <th style=""></th>
+                                            <th style="width: 175px;">Requested By</th>
+                                            <th style="width: 140px;">Date Requested</th>
+                                            <th style="width: 100px;">Status</th>
+                                            <th style="width: 95px;"></th>
                                         </tr>
                                     </thead>
 
@@ -316,7 +364,7 @@
                                             </td>
 
                                             <td>
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
+                                                <a href="POViewRejectedRequestByPO.php?reqnnumber=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
                                             </td>
 
                                             <?php
