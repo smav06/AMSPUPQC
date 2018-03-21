@@ -515,6 +515,30 @@
 </html>
 
 <script>
+
+function myFunction(id) {
+     var id = id;
+     // alert(id);
+
+     $.ajax({
+        type: 'POST',
+        url: 'UpdateNotifByClicked.php',
+        async: false,
+        data: {
+            _id: id
+        },
+        success: function(data2) {
+            // alert(data2);                              
+            // alert("tama");
+        },
+        error: function(response2) {
+            // alert(response2);  
+            // alert("mali");                                
+        }
+
+    });
+}
+
 $(document).ready(function(){
  
  function load_unseen_notification(view = '')

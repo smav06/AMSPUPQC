@@ -344,7 +344,7 @@
                 <?php
                     }
                 ?>
-                Total No. Of Request
+                Total No. Of Request 
             </div>
         </div>
     </div>
@@ -438,41 +438,68 @@
 <script src="../../js/jquery.customSelect.min.js" ></script>
 <!--common script init for all pages-->
 <script src="../../js/scripts.js"></script>
+<script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
 <!--script for this page-->
 </body>
 </html>
 
 <script>
+
+function myFunction(id) {
+     var id = id;
+     // alert(id);
+
+     $.ajax({
+        type: 'POST',
+        url: 'UpdateNotifByClicked.php',
+        async: false,
+        data: {
+            _id: id
+        },
+        success: function(data2) {
+            // alert(data2);                              
+            // alert("tama");
+        },
+        error: function(response2) {
+            // alert(response2);  
+            // alert("mali");                                
+        }
+
+    });
+}
+
 $(document).ready(function(){
  
- function load_unseen_notification(view = '')
- {
-  $.ajax({
-   url:"fetch.php",
-   method:"POST",
-   data:{view:view},
-   dataType:"json",
-   success:function(data)
-   {
-    $('.dispnotif').html(data.notification);
-    if(data.unseen_notification > 0)
-    {
-     $('.count').html(data.unseen_notification);
+    function load_unseen_notification(view = '') {
+        $.ajax({
+            url:"fetch.php",
+            method:"POST",
+            data:{view:view},
+            dataType:"json",
+       
+        success:function(data)
+        {
+            $('.dispnotif').html(data.notification);
+
+            if(data.unseen_notification > 0)
+            {
+                $('.count').html(data.unseen_notification);
+            }
+        }
+
+        });
     }
-   }
-  });
- }
- 
- load_unseen_notification();
- 
- $(document).on('click', '.dropdown-toggle', function(){
-  $('.count').html('');
-  load_unseen_notification('yes');
- });
- 
- setInterval(function(){ 
-  load_unseen_notification();; 
- }, 1000);
+     
+    load_unseen_notification();
+     
+    $(document).on('click', '.dropdown-toggle', function() {
+        $('.count').html('');
+        load_unseen_notification('yes');
+    });
+     
+    setInterval(function(){ 
+        load_unseen_notification();; 
+    }, 1000);
  
 });
 </script>
