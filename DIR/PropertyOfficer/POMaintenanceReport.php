@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Departmental User Requests</title>
+    <title>Report Of Damage</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -192,74 +192,74 @@
     <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
         <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a href="PODashboard.php">
-                        <i class="fa fa-dashboard"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="POAsset.php">
-                        <i class="fa fa-laptop"></i>
-                        <span>Assets</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;" class="active">
-                        <i class="fa fa-comment-o"></i>
-                        <span>Requests</span>
-                    </a>
-                    <ul class="sub">
-                        <li class="active"><a href="PODURequests.php">Departmental User Requests</a></li>
-                        <li><a href="POPPMP.php">PPMP Request</a></li>  
-                        <li><a href="PORequestToMain.php">Request To Main</a></li>                 
-                    </ul>
-                </li>
-                <li>
-                    <a href="POAcquisition.php">
-                        <i class="fa fa-download"></i>
-                        <span>Acquisition</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="POTransferAsset.php">
-                        <i class="fa fa-sign-out"></i>
-                        <span>Transfer Asset</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-wrench"></i>
-                        <span>Maintenance</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
-                        <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
-                    </ul>
-                </li>
-                <li>
-                    <a href="PODisposal.php">
-                        <i class="fa fa-trash-o"></i>
-                        <span>Disposal</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa fa-table"></i>
-                        <span>Reports</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                        <li><a href="POPPMPReport.php">PPMP Report</a></li>   
-                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
-                        <li><a href="POPtr.php">Property Transfer Report</a></li>   
-                        <li><a href="PORod.php">Report Of Damage</a></li>  
-                    </ul>
-                </li>
-            </ul>            
-        </div>
-        <!-- sidebar menu end-->
+    <ul class="sidebar-menu" id="nav-accordion">
+        <li>
+            <a href="PODashboard.php">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="POAsset.php">
+                <i class="fa fa-laptop"></i>
+                <span>Assets</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-comment-o"></i>
+                <span>Requests</span>
+            </a>
+            <ul class="sub">
+                <li><a href="PODURequests.php">Departmental User Requests</a></li>
+                <li><a href="POPPMP.php">PPMP Request</a></li>  
+                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+            </ul>
+        </li>
+        <li>
+            <a href="POAcquisition.php">
+                <i class="fa fa-download"></i>
+                <span>Acquisition</span>
+            </a>
+        </li>
+        <li>
+            <a href="POTransferAsset.php">
+                <i class="fa fa-sign-out"></i>
+                <span>Transfer Asset</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;" class="active">
+                <i class="fa fa-wrench"></i>
+                <span>Maintenance</span>
+            </a>
+            <ul class="sub">
+                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                <li class="active"><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
+            </ul>
+        </li>
+        <li>
+            <a href="PODisposal.php">
+                <i class="fa fa-trash-o"></i>
+                <span>Disposal</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa fa-table"></i>
+                <span>Reports</span>
+            </a>
+            <ul class="sub">
+                <li><a href="PORequestSlip.php">Request Slip</a></li> 
+                <li><a href="POPPMPReport.php">PPMP Report</a></li>   
+                <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                <li><a href="PORod.php">Report Of Damage</a></li>  
+            </ul>
+        </li>
+    </ul>            
+</div>
+         <!-- sidebar menu end-->
     </div>
 </aside>
 <!--sidebar end-->
@@ -273,7 +273,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequisitionRequests.php">Departmental User Requests</a></li>
+                        <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -282,11 +282,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            Requests
+                        <header class="panel-heading"> 
+                            Reported Damaged Asset
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
-                             </span>
+                            </span>
                         </header>
 
                         <div class="panel-body">
@@ -294,13 +294,11 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">URS ID</th>
-                                            <th style="width: 135px;">Request No.</th>
-                                            <th style="">Purpose</th> 
-                                            <th style="width: 175px;">Requested By</th>
-                                            <th style="width: 140px;">Date Requested</th>
-                                            <th style="width: 100px;">Status</th>
-                                            <th style="width: 95px;"></th>
+                                            <th style="">ROD ID</th>
+                                            <th style="">ROD No.</th>
+                                            <th style="">Reason</th> 
+                                            <th style="">Reported By</th>
+                                            <th style="">Date Reported</th>
                                         </tr>
                                     </thead>
 
@@ -308,69 +306,25 @@
 
                                         <?php  
 
-                                            $sql = "SELECT * FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
+                                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, O.O_NAME, ROD.ROD_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY ROD.ROD_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                                             while($row = mysqli_fetch_assoc($result))
                                             {
-                                              $id = $row['URS_ID'];
-                                              $no = $row['URS_NO'];
-                                              $date = $row['URS_REQUEST_DATE'];
-                                              $purpose = $row['URS_PURPOSE'];    
-                                              $officename = $row['O_NAME'];
-                                              $statuz = $row['URS_STATUS_TO_PO'];
+                                                $rodid = $row['ROD_ID'];
+                                                $rodno = $row['ROD_NO'];
+                                                $rodreason = $row['ROD_REASON'];
+                                                $rodreportby = $row['O_NAME'];
+                                                $roddate = $row['ROD_DATE'];
                                         ?>
 
                                         <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $no; ?> </td>                                        
-                                            <td> <?php echo $purpose; ?> </td>
-                                            <td> <?php echo $officename; ?> </td>
-                                            <td> <?php echo $date; ?> </td>
-
-                                            <?php  
-                                                if ($statuz == 'Pending') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;">Evaluate</a>
-                                            </td>
-
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Approved') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
-                                            </td>
-
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Reject') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRejectedRequestByPO.php?reqnnumber=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
-                                            </td>
-
-                                            <?php
-                                                }
-                                            ?>
-                                            
+                                            <td style=""> <?php echo $rodid; ?> </td>
+                                            <td style=""> <?php echo $rodno; ?> </td>
+                                            <td style=""> <?php echo $rodreason; ?> </td> 
+                                            <td style=""> <?php echo $rodreportby; ?> </td>
+                                            <td style=""> <?php echo $roddate; ?> </td>
                                         </tr>
 
                                         <?php
@@ -520,33 +474,55 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
+    <script src="../../js/jquery.multifield.min.js"></script>
+    <script src="../../js/jquery.multifield.js"></script>
+
+    <script>
+
+        $('.form-content').multifield({
+            section: '.group',
+            btnAdd:'#btnAdd',
+            btnRemove:'.btnRemove',
+        });
+
+        $(function(){
+            $('select').on('change',function(){                        
+                $('input[name=place]').val($(this).val());            
+            });
+        });
+
+    </script>
+
 </body>
 </html>
 
-<script>
-
-function myFunction(id) {
-     var id = id;
-     // alert(id);
-
-     $.ajax({
-        type: 'POST',
-        url: 'UpdateNotifByClicked.php',
-        async: false,
-        data: {
-            _id: id
-        },
-        success: function(data2) {
-            // alert(data2);                              
-            // alert("tama");
-        },
-        error: function(response2) {
-            // alert(response2);  
-            // alert("mali");                                
+<script type="text/javascript">
+    function handleSubmit(){
+          document.getElementById("pnldonationdelay").submit();
+    }
+ 
+    function delaySubmit(){ 
+        if (document.getElementById("AL_IDgg[]").value == '') 
+        {
+            document.getElementById("AL_IDgg[]").focus();
         }
+        else if(document.getElementById("A_DESCgg[]").value == '') 
+        {
+            document.getElementById("A_DESCgg[]").focus();
+        }
+        else if(document.getElementById("A_DATEgg[]").value == '' || document.getElementById("A_DATEgg[]").value == 'mm/dd/yyy' || document.getElementById("A_DATEgg[]").value == null || document.getElementById("A_DATEgg[]").value == '00/00/0000')     
+        {
+            document.getElementById("A_DATEgg[]").focus();
+        }
+        else
+        {
+            swal("Insert Successful!", "Asset is successfully acquired.", "success");
+            window.setTimeout(handleSubmit, 2500); 
+        }
+    };
+</script>
 
-    });
-}
+<script>
 
 $(document).ready(function(){
  

@@ -34,7 +34,7 @@
     <!-- Custom styles for this template -->
     <link href="../../css/style.css" rel="stylesheet">
     <link href="../../css/style-responsive.css" rel="stylesheet" />
-    <title>Assets</title>
+    <title>Transfer Out Asset</title>
     <link rel="icon" href="../../images/PUPLogo.png" sizes="32x32">
 
 </head>
@@ -65,8 +65,56 @@
                             <i class="fa fa-bell-o"></i>
                             <span class="badge bg-warning count"></span>
                         </a>
-                        <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 375px;">
+                            
+                        <?php 
+
+                            $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
+
+                            while($rowx = mysqli_fetch_assoc($sqlcntx))
+                            {
+                                $cnt = $rowx['XXX'];
+                                echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
+                            }
+
+                            if ($cnt == 0) 
+                            {
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="height: 70px;">
                         </ul>
+
+                        <?php
+                            }
+                            elseif ($cnt == 1) 
+                            {
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="height: 110px;">
+                        </ul>
+
+                        <?php
+                            }
+                            elseif ($cnt == 2) 
+                            {
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="height: 220px;">
+                        </ul>
+
+                        <?php
+                                
+                            }
+                            elseif ($cnt >= 3) 
+                            {                
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                        </ul>
+
+                        <?php 
+                            }
+                        ?>
+
                     </li>
                     <!-- notification dropdown end -->
                 </ul>
@@ -121,7 +169,7 @@
                 </a>
                         </li>
                         <li>
-                            <a class="active" href="POAsset.php">
+                            <a href="POAsset.php">
                     <i class="fa fa-laptop"></i>
                     <span>Assets</span>
                 </a>
@@ -144,7 +192,7 @@
                 </a>
                         </li>
                         <li>
-                            <a href="POTransferAsset.php">
+                            <a class="active" href="POTransferAsset.php">
                     <i class="fa fa-sign-out"></i>
                     <span>Transfer Asset</span>
                 </a>
@@ -194,7 +242,7 @@
                         <!--breadcrumbs start -->
                         <ul class="breadcrumb">
                             <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                            <li><a href="POAsset.php">Asset</a></li>
+                            <li><a href="POTransferAsset.php">Transfer Asset</a></li>
                         </ul>
                         <!--breadcrumbs end -->
                     </div>
@@ -240,7 +288,7 @@
 
                                                 <?php  
 
-                                                    $sql = "SELECT * FROM `ams_r_asset` ORDER BY A_DATE DESC";
+                                                    $sql = "SELECT * FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' OR A_AVAILABILITY = 'Transferred Out' ORDER BY A_DATE DESC";
 
                                                     $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -259,165 +307,52 @@
 
                                                 <tr class="gradeX">
 
-                                                    <?php
-                                                        if ($a_availability == 'Available' && $a_status == 'Serviceable') 
+                                                    <td class="hidden">
+                                                        <a id="getid<?php echo $i; ?>">
+                                                            <?php echo $a_id; ?>
+                                                        </a>
+                                                    </td>
+
+                                                    <?php  
+                                                        if ($a_status == 'Serviceable' && $a_availability == 'Available') 
                                                         {
                                                     ?>
-                                                        <td class="hidden">
-                                                            <a id="getid<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
 
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px">
-                                                            </center>
-                                                        </td>
+                                                    <td>
+                                                        <center>
+                                                            <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px">
+                                                        </center>
+                                                    </td>
 
-                                                        <td id="origtype<?php echo $i; ?>">
-                                                            <?php echo $a_acquistion_type; ?> </td>
-                                                        <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $a_availability; ?> </p> </td>
-                                                        <td id="origdesc<?php echo $i; ?>">
-                                                            <?php echo $a_description; ?> </td>
-                                                        <td id="origdate<?php echo $i; ?>">
-                                                            <?php echo $a_date; ?> </td>
+                                                    <td id="origtype<?php echo $i; ?>">
+                                                        <?php echo $a_acquistion_type; ?> </td>
+                                                    <td id="origstat<?php echo $i; ?>">
+                                                        <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $a_availability; ?> </p> </td>
+                                                    <td id="origdesc<?php echo $i; ?>">
+                                                        <?php echo $a_description; ?> </td>
+                                                    <td id="origdate<?php echo $i; ?>">
+                                                        <?php echo $a_date; ?> </td>
 
-                                                    <?php
+                                                    <?php  
                                                         }
-                                                        elseif ($a_availability =='Assigned' && $a_status == 'Serviceable') 
+                                                        else if($a_status == 'Transferred Out')
                                                         {
                                                     ?>
 
-                                                        <td class="hidden">
-                                                            <a id="getid<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
+                                                    <td>
+                                                        <center>
+                                                            <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px" disabled>
+                                                        </center>
+                                                    </td>
 
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px" disabled>
-                                                            </center>
-                                                        </td>
-
-                                                        <td id="origtype<?php echo $i; ?>">
-                                                            <?php echo $a_acquistion_type; ?> </td>
-                                                        <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-primary label-mini" style="font-size: 11px;"> <?php echo $a_availability; ?> </p> </td>
-                                                        <td id="origdesc<?php echo $i; ?>">
-                                                            <?php echo $a_description; ?> </td>
-                                                        <td id="origdate<?php echo $i; ?>">
-                                                            <?php echo $a_date; ?> </td>
-
-                                                    <?php
-                                                        }
-                                                        elseif ($a_availability =='Assigned' && $a_status == 'Ready For Disposal' || $a_availability =='Available' && $a_status == 'Ready For Disposal') 
-                                                        {
-                                                    ?>
-
-                                                        <td class="hidden">
-                                                            <a id="getid<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
-
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
-                                                            </center>
-                                                        </td>
-
-                                                        <td id="origtype<?php echo $i; ?>">
-                                                            <?php echo $a_acquistion_type; ?> </td>
-                                                        <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
-                                                        <td id="origdesc<?php echo $i; ?>">
-                                                            <?php echo $a_description; ?> </td>
-                                                        <td id="origdate<?php echo $i; ?>">
-                                                            <?php echo $a_date; ?> </td>
-
-                                                    <?php
-                                                        }
-                                                        elseif ($a_availability =='Assigned' && $a_status == 'For Repair' || $a_availability =='Available' && $a_status == 'For Repair' ) 
-                                                        {
-                                                    ?>
-
-                                                        <td class="hidden">
-                                                            <a id="getid<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
-
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
-                                                            </center>
-                                                        </td>
-
-                                                        <td id="origtype<?php echo $i; ?>">
-                                                            <?php echo $a_acquistion_type; ?> </td>
-                                                        <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
-                                                        <td id="origdesc<?php echo $i; ?>">
-                                                            <?php echo $a_description; ?> </td>
-                                                        <td id="origdate<?php echo $i; ?>">
-                                                            <?php echo $a_date; ?> </td>
-
-                                                    <?php
-                                                        }
-                                                        elseif ($a_availability =='Assigned' && $a_status == 'Disposed' || $a_availability =='Available' && $a_status == 'Disposed' ) 
-                                                        {
-                                                    ?>
-
-                                                        <td class="hidden">
-                                                            <a id="getid<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
-
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
-                                                            </center>
-                                                        </td>
-
-                                                        <td id="origtype<?php echo $i; ?>">
-                                                            <?php echo $a_acquistion_type; ?> </td>
-                                                        <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-default label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
-                                                        <td id="origdesc<?php echo $i; ?>">
-                                                            <?php echo $a_description; ?> </td>
-                                                        <td id="origdate<?php echo $i; ?>">
-                                                            <?php echo $a_date; ?> </td>
-
-                                                    <?php
-                                                        }
-                                                        elseif ($a_availability =='Assigned' && $a_status == 'Transferred Out' || $a_availability =='Available' && $a_status == 'Transferred Out' ) 
-                                                        {
-                                                    ?>
-
-                                                        <td class="hidden">
-                                                            <a id="getid<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
-
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
-                                                            </center>
-                                                        </td>
-
-                                                        <td id="origtype<?php echo $i; ?>">
-                                                            <?php echo $a_acquistion_type; ?> </td>
-                                                        <td id="origstat<?php echo $i; ?>">
-                                                            <p class="label label-info label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
-                                                        <td id="origdesc<?php echo $i; ?>">
-                                                            <?php echo $a_description; ?> </td>
-                                                        <td id="origdate<?php echo $i; ?>">
-                                                            <?php echo $a_date; ?> </td>
+                                                    <td id="origtype<?php echo $i; ?>">
+                                                        <?php echo $a_acquistion_type; ?> </td>
+                                                    <td id="origstat<?php echo $i; ?>">
+                                                        <p class="label label-info label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
+                                                    <td id="origdesc<?php echo $i; ?>">
+                                                        <?php echo $a_description; ?> </td>
+                                                    <td id="origdate<?php echo $i; ?>">
+                                                        <?php echo $a_date; ?> </td>
 
                                                     <?php
                                                         }
@@ -441,7 +376,7 @@
                                                     }
                                                 ?>
 
-                                                    <a class="btn btn-success" id="assignbtn" data-toggle="modal" href="#ModalAssign">Assign</a>
+                                                    <a class="btn btn-success" id="assignbtn" data-toggle="modal" href="#ModalAssign">Transfer</a>
 
                                             </tbody>
                                     </table>
@@ -491,7 +426,7 @@
 
                                             <?php  
 
-                                                $sql = "SELECT * FROM `ams_r_asset` ORDER BY A_DATE DESC";
+                                                $sql = "SELECT * FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' ORDER BY A_DATE DESC";
 
                                                 $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -509,52 +444,26 @@
                                             ?>
 
                                                 <tr class="gradeX">
+                                                    <td>
+                                                        <a id="getids<?php echo $i; ?>">
+                                                            <?php echo $a_id; ?>
+                                                        </a>
+                                                    </td>
 
-                                                <?php
-                                                    if ($a_availability == 'Available') 
-                                                    {
-                                                ?>
-                                                        <td>
-                                                            <a id="getids<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
+                                                    <td>
+                                                        <center>
+                                                            <input type="checkbox" id="chkvalsz<?php echo $i; ?>" class="checkbox form-control " style="width: 20px">
+                                                        </center>
+                                                    </td>                                                
 
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="chkvalsz<?php echo $i; ?>" class="checkbox form-control " style="width: 20px">
-                                                            </center>
-                                                        </td>
-                                                <?php
-                                                    }
-                                                    elseif ($a_availability == 'Assigned') 
-                                                    {
-                                                ?>
-
-                                                        <td>
-                                                            <a id="getids<?php echo $i; ?>">
-                                                                <?php echo $a_id; ?>
-                                                            </a>
-                                                        </td>
-
-                                                        <td>
-                                                            <center>
-                                                                <input type="checkbox" id="chkvalsz<?php echo $i; ?>" class="checkbox form-control " style="width: 20px;" disabled>
-                                                            </center>
-                                                        </td>
-
-                                                <?php
-                                                    }
-                                                ?>
-
-                                                        <td id="origtypes<?php echo $i; ?>">
-                                                            <?php echo $a_acquistion_type; ?> </td>
-                                                        <td id="origstats<?php echo $i; ?>">
-                                                            <?php echo $a_status; ?> </td>
-                                                        <td id="origdescs<?php echo $i; ?>">
-                                                            <?php echo $a_description; ?> </td>
-                                                        <td id="origdates<?php echo $i; ?>">
-                                                            <?php echo $a_date; ?> </td>
+                                                    <td id="origtypes<?php echo $i; ?>">
+                                                        <?php echo $a_acquistion_type; ?> </td>
+                                                    <td id="origstats<?php echo $i; ?>">
+                                                        <?php echo $a_status; ?> </td>
+                                                    <td id="origdescs<?php echo $i; ?>">
+                                                        <?php echo $a_description; ?> </td>
+                                                    <td id="origdates<?php echo $i; ?>">
+                                                        <?php echo $a_date; ?> </td>
                                                 </tr>
 
                                             <?php 
@@ -646,7 +555,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #8C1C1C; color: white">
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h4 class="modal-title">Assign Asset (PAR)</h4>
+                    <h4 class="modal-title">Transfer Out Asset (PTR)</h4>
                 </div>
 
                 <div class="modal-body">
@@ -681,38 +590,52 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Assign To:</label>
+                                <label>Transfer To:</label>
                                 <select class="form-control" style="color: black;" id="getsel">
-                                <option value="" disabled selected></option>
+                                    <option value="" disabled selected></option>
 
-                                <?php  
+                                    <?php  
 
-                                    $sqlforemployee = "SELECT *, EP.EP_ID FROM `ams_r_employee_profile` AS EP LEFT JOIN `ams_r_user` AS U ON U.EP_ID = EP.EP_ID WHERE EP.EP_STATUS = 'Active' AND U.U_ROLE_CODE != 'Administrator' OR EP.EP_STATUS = 'Active' AND U.U_ROLE_CODE IS NULL";
+                                        $sqlcampus = "SELECT * FROM `ams_r_campus` WHERE C_ID != 1";
 
-                                    $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+                                        $rescamp = mysqli_query($connection, $sqlcampus) or die("Bad Query: $sql");
 
-                                    while($row = mysqli_fetch_assoc($results))
-                                    {
-                                        $fname = $row['EP_FNAME'];
-                                        $mname = $row['EP_MNAME'];
-                                        $lname = $row['EP_LNAME'];
-                                        $wholename = $fname.' '.$mname.' '.$lname;
-                                        $epid = $row['EP_ID'];
+                                        while($rowc = mysqli_fetch_assoc($rescamp))
+                                        {
+                                            $cid = $rowc['C_ID'];
+                                            $cname = $rowc['C_NAME'];
+                                            $ccode = $rowc['C_CODE'];
 
-                                ?>
+                                    ?>
 
-                                <option value="<?php echo $epid ?>"><?php echo "$wholename"; ?></option>
-                                
-                                <?php
-                                    }
-                                ?>
+                                    <option value="<?php echo $cid; ?>"><?php echo $cname.' ('.$ccode.')'; ?></option>
+                                    
+                                    <?php
+                                        }
+                                    ?>
 
-                            </select>
+                                </select>
+                            </div>
+
+                            <div class="row group">  
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Date Assign:</label>
+                                        <input type="date" name="" id="getdate" class="form-control" style="color: black;">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Person will received:</label>
+                                        <input type="text" id="getnameofreceiver" maxlength="150" class="form-control" style="color: black;">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Date Assign:</label>
-                                <input type="date" name="" id="getdate" class="form-control" style="color: black;">
+                                <label>Reason For Transfer:</label>
+                                <textarea style="color: black; word-wrap: break-word; resize: none; height: 85px;" class="form-control" maxlength="200" id="getreason" required=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -724,7 +647,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-success" id="btnsend" type="button">Assign</button>
+                    <button class="btn btn-success" id="btnsend" type="button">Transfer</button>
                     <button data-dismiss="modal" class="btn btn-default" id="" type="button">Close</button>
 
                 </div>
@@ -779,8 +702,8 @@
                 e.preventDefault();
 
                 swal({
-                        title: "Are you sure you want to assign this asset?",
-                        text: "The selected assets will be assign to this employee.",
+                        title: "Are you sure you want to transfer out this/these asset?",
+                        text: "The selected asset(s) will be transferred to the selected campus.",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#DD6B55',
@@ -794,24 +717,38 @@
                         if (isConfirm) {
 
                             var nameofcurruser = document.getElementById('getthenameofuser').innerText;
+                            var reason = document.getElementById('getreason').value;
+                            var nameofreceiver = document.getElementById('getnameofreceiver').value;
+                            var gdate = document.getElementById('getdate').value;
+
                             var getthecnt = document.getElementById('getcount').value;
                             var e = document.getElementById('getsel');
                             var get = e.options[e.selectedIndex].value;
-                            var gdate = document.getElementById('getdate').value;
+
+                            // alert(nameofcurruser);
+                            // alert(reason);
+                            // alert(nameofreceiver);
+                            // alert(gdate);
+                            // alert(get);
 
                             $.ajax({
                                 type: 'POST',
-                                url: 'Insert_par.php',
+                                url: 'InsertPTR.php',
                                 async: false,
                                 data: {
-                                    _name: nameofcurruser,
-                                    _date: gdate
+                                    _nameofcurruser: nameofcurruser,
+                                    _reason: reason,
+                                    _nameofreceiver: nameofreceiver,
+                                    _gdate: gdate,
+                                    _get: get
                                 },
                                 success: function(data2) {
-                                    // alert(data2);                                    
+                                    // alert(data2);   
+                                    // alert('OK');                                 
                                 },
                                 error: function(response2) {
-                                    // alert(response2);                                    
+                                    // alert(response2);
+                                    // alert('May Mali');
                                 }
 
                             });
@@ -820,16 +757,15 @@
 
                                 $.ajax({
                                     type: 'POST',
-                                    url: 'Insert_grant.php',
+                                    url: 'InsertPTRSub.php',
                                     async: false,
                                     data: {
-                                        _aid: $(this).closest('tr').children('td:first').text(),
-                                        _epid: get
+                                        _aid: $(this).closest('tr').children('td:first').text()
                                     },
                                     success: function(data2) {
                                         // alert(data2);
 
-                                        swal("Asset Successfully Assigned!", "To view the Property Accountability Receipt (PAR) please click the Report page.", "success");
+                                        swal("Asset Successfully Transferred!", "To view the Property Transfer Report (PTR) please go to the Report page.", "success");
 
                                         setTimeout(function() 
                                         {
@@ -838,6 +774,7 @@
                                     },
                                     error: function(response2) {
                                         // alert(response2);
+                                        
                                         swal("Error", "May mali bry eh!", "error");
                                     }
 

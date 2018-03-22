@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Departmental User Requests</title>
+    <title>Acquisition</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -192,74 +192,74 @@
     <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
         <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a href="PODashboard.php">
-                        <i class="fa fa-dashboard"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="POAsset.php">
-                        <i class="fa fa-laptop"></i>
-                        <span>Assets</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;" class="active">
-                        <i class="fa fa-comment-o"></i>
-                        <span>Requests</span>
-                    </a>
-                    <ul class="sub">
-                        <li class="active"><a href="PODURequests.php">Departmental User Requests</a></li>
-                        <li><a href="POPPMP.php">PPMP Request</a></li>  
-                        <li><a href="PORequestToMain.php">Request To Main</a></li>                 
-                    </ul>
-                </li>
-                <li>
-                    <a href="POAcquisition.php">
-                        <i class="fa fa-download"></i>
-                        <span>Acquisition</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="POTransferAsset.php">
-                        <i class="fa fa-sign-out"></i>
-                        <span>Transfer Asset</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-wrench"></i>
-                        <span>Maintenance</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
-                        <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
-                    </ul>
-                </li>
-                <li>
-                    <a href="PODisposal.php">
-                        <i class="fa fa-trash-o"></i>
-                        <span>Disposal</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa fa-table"></i>
-                        <span>Reports</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                        <li><a href="POPPMPReport.php">PPMP Report</a></li>   
-                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
-                        <li><a href="POPtr.php">Property Transfer Report</a></li>   
-                        <li><a href="PORod.php">Report Of Damage</a></li>  
-                    </ul>
-                </li>
-            </ul>            
-        </div>
-        <!-- sidebar menu end-->
+    <ul class="sidebar-menu" id="nav-accordion">
+        <li>
+            <a href="PODashboard.php">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="POAsset.php">
+                <i class="fa fa-laptop"></i>
+                <span>Assets</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-comment-o"></i>
+                <span>Requests</span>
+            </a>
+            <ul class="sub">
+                <li><a href="PODURequests.php">Departmental User Requests</a></li>
+                <li><a href="POPPMP.php">PPMP Request</a></li>  
+                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+            </ul>
+        </li>
+        <li>
+            <a href="POAcquisition.php" class="active">
+                <i class="fa fa-download"></i>
+                <span>Acquisition</span>
+            </a>
+        </li>
+        <li>
+            <a href="POTransferAsset.php">
+                <i class="fa fa-sign-out"></i>
+                <span>Transfer Asset</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-wrench"></i>
+                <span>Maintenance</span>
+            </a>
+            <ul class="sub">
+                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
+            </ul>
+        </li>
+        <li>
+            <a href="PODisposal.php">
+                <i class="fa fa-trash-o"></i>
+                <span>Disposal</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa fa-table"></i>
+                <span>Reports</span>
+            </a>
+            <ul class="sub">
+                <li><a href="PORequestSlip.php">Request Slip</a></li> 
+                <li><a href="POPPMPReport.php">PPMP Report</a></li>   
+                <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                <li><a href="PORod.php">Report Of Damage</a></li>  
+            </ul>
+        </li>
+    </ul>            
+</div>
+         <!-- sidebar menu end-->
     </div>
 </aside>
 <!--sidebar end-->
@@ -273,7 +273,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequisitionRequests.php">Departmental User Requests</a></li>
+                        <li><a href="POAcquisition.php">Acquisition</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -282,105 +282,122 @@
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            Requests
-                            <span class="tools pull-right">
+                        <header class="panel-heading" style="height: 95px;">      
+
+                            <div class="row group">                                                       
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label> Select acquisition type: </label>
+                                        <select class="form-control" style="color: black;" id="getsel">
+                                            <option selected value="Donation">Donation</option>
+                                            <option value="Requests">Requests</option>
+                                            <option value="PPMP">PPMP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span class="tools pull-right" style="margin-top: -70px;">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
-                             </span>
+                            </span>
                         </header>
 
-                        <div class="panel-body">
-                            <div class="adv-table">
-                                <table  class="display table table-bordered table-striped" id="dynamic-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="display: none;">URS ID</th>
-                                            <th style="width: 135px;">Request No.</th>
-                                            <th style="">Purpose</th> 
-                                            <th style="width: 175px;">Requested By</th>
-                                            <th style="width: 140px;">Date Requested</th>
-                                            <th style="width: 100px;">Status</th>
-                                            <th style="width: 95px;"></th>
-                                        </tr>
-                                    </thead>
+                        <div class="panel-body" id="pnldonation">
+                            <table class="display table table-bordered table-striped">                                
+                                <tr>
+                                    <td> 
+                                        <form action="InsertDonation.php" method="post" id="pnldonationdelay">                                                
+                                            <div class="form-content">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p><button type="button" id="btnAdd" class="btn btn-primary">Add</button></p>
+                                                    </div>
+                                                </div>
 
-                                    <tbody> 
-
-                                        <?php  
-
-                                            $sql = "SELECT * FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
-
-                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
-
-                                            while($row = mysqli_fetch_assoc($result))
-                                            {
-                                              $id = $row['URS_ID'];
-                                              $no = $row['URS_NO'];
-                                              $date = $row['URS_REQUEST_DATE'];
-                                              $purpose = $row['URS_PURPOSE'];    
-                                              $officename = $row['O_NAME'];
-                                              $statuz = $row['URS_STATUS_TO_PO'];
-                                        ?>
-
-                                        <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $no; ?> </td>                                        
-                                            <td> <?php echo $purpose; ?> </td>
-                                            <td> <?php echo $officename; ?> </td>
-                                            <td> <?php echo $date; ?> </td>
-
-                                            <?php  
-                                                if ($statuz == 'Pending') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;">Evaluate</a>
-                                            </td>
-
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Approved') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
-                                            </td>
-
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Reject') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
-                                            </td>
-
-                                            <td>
-                                                <a href="POViewRejectedRequestByPO.php?reqnnumber=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
-                                            </td>
-
-                                            <?php
-                                                }
-                                            ?>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div style="padding: 1px; margin-bottom: 10px; background-color: #E0E1E7;">                                                             
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             
-                                        </tr>
+                                                <div class="row group">                                                        
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Asset Type</label>
+                                                            <select name="AL_ID[]" id="AL_IDgg[]" class="form-control" required="" style="color: black;">
 
-                                        <?php
-                                            }
-                                        ?>
+                                                                <option selected disabled value=""></option>
 
-                                    </tbody>
-                                </table>
+                                                                <?php  
 
-                            </div>
+                                                                    $sqlx = "SELECT * FROM `ams_r_asset_library`";
+
+                                                                    $resx = mysqli_query($connection, $sqlx) or die("Bad Query: $sql");
+
+                                                                    while($rowx = mysqli_fetch_assoc($resx))
+                                                                    {
+                                                                        $alname = $rowx['AL_NAME'];
+                                                                        $alid = $rowx['AL_ID'];
+
+                                                                ?>
+
+                                                                    <option value="<?php echo $alid; ?>"><?php echo $alname; ?></option>
+
+                                                                <?php 
+                                                                    }
+                                                                ?>
+                                                            </select>
+
+                                                                <!-- testing ko ng at_id -->
+
+                                                                <!-- <label>Date Acquired</label>
+                                                                <input name="place" value="" class="form-control" style="color: black;"/> -->
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Asset Description</label>
+                                                            <input type="text" name="A_DESCRIPTION[]" id="A_DESCgg[]" class="form-control" required="" style="color: black;" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Date Acquired</label>
+                                                            <input style="color: black; padding-right: 2px;" type="date" name="A_DATE[]" id="A_DATEgg[]" class="form-control" required="" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <button type="button" class="btn btn-danger btnRemove" style="margin-top: 23px;">Remove</button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">                                                 
+                                                        </div>
+                                                    </div>
+
+                                                </div>  
+                                            </div>
+                                            
+                                            <p> <button type="submit" class="btn btn-success" onclick="delaySubmit(); return false;" id="btnsubmitthedonation"> Submit </button> </p>
+                                        </form>  
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="panel-body hidden" id="pnlrequests">
+                            PANEL REQUESTS
+                        </div>
+
+                        <div class="panel-body hidden" id="pnlppmp">
+                            PANEL PPMP
                         </div>
 
                     </section>
@@ -520,8 +537,53 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
+    <script src="../../js/jquery.multifield.min.js"></script>
+    <script src="../../js/jquery.multifield.js"></script>
+
+    <script>
+
+        $('.form-content').multifield({
+            section: '.group',
+            btnAdd:'#btnAdd',
+            btnRemove:'.btnRemove',
+        });
+
+        $(function(){
+            $('select').on('change',function(){                        
+                $('input[name=place]').val($(this).val());            
+            });
+        });
+
+    </script>
+
 </body>
 </html>
+
+<script type="text/javascript">
+    function handleSubmit(){
+          document.getElementById("pnldonationdelay").submit();
+    }
+ 
+    function delaySubmit(){ 
+        if (document.getElementById("AL_IDgg[]").value == '') 
+        {
+            document.getElementById("AL_IDgg[]").focus();
+        }
+        else if(document.getElementById("A_DESCgg[]").value == '') 
+        {
+            document.getElementById("A_DESCgg[]").focus();
+        }
+        else if(document.getElementById("A_DATEgg[]").value == '' || document.getElementById("A_DATEgg[]").value == 'mm/dd/yyy' || document.getElementById("A_DATEgg[]").value == null || document.getElementById("A_DATEgg[]").value == '00/00/0000')     
+        {
+            document.getElementById("A_DATEgg[]").focus();
+        }
+        else
+        {
+            swal("Insert Successful!", "Asset is successfully acquired.", "success");
+            window.setTimeout(handleSubmit, 2500); 
+        }
+    };
+</script>
 
 <script>
 
@@ -549,6 +611,12 @@ function myFunction(id) {
 }
 
 $(document).ready(function(){
+
+    // btnsubmitthedonation
+
+    // $('#btnsubmitthedonation').click(function(e) {
+    //     // alert();
+    // });
  
     function load_unseen_notification(view = '') {
         $.ajax({
@@ -580,6 +648,35 @@ $(document).ready(function(){
     setInterval(function(){ 
         load_unseen_notification();; 
     }, 1000);
+
+    //START
+
+    $('#getsel').change(function(e) {
+
+        var e = document.getElementById('getsel');
+
+        if (document.getElementById('getsel').options[e.selectedIndex].value == 'Donation') 
+        {
+            $('#pnldonation').removeClass('hidden');
+            $('#pnlrequests').addClass('hidden');
+            $('#pnlppmp').addClass('hidden');
+        }
+        else if (document.getElementById('getsel').options[e.selectedIndex].value == 'Requests') 
+        {
+            $('#pnldonation').addClass('hidden');
+            $('#pnlrequests').removeClass('hidden');
+            $('#pnlppmp').addClass('hidden');
+        }
+        else if (document.getElementById('getsel').options[e.selectedIndex].value == 'PPMP') 
+        {
+            $('#pnldonation').addClass('hidden');
+            $('#pnlrequests').addClass('hidden');
+            $('#pnlppmp').removeClass('hidden');
+        }
+
+    });
+
+
  
 });
 </script>
