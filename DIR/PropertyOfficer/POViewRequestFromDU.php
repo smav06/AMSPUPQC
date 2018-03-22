@@ -308,7 +308,7 @@
                         ?>
 
                         <div class="panel-body">
-                            <div class="row group">                                                        
+                            <div class="row group">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Request No.</label>

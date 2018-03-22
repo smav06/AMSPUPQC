@@ -10,6 +10,11 @@
 
     }
 
+    if (isset($_GET['passedrodid'])) 
+    {
+        $passedrodid = $_GET['passedrodid'];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -283,64 +288,65 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading"> 
-                            Reported Damaged Asset
+                            EVALUATION OF Reported Damaged Asset
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                             </span>
                         </header>
 
+                        <?php  
+                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, O.O_NAME, ROD.ROD_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE ROD.ROD_ID = $passedrodid GROUP BY ROD.ROD_ID";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {                              
+                                $rodid = $row['ROD_ID'];
+                                $rodno = $row['ROD_NO'];
+                                $rodreason = $row['ROD_REASON'];
+                                $rodreportby = $row['O_NAME'];
+                                $roddate = $row['ROD_DATE'];
+                        ?>
+
                         <div class="panel-body">
-                            <div class="adv-table">
-                                <table  class="display table table-bordered table-striped" id="dynamic-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="display: none;">ROD ID</th>
-                                            <th style="">Report No.</th>
-                                            <th style="">Reason</th> 
-                                            <th style="">Reported By</th>
-                                            <th style="">Date Reported</th>
-                                            <th style="width: 100px;"></th>
-                                        </tr>
-                                    </thead>
+                            <div class="row group">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Report No.</label>                                        
+                                        <input type="text" value="<?php echo $rodno; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                    <tbody> 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Reported By</label>
+                                        <input type="text" value="<?php echo $rodreportby; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                        <?php  
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Date Requested</label>
+                                        <input type="Date" value="<?php echo $roddate; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, O.O_NAME, ROD.ROD_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY ROD.ROD_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
+                                <!-- <input type='text' id="chatinput" onkeyup="myFunction()">
 
-                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+                                <input type='text' id="chatdisplay"> -->
 
-                                            while($row = mysqli_fetch_assoc($result))
-                                            {
-                                                $rodid = $row['ROD_ID'];
-                                                $rodno = $row['ROD_NO'];
-                                                $rodreason = $row['ROD_REASON'];
-                                                $rodreportby = $row['O_NAME'];
-                                                $roddate = $row['ROD_DATE'];
-                                        ?>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Report</label>
+                                        <input type="text" value="<?php echo $rodreason; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
+                        <?php
+                            }
+                        ?>
 
-                                        <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $rodid; ?> </td>
-                                            <td style=""> <?php echo $rodno; ?> </td>
-                                            <td style=""> <?php echo $rodreason; ?> </td> 
-                                            <td style=""> <?php echo $rodreportby; ?> </td>
-                                            <td style=""> <?php echo $roddate; ?> </td>
-                                            
-                                            <td>
-                                                <a href="POViewReportedDamage.php?passedrodid=<?php echo $rodid; ?>" class="btn btn-success">View</a>
-                                            </td>
-
-                                        </tr>
-
-                                        <?php
-                                            }
-                                        ?>
-
-                                    </tbody>
-                                </table>
-
-                            </div>
+                                
+                            </div>                            
                         </div>
 
                     </section>
@@ -480,53 +486,8 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
-    <script src="../../js/jquery.multifield.min.js"></script>
-    <script src="../../js/jquery.multifield.js"></script>
-
-    <script>
-
-        $('.form-content').multifield({
-            section: '.group',
-            btnAdd:'#btnAdd',
-            btnRemove:'.btnRemove',
-        });
-
-        $(function(){
-            $('select').on('change',function(){                        
-                $('input[name=place]').val($(this).val());            
-            });
-        });
-
-    </script>
-
 </body>
 </html>
-
-<script type="text/javascript">
-    function handleSubmit(){
-          document.getElementById("pnldonationdelay").submit();
-    }
- 
-    function delaySubmit(){ 
-        if (document.getElementById("AL_IDgg[]").value == '') 
-        {
-            document.getElementById("AL_IDgg[]").focus();
-        }
-        else if(document.getElementById("A_DESCgg[]").value == '') 
-        {
-            document.getElementById("A_DESCgg[]").focus();
-        }
-        else if(document.getElementById("A_DATEgg[]").value == '' || document.getElementById("A_DATEgg[]").value == 'mm/dd/yyy' || document.getElementById("A_DATEgg[]").value == null || document.getElementById("A_DATEgg[]").value == '00/00/0000')     
-        {
-            document.getElementById("A_DATEgg[]").focus();
-        }
-        else
-        {
-            swal("Insert Successful!", "Asset is successfully acquired.", "success");
-            window.setTimeout(handleSubmit, 2500); 
-        }
-    };
-</script>
 
 <script>
 

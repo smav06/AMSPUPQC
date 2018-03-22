@@ -294,11 +294,12 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="">A ID</th>
+                                            <th style="display: none;">A ID</th>
                                             <th style="">Asset</th>
                                             <th style="">Reason</th> 
-                                            <th style="">Reported By</th>
-                                            <th style="">Date Reported</th>
+                                            <!-- <th style="">Reported By</th> -->
+                                            <th style="width: 140px;">Date Reported</th>
+                                            <th style="width: 100px;"></th>
                                         </tr>
                                     </thead>
 
@@ -306,7 +307,7 @@
 
                                         <?php  
 
-                                            $sql = "SELECT * FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset` AS A ON RODS.A_ID = A.A_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
+                                            $sql = "SELECT * FROM `ams_t_report_of_damage_sub` AS RODS INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_r_asset` AS A ON RODS.A_ID = A.A_ID WHERE A.A_STATUS != 'Disposed' AND A.A_DISPOSAL_STATUS != 1";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -315,17 +316,102 @@
                                                 $aid = $row['A_ID'];
                                                 $adescription = $row['A_DESCRIPTION'];
                                                 $rodreason = $row['ROD_REASON'];
-                                                $rodreportby = $row['O_NAME'];
+                                                // $rodreportby = $row['O_NAME'];
                                                 $roddate = $row['ROD_DATE'];
                                         ?>
 
                                         <tr class="gradeX">
-                                            <td style=""> <?php echo $aid; ?> </td>
+                                            <td style="display: none;"> <?php echo $aid; ?> </td>
                                             <td style=""> <?php echo $adescription; ?> </td>
                                             <td style=""> <?php echo $rodreason; ?> </td> 
-                                            <td style=""> <?php echo $rodreportby; ?> </td>
+                                            <!-- <td style=""> <?php echo $rodreportby; ?> </td> -->
                                             <td style=""> <?php echo $roddate; ?> </td>
+                                            <td style="">
+                                                <a class="btn btn-success" href="#myModals<?php echo $aid; ?>" data-toggle="modal">Evaluate</a>
+                                            </td>
                                         </tr>
+
+                                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModals<?php echo $aid; ?>" class="modal fade">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background-color: #8C1C1C; color: white">
+                                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                                        <h4 class="modal-title">Dispose an asset</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <form method="POST">
+                                                            <input type="hidden" id="passaid" value="<?php echo $aid; ?>">
+                                                            <input type="hidden" id="passdisposedby" value="<?php echo $_SESSION['mysesi']; ?>">
+                                                            <div class="form-group">
+                                                                <label>Asset</label>
+                                                                <input style="color: black; word-wrap: break-word;" type="text" value="<?php echo $adescription; ?>" class="form-control" disabled />
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>Select disposal type</label>
+                                                                <select class="form-control m-bot15" id="passdisposetype" style="color: black; padding-left: 10px;" required>
+
+                                                                    <option value="" selected disabled></option>
+                                                                    <option value="Keep">Keep</option>
+                                                                    <option value="Return">Return</option>
+                                                                
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>Disposal Location</label>
+                                                                <select class="form-control m-bot15" id="passlocation" style="color: black; padding-left: 10px;" required>
+
+                                                                    <option value="" selected disabled></option>
+
+                                                                    <?php  
+
+                                                                        $sqlforemployee = "SELECT * FROM ams_r_disposal_location";
+
+                                                                        $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                                                                        while($row = mysqli_fetch_assoc($results))
+                                                                        {
+                                                                            $dlid = $row['DL_ID'];
+                                                                            $dlname = $row['DL_NAME'];
+
+                                                                    ?>
+
+                                                                    <option value="<?php echo $dlid ?>"><?php echo "$dlname"; ?></option>
+                                                                    
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>Remarks</label>
+                                                                <textarea style="color: black; word-wrap: break-word; resize: none; height: 85px;" class="form-control" maxlength="200" id="passremarks" required=""></textarea>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label>Date of Disposal</label>
+                                                                <input style="color: black;" type="date" id="passdate" class="form-control" required="">
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">                                                             
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <button type="button" id="btndispose" class="btn btn-default" style="background-color: #43A047">Dispose</button>
+                                                            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <?php
                                             }
@@ -474,57 +560,88 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
-    <script src="../../js/jquery.multifield.min.js"></script>
-    <script src="../../js/jquery.multifield.js"></script>
-
-    <script>
-
-        $('.form-content').multifield({
-            section: '.group',
-            btnAdd:'#btnAdd',
-            btnRemove:'.btnRemove',
-        });
-
-        $(function(){
-            $('select').on('change',function(){                        
-                $('input[name=place]').val($(this).val());            
-            });
-        });
-
-    </script>
-
 </body>
 </html>
-
-<script type="text/javascript">
-    function handleSubmit(){
-          document.getElementById("pnldonationdelay").submit();
-    }
- 
-    function delaySubmit(){ 
-        if (document.getElementById("AL_IDgg[]").value == '') 
-        {
-            document.getElementById("AL_IDgg[]").focus();
-        }
-        else if(document.getElementById("A_DESCgg[]").value == '') 
-        {
-            document.getElementById("A_DESCgg[]").focus();
-        }
-        else if(document.getElementById("A_DATEgg[]").value == '' || document.getElementById("A_DATEgg[]").value == 'mm/dd/yyy' || document.getElementById("A_DATEgg[]").value == null || document.getElementById("A_DATEgg[]").value == '00/00/0000')     
-        {
-            document.getElementById("A_DATEgg[]").focus();
-        }
-        else
-        {
-            swal("Insert Successful!", "Asset is successfully acquired.", "success");
-            window.setTimeout(handleSubmit, 2500); 
-        }
-    };
-</script>
 
 <script>
 
 $(document).ready(function(){
+
+    $('#btndispose').click(function() {
+        var ddate = document.getElementById('passdate').value;
+        // alert(ddate+' = date');
+
+        var dtype = document.getElementById('passdisposetype');
+        var origdtype = dtype.options[dtype.selectedIndex].innerText;
+        // alert(origdtype+' = disposal type');
+
+        var dremarks = document.getElementById('passremarks').value;
+        // alert(dremarks+' = remakrs');
+
+        var ddisposedby = document.getElementById('passdisposedby').value;
+        // alert(ddisposedby+' = disposed by');
+
+        var ddlid = document.getElementById('passlocation');
+        var origddlid = ddlid.options[ddlid.selectedIndex].value;        
+        // alert(origddlid+' = dl id');
+
+        var daid = document.getElementById('passaid').value;
+        // alert(daid+' = a id');
+
+        swal({
+
+                title: "Are you sure you want to dispose this asset??",
+                text: "The selected asset will dispose.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes',
+                cancelButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'InsertToDisposal.php',
+                        async: false,
+                        data: {
+                            _ddate: ddate,
+                            _origdtype: origdtype,
+                            _dremarks: dremarks,
+                            _ddisposedby: ddisposedby,
+                            _origddlid: origddlid,
+                            _daid: daid
+                        },
+                        success: function(data2) {
+                            // alert(data2); 
+                            swal("Asset Successfully Disposed!", "The selected asset is disposed.", "success");
+
+                            setTimeout(function() 
+                            {
+                                window.location=window.location;
+                            },2500); 
+                        },
+                        error: function(response2) {
+                            // alert(response2);      
+
+                            swal("Error", "May mali bry eh!", "error");                              
+                        }
+
+                    });
+                    
+                }
+                else
+                {
+                    swal("Cancelled", "The confirmation of request to main is cancelled", "error");
+                }
+
+            });
+       
+    });
  
     function load_unseen_notification(view = '') {
         $.ajax({
