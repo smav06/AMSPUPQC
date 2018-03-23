@@ -596,7 +596,7 @@ $(document).ready(function(){
 
         swal({
 
-                title: "Are you sure you want to dispose this asset??",
+                title: "Are you sure you want to dispose this asset?",
                 text: "The selected asset will dispose.",
                 type: "warning",
                 showCancelButton: true,
