@@ -470,6 +470,18 @@
 
                                 </tbody>
                             </table>
+
+                            <br>
+                            <br>
+                            <br>
+                            <span class="pull-right">
+                                <label>Assigned/Issued By: </label> <u> <?php echo $_SESSION['mysesi']; ?> </u> <br>
+                            </span>
+                            <br>                            
+                            <span class="pull-right" style="margin-right: -160px;">
+                                <label> <?php echo $_SESSION['mytype']; ?> </label>
+                            </span>
+
                         </div>
                     </section>
                 </div>
