@@ -192,7 +192,7 @@
                                         
                                         <?php
                                             include('../Connection/db.php');
-                                        ?>
+                                        ?> 
 
                                             <thead>
                                                 <tr>
@@ -201,7 +201,8 @@
                                                     <th style="width: 60px"></th>
                                                     <th style="width: 350px;">Asset</th> 
                                                     <th style="width: 90px;">Date Acquired</th>
-                                                    <th style="width: 180px;">Assigned To</th>
+                                                    <th style="width: 150px;">Assigned To</th>
+                                                    <th style="width: 120px;">Status</th>
                                                     <th style="width: 5px;"> </th>
                                                 </tr>
                                             </thead>
@@ -211,7 +212,7 @@
                                                 <?php  
 
                                                     $getuserid = $_SESSION['myoid'];
-                                                    $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO, PARS.PARS_ID FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
+                                                    $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, A.A_STATUS, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO, PARS.PARS_ID, RODS.RODS_ID, RODS.RODS_EVALUATION, RODS.RODS_STATUS, PARS.PARS_CANCEL FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE EP.O_ID = $getuserid";
 
                                                     $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -230,6 +231,7 @@
                                                         $parno = $row['PAR_NO'];
                                                         $parsid = $row['PARS_ID'];
                                                         $assignedperson = $epfname.' '.$epmname.' '.$eplname;
+                                                        $status = $row['A_STATUS'];
                                                 ?>
 
                                                 <tr class="gradeX">
@@ -257,6 +259,8 @@
                                                     <td id="origdateacq<?php echo $i; ?>"> <?php echo $dateacquired; ?> </td>
 
                                                     <td id="origassto<?php echo $i; ?>"> <?php echo $assignedperson; ?> </td>
+
+                                                    <td><?php echo $status; ?></td>
 
                                                     <td> 
                                                         <a data-toggle="modal" class="btn btn-success" href="#myModal<?php echo $id; ?>"><i class="fa fa-eye"></i></a>
@@ -306,7 +310,7 @@
                                                 ?>
 
                                                 <?php
-                                                    $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
+                                                    $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE EP.O_ID = $getuserid";
 
                                                     $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
@@ -362,6 +366,7 @@
                                                         <th style="width: 350px;">Description</th> 
                                                         <th style="width: 130px;">Date Acquired</th>
                                                         <th style="width: 180px;">Assigned To</th>
+                                                        <th style="width: 100px;">Status</th>
                                                         <th style="width: 20px;"> </th>
                                                     </tr>
                                                 </thead>
@@ -371,7 +376,7 @@
                                                     <?php  
 
                                                         $getuserid = $_SESSION['myoid'];
-                                                        $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO, PARS.PARS_ID FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
+                                                        $sql = "SELECT A.A_ID, A.A_DESCRIPTION, A.A_DATE, A.A_ACQUISITION_TYPE, A.A_STATUS, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, PAR.PAR_NO, PARS.PARS_ID, RODS.RODS_ID, RODS.RODS_EVALUATION, RODS.RODS_STATUS, PARS.PARS_CANCEL FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE EP.O_ID = $getuserid";
 
                                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -390,6 +395,7 @@
                                                             $parno = $row['PAR_NO'];
                                                             $parsid = $row['PARS_ID'];
                                                             $assignedperson = $epfname.' '.$epmname.' '.$eplname;
+                                                            $status = $row['A_STATUS'];
                                                     ?>
 
                                                     <tr class="gradeX">
@@ -417,6 +423,8 @@
                                                         <td id="origdateacqs<?php echo $i; ?>"> <?php echo $dateacquired; ?> </td>
 
                                                         <td id="origasstos<?php echo $i; ?>"> <?php echo $assignedperson; ?> </td>
+
+                                                        <td><?php echo $status; ?></td>
 
                                                         <td> 
                                                             <a data-toggle="modal" class="btn btn-success" href="#myModal<?php echo $id; ?>"><i class="fa fa-eye"></i></a>
@@ -466,7 +474,7 @@
                                                     ?>
 
                                                     <?php
-                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NULL AND RODS.RODS_SHOW IS NULL AND EP.O_ID = $getuserid OR A.A_STATUS = 'Serviceable' AND A.A_DISPOSAL_STATUS = 0 AND A.A_AVAILABILITY = 'Assigned' AND PARS.PARS_CANCEL = 0 AND RODS.RODS_CANCEL_DATE IS NOT NULL AND RODS.RODS_SHOW = 0 AND EP.O_ID = $getuserid";
+                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_r_asset` AS A INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_t_par` AS PAR ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID LEFT JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID WHERE EP.O_ID = $getuserid";
 
                                                         $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 

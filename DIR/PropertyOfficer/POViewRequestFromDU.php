@@ -291,6 +291,7 @@
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
+                             <input type="hidden" id="mainursid" value="<?php echo $ids; ?>">
                         </header>
 
                         <?php  
@@ -905,6 +906,8 @@ $(document).ready(function(){
 
         var remarks = document.getElementById('viewrequestsevaluate').value;
 
+        var mainursid = document.getElementById('mainursid').value;
+
         if (document.getElementById('getsel').options[e.selectedIndex].value == '') 
         {
             document.getElementById('getsel').options[0].innerText = "Please Select";
@@ -972,7 +975,7 @@ $(document).ready(function(){
 
                                         setTimeout(function() 
                                         {
-                                            window.location = 'PODURequests.php';
+                                            window.location = 'POReqSlip.php?receiveursid='+mainursid+'';
                                         },2500);
                                     }
                                     else if (evals == 'Reject')
@@ -1017,7 +1020,7 @@ $(document).ready(function(){
 
                                         setTimeout(function() 
                                         {
-                                            window.location = 'PODURequests.php';
+                                            window.location = 'POReqSlip.php?receiveursid='+mainursid+'';
                                         },2500);
                                     }
                                     else if (evals == 'Reject')

@@ -833,7 +833,8 @@
 
                                         setTimeout(function() 
                                         {
-                                            window.location=window.location;
+                                            // window.location=window.location;
+                                            window.location = 'POPAR.php';
                                         },2500);
                                     },
                                     error: function(response2) {
