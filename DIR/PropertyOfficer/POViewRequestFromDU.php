@@ -362,7 +362,7 @@
                                                     <th>Request</th>
                                                     <th style="width: 85px;">Unit</th> 
                                                     <th style="width: 80px;">Quantity</th>
-                                                    <th style="width: 130px;">Quantity Approved</th>
+                                                    <th style="width: 130px;">Quantity Approve</th>
                                                     <th style="width: 250px;">Requesting Person</th>
                                                 </tr>
                                             </thead>
@@ -919,7 +919,7 @@ $(document).ready(function(){
             {
                 swal({
                     title: "Are you sure you want to approve this request?",
-                    text: "The departmetal user will notify about this action.",
+                    text: "The departmental user will notify about this action.",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
@@ -930,7 +930,7 @@ $(document).ready(function(){
                 },
 
                 function(isConfirm) {
-                    if (isConfirm) {                    
+                    if (isConfirm) {
 
                         $.ajax({
                             type: 'POST',
@@ -977,7 +977,7 @@ $(document).ready(function(){
                                     }
                                     else if (evals == 'Reject')
                                     {
-                                        swal("Request Rejected!", "", "error");
+                                        swal("Request Rejected!", "Rejected.", "error");
 
                                         setTimeout(function() 
                                         {

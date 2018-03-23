@@ -295,7 +295,7 @@
                         </header>
 
                         <?php  
-                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, O.O_NAME, ROD.ROD_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE ROD.ROD_ID = $passedrodid GROUP BY ROD.ROD_ID";
+                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, O.O_NAME, ROD.ROD_DATE, ROD.ROD_STATUS FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE ROD.ROD_ID = $passedrodid GROUP BY ROD.ROD_ID";
 
                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -306,12 +306,14 @@
                                 $rodreason = $row['ROD_REASON'];
                                 $rodreportby = $row['O_NAME'];
                                 $roddate = $row['ROD_DATE'];
+                                $rodstatus = $row['ROD_STATUS'];
                         ?>
 
                         <div class="panel-body">
                             <div class="row group">
                                 <div class="col-md-3">
                                     <div class="form-group">
+                                        <input type="hidden" id="allrodid" value="<?php echo $passedrodid; ?>">
                                         <label>Report No.</label>                                        
                                         <input type="text" value="<?php echo $rodno; ?>" class="form-control" style="color: black;" disabled />
                                     </div>
@@ -326,25 +328,409 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Date Requested</label>
+                                        <label>Date Reported</label>
                                         <input type="Date" value="<?php echo $roddate; ?>" class="form-control" style="color: black;" disabled />
                                     </div>
                                 </div>
 
-                                <!-- <input type='text' id="chatinput" onkeyup="myFunction()">
-
-                                <input type='text' id="chatdisplay"> -->
-
-                                <div class="col-md-12">
+                                <div class="col-md-9">
                                     <div class="form-group">
                                         <label>Report</label>
                                         <input type="text" value="<?php echo $rodreason; ?>" class="form-control" style="color: black;" disabled />
                                     </div>
                                 </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Status</label>
+
+                                        <?php  
+                                            if ($rodstatus == 'Pending') 
+                                            {
+                                        ?>
+
+                                            <input type="text" value="<?php echo $rodstatus; ?>" class="form-control" style="color: black;" disabled />
+
+                                        <?php
+                                            }
+                                            elseif ($rodstatus == 'Approved') 
+                                            {
+                                        ?>
+
+                                            <input type="text" value="<?php echo $rodstatus; ?>" class="form-control" style="color: green;" disabled />
+
+                                        <?php      # code...
+                                            }
+                                            elseif ($rodstatus == 'Reject') 
+                                            {
+                                        ?>
+
+                                            <input type="text" value="<?php echo $rodstatus; ?>" class="form-control" style="color: red;" disabled />
+
+                                        <?php
+                                            }
+                                        ?>
+
+                                    </div>
+                                </div>
+
                         <?php
                             }
                         ?>
+                                <div class="col-md-12">
+                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">
+                                    </div>
+                                </div>
 
+                                <?php  
+                                    if ($rodstatus == 'Pending') 
+                                    {
+                                ?>
+                                    
+                                    <!-- ORIGINAL -->
+                                    <div class="col-md-12">
+                                        <div class="adv-table">
+                                            <table class="display table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">rods id</th>
+                                                        <th style="display: none;">a id</th>
+                                                        <th style="width: 200px;">Status Of Asset</th>
+                                                        <th>Asset</th> 
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody> 
+                                                    <?php  
+                                                        $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
+
+                                                        $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                                                        $i = 0;
+
+                                                        while($row = mysqli_fetch_assoc($result))
+                                                        {
+                                                            $i++;  
+                                                            $aid = $row['A_ID'];
+                                                            $rodsid = $row['RODS_ID'];
+                                                            $adescription = $row['A_DESCRIPTION'];
+                                                    ?>
+
+                                                    <tr class="gradeX">
+                                                        <td style="display: none;"> <?php echo $rodsid; ?> </td>
+                                                        <td style="display: none;"> <?php echo $aid; ?> </td>
+                                                        <td> 
+                                                            <center>
+                                                                <select class="form-control selthis" id="<?php echo $i; ?>" style="color: black; width: 175px">
+                                                                    <option value="" disabled ></option>
+                                                                    <option value="For Repair" selected>For Repair</option>
+                                                                    <option value="Repaired">Repaired</option>
+                                                                    <option value="Ready For Disposal">Ready For Disposal</option>
+                                                                </select>
+                                                            </center>
+                                                        </td>
+                                                        <td> <?php echo $adescription; ?> </td>
+                                                    </tr>
+
+                                                    <?php
+                                                        }
+                                                    ?>
+
+                                                    <?php
+                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_t_report_of_damage_sub` WHERE ROD_ID = $passedrodid AND RODS_CANCEL_DATE IS NULL";
+
+                                                        $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+
+                                                        while($row1 = mysqli_fetch_assoc($result1))
+                                                        {
+                                                            $cnt = $row1['AAA'];
+                                                            echo '<input type="text" class="hidden" id="getcount" value="'.$i.'" />';
+                                                        }
+                                                    ?>
+
+                                                </tbody>                                            
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- CLONED DATA -->
+                                    <div class="col-md-12 hidden">
+                                        <div class="adv-table">
+                                            CLONE
+                                            <table class="display table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="">rods id</th>
+                                                        <th style="width: 55px;">a id</th>
+                                                        <th style="width: 200px;">Status Of Asset</th>
+                                                        <th>Asset</th> 
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody id="newmodalgetrejected"> 
+                                                    <?php  
+                                                        $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
+
+                                                        $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                                                        $i = 0;
+
+                                                        while($row = mysqli_fetch_assoc($result))
+                                                        {
+                                                            $i++;  
+                                                            $aid = $row['A_ID'];
+                                                            $rodsid = $row['RODS_ID'];
+                                                            $adescription = $row['A_DESCRIPTION'];
+                                                    ?>
+
+                                                    <tr class="gradeX">
+                                                        <td id="origrodid<?php echo $i; ?>"> <?php echo $rodsid; ?> </td>
+                                                        <td id="origaid<?php echo $i; ?>"> <?php echo $aid; ?> </td>
+                                                        <td> 
+                                                            <center>
+                                                                <select class="form-control" id="selvalsz<?php echo $i; ?>" style="color: black; width: 175px">
+                                                                    <option value="" disabled ></option>
+                                                                    <option value="For Repair" selected>For Repair</option>
+                                                                    <option value="Repaired">Repaired</option>
+                                                                    <option value="Ready For Disposal">Ready For Disposal</option>
+                                                                </select>
+                                                            </center>
+                                                        </td>
+                                                        <td id="origadesc<?php echo $i; ?>"> <?php echo $adescription; ?> </td>
+                                                    </tr>
+
+                                                    <?php
+                                                        }
+                                                    ?>
+
+                                                    <?php
+                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_t_report_of_damage_sub` WHERE ROD_ID = $passedrodid AND RODS_CANCEL_DATE IS NULL";
+
+                                                        $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+
+                                                        while($row1 = mysqli_fetch_assoc($result1))
+                                                        {
+                                                            $cnt = $row1['AAA'];
+                                                            echo '<input type="text" class="hidden" id="getcount" value="'.$i.'" />';
+                                                        }
+                                                    ?>
+
+                                                </tbody>                                            
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- JOB ORDER -->
+                                    <div class="col-md-12 hidden" id="clone2">
+                                        <label>JOB ORDER / FOR REPAIR</label>
+                                        <div class="adv-table">
+                                            <table  class="display table table-bordered table-striped" id=" ">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="">rods id</th>
+                                                        <th style="width: 55px;">a id</th>
+                                                        <th style="width: 200px;">Status Of Asset</th>
+                                                        <th>Asset</th> 
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody id="newmodalget">                                                 
+
+                                                </tbody>                                            
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- READY FOR DISPOSAL -->
+                                    <div class="col-md-12 hidden" id="clone3">
+                                        <label>DISPOSAL / READY FOR DISPOSAL</label>
+                                        <div class="adv-table">
+                                            <table  class="display table table-bordered table-striped" id=" ">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="">rods id</th>
+                                                        <th style="width: 55px;">a id</th>
+                                                        <th style="width: 200px;">Status Of Asset</th>
+                                                        <th>Asset</th> 
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody id="newmodalget2">                                                 
+
+                                                </tbody>                                            
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- REPAIRED -->
+                                    <div class="col-md-12 hidden" id="clone4">
+                                        <label>REPAIRED / UPDATE</label>
+                                        <div class="adv-table">
+                                            <table  class="display table table-bordered table-striped" id=" ">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="">rods id</th>
+                                                        <th style="width: 55px;">a id</th>
+                                                        <th style="width: 200px;">Status Of Asset</th>
+                                                        <th>Asset</th> 
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody id="newmodalget3">                                                 
+
+                                                </tbody>                                            
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                <?php
+                                    }
+                                    elseif ($rodstatus == 'Approved') 
+                                    {
+                                ?>
+
+                                    <div class="col-md-12" id="clonezxc">
+                                        <div class="adv-table">
+                                            <table  class="display table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">rods id</th>
+                                                        <th style="display: none;">a id</th>
+                                                        <th>Asset</th>
+                                                        <th style="width: 200px;">Status Of Asset</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody> 
+
+                                                <?php  
+                                                    $sqlx = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
+
+                                                    $resultx = mysqli_query($connection, $sqlx) or die("Bad Query: $sql");
+
+                                                    while($rowx = mysqli_fetch_assoc($resultx))
+                                                    { 
+                                                        $aidx = $rowx['A_ID'];
+                                                        $rodsidx = $rowx['RODS_ID'];
+                                                        $adescriptionx = $rowx['A_DESCRIPTION'];
+                                                        $rodsevalx = $rowx['RODS_EVALUATION'];
+                                                ?>                                               
+                                                    <tr>
+                                                        <td style="display: none;"> <?php echo $rodsidx; ?> </td>
+                                                        <td style="display: none;"> <?php echo $aidx; ?> </td>
+                                                        <td> <?php echo $adescriptionx; ?> </td>
+                                                        <td> <?php echo $rodsevalx; ?> </td>
+                                                    </tr>
+
+                                                <?php
+                                                    }
+                                                ?>
+                                                </tbody>                                            
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                <?php
+                                    }
+                                    elseif ($rodstatus == 'Reject') 
+                                    {
+                                ?>
+
+                                    <div class="col-md-12" id="cloneqwe">
+                                        <div class="adv-table">
+                                            <table  class="display table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">rods id</th>
+                                                        <th style="display: none;">a id</th>
+                                                        <th>Asset</th>
+                                                        <th style="width: 200px; display: none;">Status Of Asset</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody> 
+
+                                                <?php  
+                                                    $sqlxe = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
+
+                                                    $resultxe = mysqli_query($connection, $sqlxe) or die("Bad Query: $sql");
+
+                                                    while($rowxe = mysqli_fetch_assoc($resultxe))
+                                                    { 
+                                                        $aidxe = $rowxe['A_ID'];
+                                                        $rodsidxe = $rowxe['RODS_ID'];
+                                                        $adescriptionxe = $rowxe['A_DESCRIPTION'];
+                                                        $rodsevalxe = $rowxe['RODS_EVALUATION'];
+                                                ?>                                               
+                                                    <tr>
+                                                        <td style="display: none;"> <?php echo $rodsidxe; ?> </td>
+                                                        <td style="display: none;"> <?php echo $aidxe; ?> </td>
+                                                        <td> <?php echo $adescriptionxe; ?> </td>
+                                                        <td style="display: none;"> <?php echo $rodsevalxe; ?> </td>
+                                                    </tr>
+
+                                                <?php
+                                                    }
+                                                ?>
+                                                </tbody>                                            
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                <?php
+                                    }
+                                ?>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div style="padding: 1px; margin-bottom: 10px;">                                                             
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">
+                                    </div>
+                                </div>
+
+                                <?php
+                                    if ($rodstatus == 'Pending') 
+                                    {
+                                ?>
+
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Remarks</label> 
+                                            <textarea id="evalbymainremarks" class="form-control" style="resize: none; color: black; height: 85px;" maxlength="200"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Evaluation</label>
+                                            <select class="form-control" style="color: black;" id="getseleval">
+                                                <option selected disabled value=""></option>
+                                                <option value="Approved">Approved</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <a id="btnevaluate" class="btn btn-success">Submit</a>
+                                            <a href="POMaintenanceReport.php" class="btn btn-default">Go to report of damage</a>
+                                        </div>
+                                    </div>
+
+                                <?php  
+                                    }
+                                    else
+                                    {
+                                ?>
+                                    <div class="col-md-4">
+                                        <a href="POMaintenanceReport.php" class="btn btn-default">Go to report of damage</a>
+                                    </div>
+                                <?php
+                                    }
+                                ?>
                                 
                             </div>                            
                         </div>
@@ -492,7 +878,319 @@
 <script>
 
 $(document).ready(function(){
- 
+
+    
+
+    allNextSelect = $('.selthis');
+
+    allNextSelect.change(function() {
+        if (this.options[this.selectedIndex].value == 'Repaired') 
+        {    
+            // alert('Repaired');     
+            // alert(this.id);
+            document.getElementById('selvalsz' + this.id).value = 'Repaired';
+        } 
+        else if(this.options[this.selectedIndex].value == 'For Repair') 
+        {
+            // alert('For Repair');  
+            // alert(this.id);
+            document.getElementById('selvalsz' + this.id).value = 'For Repair'; 
+        }
+        else if(this.options[this.selectedIndex].value == 'Ready For Disposal') 
+        {
+            // alert('Ready For Disposal');   
+            // alert(this.id);
+            document.getElementById('selvalsz' + this.id).value = 'Ready For Disposal';
+        }
+    });
+    
+    $('#btnevaluate').click(function() {
+        var getthecnt = document.getElementById('getcount').value;
+
+        for (var z = getthecnt; z > 0; z--) {
+            var ck = 'selvalsz' + z;
+            var idofcloned = ck;
+            // alert(idofcloned);
+
+            var e = document.getElementById(idofcloned);
+            var get = e.options[e.selectedIndex].value;
+            // alert(get);
+        }
+
+        var getthecnt = document.getElementById('getcount').value;
+        var ck = '';
+        var filltable = '';
+        var filltablex = '';
+        var filltabley = '';
+
+        // JOB ORDER (FOR REPAIR)
+        for (var z = getthecnt; z > 0; z--) {
+
+            var ck = 'selvalsz' + z;
+            var ek = document.getElementById(ck);
+            var getk = ek.options[ek.selectedIndex].value;
+
+            if (document.getElementById(ck).options[ek.selectedIndex].value == 'For Repair') {
+                var idz = document.getElementById('origrodid' + z).innerText;
+                var reqz = document.getElementById('origaid' + z).innerText;
+                var unitz = document.getElementById('origadesc' + z).innerText;
+                var qtyz = document.getElementById('selvalsz' + z).options[ek.selectedIndex].value;
+                filltable = filltable + '<tr><td class="">' + idz + '</td><td>' + reqz + '</td><td>' + qtyz + '</td><td>' + unitz + '</td></tr>';
+            }
+            document.getElementById('newmodalget').innerHTML = filltable;
+        }
+
+        // DISPOSAL (READY FOR DISPOSAL)
+        for (var x = getthecnt; x > 0; x--) {
+
+            var ckx = 'selvalsz' + x;
+            var ekx = document.getElementById(ckx);
+            var getkx = ekx.options[ekx.selectedIndex].value;
+
+            if (document.getElementById(ckx).options[ekx.selectedIndex].value == 'Ready For Disposal') {
+                var idx = document.getElementById('origrodid' + x).innerText;
+                var reqx = document.getElementById('origaid' + x).innerText;
+                var unitx = document.getElementById('origadesc' + x).innerText;
+                var qtyx = document.getElementById('selvalsz' + x).options[ekx.selectedIndex].value;
+                filltablex = filltablex + '<tr><td class="">' + idx + '</td><td>' + reqx + '</td><td>' + qtyx + '</td><td>' + unitx + '</td></tr>';
+            }
+            document.getElementById('newmodalget2').innerHTML = filltablex;
+        }
+
+        // REPAIRED
+        for (var y = getthecnt; y > 0; y--) {
+
+            var cky = 'selvalsz' + y;
+            var eky = document.getElementById(cky);
+            var getky = eky.options[eky.selectedIndex].value;
+
+            if (document.getElementById(cky).options[eky.selectedIndex].value == 'Repaired') {
+                var idy = document.getElementById('origrodid' + y).innerText;
+                var reqy = document.getElementById('origaid' + y).innerText;
+                var unity = document.getElementById('origadesc' + y).innerText;
+                var qtyy = document.getElementById('selvalsz' + y).options[eky.selectedIndex].value;
+                filltabley = filltabley + '<tr><td class="">' + idy + '</td><td>' + reqy + '</td><td>' + qtyy + '</td><td>' + unity + '</td></tr>';
+            }
+            document.getElementById('newmodalget3').innerHTML = filltabley;
+        }
+
+        var remakrsofreport = document.getElementById('evalbymainremarks').value;
+        var gettheeval = document.getElementById('getseleval');
+        var finaleval = gettheeval.options[gettheeval.selectedIndex].value;
+        var allrodid = document.getElementById('allrodid').value;
+        // alert(allrodid);
+        // alert(finaleval);
+        // alert(remakrsofreport);
+
+        if (finaleval == '') 
+        {
+            alert('Evaluate First!');
+        }
+        else if (finaleval == 'Approved') 
+        {
+            // alert('APPROVED!');
+
+            swal({
+
+                title: "Are you sure you want to approve this report?",
+                text: "The departmental user will notify about this action.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes',
+                cancelButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'ApprovedReport.php',
+                        async: false,
+                        data: {
+                            _rodid: allrodid,
+                            _finaleval: finaleval,
+                            _remakrsofreport: remakrsofreport
+                        },
+                        success: function(data2) {
+                            // alert(data2);    
+                            // swal("Report Approved!", "Approved.", "error");
+
+                            // setTimeout(function() 
+                            // {
+                            //     window.location = 'POMaintenanceReport.php';
+                            // },2500);                                
+                        },
+                        error: function(response2) {
+                            //alert(response2);                                    
+                        }
+
+                    });
+
+                    //FOR REPAIRED ASSET
+                    $('#newmodalget3 tr').each(function(index, val) {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'ApprovedReportRepaired.php',
+                            async: false,
+                            data: {
+                                _rodsid: $(this).closest('tr').children('td:first').text(),
+                                _finaleval: finaleval
+                            },
+                            success: function(data2) {
+                                // alert(data2);
+                                swal("Report Approved!", "Approved.", "success");
+
+                                setTimeout(function() 
+                                {
+                                    // window.location = 'POMaintenanceReport.php';
+                                    window.location = window.location;
+                                },2500);  
+                                
+                            },
+                            error: function(response2) {
+                                // alert(response2);
+
+                                swal("Error", "May mali bry eh!", "error");
+                            }
+
+                        });
+                    });
+
+                    // FOR READY FOR DISPOSAL
+                    $('#newmodalget2 tr').each(function(index, val) {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'ApprovedReportReadyForDisposal.php',
+                            async: false,
+                            data: {
+                                _rodsid: $(this).closest('tr').children('td:first').text(),
+                                _aid: $(this).closest('tr').children('td:first').next().text(),
+                                _finaleval: finaleval
+                            },
+                            success: function(data2) {
+                                // alert(data2);
+                                
+                                swal("Report Approved!", "Approved.", "success");
+
+                                setTimeout(function() 
+                                {
+                                    // window.location = 'POMaintenanceReport.php';
+                                    window.location = window.location;
+                                },2500);  
+                                
+                            },
+                            error: function(response2) {
+                                // alert(response2);
+
+                                swal("Error", "May mali bry eh!", "error");
+                            }
+
+                        });
+                    });
+
+                    // FOR REPAIR / JOB ORDER
+                    $('#newmodalget tr').each(function(index, val) {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'ApprovedReportForRepair.php',
+                            async: false,
+                            data: {
+                                _rodsid: $(this).closest('tr').children('td:first').text(),
+                                _aid: $(this).closest('tr').children('td:first').next().text(),
+                                _finaleval: finaleval
+                            },
+                            success: function(data2) {
+                                // alert(data2);
+
+                                swal("Report Approved!", "Approved.", "success");
+
+                                setTimeout(function() 
+                                {
+                                    // window.location = 'POMaintenanceReport.php';
+                                    window.location = window.location;
+                                },2500);  
+                                
+                            },
+                            error: function(response2) {
+                                // alert(response2);
+
+                                swal("Error", "May mali bry eh!", "error");
+                            }
+
+                        });
+                    });
+
+                } 
+                else
+                {
+                    swal("Cancelled", "The transaction is cancelled", "error");
+                }
+
+            });
+
+        }
+        else if (finaleval == 'Reject') 
+        {
+            // alert('REJECTED </3');
+
+            swal({
+
+                title: "Are you sure you want to reject this report?",
+                text: "The departmental user will notify about this action.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes',
+                cancelButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'RejectReport.php',
+                        async: false,
+                        data: {
+                            _rodid: allrodid,
+                            _finaleval: finaleval,
+                            _remakrsofreport: remakrsofreport
+                        },
+                        success: function(data2) {
+                            // alert(data2);    
+                            swal("Report Rejected!", "Rejected.", "error");
+
+                            setTimeout(function() 
+                            {
+                                window.location = 'POMaintenanceReport.php';
+                            },2500);                                
+                        },
+                        error: function(response2) {
+                            //alert(response2);                                    
+                        }
+
+                    });
+                } 
+                else
+                {
+                    swal("Cancelled", "The transaction is cancelled", "error");
+                }
+
+            });
+
+        }
+
+    });
+
     function load_unseen_notification(view = '') {
         $.ajax({
             url:"fetch.php",

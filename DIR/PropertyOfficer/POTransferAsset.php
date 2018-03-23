@@ -627,7 +627,7 @@
 
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label>Person will received:</label>
+                                        <label>Person will receive:</label>
                                         <input type="text" id="getnameofreceiver" maxlength="150" class="form-control" style="color: black;">
                                     </div>
                                 </div>

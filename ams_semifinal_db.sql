@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2018 at 06:12 AM
+-- Generation Time: Mar 23, 2018 at 05:51 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -69,11 +69,11 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (20, 'APPO YG Projector', '2018-03-20', 'Serviceable', 'Donation', 'Assigned', 0, 10, NULL, NULL, NULL),
 (21, 'Canon Pixma', '2018-03-21', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
 (22, 'Lenovo Gaming Computer', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
-(23, 'Lenovo Home Computer', '2018-03-02', 'Serviceable', 'Donation', 'Assigned', 0, 1, NULL, NULL, NULL),
+(23, 'Lenovo Home Computer', '2018-03-02', 'Ready For Disposal', 'Donation', 'Assigned', 0, 1, NULL, NULL, NULL),
 (24, 'HP Elite Laptop', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
-(25, 'Asahi Industrial Fan', '2018-03-04', 'Serviceable', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
+(25, 'Asahi Industrial Fan', '2018-03-04', 'Ready For Disposal', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
 (26, 'Gigaware Keypress gaming keyboard', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
-(27, 'RedDragon Mirage Gaming Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Assigned', 0, 5, NULL, NULL, NULL),
+(27, 'RedDragon Mirage Gaming Mouse', '2018-03-06', 'Disposed', 'Donation', 'Assigned', 1, 5, NULL, NULL, NULL),
 (28, 'QUBE 1.5HP Inverter Aircon', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
 (29, 'Itechie 24\" Full HD LED TV', '2018-03-08', 'Serviceable', 'Donation', 'Assigned', 0, 7, NULL, NULL, NULL),
 (30, 'iSAFE High Definition DOME and BULLET CCTV', '2018-03-10', 'Serviceable', 'Donation', 'Assigned', 0, 8, NULL, NULL, NULL),
@@ -288,8 +288,15 @@ CREATE TABLE `ams_t_dispose` (
   `D_DISPOSED_BY` varchar(120) NOT NULL,
   `DL_ID` int(11) NOT NULL,
   `A_ID` int(11) NOT NULL,
-  `PARS_ID` int(11) NOT NULL
+  `PARS_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_dispose`
+--
+
+INSERT INTO `ams_t_dispose` (`D_ID`, `D_DATE`, `D_TYPE`, `D_REMARKS`, `D_DISPOSED_BY`, `DL_ID`, `A_ID`, `PARS_ID`) VALUES
+(1, '2018-03-23', 'Keep', 'Wala na talaga eh. itambak nalang.', 'Shiela Mae  Velga', 1, 27, NULL);
 
 -- --------------------------------------------------------
 
@@ -457,6 +464,7 @@ CREATE TABLE `ams_t_report_of_damage` (
   `ROD_NO` varchar(15) NOT NULL,
   `ROD_REASON` varchar(350) NOT NULL,
   `ROD_DATE` date NOT NULL,
+  `ROD_STATUS` varchar(25) NOT NULL DEFAULT 'Pending',
   `ROD_VIEW_BY_PO` int(11) DEFAULT '0',
   `ROD_VIEW_BY_USER` int(11) NOT NULL DEFAULT '0',
   `ROD_REMARKS` varchar(350) DEFAULT NULL
@@ -466,8 +474,9 @@ CREATE TABLE `ams_t_report_of_damage` (
 -- Dumping data for table `ams_t_report_of_damage`
 --
 
-INSERT INTO `ams_t_report_of_damage` (`ROD_ID`, `ROD_NO`, `ROD_REASON`, `ROD_DATE`, `ROD_VIEW_BY_PO`, `ROD_VIEW_BY_USER`, `ROD_REMARKS`) VALUES
-(1, 'ROD-2018-0001', 'Sira sila.', '2018-03-22', 0, 0, NULL);
+INSERT INTO `ams_t_report_of_damage` (`ROD_ID`, `ROD_NO`, `ROD_REASON`, `ROD_DATE`, `ROD_STATUS`, `ROD_VIEW_BY_PO`, `ROD_VIEW_BY_USER`, `ROD_REMARKS`) VALUES
+(1, 'ROD-2018-0001', 'sira sila', '2018-03-23', 'Approved', 0, 0, 'sra'),
+(2, 'ROD-2018-0002', 'may depekto', '2018-03-23', 'Pending', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -480,6 +489,7 @@ CREATE TABLE `ams_t_report_of_damage_sub` (
   `RODS_CANCEL_DATE` date DEFAULT NULL,
   `RODS_DATE_INSPECT` date DEFAULT NULL,
   `RODS_STATUS` varchar(25) NOT NULL DEFAULT 'Pending',
+  `RODS_EVALUATION` varchar(25) DEFAULT NULL,
   `RODS_SHOW` int(11) NOT NULL DEFAULT '0',
   `ROD_ID` int(11) NOT NULL,
   `A_ID` int(11) NOT NULL
@@ -489,11 +499,13 @@ CREATE TABLE `ams_t_report_of_damage_sub` (
 -- Dumping data for table `ams_t_report_of_damage_sub`
 --
 
-INSERT INTO `ams_t_report_of_damage_sub` (`RODS_ID`, `RODS_CANCEL_DATE`, `RODS_DATE_INSPECT`, `RODS_STATUS`, `RODS_SHOW`, `ROD_ID`, `A_ID`) VALUES
-(1, NULL, NULL, 'Pending', 0, 1, 9),
-(2, NULL, NULL, 'Pending', 0, 1, 8),
-(3, NULL, NULL, 'Pending', 0, 1, 7),
-(4, NULL, NULL, 'Pending', 0, 1, 6);
+INSERT INTO `ams_t_report_of_damage_sub` (`RODS_ID`, `RODS_CANCEL_DATE`, `RODS_DATE_INSPECT`, `RODS_STATUS`, `RODS_EVALUATION`, `RODS_SHOW`, `ROD_ID`, `A_ID`) VALUES
+(1, NULL, '2018-03-23', 'Approved', 'Ready For Disposal', 0, 1, 27),
+(2, NULL, '2018-03-23', 'Approved', 'Ready For Disposal', 0, 1, 25),
+(3, NULL, '2018-03-23', 'Approved', 'Ready For Disposal', 0, 1, 23),
+(4, NULL, NULL, 'Pending', NULL, 0, 2, 36),
+(5, NULL, NULL, 'Pending', NULL, 0, 2, 4),
+(6, NULL, NULL, 'Pending', NULL, 0, 2, 38);
 
 -- --------------------------------------------------------
 
@@ -566,9 +578,11 @@ INSERT INTO `ams_t_user_request` (`UR_ID`, `UR_UNIT`, `UR_QUANTITY`, `UR_STATUS`
 (2, 'Piece', 1, 'Approved', '2018-03-21', NULL, 1, 5, 5),
 (3, 'Piece', 1, 'Reject', NULL, '2018-03-21', 2, 1, 2),
 (4, 'Set', 2, 'Reject', NULL, '2018-03-21', 2, 2, 5),
-(5, 'Set', 4, 'Pending', NULL, NULL, 3, 9, 4),
-(6, 'Piece', 10, 'Pending', NULL, NULL, 3, 3, 4),
-(7, 'Piece', 3, 'Pending', NULL, NULL, 3, 10, 4);
+(5, 'Set', 4, 'Approved', '2018-03-22', NULL, 3, 9, 4),
+(6, 'Piece', 10, 'Approved', '2018-03-22', NULL, 3, 3, 4),
+(7, 'Piece', 3, 'Approved', '2018-03-22', NULL, 3, 10, 4),
+(8, 'Set', 5, 'Pending', NULL, NULL, 4, 1, 4),
+(9, 'Piece', 2, 'Pending', NULL, NULL, 4, 8, 4);
 
 -- --------------------------------------------------------
 
@@ -603,7 +617,10 @@ CREATE TABLE `ams_t_user_request_approved_by_po` (
 
 INSERT INTO `ams_t_user_request_approved_by_po` (`URABPO_ID`, `URABPO_STATUS`, `URABPO_APPROVED_DATE_BY_MAIN`, `URABPO_REJECT_DATE_BY_MAIN`, `URA_QUANTITY`, `UR_ID`, `URS_ID`) VALUES
 (1, 'Pending', NULL, NULL, 1, 2, 1),
-(2, 'Pending', NULL, NULL, 2, 1, 1);
+(2, 'Pending', NULL, NULL, 2, 1, 1),
+(3, 'Pending', NULL, NULL, 3, 7, 3),
+(4, 'Pending', NULL, NULL, 10, 6, 3),
+(5, 'Pending', NULL, NULL, 4, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -625,7 +642,8 @@ CREATE TABLE `ams_t_user_request_status_to_main` (
 --
 
 INSERT INTO `ams_t_user_request_status_to_main` (`URSTM_ID`, `URSTM_STATUS_TO_MAIN`, `URSTM_APPROVED_DATE_BY_MAIN`, `URSTM_REJECT_DATE_BY_MAIN`, `URSTM_REMARKS`, `URS_ID`) VALUES
-(1, 'Pending', NULL, NULL, NULL, 1);
+(1, 'Approved', '2018-03-22', NULL, 'OK.', 1),
+(2, 'Pending', NULL, NULL, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -655,7 +673,8 @@ CREATE TABLE `ams_t_user_request_summary` (
 INSERT INTO `ams_t_user_request_summary` (`URS_ID`, `URS_NO`, `URS_REQUEST_DATE`, `URS_PURPOSE`, `URS_STATUS_TO_PO`, `URS_APPROVED_DATE`, `URS_REJECT_DATE`, `URS_REMARKS`, `URS_VIEW_BY_USER`, `URS_VIEW_BY_PO`, `URS_VIEW_BY_USER_MAIN`, `URS_VIEW_CLICKED`) VALUES
 (1, 'REQ-2018-0001', '2018-03-16', 'Need for teaching.', 'Approved', '2018-03-21', NULL, 'gg', 0, 1, 0, 1),
 (2, 'REQ-2018-0002', '2018-03-16', 'For Academic Purposes.', 'Reject', NULL, '2018-03-21', 'reject', 0, 1, 0, 1),
-(3, 'REQ-2018-0003', '2018-03-18', 'For incoming event.', 'Pending', NULL, NULL, NULL, 0, 1, 0, 1);
+(3, 'REQ-2018-0003', '2018-03-18', 'For incoming event.', 'Approved', '2018-03-22', NULL, '', 0, 1, 0, 1),
+(4, 'REQ-2018-0004', '2018-03-22', 'Badly Need It.', 'Pending', NULL, NULL, NULL, 0, 1, 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -908,7 +927,7 @@ ALTER TABLE `ams_r_ppmp_period`
 -- AUTO_INCREMENT for table `ams_t_dispose`
 --
 ALTER TABLE `ams_t_dispose`
-  MODIFY `D_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `D_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_job_order`
@@ -962,13 +981,13 @@ ALTER TABLE `ams_t_release_of_asset_sub`
 -- AUTO_INCREMENT for table `ams_t_report_of_damage`
 --
 ALTER TABLE `ams_t_report_of_damage`
-  MODIFY `ROD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ROD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_report_of_damage_sub`
 --
 ALTER TABLE `ams_t_report_of_damage_sub`
-  MODIFY `RODS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `RODS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ams_t_transfer_out_ptr`
@@ -986,7 +1005,7 @@ ALTER TABLE `ams_t_transfer_out_ptr_sub`
 -- AUTO_INCREMENT for table `ams_t_user_request`
 --
 ALTER TABLE `ams_t_user_request`
-  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_main`
@@ -998,19 +1017,19 @@ ALTER TABLE `ams_t_user_request_approved_by_main`
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_po`
 --
 ALTER TABLE `ams_t_user_request_approved_by_po`
-  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_status_to_main`
 --
 ALTER TABLE `ams_t_user_request_status_to_main`
-  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_summary`
 --
 ALTER TABLE `ams_t_user_request_summary`
-  MODIFY `URS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `URS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

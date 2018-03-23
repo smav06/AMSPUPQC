@@ -295,10 +295,11 @@
                                     <thead>
                                         <tr>
                                             <th style="display: none;">ROD ID</th>
-                                            <th style="">Report No.</th>
+                                            <th style="width: 125px;">Report No.</th>
                                             <th style="">Reason</th> 
-                                            <th style="">Reported By</th>
-                                            <th style="">Date Reported</th>
+                                            <th style="width: 200px;">Reported By</th>
+                                            <th style="width: 110px;">Status</th>
+                                            <th style="width: 130px;">Date Reported</th>
                                             <th style="width: 100px;"></th>
                                         </tr>
                                     </thead>
@@ -307,7 +308,7 @@
 
                                         <?php  
 
-                                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, O.O_NAME, ROD.ROD_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY ROD.ROD_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
+                                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, ROD.ROD_STATUS, O.O_NAME, ROD.ROD_DATE, RODS.RODS_CANCEL_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE RODS.RODS_CANCEL_DATE IS NULL GROUP BY ROD.ROD_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -317,15 +318,44 @@
                                                 $rodno = $row['ROD_NO'];
                                                 $rodreason = $row['ROD_REASON'];
                                                 $rodreportby = $row['O_NAME'];
+                                                $rodstatus = $row['ROD_STATUS'];
                                                 $roddate = $row['ROD_DATE'];
                                         ?>
 
                                         <tr class="gradeX">
                                             <td style="display: none;"> <?php echo $rodid; ?> </td>
-                                            <td style=""> <?php echo $rodno; ?> </td>
-                                            <td style=""> <?php echo $rodreason; ?> </td> 
-                                            <td style=""> <?php echo $rodreportby; ?> </td>
-                                            <td style=""> <?php echo $roddate; ?> </td>
+                                            <td> <?php echo $rodno; ?> </td>
+                                            <td> <?php echo $rodreason; ?> </td> 
+                                            <td> <?php echo $rodreportby; ?> </td>
+                                            
+                                            <?php 
+                                                if ($rodstatus == 'Pending') 
+                                                {
+                                            ?>
+
+                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $rodstatus; ?> </p> </td>
+
+                                            <?php  
+                                                }
+                                                elseif ($rodstatus == 'Approved') 
+                                                {
+                                            ?>
+
+                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $rodstatus; ?> </p> </td>
+
+                                            <?php  
+                                                }
+                                                elseif ($rodstatus == 'Reject') 
+                                                {
+                                            ?>
+
+                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $rodstatus; ?> </p> </td>
+
+                                            <?php
+                                                }
+                                            ?>
+
+                                            <td> <?php echo $roddate; ?> </td>
                                             
                                             <td>
                                                 <a href="POViewReportedDamage.php?passedrodid=<?php echo $rodid; ?>" class="btn btn-success">View</a>

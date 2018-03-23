@@ -296,7 +296,7 @@
                                         <tr>
                                             <th style="display: none;">A ID</th>
                                             <th style="">Asset</th>
-                                            <th style="">Reason</th> 
+                                            <!-- <th style="">Reason</th>  -->
                                             <!-- <th style="">Reported By</th> -->
                                             <th style="width: 140px;">Date Reported</th>
                                             <th style="width: 100px;"></th>
@@ -307,7 +307,7 @@
 
                                         <?php  
 
-                                            $sql = "SELECT * FROM `ams_t_report_of_damage_sub` AS RODS INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_r_asset` AS A ON RODS.A_ID = A.A_ID WHERE A.A_STATUS != 'Disposed' AND A.A_DISPOSAL_STATUS != 1";
+                                            $sql = "SELECT * FROM `ams_t_report_of_damage_sub` AS RODS INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_r_asset` AS A ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Ready For Disposal' AND A.A_DISPOSAL_STATUS != 1";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -315,7 +315,7 @@
                                             {
                                                 $aid = $row['A_ID'];
                                                 $adescription = $row['A_DESCRIPTION'];
-                                                $rodreason = $row['ROD_REASON'];
+                                                // $rodreason = $row['ROD_REASON'];
                                                 // $rodreportby = $row['O_NAME'];
                                                 $roddate = $row['ROD_DATE'];
                                         ?>
@@ -323,7 +323,7 @@
                                         <tr class="gradeX">
                                             <td style="display: none;"> <?php echo $aid; ?> </td>
                                             <td style=""> <?php echo $adescription; ?> </td>
-                                            <td style=""> <?php echo $rodreason; ?> </td> 
+                                            <!-- <td style=""> <?php echo $rodreason; ?> </td>  -->
                                             <!-- <td style=""> <?php echo $rodreportby; ?> </td> -->
                                             <td style=""> <?php echo $roddate; ?> </td>
                                             <td style="">
@@ -348,43 +348,49 @@
                                                                 <input style="color: black; word-wrap: break-word;" type="text" value="<?php echo $adescription; ?>" class="form-control" disabled />
                                                             </div>
 
-                                                            <div class="form-group">
-                                                                <label>Select disposal type</label>
-                                                                <select class="form-control m-bot15" id="passdisposetype" style="color: black; padding-left: 10px;" required>
+                                                            <div class="row group">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label>Select disposal type</label>
+                                                                        <select class="form-control m-bot15" id="passdisposetype" style="color: black; padding-left: 10px;" required>
 
-                                                                    <option value="" selected disabled></option>
-                                                                    <option value="Keep">Keep</option>
-                                                                    <option value="Return">Return</option>
-                                                                
-                                                                </select>
-                                                            </div>
+                                                                            <option value="" selected disabled></option>
+                                                                            <option value="Keep">Keep</option>
+                                                                            <option value="Return">Return</option>
+                                                                        
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
 
-                                                            <div class="form-group">
-                                                                <label>Disposal Location</label>
-                                                                <select class="form-control m-bot15" id="passlocation" style="color: black; padding-left: 10px;" required>
+                                                                <div class="col-sm-8">
+                                                                    <div class="form-group">
+                                                                        <label>Disposal Location</label>
+                                                                        <select class="form-control m-bot15" id="passlocation" style="color: black; padding-left: 10px;" required>
 
-                                                                    <option value="" selected disabled></option>
+                                                                            <option value="" selected disabled></option>
 
-                                                                    <?php  
+                                                                            <?php  
 
-                                                                        $sqlforemployee = "SELECT * FROM ams_r_disposal_location";
+                                                                                $sqlforemployee = "SELECT * FROM ams_r_disposal_location";
 
-                                                                        $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+                                                                                $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
 
-                                                                        while($row = mysqli_fetch_assoc($results))
-                                                                        {
-                                                                            $dlid = $row['DL_ID'];
-                                                                            $dlname = $row['DL_NAME'];
+                                                                                while($row = mysqli_fetch_assoc($results))
+                                                                                {
+                                                                                    $dlid = $row['DL_ID'];
+                                                                                    $dlname = $row['DL_NAME'];
 
-                                                                    ?>
+                                                                            ?>
 
-                                                                    <option value="<?php echo $dlid ?>"><?php echo "$dlname"; ?></option>
-                                                                    
-                                                                    <?php
-                                                                        }
-                                                                    ?>
-                                                                
-                                                                </select>
+                                                                            <option value="<?php echo $dlid ?>"><?php echo "$dlname"; ?></option>
+                                                                            
+                                                                            <?php
+                                                                                }
+                                                                            ?>
+                                                                        
+                                                                        </select>
+                                                                    </div>             
+                                                                </div>
                                                             </div>
 
                                                             <div class="form-group">
