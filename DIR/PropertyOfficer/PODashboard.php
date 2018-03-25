@@ -178,7 +178,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                        <li><a href="POPPMP.php">PPMP Request</a></li>  
+                        <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
                         <li><a href="PORequestToMain.php">Request To Main</a></li>                 
                     </ul>
                 </li>
@@ -217,10 +217,10 @@
                     </a>
                     <ul class="sub">
                         <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                        <li><a href="POPPMPReport.php">PPMP Report</a></li>   
-                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                        <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
+                        <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
                         <li><a href="POPtr.php">Property Transfer Report</a></li>   
-                        <li><a href="PORod.php">Report Of Damage</a></li>  
+                        <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
                     </ul>
                 </li>
             </ul>            
@@ -301,7 +301,7 @@
 <div class="row">
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <span class="mini-stat-icon orange"><i class="fa fa-gavel"></i></span>
+            <span class="mini-stat-icon green"><i class="fa fa-laptop"></i></span>
             <div class="mini-stat-info">
                 <?php 
                     $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset`";
@@ -318,13 +318,68 @@
                 <?php
                     }
                 ?>
+
                 Total No. Of Asset
+                <hr>
+
+                Available: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' AND A_STATUS = 'Serviceable' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                Assigned: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Assigned' AND A_STATUS = 'Serviceable' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+                <br>
+
+                Transferred Out: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Transferred Out' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+                
+                &nbsp &nbsp &nbsp &nbsp
+                Disposed: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Disposed' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+                <br>
+
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <span class="mini-stat-icon tar"><i class="fa fa-tag"></i></span>
+            <span class="mini-stat-icon tar"><i class="fa fa-comment-o"></i></span>
             <div class="mini-stat-info">
                 <?php 
 
@@ -344,25 +399,177 @@
                 <?php
                     }
                 ?>
-                Total No. Of Request 
+                Total No. Of Request
+                <hr>
+
+                Pending: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_summary` WHERE URS_STATUS_TO_PO = 'Pending' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                Approved: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_summary` WHERE URS_STATUS_TO_PO = 'Approved' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+                <br>
+
+                Reject: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_summary` WHERE URS_STATUS_TO_PO = 'Reject' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <span class="mini-stat-icon pink"><i class="fa fa-money"></i></span>
+            <span class="mini-stat-icon orange"><i class="fa fa-warning"></i></span>
             <div class="mini-stat-info">
-                <span>1</span>
-                Dollar Profit Today
+                <?php 
+
+                    // $con = mysqli_connect("localhost", "root", "", "ams_sample_db");
+
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage`";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      
+                ?>
+                
+                <span><?php echo $cnt; ?></span>
+                
+                <?php
+                    }
+                ?>
+                Total No. Of Report
+                <hr>
+
+                Pending: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Pending' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                Approved: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Approved' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+                <br>
+
+                Reject: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Reject' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <span class="mini-stat-icon green"><i class="fa fa-eye"></i></span>
+            <span class="mini-stat-icon green"><i class="fa fa-comment"></i></span>
             <div class="mini-stat-info">
-                <span>10</span>
-                Unique Visitors
+                <?php 
+
+                    // $con = mysqli_connect("localhost", "root", "", "ams_sample_db");
+
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_status_to_main`";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      
+                ?>
+                
+                <span><?php echo $cnt; ?></span>
+                
+                <?php
+                    }
+                ?>
+                Request To Main
+                <hr>
+
+                Pending: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_status_to_main` WHERE URSTM_STATUS_TO_MAIN = 'Pending' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                Approved: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_status_to_main` WHERE URSTM_STATUS_TO_MAIN = 'Approved' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
+                <br>
+
+                Reject: 
+                <?php 
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_status_to_main` WHERE URSTM_STATUS_TO_MAIN = 'Reject' ";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      echo '<strong>'.$cnt.'</strong>';
+                    }
+                ?>
             </div>
         </div>
     </div>

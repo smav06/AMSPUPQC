@@ -212,12 +212,12 @@
     <section id="main-content">
         <section class="wrapper">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="mini-stat clearfix">
-                        <span class="mini-stat-icon orange"><i class="fa fa-gavel"></i></span>
+                        <span class="mini-stat-icon green"><i class="fa fa-laptop"></i></span>
                         <div class="mini-stat-info">
                             <?php 
-                                $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset`";
+                                $sql = "SELECT COUNT(*) AS C FROM ams_t_par_sub AS PARS INNER JOIN ams_r_asset AS A ON PARS.A_ID = A.A_ID INNER JOIN ams_r_employee_profile AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID LEFT JOIN ams_t_report_of_damage_sub AS RODS ON PARS.A_ID = RODS.A_ID WHERE O.O_ID = ".$_SESSION['myoid']." AND RODS.RODS_STATUS IS NULL AND PARS.PARS_CANCEL_BY IS NULL";
                                 $result = mysqli_query($connection, $sql);
 
                                 while ($row = mysqli_fetch_array($result)) 
@@ -231,46 +231,56 @@
                             <?php
                                 }
                             ?>
-                            Total No. Of Asset
+                            No. Of Acquired Asset
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="mini-stat clearfix">
-                        <span class="mini-stat-icon tar"><i class="fa fa-tag"></i></span>
+                        <span class="mini-stat-icon tar"><i class="fa fa-comment-o"></i></span>
                         <div class="mini-stat-info">
                             <?php 
-                                $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_summary`";
+                                $sql = "SELECT COUNT(PAR.PAR_ID) AS C FROM ams_t_par AS PAR INNER JOIN ams_t_par_sub AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN ams_r_employee_profile AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE O.O_ID = ".$_SESSION['myoid']." GROUP BY PAR.PAR_ID";
                                 $result = mysqli_query($connection, $sql);
 
+                                $i=0;
                                 while ($row = mysqli_fetch_array($result)) 
                                 {
-                                  $cnt = $row['C'];
-                                  
+                                    $i++;
+                                    $cnt = $row['C'];                                  
+                                }                                
                             ?>
-                            
-                            <span><?php echo $cnt; ?></span>
-                            
-                            <?php
-                                }
-                            ?>
+                            <span><?php echo $i; ?></span>
                             Total No. Of Request
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="mini-stat clearfix">
-                        <span class="mini-stat-icon pink"><i class="fa fa-money"></i></span>
+                        <span class="mini-stat-icon orange"><i class="fa fa-warning"></i></span>
                         <div class="mini-stat-info">
-                            <span>34,320</span>
-                            Dollar Profit Today
+                            <?php 
+
+                                // $con = mysqli_connect("localhost", "root", "", "ams_sample_db");
+
+                                $sql = "SELECT COUNT(*) AS C FROM ams_t_report_of_damage AS ROD INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN ams_t_par_sub AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN ams_r_employee_profile AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE O.O_ID = ".$_SESSION['myoid']." GROUP BY ROD.ROD_ID";
+                                $result = mysqli_query($connection, $sql);
+                                $i=0;
+                                while ($row = mysqli_fetch_array($result)) 
+                                {
+                                    $i++;
+                                    $cnt = $row['C'];                                  
+                                }
+                            ?>
+                            <span><?php echo $i; ?></span>
+                            Total No. Of Report
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <div class="mini-stat clearfix">
                         <span class="mini-stat-icon green"><i class="fa fa-eye"></i></span>
                         <div class="mini-stat-info">
@@ -278,7 +288,7 @@
                             Unique Visitors
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
         </section>

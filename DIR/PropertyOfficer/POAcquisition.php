@@ -212,7 +212,7 @@
             </a>
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li><a href="POPPMP.php">PPMP Request</a></li>  
+                <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
                 <li><a href="PORequestToMain.php">Request To Main</a></li>                 
             </ul>
         </li>
@@ -251,10 +251,10 @@
             </a>
             <ul class="sub">
                 <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                <li><a href="POPPMPReport.php">PPMP Report</a></li>   
-                <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
+                <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
                 <li><a href="POPtr.php">Property Transfer Report</a></li>   
-                <li><a href="PORod.php">Report Of Damage</a></li>  
+                <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
         </li>
     </ul>            

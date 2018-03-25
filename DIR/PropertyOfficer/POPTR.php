@@ -4,15 +4,10 @@
 
     session_start();
 
-    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Property Officer' && !isset($_SESSION['myuser']) && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
+    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Property Officer' && !isset($_SESSION['myuser'])  && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
     {
       echo "<script>window.location.assign('../login.php')</script>";
 
-    }
-
-    if (isset($_GET['reqmain'])) 
-    {
-        $ids = $_GET['reqmain'];
     }
 
 ?>
@@ -27,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Departmental User Requests</title>
+    <title>PTR</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -151,7 +146,7 @@
             <?php 
                 }
             ?>
-            
+
         </li>
         <!-- notification dropdown end -->
     </ul>
@@ -211,14 +206,14 @@
             </a>
         </li>
         <li class="sub-menu">
-            <a href="javascript:;" class="active">
+            <a href="javascript:;">
                 <i class="fa fa-comment-o"></i>
                 <span>Requests</span>
             </a>
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
                 <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                <li class="active"><a href="PORequestToMain.php">Request To Main</a></li>                 
+                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
             </ul>
         </li>
         <li>
@@ -263,8 +258,8 @@
             </ul>
         </li>
     </ul>            
-</div
-        <!-- sidebar menu end-->
+</div>
+         <!-- sidebar menu end-->
     </div>
 </aside>
 <!--sidebar end-->
@@ -278,7 +273,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequestToMain.php">Requests To Main</a></li>
+                        <li><a href="POAsset.php">Assets</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -287,199 +282,234 @@
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
-                        <header style="color: black;" class="panel-heading">
-                            REQUESTS TO MAIN
+                        <header class="panel-heading">
+                            Property Transfer Report
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
-                             </span>
-                        </header>
+                            </span>
+                        </header>                        
+
+                        <?php
+                            $sql = "SELECT MAX(PTR_ID) AS AAA FROM `ams_t_transfer_out_ptr`";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $maxptrid = $row['AAA'];
+                                echo '<input type="text" class="hidden" id="maxptrid" value="'.$maxptrid.'" />';
+                            }
+                        ?>
 
                         <?php  
-                            $sql = "SELECT URS.URS_PURPOSE, URS.URS_NO, URS.URS_ID, URS.URS_REQUEST_DATE, O.O_NAME, URSTM.URSTM_STATUS_TO_MAIN, URABPO.URA_QUANTITY, ALS.AL_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset_library` AS ALS ON UR.AL_ID = ALS.AL_ID WHERE URS.URS_ID = $ids GROUP BY URS.URS_ID ORDER BY URS.URS_APPROVED_DATE DESC";
+                            $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $maxptrid GROUP BY PTR.PTR_ID";
 
                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                             while($row = mysqli_fetch_assoc($result))
                             {                              
-                                $urspurpose = $row['URS_PURPOSE'];
-                                $ursno = $row['URS_NO'];
-                                $ursdatereq = $row['URS_REQUEST_DATE'];
-                                $ursreqby = $row['O_NAME'];
-                                $ursid = $row['URS_ID'];
-                                $mainstat = $row['URSTM_STATUS_TO_MAIN'];                              
+                              $ptrno = $row['PTR_NO'];
+                              $ptrdate = $row['PTR_DATE'];
+                              $receivedby = $row['PTR_RECEIVED_BY'];
+                              $reason = $row['PTR_REMARKS'];
+                              $transferredby = $row['PTR_TRANSFERRED_BY'];
+                              $transferto = $row['C_NAME'];
+                              $transfertocode = $row['C_CODE'];
+
                         ?>
 
                         <div class="panel-body">
-                            <div class="row group">                                                        
+                            <div class="row group">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Request No.</label>
-                                        <input type="hidden" id="pinakaursid" value="<?php echo $ursid; ?>">
-                                        <input type="text" value="<?php echo $ursno; ?>" class="form-control" style="color: black;" disabled  />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Requested By</label>
-                                        <input type="text" value="<?php echo $ursreqby; ?>" class="form-control" style="color: black;" disabled  />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Date Requested</label>
-                                        <input type="Date" value="<?php echo $ursdatereq; ?>" class="form-control" style="color: black;" disabled />
+                                        <label>PTR No.</label>
+                                        <input type="text" value="<?php echo $ptrno; ?>" class="form-control" style="color: black;" disabled  />
                                     </div>
                                 </div>
 
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label>Purpose</label>
-                                        <input type="text" value="<?php echo $urspurpose; ?>" class="form-control" style="color: black;" disabled />
+                                        <label>Transfer To</label>
+                                        <input type="text" value="<?php echo $transferto; ?> (<?php echo $transfertocode; ?>)" class="form-control" style="color: black;" disabled  />
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Status To Main</label>
-
-                                        <?php  
-                                            if ($mainstat == 'Pending') 
-                                            {
-                                        ?>
-
-                                            <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: black;" disabled />
-
-                                        <?php      # code...
-                                            }
-                                            elseif ($mainstat == 'Approved') 
-                                            {
-                                        ?>
-
-                                            <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: green;" disabled />
-
-                                        <?php      # code...
-                                            }
-                                            elseif ($mainstat == 'Reject') 
-                                            {
-                                        ?>
-
-                                            <input type="text" value="<?php echo $mainstat; ?>" class="form-control" style="color: red;" disabled />
-
-                                        <?php
-                                            }
-                                        ?>
-
+                                        <label>Date</label>
+                                        <input type="text" value="<?php echo $ptrdate; ?>" class="form-control" style="color: black;" disabled />
                                     </div>
                                 </div>
 
-                        
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label>Transfer From</label>
+                                        <input type="text" value="Polytechnic University of the Philippines Quezon City (PUP QC)" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Receiver</label>
+                                        <input type="text" value="<?php echo $receivedby; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Transfer By</label>
+                                        <input type="text" value="<?php echo $transferredby; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
+
+                        <?php
+                            }
+                        ?>
                                 <div class="col-md-12">
                                     <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">
                                     </div>
-                                </div>
+                                </div>  
 
                                 <div class="col-md-12">
-                                    <!-- <label>Requests</label> -->
                                     <div class="adv-table">
-                                        <table  class="display table table-bordered table-striped" id=" ">
+                                        <table class="display table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th style="">Request</th>
-                                                    <th style="width: 90px;">Unit</th>
-                                                    <th style="width: 250px;">Approved Quantity By Property Officer</th>
+                                                    <th>Assets</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <?php  
-                                                    $sqlz = "SELECT URS.URS_PURPOSE, URS.URS_NO, URS.URS_ID, URS.URS_REQUEST_DATE, O.O_NAME, URSTM.URSTM_STATUS_TO_MAIN, UR.UR_UNIT, URABPO.URA_QUANTITY, ALS.AL_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset_library` AS ALS ON UR.AL_ID = ALS.AL_ID WHERE URS.URS_ID = $ids ORDER BY URS.URS_APPROVED_DATE DESC";
 
-                                                    $resultz = mysqli_query($connection, $sqlz) or die("Bad Query: $sql");
+                                            <?php  
+                                                $sql1 = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $maxptrid";
 
-                                                    while($rowz = mysqli_fetch_assoc($resultz))
-                                                    {
-                                                        $requestname = $rowz['AL_NAME'];
-                                                        $requestunit = $rowz['UR_UNIT'];
-                                                        $requestqty = $rowz['URA_QUANTITY'];
-                                                ?>
+                                                $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
+                                                while($row1 = mysqli_fetch_assoc($result1))
+                                                {
+                                                    $adesc = $row1['A_DESCRIPTION'];
+                                            ?>
                                                 <tr>
-                                                    <td> <?php echo $requestname; ?> </td>
-                                                    <td> <?php echo $requestunit; ?> </td>
-                                                    <td> <center> <?php echo $requestqty; ?> </center> </td>
+                                                    <td> <?php echo $adesc; ?> </td>
                                                 </tr>
 
-                                                <?php
-                                                    }
-                                                ?>
-                                            </tbody>                                            
+                                            <?php
+                                                }
+                                            ?>
+
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div style="padding: 1px; margin-bottom: 10px;">                                                             
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div style="padding: 0.5px; margin-bottom: 10px; background: #757575;">                                                             
-                                    </div>
-                                </div>
-                            </div>
-
-                            <?php
-                                if ($mainstat == 'Pending') 
-                                {
-                            ?>
-
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Remarks</label> 
-                                        <textarea name="viewrequestsevaluate" id="evalbymainremarks" class="form-control" style="resize: none; color: black; height: 85px;" maxlength="200"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Evaluation Of Main</label>
-                                        <select class="form-control" style="color: black;" id="getsel">
-                                            <option selected disabled value=""></option>
-                                            <option value="Approved">Approved</option>
-                                            <option value="Reject">Reject</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <a id="btnevaluate" class="btn btn-success">Submit</a>
-                                        <a href="PORequestToMain.php" class="btn btn-default">Go to requests to main</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <?php  
-                                }
-                                else
-                                {
-                            ?>
-                                <a href="PORequestToMain.php" class="btn btn-default">Go to requests to main</a>
-                            <?php
-                                }
-                            ?>
-
+                            <span class="pull-right">
+                                <button type="button" class="btn btn-success" onclick="printonly()"><i class="fa fa-print"> PRINT</i></button>
+                            </span>
+                            
                         </div>
+
+
+                        
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <div id="printdisbook" class="panel-body" style="display: none;">
+                            <br>
+                            <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
+                            <br>
+                            <center><h5>Polytechnic University of the Philippines Quezon City</h5></center>
+                            <center><h5>Don Fabian St. Commonwealth Quezon City</h5></center>
+                            <center><h6>PROPERTY TRANSFER REPORT (PTR)</h6></center>
+                            <br>
+                            <br>
+                            <br>  
+                            <br>
+                            <br>
+                            <br>
+                            <br>                      
+
+                        <?php 
+                            $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $maxptrid GROUP BY PTR.PTR_ID";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {                              
+                              $ptrno = $row['PTR_NO'];
+                              $ptrdate = $row['PTR_DATE'];
+                              $receivedby = $row['PTR_RECEIVED_BY'];
+                              $reason = $row['PTR_REMARKS'];
+                              $transferredby = $row['PTR_TRANSFERRED_BY'];
+                              $transferto = $row['C_NAME'];
+                              $transfertocode = $row['C_CODE'];
+                        ?>
+
+                            <label>Date: </label> <u> <?php echo $ptrdate; ?> </u> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            <label>Transfer From: </label> <u> PUP QC </u>  
+                            <br>
+                            <label>PTR NO: </label> <u> <?php echo $ptrno; ?> </u> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            <label>Transfer To: </label> <u> <?php echo $transfertocode; ?> </u>
+                            <br>
+                            <label>Receiver: </label> <u> <?php echo $receivedby; ?> </u>
+                            <br>
+                            <br>
+                            <label>Reason For Transfer: </label> <u> <?php echo $reason; ?> </u> 
 
                         <?php
                             }
                         ?>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <table class="display table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Asset</th>
+                                    </tr>
+                                </thead>
 
+                                <tbody>
+
+                                <?php  
+                                    $sql1 = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $maxptrid";
+
+                                    $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+
+                                    while($row1 = mysqli_fetch_assoc($result1))
+                                    {
+                                        $adesc = $row1['A_DESCRIPTION'];
+                                ?>
+
+                                    <tr>
+                                        <td> <?php echo $adesc; ?> </td>
+                                    </tr>
+
+                                <?php
+                                    }
+                                ?>
+
+                                </tbody>
+                            </table>
+
+                            <br>
+                            <br>
+                            <br>
+                            <span class="pull-right">
+                                <label>Transfer By: </label> <u> <?php echo $transferredby; ?> </u> <br>
+                            </span>
+                            <br>                            
+                            <span class="pull-right" style="margin-right: -135px;">
+                                <label> <?php echo $_SESSION['mytype']; ?> </label>
+                            </span>
+
+                        </div>
                     </section>
                 </div>
             </div>
@@ -488,7 +518,7 @@
     </section>
     <!--main content end-->
 <!--right sidebar start-->
-<div class="right-sidebar">
+<div class="right-sidebar" >
     <div class="search-row">
         <input type="text" placeholder="Search" class="form-control">
     </div>
@@ -617,136 +647,37 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
+    <script src="../../js/jquery.multifield.min.js"></script>
+    <script src="../../js/jquery.multifield.js"></script>
+
+    <script>
+
+        $('.form-content').multifield({
+            section: '.group',
+            btnAdd:'#btnAdd',
+            btnRemove:'.btnRemove',
+        });
+
+        $(function(){
+            $('select').on('change',function(){                        
+                $('input[name=place]').val($(this).val());            
+            });
+        });
+
+    </script>    
+
 </body>
 </html>
 
 <script>
 
-function myFunction(id) {
-     var id = id;
-     // alert(id);
-
-     $.ajax({
-        type: 'POST',
-        url: 'UpdateNotifByClicked.php',
-        async: false,
-        data: {
-            _id: id
-        },
-        success: function(data2) {
-            // alert(data2);                              
-            // alert("tama");
-        },
-        error: function(response2) {
-            // alert(response2);  
-            // alert("mali");                                
-        }
-
-    });
-}
-
 $(document).ready(function(){
 
-    $('#getsel').click(function(e) {
-        document.getElementById('getsel').options[0].innerText = "";
-        document.getElementById('getsel').style.borderColor = "#00A8B3";
-        document.getElementById('getsel').style.color = "black";
-    });
+    // btnsubmitthedonation
 
-    $('#getsel').blur(function(e) {
-        document.getElementById('getsel').options[0].innerText = "";
-        document.getElementById('getsel').style.borderColor = "#E2E2E4";
-        document.getElementById('getsel').style.color = "black";
-    });
-
-    $('#btnevaluate').click(function(e) {
-                
-        e.preventDefault();
-
-        var ursid = document.getElementById('pinakaursid').value;
-
-        var ez = document.getElementById('getsel');
-        var evals = ez.options[ez.selectedIndex].value;
-
-        var remarks = document.getElementById('evalbymainremarks').value;
-
-        if (document.getElementById('getsel').options[ez.selectedIndex].value == '') 
-        {
-            document.getElementById('getsel').options[0].innerText = "Please Select";
-            document.getElementById('getsel').focus();
-            document.getElementById('getsel').style.borderColor = "#B94A48";
-            document.getElementById('getsel').style.color = "#B94A48";
-        }
-        else
-        {
-            swal({
-
-                title: "Are you sure you want to submit?",
-                text: "The request confirmation evaluated \n by main will be recorded.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes',
-                cancelButtonText: "No",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-
-            function(isConfirm) {
-                if (isConfirm) {
-
-                    $.ajax({
-                        type: 'POST',
-                        url: 'ApprovedRequestByMain.php',
-                        async: false,
-                        data: {
-                            _ursid: ursid,
-                            _evals: evals,
-                            _remarks: remarks
-                        },
-                        success: function(data2) {
-                            // alert(data2); 
-
-                            if (evals == 'Approved') {
-
-                                swal("Request Approved!", "The request is approved by main.", "success");
-
-                                setTimeout(function() 
-                                {
-                                    window.location = window.location;
-                                },2500);  
-                            }   
-                            else if (evals == 'Reject') 
-                            {
-                                swal("Request Rejected!", "The request is rejected by main.", "error");
-
-                                setTimeout(function() 
-                                {
-                                    window.location = window.location;
-                                },2500);  
-                            }
-
-                                                          
-                        },
-                        error: function(response2) {
-                            // alert(response2);      
-
-                            swal("Error", "May mali bry eh!", "error");                              
-                        }
-
-                    });
-                    
-                }
-                else
-                {
-                    swal("Cancelled", "The confirmation of request to main is cancelled", "error");
-                }
-
-            });
-        }        
-
-    });
-
+    // $('#btnsubmitthedonation').click(function(e) {
+    //     // alert();
+    // });
  
     function load_unseen_notification(view = '') {
         $.ajax({
@@ -778,6 +709,25 @@ $(document).ready(function(){
     setInterval(function(){ 
         load_unseen_notification();; 
     }, 1000);
- 
+
 });
+</script>
+
+<script>
+
+    function printonly() {
+
+        var restorepage = document.body.innerHTML;
+        var printcont = document.getElementById('printdisbook').innerHTML;
+        document.body.innerHTML = printcont;
+        window.print();
+        document.body.innerHTML = restorepage;
+
+            setTimeout(function() 
+            {
+                window.location = window.location;
+            }, 100);
+
+    }
+
 </script>
