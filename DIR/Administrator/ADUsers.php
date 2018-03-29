@@ -1,4 +1,4 @@
-<?php
+     <?php
 
     include('../Connection/db.php');
 
@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Asset Library</title>
+    <title>Users</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -114,8 +114,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>     
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -130,14 +129,14 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li class="sub-menu">
-                    <a href="javascript:;" class="active">
+                    <a href="javascript:;">
                         <i class="fa fa-wrench"></i>
                         <span>System Setup</span>
                     </a>
                     <ul class="sub">
                         <li><a href="ADCampus.php">Campus</a></li>
                         <li><a href="ADDepartment.php">Department</a></li>
-                        <li class="active"><a href="ADAssetType.php">Asset Library</a></li>
+                        <li><a href="ADAssetType.php">Asset Library</a></li>
                         <li><a href="ADRequestingPerson.php">Disposal Location</a></li>  
                     </ul>
                 </li>
@@ -164,12 +163,12 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:;" class="active">
                         <i class="fa fa-user"></i>
                         <span>User Management</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="ADUsers.php">Users</a></li>
+                        <li class="active"><a href="ADUsers.php">Users</a></li>
                         <li><a href="ADUserslog.php">User's Log</a></li>  
                     </ul>
                 </li>
@@ -188,8 +187,8 @@
                 <div class="col-md-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><a href="ADCampus.php"><i class="fa fa-wrench"></i> System Setup</a></li>
-                        <li><a href="ADCampus.php">Asset Library</a></li>
+                        <li><a href="ADCampus.php"><i class="fa fa-user"></i> User Management</a></li>
+                        <li><a href="ADCampus.php">Users</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -199,14 +198,14 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            List of Assets
+                            List of System Users
                         </header>
 
                         <div class="panel-body">
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus"></i></a>
+                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus"></i> Add </a>
                                 </div>
                             </div>
 
@@ -221,9 +220,11 @@
                                 <table  class="display table table-bordered table-striped tblCampusData" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">AssetLibrary ID</th>
-                                            <th style="width: 900px">Asset Name</th>
-                                            <th style="width: 70px">Action</th>  
+                                            <th style="display: none;">Employee ID</th>
+                                            <th style="width: 350px">Name</th>
+                                            <th style="width: 350px">Role</th>
+                                            <th style="width: 200px">Status</th>
+                                            <th style="width: 100px">Action</th>  
                                         </tr>
                                     </thead>
 
@@ -231,21 +232,25 @@
 
                                     <?php  
 
-                                        $sql = "SELECT * FROM ams_r_asset_library";
+                                        $sql = "SELECT * FROM ams_r_employee_profile";
 
                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                                         while($row = mysqli_fetch_assoc($result))
                                             {
-                                              $id = $row['AL_ID'];
-                                              $aname = $row['AL_NAME'];    
+                                                $id = $row['EP_ID'];
+                                                $fullname = $row['EP_FNAME'] . " " . $row['EP_MNAME'] . " " . $row['EP_LNAME'];
+                                                $epType = $row['EP_TYPE'];
+                                                $epStatus = $row['EP_STATUS'];
                                     ?>                                      
 
                                         <tr class="gradeX"">
                                             <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $aname; ?> </td>
+                                            <td> <?php echo $fullname; ?> </td>
+                                            <td> <?php echo $epType; ?> </td>
+                                            <td> <?php echo $epStatus; ?> </td>
                                             <td>
-                                                <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-pencil"></i></a>
+                                                <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-eye"></i> View</a>
                                             </td>
                                         </tr>
 
@@ -307,85 +312,85 @@
     <!--main content end-->
 <!--right sidebar start-->
 <div class="right-sidebar">
-    <div class="search-row">
-        <input type="text" placeholder="Search" class="form-control">
-    </div>
-    <div class="right-stat-bar">
-        <ul class="right-side-accordion">
-        <li class="widget-collapsible">
-            <ul class="widget-container">
-                <li>
-                    <div class="prog-row side-mini-stat clearfix">
-                        <div class="side-graph-info">
-                            <h4>Target sell</h4>
-                            <p>
-                                25%, Deadline 12 june 13
-                            </p>
-                        </div>
-                        <div class="side-mini-graph">
-                            <div class="target-sell">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="prog-row side-mini-stat">
-                        <div class="side-graph-info">
-                            <h4>product delivery</h4>
-                            <p>
-                                55%, Deadline 12 june 13
-                            </p>
-                        </div>
-                        <div class="side-mini-graph">
-                            <div class="p-delivery">
-                                <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="prog-row side-mini-stat">
-                        <div class="side-graph-info payment-info">
-                            <h4>payment collection</h4>
-                            <p>
-                                25%, Deadline 12 june 13
-                            </p>
-                        </div>
-                        <div class="side-mini-graph">
-                            <div class="p-collection">
-                                <span class="pc-epie-chart" data-percent="45">
-                                <span class="percent"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="prog-row side-mini-stat">
-                        <div class="side-graph-info">
-                            <h4>delivery pending</h4>
-                            <p>
-                                44%, Deadline 12 june 13
-                            </p>
-                        </div>
-                        <div class="side-mini-graph">
-                            <div class="d-pending">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="prog-row side-mini-stat">
-                        <div class="col-md-12">
-                            <h4>total progress</h4>
-                            <p>
-                                50%, Deadline 12 june 13
-                            </p>
-                            <div class="progress progress-xs mtop10">
-                                <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
-                                    <span class="sr-only">50% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </li>
-        </ul>
-    </div>
+	<div class="search-row">
+	    <input type="text" placeholder="Search" class="form-control">
+	</div>
+	<div class="right-stat-bar">
+		<ul class="right-side-accordion">
+		<li class="widget-collapsible">
+		    <ul class="widget-container">
+		        <li>
+		            <div class="prog-row side-mini-stat clearfix">
+		                <div class="side-graph-info">
+		                    <h4>Target sell</h4>
+		                    <p>
+		                        25%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="target-sell">
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="side-graph-info">
+		                    <h4>product delivery</h4>
+		                    <p>
+		                        55%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="p-delivery">
+		                        <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="side-graph-info payment-info">
+		                    <h4>payment collection</h4>
+		                    <p>
+		                        25%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="p-collection">
+								<span class="pc-epie-chart" data-percent="45">
+								<span class="percent"></span>
+								</span>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="side-graph-info">
+		                    <h4>delivery pending</h4>
+		                    <p>
+		                        44%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="d-pending">
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="col-md-12">
+		                    <h4>total progress</h4>
+		                    <p>
+		                        50%, Deadline 12 june 13
+		                    </p>
+		                    <div class="progress progress-xs mtop10">
+		                        <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
+		                            <span class="sr-only">50% Complete</span>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </li>
+		    </ul>
+		</li>
+		</ul>
+	</div>
 </div>
 <!--right sidebar end-->
 
@@ -403,9 +408,80 @@
             <div class="modal-body">
 
                 <form role="form" method="POST">
-                    <div class="form-group">
-                        <label><strong>Asset Name</strong></label>
-                        <input style="color: black;" onfocus="addcampuscodeOnClick()" onblur="addcampuscodeOnLeave()" type="text" class="form-control" id="addcampuscode"/>
+
+                    <div class="row-group">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="color: black;" placeholder="First Name" onfocus="addcampuscodeOnClick()" onblur="addcampuscodeOnLeave()" type="text" class="form-control" id="addcampuscode"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="color: black;" placeholder="Middle Initial" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="color: black;" placeholder="Last Name" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input style="color: black;" placeholder="Email Address" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <input style="color: black;" placeholder="Mobile No." onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class="form-control m-bot15" id="deptcampuscode" onfocus="deptcampuscodeOnClick()" onblur="deptcampuscodeOnLeave()" name="assignpassempid" style="color: #A09FA0; padding-left: 10px;">
+                                    <option hidden selected disabled>Gender</option>
+                                    <option disabled></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <select class="form-control m-bot15" id="deptcampuscode" onfocus="deptcampuscodeOnClick()" onblur="deptcampuscodeOnLeave()" name="assignpassempid" style="color: #A09FA0; padding-left: 10px;">
+
+                                    <option hidden selected disabled>Department</option>
+                                    <option disabled></option>
+
+                                    <?php  
+
+                                    $sqlforemployee = "SELECT O_NAME, O_ID FROM ams_r_office";
+
+                                    $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                                    while($row = mysqli_fetch_assoc($results))
+                                    {
+                                        $deptName = $row['O_NAME'];
+                                        $deptID = $row['O_ID'];
+
+                                    ?>
+
+                                    <option value= "<?php echo $deptID ?>"> <?php echo "$deptName"; ?> </option>
+
+                                    <?php 
+                                        } 
+                                    ?>
+
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
 
                 <div class="row">
@@ -426,37 +502,37 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
-    <script src="../../js/jquery.js"></script>
-    <script src="../../bs3/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="../../js/jquery.scrollTo.min.js"></script>
-    <script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-    <script src="../../js/jquery.nicescroll.js"></script>
-    <!--Easy Pie Chart-->
-    <script src="../../js/easypiechart/jquery.easypiechart.js"></script>
-    <!--Sparkline Chart-->
-    <script src="../../js/sparkline/jquery.sparkline.js"></script>
-    <!--jQuery Flot Chart-->
-    <script src="../../js/flot-chart/jquery.flot.js"></script>
-    <script src="../../js/flot-chart/jquery.flot.tooltip.min.js"></script>
-    <script src="../../js/flot-chart/jquery.flot.resize.js"></script>
-    <script src="../../js/flot-chart/jquery.flot.pie.resize.js"></script>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../bs3/js/bootstrap.min.js"></script>
+	<script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="../../js/jquery.scrollTo.min.js"></script>
+	<script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+	<script src="../../js/jquery.nicescroll.js"></script>
+	<!--Easy Pie Chart-->
+	<script src="../../js/easypiechart/jquery.easypiechart.js"></script>
+	<!--Sparkline Chart-->
+	<script src="../../js/sparkline/jquery.sparkline.js"></script>
+	<!--jQuery Flot Chart-->
+	<script src="../../js/flot-chart/jquery.flot.js"></script>
+	<script src="../../js/flot-chart/jquery.flot.tooltip.min.js"></script>
+	<script src="../../js/flot-chart/jquery.flot.resize.js"></script>
+	<script src="../../js/flot-chart/jquery.flot.pie.resize.js"></script>
 
-    <!--dynamic table-->
-    <script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
-    <!--common script init for all pages-->
-    <script src="../../js/scripts.js"></script>
+	<!--dynamic table-->
+	<script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
+	<!--common script init for all pages-->
+	<script src="../../js/scripts.js"></script>
 
-    <!--dynamic table initialization -->
-    <script src="../../js/dynamic_table_init.js"></script>
+	<!--dynamic table initialization -->
+	<script src="../../js/dynamic_table_init.js"></script>
 
-    <script src="../../js/iCheck/jquery.icheck.js"></script>
+	<script src="../../js/iCheck/jquery.icheck.js"></script>
 
-    <script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
 
-    <!--icheck init -->
-    <script src="../../js/icheck-init.js"></script>
+	<!--icheck init -->
+	<script src="../../js/icheck-init.js"></script>
 
     <script type="text/javascript" src="../../js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -478,15 +554,34 @@
         {
             if (document.getElementById('addcampuscode').value == "" || document.getElementById('addcampuscode').value == "Empty Fields are not allowed.") 
             {
-                document.getElementById('addcampuscode').value = "Empty Fields are not allowed."
+                document.getElementById('addcampuscode').value = "Empty Fields are not allowed.";
                 document.getElementById('addcampuscode').style.color = "red";
                 document.getElementById('addcampuscode').style.backgroundColor = "#ffffcc";
                 document.getElementById('addcampuscode').style.borderColor = "red";
             }
 
-            if (document.getElementById('addcampuscode').value != "" && document.getElementById('addcampuscode').value != "Empty Fields are not allowed.") 
+            if (document.getElementById('addcampusname').value == "" || document.getElementById('addcampusname').value == "Empty Fields are not allowed.") 
             {
-                var assetname = document.getElementById('addcampuscode').value;
+                document.getElementById('addcampusname').value = "Empty Fields are not allowed.";
+                document.getElementById('addcampusname').style.color = "red";
+                document.getElementById('addcampusname').style.backgroundColor = "#ffffcc";
+                document.getElementById('addcampusname').style.borderColor = "red";
+            }
+
+            if (document.getElementById('deptcampuscode').value == "" || document.getElementById('deptcampuscode').value == "Empty Fields are not allowed.") 
+            {
+                document.getElementById('firstOption').innerHTML = "Empty Fields are not allowed.";
+                document.getElementById('deptcampuscode').style.color = "red";
+                document.getElementById('deptcampuscode').style.backgroundColor = "#ffffcc";
+                document.getElementById('deptcampuscode').style.borderColor = "red";
+            }
+
+            if (document.getElementById('addcampuscode').value != "" && document.getElementById('addcampuscode').value != "Empty Fields are not allowed." && document.getElementById('addcampusname').value != "" && document.getElementById('addcampusname').value != "Empty Fields are not allowed." && document.getElementById('deptcampuscode').selectedIndex != "0") 
+            {
+
+                var deptcode = document.getElementById('addcampuscode').value;
+                var deptname = document.getElementById('addcampusname').value;
+                var campuscode = document.getElementById('deptcampuscode').value;
 
                 swal(
                 {
@@ -508,10 +603,12 @@
                             $.ajax(
                             {
                                 type: 'POST',
-                                url : 'insertassetlibrary.php',
+                                url : 'insertdepartment.php',
                                 data: 
                                 {
-                                    _assetname: assetname,
+                                    _deptcode: deptcode,
+                                    _deptname: deptname,
+                                    _campuscode: campuscode
 
                                 },
                                 
@@ -550,7 +647,7 @@
 
                                 error: function(response)
                                 {
-                                    alert(request.resposeText);
+                                    alert(request.responseText);
                                 }
                             }           
                             );
@@ -727,12 +824,23 @@
 
         function addcampuscodeOnClick()
         {
-            if (document.getElementById('addcampuscode').value == "Empty Fields are not allowed.")
+            if (document.getElementById('addcampuscode').value == "Empty Fields are not allowed." || document.getElementById('addcampuscode').value == "")
             {
                 document.getElementById('addcampuscode').value = "";
                 document.getElementById('addcampuscode').style.color = "black";
                 document.getElementById('addcampuscode').style.backgroundColor = "white";
                 document.getElementById('addcampuscode').style.borderColor = "#00A8B3";
+            }
+        }
+
+        function deptcampuscodeOnClick()
+        {
+            if (document.getElementById('deptcampuscode').selectedIndex == "0")
+            {
+                document.getElementById('firstOption').innerHTML = "";
+                document.getElementById('deptcampuscode').style.color = "black";
+                document.getElementById('deptcampuscode').style.backgroundColor = "white";
+                document.getElementById('deptcampuscode').style.borderColor = "#00A8B3";
             }
         }
 
@@ -765,7 +873,7 @@
 
         function addcampusnameOnClick()
         {
-            if (document.getElementById('addcampusname').value == "Empty Fields are not allowed.")
+            if (document.getElementById('addcampusname').value == "Empty Fields are not allowed." || document.getElementById('addcampusname').value == "")
             {
                 document.getElementById('addcampusname').value = "";
                 document.getElementById('addcampusname').style.color = "black";
@@ -809,6 +917,11 @@
         function addcampusnameOnLeave()
         {
             document.getElementById('addcampusname').style.borderColor = "#E2E2E4";
+        }
+
+        function deptcampuscodeOnLeave()
+        {
+            document.getElementById('deptcampuscode').style.borderColor = "#E2E2E4";
         }
 
         function updatecampuscodeOnLeave()
