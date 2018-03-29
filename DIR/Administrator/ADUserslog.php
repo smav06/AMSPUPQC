@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Campus</title>
+    <title>User's Log</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -130,12 +130,12 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li class="sub-menu">
-                    <a href="javascript:;" class="active">
+                    <a href="javascript:;">
                         <i class="fa fa-wrench"></i>
                         <span>System Setup</span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a href="ADCampus.php">Campus</a></li>
+                        <li><a href="ADCampus.php">Campus</a></li>
                         <li><a href="ADDepartment.php">Department</a></li>
                         <li><a href="ADAssetType.php">Asset Library</a></li>
                         <li><a href="ADRequestingPerson.php">Disposal Location</a></li>  
@@ -164,13 +164,13 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:;" class="active">
                         <i class="fa fa-user"></i>
                         <span>User Management</span>
                     </a>
                     <ul class="sub">
                         <li><a href="ADUsers.php">Users</a></li>
-                        <li><a href="ADUserslog.php">User's Log</a></li>  
+                        <li class="active"><a href="ADUsers.php">User's Log</a></li>  
                     </ul>
                 </li>
             </ul>            
@@ -188,8 +188,8 @@
                 <div class="col-md-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><i class="fa fa-wrench"></i> &nbsp;System Setup</li>
-                        <li>Campus</li>
+                        <li><a href="ADCampus.php"><i class="fa fa-list"></i>&nbsp;Queries</a></li>
+                        <li><a href="ADCampus.php">Asset</li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -199,32 +199,19 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            List of Campus
+                            User's Log
                         </header>
 
                         <div class="panel-body">
-                            
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus" style="font-color"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div style="padding: 1px; margin-bottom: 10px; margin-top: 10px; background-color: #E0E1E7;">                                                             
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped tblCampusData" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">Campus ID</th>
-                                            <th style="width: 200px">Campus Code</th>
-                                            <th style="width: 550px">Campus Name</th>
-                                            <th style="width: 70px">Action</th>  
+                                            <th style="width: 250px">Username</th>
+                                            <th style="width: 250px">Role Code</th>
+                                            <th style="width: 250px">Type</th>
+                                            <th style="width: 250px">Date and time</th>   
                                         </tr>
                                     </thead>
 
@@ -232,24 +219,23 @@
 
                                     <?php  
 
-                                        $sql = "SELECT * FROM ams_r_campus";
+                                        $sql = "SELECT ams_r_users_log.UL_LOGGED_DATE, ams_r_users_log.UL_LOGGED_TYPE, ams_r_user.U_USERNAME, ams_r_user.U_ROLE_CODE FROM ams_r_users_log JOIN ams_r_user ON ams_r_users_log.EP_ID = ams_r_user.EP_ID";
 
                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                                         while($row = mysqli_fetch_assoc($result))
                                             {
-                                              $id = $row['C_ID'];
-                                              $code = $row['C_CODE'];
-                                              $name = $row['C_NAME'];    
+                                              $uname = $row['U_USERNAME'];
+                                              $role = $row['U_ROLE_CODE'];
+                                              $type = $row['UL_LOGGED_TYPE'];
+                                              $dt = $row['UL_LOGGED_DATE'];
                                     ?>                                      
 
                                         <tr class="gradeX"">
-                                            <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $code; ?> </td>
-                                            <td> <?php echo $name; ?> </td>
-                                            <td>
-                                                <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-pencil"></i></a>
-                                            </td>
+                                            <td> <?php echo $uname; ?> </td>
+                                            <td> <?php echo $role; ?> </td>
+                                            <td> <?php echo $type; ?> </td>
+                                            <td> <?php echo $dt; ?> </td>
                                         </tr>
 
                                         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModalUpdate<?php echo $id ?>" class="modal fade">
@@ -266,14 +252,14 @@
                                                         <form role="form" method="POST">
                                                             <div class="form-group">
                                                                 <label>Campus Code</label>
-                                                                <input type="hidden" id="inputId<?php echo $id ?>" name="id" value="<?php echo $id ?>">
+                                                                <input type="hidden" id="id<?php echo $id ?>" name="id" value="<?php echo $id ?>">
 
-                                                                <input style="color: black;" type="text" onfocus="inputCcodeOnClick(<?php echo $id ?>)" onblur="inputCcodeOnLeave(<?php echo $id ?>)" class="form-control" id="inputCcode<?php echo $id ?>" value="<?php echo $code; ?>"/>
+                                                                <input style="color: black;" type="text" onfocus="updatecampuscodeOnClick()" onblur="updatecampuscodeOnLeave()" class="form-control" id="updatecampuscode<?php echo $id ?>" value="<?php echo $code; ?>"/>
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label>Campus Name</label>
-                                                                <input style="color: black;" type="text" onfocus="inputCnameOnClick(<?php echo $id ?>)" onblur="inputCnameOnLeave(<?php echo $id ?>)" class="form-control" id="inputCname<?php echo $id ?>" value="<?php echo $name ?>"/>
+                                                                <input style="color: black;" type="text" onfocus="updatecampusnameOnClick()" onblur="updatecampusnameOnLeave()" class="form-control" id="updatecampusname<?php echo $id ?>" value="<?php echo $name ?>"/>
                                                             </div>
 
                                                             <div class="row">
@@ -282,8 +268,8 @@
                                                                 </div>
                                                             </div>
             
-                                                            <button class="btn btn-success" onclick="btnSubmitForUpOnClick(<?php echo $id ?>)" id="btnSubmitForUp" style="margin-left: 380px; margin-bottom: -10px" type="button">Save Changes</button>
-                                                            <button data-dismiss="modal" class="btn btn-default" onclick="onClose()" style="float: right;" type="button">Close</button>
+                                                            <button class="btn btn-success" name="updatecampus" onclick="updateFormValidation(); doTransaction()" id="btn-save-update" style="margin-left: 380px; margin-bottom: -10px" type="button">Save Changes</button>
+                                                            <button data-dismiss="modal" class="btn btn-default" onclick="onClose()" name="refreshpageeditcampus" style="float: right;" type="button">Close</button>
 
                                                         </form>
                                                     </div>
@@ -475,305 +461,6 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
 
-    <script type="text/javascript">
-        
-        function onClose()
-        {
-            // window.location = window.location;
-        }
-
-        
-
-        function formValidation()
-        {
-            if (document.getElementById('addcampuscode').value == "" || document.getElementById('addcampuscode').value == "Empty Fields are not allowed.") 
-            {
-                document.getElementById('addcampuscode').value = "Empty Fields are not allowed."
-                document.getElementById('addcampuscode').style.color = "red";
-                document.getElementById('addcampuscode').style.backgroundColor = "#ffffcc";
-                document.getElementById('addcampuscode').style.borderColor = "red";
-            }
-
-            if (document.getElementById('addcampusname').value == "" || document.getElementById('addcampusname').value == "Empty Fields are not allowed.") 
-            {
-                document.getElementById('addcampusname').value = "Empty Fields are not allowed."
-                document.getElementById('addcampusname').style.color = "red";
-                document.getElementById('addcampusname').style.backgroundColor = "#ffffcc";
-                document.getElementById('addcampusname').style.borderColor = "red";
-            }
-
-            if (document.getElementById('addcampuscode').value != "" && document.getElementById('addcampuscode').value != "Empty Fields are not allowed." && document.getElementById('addcampusname').value != "" && document.getElementById('addcampusname').value != "Empty Fields are not allowed.") 
-            {
-                var campuscode = document.getElementById('addcampuscode').value;
-                var campusname = document.getElementById('addcampusname').value;
-
-                swal(
-                {
-                    title: "Warning!",
-                    text: "This transaction can't be undone. Are you sure you want to do it?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#43A047',
-                    confirmButtonText: 'YES',
-                    cancelButtonText: "NO",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-
-                    function(isConfirm)
-                    {
-                        if (isConfirm) 
-                        {
-                            $.ajax(
-                            {
-                                type: 'POST',
-                                url : 'insertcampus.php',
-                                data: 
-                                {
-                                    _campuscode: campuscode,
-                                    _campusname: campusname
-
-                                },
-                                
-                                success: function(data)
-                                {
-
-                                    swal(
-                                    {
-                                        title: 'Successful!',
-                                        text: 'The campus is inserted successfully.',
-                                        type: 'success',
-                                        confirmButtonColor: '#43A047',
-                                        confirmButtonText: 'OK',
-                                        closeOnConfirm: false
-                                    },
-
-                                        function(isConfirm)
-                                        {
-                                            if (isConfirm) 
-                                            {
-                                                window.location=window.location; 
-                                            }
-                                        }
-                                    
-                                    );
-              
-                                    setTimeout(
-                                    function() 
-                                    {
-                                        window.location = window.location;
-                                    },
-                                    5000
-                                    );
-
-                                },
-
-                                error: function(response)
-                                {
-                                    alert(request.resposeText);
-                                }
-                            }           
-                            );
-                        }
-
-                        else 
-                        {
-                            swal(
-                            {
-                                title: 'Cancelled!',
-                                text: 'You have cancelled the transaction.',
-                                type: 'error',
-                                confirmButtonColor: '#43A047',
-                                confirmButtonText: 'OK',
-                                closeOnConfirm: true
-                            }  
-                            );
-                                        
-                        }//endelse{}
-                    }
-                );//endswal()
-            }//endif{}            
-        }//endfunc()
-
-        function btnSubmitForUpOnClick(modId)
-        {
-            if (document.getElementById('inputCcode' + modId).value == "" || document.getElementById('inputCcode' + modId).value == "Empty Fields are not allowed.") 
-            {
-                document.getElementById('inputCcode' + modId).value = "Empty Fields are not allowed."
-                document.getElementById('inputCcode' + modId).style.color = "red";
-                document.getElementById('inputCcode' + modId).style.backgroundColor = "#ffffcc";
-                document.getElementById('inputCcode' + modId).style.borderColor = "red";
-            }
-
-            if (document.getElementById('inputCname' + modId).value == "" || document.getElementById('inputCname' + modId).value == "Empty Fields are not allowed.") 
-            {
-                document.getElementById('inputCname' + modId).value = "Empty Fields are not allowed."
-                document.getElementById('inputCname' + modId).style.color = "red";
-                document.getElementById('inputCname' + modId).style.backgroundColor = "#ffffcc";
-                document.getElementById('inputCname' + modId).style.borderColor = "red";
-            }
-
-            if (document.getElementById('inputCcode' + modId).value != "Empty Fields are not allowed." && document.getElementById('inputCname' + modId).value != "Empty Fields are not allowed.") 
-            {
-                var campuscode = document.getElementById('inputCcode' + modId).value;
-                var campusname = document.getElementById('inputCname' + modId).value;
-                var id = document.getElementById('inputId' + modId).value;
-
-                swal(
-                {
-                    title: "Warning!",
-                    text: "This transaction can't be undone. Are you sure you want to do it?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#43A047',
-                    confirmButtonText: 'YES',
-                    cancelButtonText: "NO",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-
-                    function(isConfirm)
-                    {
-                        if (isConfirm) 
-                        {
-                            $.ajax(
-                            {
-                                type: 'POST',
-                                url : 'updatecampus.php',
-                                data: 
-                                {
-                                    _campuscode: campuscode,
-                                    _campusname: campusname,
-                                    _id: id
-
-                                },
-                                        
-                                success: function(data)
-                                {
-
-                                    swal(
-                                    {
-                                        title: 'Successful!',
-                                        text: 'The campus is updated successfully.',
-                                        type: 'success',
-                                        confirmButtonColor: '#43A047',
-                                        confirmButtonText: 'OK',
-                                        closeOnConfirm: false
-                                    },
-
-                                        function(isConfirm)
-                                        {
-                                            if (isConfirm) 
-                                            {
-                                                window.location=window.location; 
-                                            }
-                                        }
-                                            
-                                    );
-                      
-                                    setTimeout(
-                                    function() 
-                                    {
-                                        window.location = window.location;
-                                    },
-                                    5000
-                                    );
-
-                                },
-
-                                error: function(response)
-                                {
-                                    alert(request.resposeText);
-                                }
-                            }           
-                            );
-                        }
-
-                        else 
-                        {
-                            swal(
-                            {
-                                title: 'Cancelled!',
-                                text: 'You have cancelled the transaction.',
-                                type: 'error',
-                                confirmButtonColor: '#43A047',
-                                confirmButtonText: 'OK',
-                                closeOnConfirm: true
-                            }
-                            );
-                                                
-                        }//endelse{}
-                    }//endfunc(isconfirm)
-                );//endswal()
-            }//endif{}
-        }//endfunc{}
-
-        function addcampuscodeOnClick()
-        {
-            if (document.getElementById('addcampuscode').value == "Empty Fields are not allowed.")
-            {
-                document.getElementById('addcampuscode').value = "";
-                document.getElementById('addcampuscode').style.color = "black";
-                document.getElementById('addcampuscode').style.backgroundColor = "white";
-                document.getElementById('addcampuscode').style.borderColor = "#00A8B3";
-            }
-        }
-
-        function addcampusnameOnClick()
-        {
-            if (document.getElementById('addcampusname').value == "Empty Fields are not allowed.")
-            {
-                document.getElementById('addcampusname').value = "";
-                document.getElementById('addcampusname').style.color = "black";
-                document.getElementById('addcampusname').style.backgroundColor = "white";
-                document.getElementById('addcampusname').style.borderColor = "#00A8B3";
-            }
-        }
-
-        function inputCcodeOnClick(modId)
-        {
-            if (document.getElementById('inputCcode' + modId).value == "Empty Fields are not allowed.")
-            {
-                document.getElementById('inputCcode' + modId).value = "";
-                document.getElementById('inputCcode' + modId).style.color = "black";
-                document.getElementById('inputCcode' + modId).style.backgroundColor = "white";
-                document.getElementById('inputCcode' + modId).style.borderColor = "#00A8B3";
-            }
-        }
-
-        function inputCnameOnClick(modId)
-        {
-            if (document.getElementById('inputCname' + modId).value == "Empty Fields are not allowed.")
-            {
-                document.getElementById('inputCname' + modId).value = "";
-                document.getElementById('inputCname' + modId).style.color = "black";
-                document.getElementById('inputCname' + modId).style.backgroundColor = "white";
-                document.getElementById('inputCname' + modId).style.borderColor = "#00A8B3";
-            }
-        }
-
-        function addcampuscodeOnLeave()
-        {
-            document.getElementById('addcampuscode').style.borderColor = "#E2E2E4";
-        }
-
-        function addcampusnameOnLeave()
-        {
-            document.getElementById('addcampusname').style.borderColor = "#E2E2E4";
-        }
-
-        function inputCcodeOnLeave(modId)
-        {
-            document.getElementById('inputCcode' + modId).style.borderColor = "#E2E2E4";
-        }
-
-        function inputCnameOnLeave(modId)
-        {
-            document.getElementById('inputCname' + modId).style.borderColor = "#E2E2E4";
-        }
-
-
-    </script>   
 
 </body>
 </html>

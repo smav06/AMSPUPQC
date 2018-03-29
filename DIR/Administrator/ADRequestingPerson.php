@@ -88,50 +88,6 @@
 </div>
 <!--logo end-->
 
-<div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- notification dropdown start-->
-        <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
-            </a>
-            <ul class="dropdown-menu extended notification">
-                <li>
-                    <p>Notifications</p>
-                </li>
-                <li>
-                    <div class="alert alert-info clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #1 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-danger clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #2 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-success clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #3 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-        </li>
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
-</div>
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
@@ -203,12 +159,8 @@
                         <li><a href="ADQueryAsset.php">Asset</a></li>
                         <li><a href="ADRequest.php">Request</a></li>
                         <li><a href="ADPar.php">Purchase Accountability Receipt</a></li>
-                        <li><a href="ADPr.php">Purchase Request</a></li>
-                        <li><a href="ADPo.php">Purchase Order</a></li>
                         <li><a href="ADPtr.php">Property Transfer Report</a></li>
-                        <li><a href="ADJobOrder.php">Job Order</a></li> 
                         <li><a href="ADDispose.php">Disposed Asset</a></li>
-                        <li><a href="ADTransferredOut.php">Transferred Out Asset</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -218,7 +170,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="ADUsers.php">Users</a></li>
-                        <li><a href="ADUsers.php">User's Log</a></li>  
+                        <li><a href="ADUserslog.php">User's Log</a></li>  
                     </ul>
                 </li>
             </ul>            
@@ -254,7 +206,7 @@
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus"></i> Add Disposal Location</a>
+                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus"></i> Add </a>
                                 </div>
                             </div>
 
@@ -355,85 +307,85 @@
     <!--main content end-->
 <!--right sidebar start-->
 <div class="right-sidebar">
-	<div class="search-row">
-	    <input type="text" placeholder="Search" class="form-control">
-	</div>
-	<div class="right-stat-bar">
-		<ul class="right-side-accordion">
-		<li class="widget-collapsible">
-		    <ul class="widget-container">
-		        <li>
-		            <div class="prog-row side-mini-stat clearfix">
-		                <div class="side-graph-info">
-		                    <h4>Target sell</h4>
-		                    <p>
-		                        25%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="target-sell">
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="side-graph-info">
-		                    <h4>product delivery</h4>
-		                    <p>
-		                        55%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="p-delivery">
-		                        <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="side-graph-info payment-info">
-		                    <h4>payment collection</h4>
-		                    <p>
-		                        25%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="p-collection">
-								<span class="pc-epie-chart" data-percent="45">
-								<span class="percent"></span>
-								</span>
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="side-graph-info">
-		                    <h4>delivery pending</h4>
-		                    <p>
-		                        44%, Deadline 12 june 13
-		                    </p>
-		                </div>
-		                <div class="side-mini-graph">
-		                    <div class="d-pending">
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="prog-row side-mini-stat">
-		                <div class="col-md-12">
-		                    <h4>total progress</h4>
-		                    <p>
-		                        50%, Deadline 12 june 13
-		                    </p>
-		                    <div class="progress progress-xs mtop10">
-		                        <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
-		                            <span class="sr-only">50% Complete</span>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		        </li>
-		    </ul>
-		</li>
-		</ul>
-	</div>
+    <div class="search-row">
+        <input type="text" placeholder="Search" class="form-control">
+    </div>
+    <div class="right-stat-bar">
+        <ul class="right-side-accordion">
+        <li class="widget-collapsible">
+            <ul class="widget-container">
+                <li>
+                    <div class="prog-row side-mini-stat clearfix">
+                        <div class="side-graph-info">
+                            <h4>Target sell</h4>
+                            <p>
+                                25%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="target-sell">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="side-graph-info">
+                            <h4>product delivery</h4>
+                            <p>
+                                55%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="p-delivery">
+                                <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="side-graph-info payment-info">
+                            <h4>payment collection</h4>
+                            <p>
+                                25%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="p-collection">
+                                <span class="pc-epie-chart" data-percent="45">
+                                <span class="percent"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="side-graph-info">
+                            <h4>delivery pending</h4>
+                            <p>
+                                44%, Deadline 12 june 13
+                            </p>
+                        </div>
+                        <div class="side-mini-graph">
+                            <div class="d-pending">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prog-row side-mini-stat">
+                        <div class="col-md-12">
+                            <h4>total progress</h4>
+                            <p>
+                                50%, Deadline 12 june 13
+                            </p>
+                            <div class="progress progress-xs mtop10">
+                                <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
+                                    <span class="sr-only">50% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        </ul>
+    </div>
 </div>
 <!--right sidebar end-->
 
@@ -452,13 +404,8 @@
 
                 <form role="form" method="POST">
                     <div class="form-group">
-                        <label><strong>Campus Code</strong></label>
+                        <label><strong>Disposal Location</strong></label>
                         <input style="color: black;" onfocus="addcampuscodeOnClick()" onblur="addcampuscodeOnLeave()" type="text" class="form-control" id="addcampuscode"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label><strong>Campus Name</strong></label>
-                        <input style="color: black;" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
                     </div>
 
                 <div class="row">
@@ -479,37 +426,37 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
-	<script src="../../js/jquery.js"></script>
-	<script src="../../bs3/js/bootstrap.min.js"></script>
-	<script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="../../js/jquery.scrollTo.min.js"></script>
-	<script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-	<script src="../../js/jquery.nicescroll.js"></script>
-	<!--Easy Pie Chart-->
-	<script src="../../js/easypiechart/jquery.easypiechart.js"></script>
-	<!--Sparkline Chart-->
-	<script src="../../js/sparkline/jquery.sparkline.js"></script>
-	<!--jQuery Flot Chart-->
-	<script src="../../js/flot-chart/jquery.flot.js"></script>
-	<script src="../../js/flot-chart/jquery.flot.tooltip.min.js"></script>
-	<script src="../../js/flot-chart/jquery.flot.resize.js"></script>
-	<script src="../../js/flot-chart/jquery.flot.pie.resize.js"></script>
+    <script src="../../js/jquery.js"></script>
+    <script src="../../bs3/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="../../js/jquery.scrollTo.min.js"></script>
+    <script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="../../js/jquery.nicescroll.js"></script>
+    <!--Easy Pie Chart-->
+    <script src="../../js/easypiechart/jquery.easypiechart.js"></script>
+    <!--Sparkline Chart-->
+    <script src="../../js/sparkline/jquery.sparkline.js"></script>
+    <!--jQuery Flot Chart-->
+    <script src="../../js/flot-chart/jquery.flot.js"></script>
+    <script src="../../js/flot-chart/jquery.flot.tooltip.min.js"></script>
+    <script src="../../js/flot-chart/jquery.flot.resize.js"></script>
+    <script src="../../js/flot-chart/jquery.flot.pie.resize.js"></script>
 
-	<!--dynamic table-->
-	<script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
-	<!--common script init for all pages-->
-	<script src="../../js/scripts.js"></script>
+    <!--dynamic table-->
+    <script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
+    <!--common script init for all pages-->
+    <script src="../../js/scripts.js"></script>
 
-	<!--dynamic table initialization -->
-	<script src="../../js/dynamic_table_init.js"></script>
+    <!--dynamic table initialization -->
+    <script src="../../js/dynamic_table_init.js"></script>
 
-	<script src="../../js/iCheck/jquery.icheck.js"></script>
+    <script src="../../js/iCheck/jquery.icheck.js"></script>
 
-	<script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
 
-	<!--icheck init -->
-	<script src="../../js/icheck-init.js"></script>
+    <!--icheck init -->
+    <script src="../../js/icheck-init.js"></script>
 
     <script type="text/javascript" src="../../js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -537,18 +484,9 @@
                 document.getElementById('addcampuscode').style.borderColor = "red";
             }
 
-            if (document.getElementById('addcampusname').value == "" || document.getElementById('addcampusname').value == "Empty Fields are not allowed.") 
+            if (document.getElementById('addcampuscode').value != "" && document.getElementById('addcampuscode').value != "Empty Fields are not allowed.") 
             {
-                document.getElementById('addcampusname').value = "Empty Fields are not allowed."
-                document.getElementById('addcampusname').style.color = "red";
-                document.getElementById('addcampusname').style.backgroundColor = "#ffffcc";
-                document.getElementById('addcampusname').style.borderColor = "red";
-            }
-
-            if (document.getElementById('addcampuscode').value != "" && document.getElementById('addcampuscode').value != "Empty Fields are not allowed." && document.getElementById('addcampusname').value != "" && document.getElementById('addcampusname').value != "Empty Fields are not allowed.") 
-            {
-                var campuscode = document.getElementById('addcampuscode').value;
-                var campusname = document.getElementById('addcampusname').value;
+                var dlocation = document.getElementById('addcampuscode').value;
 
                 swal(
                 {
@@ -570,11 +508,10 @@
                             $.ajax(
                             {
                                 type: 'POST',
-                                url : 'insertcampus.php',
+                                url : 'insertdisposallocation.php',
                                 data: 
                                 {
-                                    _campuscode: campuscode,
-                                    _campusname: campusname
+                                    _dlocation: dlocation
 
                                 },
                                 
