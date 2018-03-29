@@ -70,7 +70,8 @@ var EditableTable = function () {
                         'bSortable': false,
                         'aTargets': [0]
                     }
-                ]
+                ],
+                "aaSorting": [[ 5, "asc" ]]
             });
 
             var oTable2 = $('#proftable').dataTable({
@@ -163,7 +164,8 @@ var initproftable = function () {
                         'bSortable': false,
                         'aTargets': [0]
                     }
-                ]
+                ],
+                "aaSorting": [[ 5, "asc" ]]
             });
 
 

@@ -479,7 +479,7 @@
         
         function onClose()
         {
-            window.location = window.location;
+            // window.location = window.location;
         }
 
         

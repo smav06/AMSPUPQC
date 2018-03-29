@@ -65,8 +65,56 @@
                             <i class="fa fa-bell-o"></i>
                             <span class="badge bg-warning count"></span>
                         </a>
-                        <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 375px;">
+                        
+                        <?php 
+
+                            $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
+
+                            while($rowx = mysqli_fetch_assoc($sqlcntx))
+                            {
+                                $cnt = $rowx['XXX'];
+                                echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
+                            }
+
+                            if ($cnt == 0) 
+                            {
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="height: 70px;">
                         </ul>
+
+                        <?php
+                            }
+                            elseif ($cnt == 1) 
+                            {
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="height: 110px;">
+                        </ul>
+
+                        <?php
+                            }
+                            elseif ($cnt == 2) 
+                            {
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="height: 220px;">
+                        </ul>
+
+                        <?php
+                                
+                            }
+                            elseif ($cnt >= 3) 
+                            {                
+                        ?>
+
+                        <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                        </ul>
+
+                        <?php 
+                            }
+                        ?>
+
                     </li>
                     <!-- notification dropdown end -->
                 </ul>
@@ -232,6 +280,7 @@
                                                     <th style="width: 140px;">Acquisition Type</th>
                                                     <th style="width: 100px;">Status</th>
                                                     <th style="word-wrap: break-word;">Description</th>
+                                                    <th class="hidden">available</th>
                                                     <th style="width: 130px;">Date Acquired</th>
                                                 </tr>
                                             </thead>
@@ -281,6 +330,7 @@
                                                             <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $a_availability; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
+                                                        <td class="hidden">1</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -308,6 +358,7 @@
                                                             <p class="label label-primary label-mini" style="font-size: 11px;"> <?php echo $a_availability; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
+                                                        <td class="hidden">2</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -335,6 +386,7 @@
                                                             <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
+                                                        <td class="hidden">4</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -362,6 +414,7 @@
                                                             <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
+                                                        <td class="hidden">3</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -389,6 +442,7 @@
                                                             <p class="label label-default label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
+                                                        <td class="hidden">6</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -416,6 +470,7 @@
                                                             <p class="label label-info label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
+                                                        <td class="hidden">5</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -614,7 +669,7 @@
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!--Core js-->
-    <script src="../../js/jquery-1.8.3.min.js"></script>
+    <script src="../../js/jquery.js"></script>
     <script src="../../bs3/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="../../js/jquery.scrollTo.min.js"></script>
@@ -735,6 +790,41 @@
 
     <!-- END JAVASCRIPTS -->
     <script type="text/javascript" src="../../js/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            function load_unseen_notification(view = '') {
+                $.ajax({
+                    url: "fetch.php",
+                    method: "POST",
+                    data: {
+                        view: view
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $('.dispnotif').html(data.notification);
+                        if (data.unseen_notification > 0) {
+                            $('.count').html(data.unseen_notification);
+                        }
+                    }
+                });
+            }
+
+            load_unseen_notification();
+
+            $(document).on('click', '.dropdown-toggle', function() {
+                $('.count').html('');
+                load_unseen_notification('yes');
+            });
+
+            setInterval(function() {
+                load_unseen_notification();;
+            }, 1000);
+
+        });
+
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -862,41 +952,6 @@
         });
 
     </script>
-
-    <!-- <script>
-        $(document).ready(function() {
-
-            function load_unseen_notification(view = '') {
-                $.ajax({
-                    url: "fetch.php",
-                    method: "POST",
-                    data: {
-                        view: view
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $('.dispnotif').html(data.notification);
-                        if (data.unseen_notification > 0) {
-                            $('.count').html(data.unseen_notification);
-                        }
-                    }
-                });
-            }
-
-            load_unseen_notification();
-
-            $(document).on('click', '.dropdown-toggle', function() {
-                $('.count').html('');
-                load_unseen_notification('yes');
-            });
-
-            setInterval(function() {
-                load_unseen_notification();;
-            }, 1000);
-
-        });
-
-    </script> -->
 
 </body>
 

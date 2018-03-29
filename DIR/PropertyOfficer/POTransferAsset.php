@@ -523,7 +523,7 @@
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!--Core js-->
-    <script src="../../js/jquery-1.8.3.min.js"></script>
+    <script src="../../js/jquery.js"></script>
     <script src="../../bs3/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="../../js/jquery.scrollTo.min.js"></script>
@@ -799,7 +799,7 @@
 
     </script>
 
-    <!-- <script>
+    <script>
         $(document).ready(function() {
 
             function load_unseen_notification(view = '') {
@@ -832,7 +832,7 @@
 
         });
 
-    </script> -->
+    </script>
 
 </body>
 
