@@ -527,7 +527,7 @@
         
         function onClose()
         {
-            window.location = window.location;
+            // window.location = window.location;
         }
 
         function formValidation()
