@@ -217,8 +217,8 @@
                     </a>
                     <ul class="sub">
                         <li class="active"><a href="PODURequests.php">Departmental User Requests</a></li>
-                        <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                        <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+                        <li><a href="PORequestToMain.php">Request From Main</a></li>            
+                        <li><a href="POPPMP.php">PPMP</a></li>  
                     </ul>
                 </li>
                 <li>
@@ -239,7 +239,7 @@
                         <span>Maintenance</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                        <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                         <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
                     </ul>
                 </li>
@@ -255,10 +255,10 @@
                         <span>Reports</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                        <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
-                        <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
-                        <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                        <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                        <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                        <li><a href="POPtr.php">Property Transfer Report</a></li>  
                         <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
                     </ul>
                 </li>
@@ -783,6 +783,8 @@ $(document).ready(function(){
         var filltable = '';
         var filltablex = '';
 
+        var noofchecked = 0;
+
         for (var z = getthecnt; z > 0; z--) {
 
             var ck = 'chkvalsz' + z;
@@ -792,9 +794,10 @@ $(document).ready(function(){
                 var unitz = document.getElementById('origunit' + z).innerText;
                 var qtyz = document.getElementById('origqty' + z).innerText;
                 filltable = filltable + '<tr><td class="">' + idz + '</td><td>' + reqz + '</td><td>' + unitz + '</td><td>' + qtyz + '</td></tr>';
+                noofchecked = noofchecked + 1;
             }
             document.getElementById('newmodalget').innerHTML = filltable;
-        }
+        }        
 
         for (var x = getthecnt; x > 0; x--) {
 
@@ -805,99 +808,12 @@ $(document).ready(function(){
                 var unitx = document.getElementById('origunit' + x).innerText;
                 var qtyx = document.getElementById('origqty' + x).innerText;
                 filltablex = filltablex + '<tr><td class="">' + idx + '</td><td>' + reqx + '</td><td>' + unitx + '</td><td>' + qtyx + '</td></tr>';
+
             }
             document.getElementById('newmodalget2').innerHTML = filltablex;
         }
 
-    });
-
-    allNextBtn = $('.ckthis');
-
-    allNextBtn.click(function() {
-        if (this.checked) 
-        {
-            // ebriwer
-            // alert('nachecked!');
-            // alert(this.id);
-            var e = this.id;
-            // alert(e);
-            var f = 'chkvalsz' + e.substring(7);
-            document.getElementById(f).checked = true;
-            // document.getElementById('chkvalsz' + this.id).disabled = false;
-            document.getElementById("chatinput" + e.substring(7)).disabled = false;            
-        } 
-        else 
-        {
-            // alert('dili!');
-            // alert(this.id);
-            var e = this.id;
-            // alert(e);
-            var f = 'chkvalsz' + e.substring(7);
-            document.getElementById(f).checked = false;
-            // document.getElementById('chkvalsz' + this.id).disabled = true;
-            document.getElementById("chatinput" + e.substring(7)).disabled = true;
-            // document.getElementById("chatinput" + this.id).value = "";
-        }
-    });
-
-    $('#getsel').click(function(e) {
-        document.getElementById('getsel').options[0].innerText = "";
-        document.getElementById('getsel').style.borderColor = "#00A8B3";
-        document.getElementById('getsel').style.color = "black";
-    });
-
-    $('#getsel').change(function(e) {
-
-        var e = document.getElementById('getsel');
-
-        if (document.getElementById('getsel').options[e.selectedIndex].value == 'Approved') 
-        {
-            var getthecnt = document.getElementById('getcount').value;
-
-            for (var zx = getthecnt; zx > 0; zx--) 
-            {
-                var ckz = 'chatinput' + zx;
-                // alert(ckz);
-                document.getElementById('chatinput' + zx).disabled = false;                
-            }
-        }
-        else if (document.getElementById('getsel').options[0].value = "Reject") 
-        {
-            var getthecnt = document.getElementById('getcount').value;
-
-            for (var z = getthecnt; z > 0; z--) 
-            {
-                var ck = 'chkvalsz' + z;
-                // alert(ck);
-                document.getElementById('chkvalsz' + z).checked = false;                
-            }
-
-            for (var zx = getthecnt; zx > 0; zx--) 
-            {
-                var ckz = 'chatinput' + zx;
-                // alert(ckz);
-                document.getElementById('chatinput' + zx).disabled = true;                
-            }
-
-            for (var zxw = getthecnt; zxw > 0; zxw--) 
-            {
-                var ckzw = 'ebriwer' + zxw;
-                // alert(ckz);
-                document.getElementById('ebriwer' + zxw).checked = false;                
-            }
-
-        }
-    });
-
-    $('#getsel').blur(function(e) {
-        document.getElementById('getsel').options[0].innerText = "";
-        document.getElementById('getsel').style.borderColor = "#E2E2E4";
-        document.getElementById('getsel').style.color = "black";
-    });
-
-    $('#btnevaluate').click(function(e) {
-                
-        e.preventDefault();
+        // alert(noofchecked);
 
         var ursid = document.getElementById('pinakaursid').value;
 
@@ -915,11 +831,148 @@ $(document).ready(function(){
             document.getElementById('getsel').style.borderColor = "#B94A48";
             document.getElementById('getsel').style.color = "#B94A48";
         }
-        else
-        {   
+        else if (evals == 'Reject') 
+        {
+            swal({
 
-            if (evals == 'Approved') 
+                title: "Are you sure you want reject this request?",
+                text: "The departmetal user will notify about this action.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes',
+                cancelButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+                if (isConfirm) {                    
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'ApprovedRequest.php',
+                        async: false,
+                        data: {
+                            _ursid: ursid,
+                            _evals: evals,
+                            _remarks: remarks
+                        },
+                        success: function(data2) {
+                            //alert(data2);                                    
+                        },
+                        error: function(response2) {
+                            //alert(response2);                                    
+                        }
+
+                    });
+
+                    $('#newmodalget tr').each(function(index, val) {
+
+                        // var ursid = document.getElementById('pinakaursid').value;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'ApprovedRequestSub.php',
+                            async: false,
+                            data: {
+                                _urid: $(this).closest('tr').children('td:first').text(),
+                                _aqty: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                _ursid: ursid
+                            },
+                            success: function(data2) {
+                                // alert(data2);
+
+                                if (evals == 'Approved') 
+                                {
+                                    swal("Request Approved!", "The request will be process to main.", "success");
+
+                                    setTimeout(function() 
+                                    {
+                                        window.location = 'PODURequests.php';
+                                    },2500);
+                                }
+                                else if (evals == 'Reject')
+                                {
+                                    swal("Request Rejected!", "", "error");
+
+                                    setTimeout(function() 
+                                    {
+                                        window.location = 'PODURequests.php';
+                                    },2500);
+                                }
+                                
+                            },
+                            error: function(response2) {
+                                // alert(response2);
+
+                                swal("Error", "May mali bry eh!", "error");
+                            }
+
+                        });
+                    });
+
+                    $('#newmodalget2 tr').each(function(index, val) {
+
+                        // var ursidx = document.getElementById('pinakaursid').value;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'ApprovedRequestSubReject.php',
+                            async: false,
+                            data: {
+                                _uridx: $(this).closest('tr').children('td:first').text(),
+                                _aqtyx: $(this).closest('tr').children('td:first').next().next().next().text(),
+                                _ursidx: ursid
+                            },
+                            success: function(data2) {
+                                // alert(data2);
+
+                                if (evals == 'Approved') 
+                                {
+                                    swal("Request Approved!", "The request will be process to main.", "success");
+
+                                    setTimeout(function() 
+                                    {
+                                        window.location = 'PODURequests.php';
+                                    },2500);
+                                }
+                                else if (evals == 'Reject')
+                                {
+                                    swal("Request Rejected!", "", "error");
+
+                                    setTimeout(function() 
+                                    {
+                                        window.location = 'PODURequests.php';
+                                    },2500);
+                                }
+                                
+                            },
+                            error: function(response2) {
+                                // alert(response2);
+
+                                swal("Error", "May mali bry eh!", "error");
+                            }
+
+                        });
+                    });
+                } 
+                else
+                {
+                    swal("Cancelled", "The transaction is cancelled", "error");
+                }
+
+            });
+        }
+        else if (evals == 'Approved') 
+        {
+            if (noofchecked == 0) 
             {
+                alert('select atleast one if you want to approve.')
+            }
+            else if (noofchecked >= 1)
+            {            
+                 
                 swal({
                     title: "Are you sure you want to approve this request?",
                     text: "The departmental user will notify about this action.",
@@ -1049,143 +1102,94 @@ $(document).ready(function(){
                     }
 
                 });
+                
             }
-            else if (evals == 'Reject') 
-            {
-                swal({
+        }        
 
-                    title: "Are you sure you want reject this request?",
-                    text: "The departmetal user will notify about this action.",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: "No",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
+    });
 
-                function(isConfirm) {
-                    if (isConfirm) {                    
+    allNextBtn = $('.ckthis');
 
-                        $.ajax({
-                            type: 'POST',
-                            url: 'ApprovedRequest.php',
-                            async: false,
-                            data: {
-                                _ursid: ursid,
-                                _evals: evals,
-                                _remarks: remarks
-                            },
-                            success: function(data2) {
-                                //alert(data2);                                    
-                            },
-                            error: function(response2) {
-                                //alert(response2);                                    
-                            }
-
-                        });
-
-                        $('#newmodalget tr').each(function(index, val) {
-
-                            // var ursid = document.getElementById('pinakaursid').value;
-
-                            $.ajax({
-                                type: 'POST',
-                                url: 'ApprovedRequestSub.php',
-                                async: false,
-                                data: {
-                                    _urid: $(this).closest('tr').children('td:first').text(),
-                                    _aqty: $(this).closest('tr').children('td:first').next().next().next().text(),
-                                    _ursid: ursid
-                                },
-                                success: function(data2) {
-                                    // alert(data2);
-
-                                    if (evals == 'Approved') 
-                                    {
-                                        swal("Request Approved!", "The request will be process to main.", "success");
-
-                                        setTimeout(function() 
-                                        {
-                                            window.location = 'PODURequests.php';
-                                        },2500);
-                                    }
-                                    else if (evals == 'Reject')
-                                    {
-                                        swal("Request Rejected!", "", "error");
-
-                                        setTimeout(function() 
-                                        {
-                                            window.location = 'PODURequests.php';
-                                        },2500);
-                                    }
-                                    
-                                },
-                                error: function(response2) {
-                                    // alert(response2);
-
-                                    swal("Error", "May mali bry eh!", "error");
-                                }
-
-                            });
-                        });
-
-                        $('#newmodalget2 tr').each(function(index, val) {
-
-                            // var ursidx = document.getElementById('pinakaursid').value;
-
-                            $.ajax({
-                                type: 'POST',
-                                url: 'ApprovedRequestSubReject.php',
-                                async: false,
-                                data: {
-                                    _uridx: $(this).closest('tr').children('td:first').text(),
-                                    _aqtyx: $(this).closest('tr').children('td:first').next().next().next().text(),
-                                    _ursidx: ursid
-                                },
-                                success: function(data2) {
-                                    // alert(data2);
-
-                                    if (evals == 'Approved') 
-                                    {
-                                        swal("Request Approved!", "The request will be process to main.", "success");
-
-                                        setTimeout(function() 
-                                        {
-                                            window.location = 'PODURequests.php';
-                                        },2500);
-                                    }
-                                    else if (evals == 'Reject')
-                                    {
-                                        swal("Request Rejected!", "", "error");
-
-                                        setTimeout(function() 
-                                        {
-                                            window.location = 'PODURequests.php';
-                                        },2500);
-                                    }
-                                    
-                                },
-                                error: function(response2) {
-                                    // alert(response2);
-
-                                    swal("Error", "May mali bry eh!", "error");
-                                }
-
-                            });
-                        });
-                    } 
-                    else
-                    {
-                        swal("Cancelled", "The transaction is cancelled", "error");
-                    }
-
-                });
-            }
-            
+    allNextBtn.click(function() {
+        if (this.checked) 
+        {
+            // ebriwer
+            // alert('nachecked!');
+            // alert(this.id);
+            var e = this.id;
+            // alert(e);
+            var f = 'chkvalsz' + e.substring(7);
+            document.getElementById(f).checked = true;
+            // document.getElementById('chkvalsz' + this.id).disabled = false;
+            document.getElementById("chatinput" + e.substring(7)).disabled = false;            
+        } 
+        else 
+        {
+            // alert('dili!');
+            // alert(this.id);
+            var e = this.id;
+            // alert(e);
+            var f = 'chkvalsz' + e.substring(7);
+            document.getElementById(f).checked = false;
+            // document.getElementById('chkvalsz' + this.id).disabled = true;
+            document.getElementById("chatinput" + e.substring(7)).disabled = true;
+            // document.getElementById("chatinput" + this.id).value = "";
         }
+    });
 
+    $('#getsel').click(function(e) {
+        document.getElementById('getsel').options[0].innerText = "";
+        document.getElementById('getsel').style.borderColor = "#00A8B3";
+        document.getElementById('getsel').style.color = "black";
+    });
+
+    $('#getsel').change(function(e) {
+
+        var e = document.getElementById('getsel');
+
+        if (document.getElementById('getsel').options[e.selectedIndex].value == 'Approved') 
+        {
+            var getthecnt = document.getElementById('getcount').value;
+
+            for (var zx = getthecnt; zx > 0; zx--) 
+            {
+                var ckz = 'chatinput' + zx;
+                // alert(ckz);
+                document.getElementById('chatinput' + zx).disabled = false;                
+            }
+        }
+        else if (document.getElementById('getsel').options[0].value = "Reject") 
+        {
+            var getthecnt = document.getElementById('getcount').value;
+
+            for (var z = getthecnt; z > 0; z--) 
+            {
+                var ck = 'chkvalsz' + z;
+                // alert(ck);
+                document.getElementById('chkvalsz' + z).checked = false;                
+            }
+
+            for (var zx = getthecnt; zx > 0; zx--) 
+            {
+                var ckz = 'chatinput' + zx;
+                // alert(ckz);
+                document.getElementById('chatinput' + zx).disabled = true;                
+            }
+
+            for (var zxw = getthecnt; zxw > 0; zxw--) 
+            {
+                var ckzw = 'ebriwer' + zxw;
+                // alert(ckz);
+                document.getElementById('ebriwer' + zxw).checked = false;                
+            }
+
+        }
+    });
+
+    $('#getsel').blur(function(e) {
+        document.getElementById('getsel').options[0].innerText = "";
+        document.getElementById('getsel').style.borderColor = "#E2E2E4";
+        document.getElementById('getsel').style.color = "black";
     });
  
 });

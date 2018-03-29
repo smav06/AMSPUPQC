@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Departmental User Requests</title>
+    <title>Requests From Main</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -212,8 +212,8 @@
             </a>
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                <li class="active"><a href="PORequestToMain.php">Request To Main</a></li>                 
+                <li class="active"><a href="PORequestToMain.php">Request From Main</a></li>
+                <li><a href="POPPMP.php">PPMP</a></li>                
             </ul>
         </li>
         <li>
@@ -234,7 +234,7 @@
                 <span>Maintenance</span>
             </a>
             <ul class="sub">
-                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                 <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
             </ul>
         </li>
@@ -250,9 +250,9 @@
                 <span>Reports</span>
             </a>
             <ul class="sub">
-                <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
-                <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
+                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                <li><a href="POPPMPReport.php">PPMP Report</a></li>   
+                <li><a href="POPar.php">Property Accountability Receipt</a></li>
                 <li><a href="POPtr.php">Property Transfer Report</a></li>   
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
@@ -296,7 +296,8 @@
                                         <tr>
                                             <th style="display: none;">URS ID</th>
                                             <th style="">Request No.</th>
-                                            <th style="">Resquested By</th> 
+                                            <th style="display: none;"></th>
+                                            <th style="">Requested By</th> 
                                             <th style="width: 140px;">Date Requested</th>
                                             <th style="width: 130px;">Status To Main</th>
                                             <th style="width: 90px;"></th>
@@ -320,47 +321,61 @@
                                             $status = $row['URSTM_STATUS_TO_MAIN'];
                                     ?>
 
-                                        <tr>
+                                        <tr>                                        
+
+                                        <?php  
+                                            if ($status == 'Pending') 
+                                            {
+                                        ?>
+
                                             <td style="display: none;"> <?php echo $ursid; ?> </td>
                                             <td> <?php echo $ursno; ?> </td>
+                                            <td style="display: none;">1</td>
                                             <td> <?php echo $reqby; ?> </td>
                                             <td> <?php echo $reqdate; ?> </td>
-
-                                            <?php  
-                                                if ($status == 'Pending') 
-                                                {
-                                            ?>
 
                                             <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
                                             <td> 
                                                 <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
                                             </td>
 
-                                            <?php
-                                                }
-                                                elseif ($status == 'Approved') 
-                                                {
-                                            ?>
+                                        <?php
+                                            }
+                                            elseif ($status == 'Approved') 
+                                            {
+                                        ?>
+
+                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
+                                            <td> <?php echo $ursno; ?> </td>
+                                            <td style="display: none;">2</td>
+                                            <td> <?php echo $reqby; ?> </td>
+                                            <td> <?php echo $reqdate; ?> </td>
 
                                             <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
                                             <td> 
                                                 <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
                                             </td>
 
-                                            <?php
-                                                }
-                                                elseif ($status == 'Reject') 
-                                                {
-                                            ?>
+                                        <?php
+                                            }
+                                            elseif ($status == 'Reject') 
+                                            {
+                                        ?>
+
+                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
+                                            <td> <?php echo $ursno; ?> </td>
+                                            <td style="display: none;">3</td>
+                                            <td> <?php echo $reqby; ?> </td>
+                                            <td> <?php echo $reqdate; ?> </td>
 
                                             <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
                                             <td> 
                                                 <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
                                             </td>
 
-                                            <?php
-                                                }
-                                            ?>
+                                        <?php
+                                            }
+                                        ?>
 
                                         </tr>
 
@@ -493,7 +508,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--dynamic table initialization -->
-    <script src="../../js/dynamic_table_init.js"></script>
+    <script src="PORequestToMain/dynamic_table_init.js"></script>
 
     <script src="../../js/iCheck/jquery.icheck.js"></script>
 

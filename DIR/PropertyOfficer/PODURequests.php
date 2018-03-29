@@ -212,8 +212,8 @@
                     </a>
                     <ul class="sub">
                         <li class="active"><a href="PODURequests.php">Departmental User Requests</a></li>
-                        <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                        <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+                        <li><a href="PORequestToMain.php">Request From Main</a></li>                
+                        <li><a href="POPPMP.php">PPMP</a></li>
                     </ul>
                 </li>
                 <li>
@@ -234,7 +234,7 @@
                         <span>Maintenance</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                        <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                         <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
                     </ul>
                 </li>
@@ -250,10 +250,10 @@
                         <span>Reports</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                        <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
-                        <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
-                        <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                        <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                        <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                        <li><a href="POPtr.php">Property Transfer Report</a></li>
                         <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
                     </ul>
                 </li>
@@ -273,7 +273,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequisitionRequests.php">Departmental User Requests</a></li>
+                        <li><a href="PODURequests.php">Departmental User Requests</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -296,11 +296,12 @@
                                         <tr>
                                             <th style="display: none;">URS ID</th>
                                             <th style="width: 135px;">Request No.</th>
-                                            <th style="">Purpose</th> 
+                                            <th style="">Purpose</th>
+                                            <th style="display: none;"></th>
                                             <th style="width: 175px;">Requested By</th>
                                             <th style="width: 140px;">Date Requested</th>
                                             <th style="width: 100px;">Status</th>
-                                            <th style="width: 95px;"></th>
+                                            <th style="width: 55px;"></th>
                                         </tr>
                                     </thead>
 
@@ -322,30 +323,39 @@
                                               $statuz = $row['URS_STATUS_TO_PO'];
                                         ?>
 
-                                        <tr class="gradeX">
+                                        <tr class="gradeX">                                            
+
+                                        <?php  
+                                            if ($statuz == 'Pending') 
+                                            {
+                                        ?>
+
                                             <td style="display: none;"> <?php echo $id; ?> </td>
                                             <td> <?php echo $no; ?> </td>                                        
                                             <td> <?php echo $purpose; ?> </td>
+                                            <td style="display: none;">1</td>
                                             <td> <?php echo $officename; ?> </td>
                                             <td> <?php echo $date; ?> </td>
-
-                                            <?php  
-                                                if ($statuz == 'Pending') 
-                                                {
-                                            ?>
 
                                             <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
                                             </td>
 
                                             <td>
-                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;">Evaluate</a>
+                                                <a href="POViewRequestFromDU.php?viewrequests=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;">View</a>
                                             </td>
 
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Approved') 
-                                                {
-                                            ?>
+                                        <?php  
+                                            }
+                                            elseif ($statuz == 'Approved') 
+                                            {
+                                        ?>
+
+                                            <td style="display: none;"> <?php echo $id; ?> </td>
+                                            <td> <?php echo $no; ?> </td>                                        
+                                            <td> <?php echo $purpose; ?> </td>
+                                            <td style="display: none;">2</td>
+                                            <td> <?php echo $officename; ?> </td>
+                                            <td> <?php echo $date; ?> </td>
 
                                             <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
                                             </td>
@@ -354,11 +364,18 @@
                                                 <a href="POViewRequestToMain.php?reqmain=<?php echo $id; ?>" class="btn btn-success" style="margin: -5px;" >View</a>
                                             </td>
 
-                                            <?php  
-                                                }
-                                                elseif ($statuz == 'Reject') 
-                                                {
-                                            ?>
+                                        <?php  
+                                            }
+                                            elseif ($statuz == 'Reject') 
+                                            {
+                                        ?>
+
+                                            <td style="display: none;"> <?php echo $id; ?> </td>
+                                            <td> <?php echo $no; ?> </td>                                        
+                                            <td> <?php echo $purpose; ?> </td>
+                                            <td style="display: none;">3</td>
+                                            <td> <?php echo $officename; ?> </td>
+                                            <td> <?php echo $date; ?> </td>
 
                                             <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $statuz; ?> </p> 
                                             </td>
@@ -502,7 +519,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--dynamic table initialization -->
-    <script src="../../js/dynamic_table_init.js"></script>
+    <script src="PODURequests/dynamic_table_init.js"></script>
 
     <script src="../../js/iCheck/jquery.icheck.js"></script>
 

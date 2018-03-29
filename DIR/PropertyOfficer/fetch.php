@@ -24,7 +24,7 @@ if(isset($_POST["view"]))
     {
       $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'" onclick="myFunction('.$id.')">
                     <li style="margin-top: 10px;">
-                      <div class="alert alert-success clearfix" style="background-color: #EDF2FA; color: gray;">
+                      <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
                         Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
                         Request No: <strong> '.$row["URS_NO"].' </strong><br/>
                         Request By: <strong> '.$row["O_CODE"].' </strong>

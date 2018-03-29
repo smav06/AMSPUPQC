@@ -181,8 +181,8 @@
                 </a>
                             <ul class="sub">
                                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                                <li><a href="POPPMP.php">[ PPMP Request ]</a></li>
-                                <li><a href="PORequestToMain.php">Request To Main</a></li>
+                                <li><a href="PORequestToMain.php">Request From Main</a></li>
+                                <li><a href="POPPMP.php">PPMP</a></li>
                             </ul>
                         </li>
                         <li>
@@ -203,7 +203,7 @@
                     <span>Maintenance</span>
                 </a>
                             <ul class="sub">
-                                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                                <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                                 <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>
                             </ul>
                         </li>
@@ -219,9 +219,9 @@
                     <span>Reports</span>
                 </a>
                             <ul class="sub">
-                                <li><a href="PORequestSlip.php">Request Slip</a></li>
-                                <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>
-                                <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
+                                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                                <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                                <li><a href="POPar.php">Property Accountability Receipt</a></li>
                                 <li><a href="POPtr.php">Property Transfer Report</a></li>
                                 <!-- <li><a href="PORod.php">Report Of Damage</a></li> -->
                             </ul>
@@ -496,7 +496,9 @@
                                                     }
                                                 ?>
 
-                                                    <a class="btn btn-success" id="assignbtn" data-toggle="modal" href="#ModalAssign">Assign</a>
+                                                    <a class="btn btn-success" id="assignbtn2">Assign</a>
+
+                                                    <a class="btn btn-success hidden" id="assignbtn" data-toggle="modal" href="#ModalAssign">Assign</a>
 
                                             </tbody>
                                     </table>
@@ -829,11 +831,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#assignbtn').click(function() {
+            $('#assignbtn2').click(function() {
 
                 var getthecnt = document.getElementById('getcount').value;
                 var ck = '';
                 var filltable = '';
+                var noofchecked = 0;
 
                 for (var z = getthecnt; z > 0; z--) {
 
@@ -844,10 +847,51 @@
                         var descz = document.getElementById('origdescs' + z).innerText;
                         var datez = document.getElementById('origdates' + z).innerText;
                         filltable = filltable + '<tr><td class="hidden">' + idz + '</td><td>' + statz + '</td><td>' + descz + '</td><td>' + datez + '</td></tr>';
+                        noofchecked = noofchecked + 1;
+                        
                     }
-                    document.getElementById('newmodalget').innerHTML = filltable;
+                    document.getElementById('newmodalget').innerHTML = filltable;                    
+                }
+                // alert(noofchecked);
+
+                if (noofchecked == 0) 
+                {
+                    // alert('tago');
+                    swal("Please select atleast one item/asset.", "To assign item/asset please select atleast one.", "warning");
+                }
+                else
+                {
+                    // alert('labas modal');
+                    $('#assignbtn').click();
                 }
 
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#assignbtn').click(function() {
+
+                var getthecnt = document.getElementById('getcount').value;
+                var ck = '';
+                var filltable = '';
+                var noofchecked = 0;
+
+                for (var z = getthecnt; z > 0; z--) {
+
+                    var ck = 'chkvalsz' + z;
+                    if (document.getElementById(ck).checked) {
+                        var idz = document.getElementById('getids' + z).innerText;
+                        var statz = document.getElementById('origstats' + z).innerText;
+                        var descz = document.getElementById('origdescs' + z).innerText;
+                        var datez = document.getElementById('origdates' + z).innerText;
+                        filltable = filltable + '<tr><td class="hidden">' + idz + '</td><td>' + statz + '</td><td>' + descz + '</td><td>' + datez + '</td></tr>';
+                        noofchecked = noofchecked + 1;                        
+                    }
+                    document.getElementById('newmodalget').innerHTML = filltable;                    
+                }                
             });
 
             allNextBtn = $('.ckthis');
@@ -864,30 +908,73 @@
                 }
             });
 
+            $('#getsel').click(function(e) {
+                document.getElementById('getsel').options[0].innerText = "";
+                document.getElementById('getsel').style.borderColor = "#00A8B3";
+                document.getElementById('getsel').style.color = "black";
+            });
+
+            $('#getsel').blur(function(e) {
+                document.getElementById('getsel').options[0].innerText = "";
+                document.getElementById('getsel').style.borderColor = "#E2E2E4";
+                document.getElementById('getsel').style.color = "black";
+            });
+
+            $('#getdate').click(function(e) {
+                document.getElementById('getdate').style.borderColor = "#00A8B3";
+                document.getElementById('getdate').style.color = "black";
+
+            });
+
+            $('#getdate').blur(function(e) {
+                document.getElementById('getdate').style.borderColor = "#E2E2E4";
+                document.getElementById('getdate').style.color = "black";
+            });
+
             $('#btnsend').click(function(e) {
                 
                 e.preventDefault();
 
-                swal({
-                        title: "Are you sure you want to assign this asset?",
-                        text: "The selected assets will be assign to this employee.",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: '#DD6B55',
-                        confirmButtonText: 'Yes',
-                        cancelButtonText: "No",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
+                var nameofcurruser = document.getElementById('getthenameofuser').innerText;
+                var getthecnt = document.getElementById('getcount').value;
+                var e = document.getElementById('getsel');
+                var get = e.options[e.selectedIndex].value;
+                var gdate = document.getElementById('getdate').value;
 
-                    function(isConfirm) {
+                if (!Date.parse(gdate) || get == "") 
+                {
+                    if (document.getElementById('getsel').options[e.selectedIndex].value == '') 
+                    {
+                        document.getElementById('getsel').options[0].innerText = "Please Select";
+                        document.getElementById('getsel').focus();
+                        document.getElementById('getsel').style.borderColor = "#B94A48";
+                        document.getElementById('getsel').style.color = "#B94A48";
+                    }
+                    else if(!Date.parse(gdate))
+                    {
+                        document.getElementById('getdate').focus();
+                        document.getElementById('getdate').style.borderColor = "#B94A48";
+                        document.getElementById('getdate').style.color = "#B94A48";
+                    }
+                }
+                else
+                {
+                    swal({
+                            title: "Are you sure you want to assign this asset?",
+                            text: "The selected assets will be assign to this employee.",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: '#DD6B55',
+                            confirmButtonText: 'Yes',
+                            cancelButtonText: "No",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+
+                        function(isConfirm) {
                         if (isConfirm) {
 
-                            var nameofcurruser = document.getElementById('getthenameofuser').innerText;
-                            var getthecnt = document.getElementById('getcount').value;
-                            var e = document.getElementById('getsel');
-                            var get = e.options[e.selectedIndex].value;
-                            var gdate = document.getElementById('getdate').value;
+                            
 
                             $.ajax({
                                 type: 'POST',
@@ -941,6 +1028,7 @@
                         }
 
                     });
+                }                
 
             });
 

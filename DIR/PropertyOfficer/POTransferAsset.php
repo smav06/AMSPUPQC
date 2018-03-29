@@ -164,66 +164,66 @@
                     <ul class="sidebar-menu" id="nav-accordion">
                         <li>
                             <a href="PODashboard.php">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
-                </a>
+                                <i class="fa fa-dashboard"></i>
+                                <span>Dashboard</span>
+                            </a>
                         </li>
                         <li>
                             <a href="POAsset.php">
-                    <i class="fa fa-laptop"></i>
-                    <span>Assets</span>
-                </a>
+                                <i class="fa fa-laptop"></i>
+                                <span>Assets</span>
+                            </a>
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                    <i class="fa fa-comment-o"></i>
-                    <span>Requests</span>
-                </a>
+                                <i class="fa fa-comment-o"></i>
+                                <span>Requests</span>
+                            </a>
                             <ul class="sub">
-                                <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                                <li><a href="POPPMP.php">[ PPMP Request ]</a></li>
-                                <li><a href="PORequestToMain.php">Request To Main</a></li>
+                                <li><a href="PODURequests.php">Departmental User Requests</a></li>                        
+                                <li><a href="PORequestToMain.php">Request From Main</a></li>
+                                <li><a href="POPPMP.php">PPMP</a></li>  
                             </ul>
                         </li>
                         <li>
                             <a href="POAcquisition.php">
-                    <i class="fa fa-download"></i>
-                    <span>Acquisition</span>
-                </a>
+                                <i class="fa fa-download"></i>
+                                <span>Acquisition</span>
+                            </a>
                         </li>
                         <li>
                             <a class="active" href="POTransferAsset.php">
-                    <i class="fa fa-sign-out"></i>
-                    <span>Transfer Asset</span>
-                </a>
+                                <i class="fa fa-sign-out"></i>
+                                <span>Transfer Asset</span>
+                            </a>
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                    <i class="fa fa-wrench"></i>
-                    <span>Maintenance</span>
-                </a>
+                                <i class="fa fa-wrench"></i>
+                                <span>Maintenance</span>
+                            </a>
                             <ul class="sub">
-                                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                                <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                                 <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="PODisposal.php">
-                    <i class="fa fa-trash-o"></i>
-                    <span>Disposal</span>
-                </a>
+                                <i class="fa fa-trash-o"></i>
+                                <span>Disposal</span>
+                            </a>
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                    <i class="fa fa fa-table"></i>
-                    <span>Reports</span>
-                </a>
+                                <i class="fa fa fa-table"></i>
+                                <span>Reports</span>
+                            </a>
                             <ul class="sub">
-                                <li><a href="PORequestSlip.php">Request Slip</a></li>
-                                <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>
-                                <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
-                                <li><a href="POPtr.php">Property Transfer Report</a></li>
-                                <!-- <li><a href="PORod.php">Report Of Damage</a></li> -->
+                                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                                <li><a href="POPPMPReport.php">PPMP Report</a></li>   
+                                <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                                <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                                <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
                             </ul>
                         </li>
                     </ul>

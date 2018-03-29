@@ -177,9 +177,9 @@
                         <span>Requests</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                        <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                        <li><a href="PORequestToMain.php">Request From Main</a></li>                 
+                        <li><a href="PODURequests.php">Departmental User Requests</a></li>                        
+                        <li><a href="PORequestToMain.php">Request From Main</a></li>
+                        <li><a href="POPPMP.php">PPMP</a></li>           
                     </ul>
                 </li>
                 <li>
@@ -200,7 +200,7 @@
                         <span>Maintenance</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                        <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                         <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
                     </ul>
                 </li>
@@ -216,9 +216,9 @@
                         <span>Reports</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                        <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
-                        <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
+                        <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                        <li><a href="POPPMPReport.php">PPMP Report</a></li>   
+                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
                         <li><a href="POPtr.php">Property Transfer Report</a></li>   
                         <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
                     </ul>
@@ -383,10 +383,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        Disposed: 
+                    <div class="col-md-12">
+                        Ready For Disposal: 
                         <?php 
-                            $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Disposed' ";
+                            $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Ready For Disposal' ";
                             $result = mysqli_query($connection, $sql);
 
                             while ($row = mysqli_fetch_array($result)) 
@@ -427,7 +427,7 @@
                 <hr>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         Pending: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_summary` WHERE URS_STATUS_TO_PO = 'Pending' ";
@@ -441,7 +441,7 @@
                         ?>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         Approved: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_summary` WHERE URS_STATUS_TO_PO = 'Approved' ";
@@ -501,7 +501,7 @@
                 <hr>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         Pending: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Pending' ";
@@ -515,7 +515,7 @@
                         ?>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         Approved: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Approved' ";
@@ -575,7 +575,7 @@
                 <hr>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         Pending: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_status_to_main` WHERE URSTM_STATUS_TO_MAIN = 'Pending' ";
@@ -589,7 +589,7 @@
                         ?>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         Approved: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_t_user_request_status_to_main` WHERE URSTM_STATUS_TO_MAIN = 'Approved' ";
