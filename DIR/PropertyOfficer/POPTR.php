@@ -447,19 +447,27 @@
                     <section class="panel">
                         <div id="printdisbook" class="panel-body" style="display: none;">
                             <br>
-                            <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
+                            
+                            <!-- <hr> -->
                             <br>
-                            <center><h5>Polytechnic University of the Philippines Quezon City</h5></center>
-                            <center><h5>Don Fabian St. Commonwealth Quezon City</h5></center>
-                            <center><h6>PROPERTY TRANSFER REPORT (PTR)</h6></center>
-                            <br>
-                            <br>
-                            <br>  
-                            <br>
-                            <br>
-                            <br>
-                            <br>                      
+                        <table style="width: 100%;" border="1">   
 
+                        <tr>
+                            <td>
+                            <br>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
+                                        <center><h4 style="font-family: Times New Roman; font-weight: bold;"> POLYTECHNIC UNIVERSITY OF THE PHILIPPINES </h4></center>
+                                        <center> <h4 style="font-family: Times New Roman;"> PROPERTY TRANSFER REPORT </h4> </center>
+                                        <center><h4 style="font-family: Times New Roman;">Don Fabian, Commonwealth, Quezon City</h4></center>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <br>
+                            <br>
                         <?php 
                             $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $maxptrid GROUP BY PTR.PTR_ID";
 
@@ -474,66 +482,135 @@
                               $transferredby = $row['PTR_TRANSFERRED_BY'];
                               $transferto = $row['C_NAME'];
                               $transfertocode = $row['C_CODE'];
+                              $transfertoname = $row['C_NAME'];
                         ?>
 
-                            <label>Date: </label> <u> <?php echo $ptrdate; ?> </u> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 80%;"><h5 style="font-family: Arial; padding-left: 10px;">PTR No. : <strong> <u> <?php echo $ptrno; ?> </u> <strong> </h5></td>
+                                    <td style="width: 20%;"><h5 style="font-family: Arial; padding-left: 10px;">Date : <strong> <u> <?php echo $ptrdate; ?> </u> </strong> </h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;"> To the Security Guard on Duty : </h5></td>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;"></h5></td>
+                                </tr>                                
+                            </table>
+
+                            <table style="width: 100%">
+                                <tr>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Please Allow the Bearer, <strong> MR./MS. </strong> _<u> <em> <strong> <?php echo $receivedby; ?> </strong> </em> </u>_ to take Out/Transfer the following from _<u> <em> <strong> PUP Quezon City </strong> </em> </u>_ </h5></td>
+                                </tr>                                
+                            </table>
+                            <br>
+
+                            <!-- <label>Date: </label> <u> <?php echo $ptrdate; ?> </u> 
                             <label>Transfer From: </label> <u> PUP QC </u>  
                             <br>
-                            <label>PTR NO: </label> <u> <?php echo $ptrno; ?> </u> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            <label>PTR NO: </label> <u> <?php echo $ptrno; ?> </u> 
                             <label>Transfer To: </label> <u> <?php echo $transfertocode; ?> </u>
                             <br>
                             <label>Receiver: </label> <u> <?php echo $receivedby; ?> </u>
                             <br>
                             <br>
-                            <label>Reason For Transfer: </label> <u> <?php echo $reason; ?> </u> 
+                            <label>Reason For Transfer: </label> <u> <?php echo $reason; ?> </u>  -->
 
                         <?php
                             }
                         ?>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <table class="display table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Asset</th>
-                                    </tr>
-                                </thead>
+                            </td>
+                        </tr>                                                     
+                        </table>
+                        <!-- <hr> -->
 
-                                <tbody>
+                        <table style="width: 100%; margin-top: -1px;" border="1">
+                            <tr>
+                                <td>
+                                    <h5 style="font-family: Times New Roman; padding-left: 10px;">
+                                        <strong><center> PLACE OF DESTINATION : <u> <?php echo $transfertoname; ?> (<?php echo $transfertocode; ?>) </u> </center></strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
 
-                                <?php  
-                                    $sql1 = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $maxptrid";
+                        <table style="width: 100%; margin-top: 2px;" border="1">
+                            <tr>
+                                <td>
+                                    <h5 style="font-family: Times New Roman; padding-left: 10px;">
+                                        <strong><center><em>Items of Equipment, Supplies, or Materials</em></center></strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
 
-                                    $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+                        <table style="width: 100%; margin-top: 2px;" border="1">
+                            <thead>
+                                <tr>
+                                    <th style="font-family: Times New Roman; padding: 10px; font-size: 18px;">DESCRIPTION</th>
+                                </tr>
+                            </thead>
 
-                                    while($row1 = mysqli_fetch_assoc($result1))
-                                    {
-                                        $adesc = $row1['A_DESCRIPTION'];
-                                ?>
+                            <tbody>
 
-                                    <tr>
-                                        <td> <?php echo $adesc; ?> </td>
-                                    </tr>
+                            <?php  
+                                $sql1 = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $maxptrid";
 
-                                <?php
-                                    }
-                                ?>
+                                $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
-                                </tbody>
-                            </table>
+                                while($row1 = mysqli_fetch_assoc($result1))
+                                {
+                                    $adesc = $row1['A_DESCRIPTION'];
+                            ?>
 
-                            <br>
-                            <br>
-                            <br>
-                            <span class="pull-right">
-                                <label>Transfer By: </label> <u> <?php echo $transferredby; ?> </u> <br>
-                            </span>
-                            <br>                            
-                            <span class="pull-right" style="margin-right: -135px;">
-                                <label> <?php echo $_SESSION['mytype']; ?> </label>
-                            </span>
+                                <tr>
+                                    <td style="font-family: Arial; padding: 10px;"> <?php echo $adesc; ?> </td>
+                                </tr>
+
+                            <?php
+                                }
+                            ?>
+
+                            </tbody>
+                        </table>
+
+                        <table style="width: 100%; margin-top: -1px;" border="1">
+                            <tr>
+
+                                <td>
+                                    <table style="width: 100%;">
+                                        <br>
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> __<u> <?php echo $receivedby; ?> </u>__ </center> <center> Print/Sign Name of Authorized Receiver </center> </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> __<u> <?php echo $transferredby; ?> </u>__ </center> <center> Print/Sign Name of Property Official </center> </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> ________________________________ </center> <center> Print/Sign Name of Driver </center> </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; padding-left: 68px; width: 33%"> Date : _<u> <?php echo $ptrdate; ?> </u>__________ <br> Time Out : __________________ </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; padding-left: 80px; width: 33%"> Date : _<u> <?php echo $ptrdate; ?> </u>__________ <br> Time Out : __________________  </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> ________________________________ </center> <center> (Print/Sign Name of Guard on Duty) </center> </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%">NOTE: The Security Guard  on Duty is hereby instructed to check the above supplies and/or equipment aboard the herein vehicle.</td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>                        
 
                         </div>
                     </section>
