@@ -99,7 +99,7 @@
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
+                <i class="fa fa-comment-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
 
@@ -154,6 +154,18 @@
 
         </li>
         <!-- notification dropdown end -->
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-warning"></i>
+                <span class="badge bg-warning count2"></span>
+            </a>
+        </li>
+
+        <li id="" class="">
+            <a style="background-color: white;">
+                <?php echo $_SESSION['mytype']; ?>
+            </a>
+        </li>
     </ul>
     <!--  notification end -->
 </div>
@@ -183,8 +195,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -339,7 +350,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Purpose</label>
-                                        <input type="text" value="<?php echo $urspurpose; ?>" class="form-control" style="color: black;" disabled />
+                                        <textarea style="color: black; word-wrap: break-word; resize: none; height: 85px;" class="form-control" maxlength="200" id="getreason" required="" disabled><?php echo $urspurpose; ?></textarea>
+                                        <!-- <input type="text" value="<?php echo $urspurpose; ?>" class="form-control" style="color: black;" disabled /> -->
                                     </div>
                                 </div>
 
@@ -968,7 +980,7 @@ $(document).ready(function(){
         {
             if (noofchecked == 0) 
             {
-                alert('select atleast one if you want to approve.')
+                swal("Please select atleast one.", "To approve this request please select atleast one of the requests.", "warning");
             }
             else if (noofchecked >= 1)
             {            

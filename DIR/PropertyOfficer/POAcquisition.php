@@ -94,7 +94,7 @@
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
+                <i class="fa fa-comment-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
             
@@ -149,6 +149,18 @@
 
         </li>
         <!-- notification dropdown end -->
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-warning"></i>
+                <span class="badge bg-warning count2"></span>
+            </a>
+        </li>
+
+        <li id="" class="">
+            <a style="background-color: white;">
+                <?php echo $_SESSION['mytype']; ?>
+            </a>
+        </li>
     </ul>
     <!--  notification end -->
 </div>
@@ -178,8 +190,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -306,7 +317,8 @@
                             <table class="display table table-bordered table-striped">                                
                                 <tr>
                                     <td> 
-                                        <form action="InsertDonation.php" method="post" id="pnldonationdelay">                                                
+                                        <form action="InsertDonation.php" method="post" id="pnldonationdelay">
+
                                             <div class="form-content">
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -322,7 +334,7 @@
                                                 </div>
                                             
                                                 <div class="row group">                                                        
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label>Asset Type</label>
                                                             <select name="AL_ID[]" id="AL_IDgg[]" class="form-control" required="" style="color: black;">
@@ -357,14 +369,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Asset Description</label>
-                                                            <input type="text" name="A_DESCRIPTION[]" id="A_DESCgg[]" class="form-control" required="" style="color: black;" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Date Acquired</label>
                                                             <input style="color: black; padding-right: 2px;" type="date" name="A_DATE[]" id="A_DATEgg[]" class="form-control" required="" />
@@ -376,6 +381,15 @@
                                                             <button type="button" class="btn btn-danger btnRemove" style="margin-top: 23px;">Remove</button>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Asset Description</label>
+                                                            <textarea name="A_DESCRIPTION[]" id="A_DESCgg[]" maxlength="250" class="form-control" required="" style="color: black; height: 80px;"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    
                                                     
                                                     <div class="col-md-12">
                                                         <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">                                                 

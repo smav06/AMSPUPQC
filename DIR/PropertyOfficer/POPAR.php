@@ -15,6 +15,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <style type="text/css" media="print">
+        @media print
+          {
+             @page {
+               margin-top: 0;
+               margin-bottom: 0;
+             }
+             body  {
+               padding-top: 72px;
+               padding-bottom: 72px ;
+             }
+          } 
+    </style>
+
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,7 +109,7 @@
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
+                <i class="fa fa-comment-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
             
@@ -149,6 +164,18 @@
 
         </li>
         <!-- notification dropdown end -->
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-warning"></i>
+                <span class="badge bg-warning count2"></span>
+            </a>
+        </li>
+
+        <li id="" class="">
+            <a style="background-color: white;">
+                <?php echo $_SESSION['mytype']; ?>
+            </a>
+        </li>
     </ul>
     <!--  notification end -->
 </div>
@@ -179,8 +206,7 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="../logout.php"><i class="fa fa-key"></i>Log Out</a></li>
             </ul>
         </li>
     </ul>
@@ -212,8 +238,8 @@
             </a>
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+                <li><a href="PORequestToMain.php">Request From Main</a></li>            
+                <li><a href="POPPMP.php">PPMP</a></li>                   
             </ul>
         </li>
         <li>
@@ -234,7 +260,7 @@
                 <span>Maintenance</span>
             </a>
             <ul class="sub">
-                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                 <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
             </ul>
         </li>
@@ -250,10 +276,10 @@
                 <span>Reports</span>
             </a>
             <ul class="sub">
-                <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
-                <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
-                <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                <li><a href="POPtr.php">Property Transfer Report</a></li>  
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
         </li>
@@ -408,13 +434,11 @@
                         <div id="printdisbook" class="panel-body" style="display: none;">
                             <br>
                             <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
-                            <br>
-                            <center><h5>Polytechnic University of the Philippines Quezon City</h5></center>
-                            <center><h5>Don Fabian St. Commonwealth Quezon City</h5></center>
-                            <center><h6>PROPERTY ACKNOWLEDGEMENT RECEIPT (PAR)</h6></center>
-                            <br>
-                            <br>
-                            <br>                        
+                            
+                            <center><h4 style="font-family: Arial; font-weight: bold;">PROPERTY ACCOUNTABILITY RECEIPT</h4></center>
+                            <center><u><h4 style="font-family: Times New Roman;">Polytechnic University of the Philippines</h4></u></center>
+                            <center><h4 style="font-family: Arial;">Quezon City Branch</h4></center>
+                            <hr>                       
 
                         <?php 
                             $sql = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID WHERE PAR.PAR_ID = $maxparid GROUP BY PAR.PAR_ID";
@@ -432,19 +456,30 @@
                               $parassignby = $row['PAR_ISSUED_BY'];
                         ?>
 
-                            <label>Date: </label> <u> <?php echo $pardate; ?> </u> <br>
+                            <!-- <label>Date: </label> <u> <?php echo $pardate; ?> </u> <br>
                             <label>PAR NO: </label> <u> <?php echo $parno; ?> </u> <br>
-                            <label>Accountable Person: </label> <u> <?php echo $wholename; ?> </u> 
+                            <label>Accountable Person: </label> <u> <?php echo $wholename; ?> </u> -->
+
+                            <table style="width: 100%;" border="1">
+                                <tr>
+                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">PAR No. : <strong> <u> <?php echo $parno; ?> </u> <strong> </h5></td>
+                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">Assigned To : <strong> <u> <?php echo $wholename; ?> </u> </strong> </h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;">Date : <strong> <u> <?php echo $pardate; ?> </u> </strong> </h5></td>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;"></h5></td>
+                                </tr>
+                            </table>
 
                         <?php
                             }
                         ?>
-                            <br>
-                            <br>
-                            <table class="display table table-bordered table-striped">
+                            <p style="margin-top: 15px;"></p>
+
+                            <table style="width: 100%;" border="1">
                                 <thead>
                                     <tr>
-                                        <th>Asset</th>
+                                        <th style="font-family: Arial; width: 70px; padding: 10px; font-size: 18px;"> Asset / Item / Equipment</th>
                                     </tr>
                                 </thead>
 
@@ -458,10 +493,11 @@
                                     while($row1 = mysqli_fetch_assoc($result1))
                                     {
                                         $adesc = $row1['A_DESCRIPTION'];
+                                        $issedby = $row1['PAR_ISSUED_BY'];
                                 ?>
 
                                     <tr>
-                                        <td> <?php echo $adesc; ?> </td>
+                                        <td style="font-family: Arial; padding: 10px;"> <?php echo $adesc; ?> </td>
                                     </tr>
 
                                 <?php
@@ -471,16 +507,27 @@
                                 </tbody>
                             </table>
 
-                            <br>
-                            <br>
-                            <br>
-                            <span class="pull-right">
-                                <label>Assigned/Issued By: </label> <u> <?php echo $_SESSION['mysesi']; ?> </u> <br>
-                            </span>
-                            <br>                            
-                            <span class="pull-right" style="margin-right: -160px;">
-                                <label> <?php echo $_SESSION['mytype']; ?> </label>
-                            </span>
+                            <p style="margin-top: -8px;"></p>
+                            
+                            <table style="width: 100%;" border="1">                                
+                                <tr>
+                                    <td style="font-family: Arial; padding: 5px; width: 20%"></td>
+                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned To: </em> </center> </td>
+                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned/Issued By: </em> </center> </td>
+                                </tr>
+
+                                <tr>                                    
+                                    <td style="font-family: Arial; padding: 5px;">Signature :</td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                </tr>
+
+                                <tr>                                    
+                                    <td style="font-family: Arial; padding: 5px;">Printed Name :</td>
+                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($wholename) ?> </strong> </center> </td>
+                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($issedby) ?> </strong> </center> </td>
+                                </tr>
+                            </table>
 
                         </div>
                     </section>

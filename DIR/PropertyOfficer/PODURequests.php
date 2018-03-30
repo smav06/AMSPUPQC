@@ -94,7 +94,7 @@
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
+                <i class="fa fa-comment-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
             
@@ -149,6 +149,19 @@
 
         </li>
         <!-- notification dropdown end -->
+
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-warning"></i>
+                <span class="badge bg-warning count2"></span>
+            </a>
+        </li>
+
+        <li id="" class="">
+            <a style="background-color: white;">
+                <?php echo $_SESSION['mytype']; ?>
+            </a>
+        </li>
     </ul>
     <!--  notification end -->
 </div>
@@ -178,8 +191,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>

@@ -20,6 +20,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <style type="text/css" media="print">
+        @media print
+          {
+             @page {
+               margin-top: 0;
+               margin-bottom: 0;
+             }
+             body  {
+               padding-top: 72px;
+               padding-bottom: 72px ;
+             }
+          } 
+    </style>
+
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +42,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Request Slip</title>
+    <title>Purchase Request</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -99,7 +114,7 @@
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
+                <i class="fa fa-comment-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
             
@@ -154,6 +169,18 @@
             
         </li>
         <!-- notification dropdown end -->
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-warning"></i>
+                <span class="badge bg-warning count2"></span>
+            </a>
+        </li>
+
+        <li id="" class="">
+            <a style="background-color: white;">
+                <?php echo $_SESSION['mytype']; ?>
+            </a>
+        </li>
     </ul>
     <!--  notification end -->
 </div>
@@ -183,8 +210,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -217,8 +243,8 @@
             </a>
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+                <li><a href="PORequestToMain.php">Request From Main</a></li>            
+                <li><a href="POPPMP.php">PPMP</a></li>                  
             </ul>
         </li>
         <li>
@@ -239,7 +265,7 @@
                 <span>Maintenance</span>
             </a>
             <ul class="sub">
-                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                 <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
             </ul>
         </li>
@@ -255,10 +281,10 @@
                 <span>Reports</span>
             </a>
             <ul class="sub">
-                <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
-                <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
-                <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                <li><a href="POPar.php">Property Accountability Receipt</a></li>
+                <li><a href="POPtr.php">Property Transfer Report</a></li>  
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
         </li>
@@ -278,7 +304,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequestSlip.php">Request Slip</a></li>
+                        <li><a href="POPurchaseRequest.php">Purchase Request</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -288,7 +314,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header style="color: black;" class="panel-heading">
-                            Request slip
+                            Purchase Request
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
@@ -345,7 +371,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Purpose</label>
-                                        <input type="text" value="<?php echo $urspurpose; ?>" class="form-control" style="color: black;" disabled />
+                                        <textarea style="color: black; word-wrap: break-word; resize: none; height: 85px;" class="form-control" maxlength="200" id="getreason" required="" disabled><?php echo $urspurpose; ?></textarea>
+                                        <!-- <input type="text" value="" class="form-control" style="color: black;" disabled /> -->
                                     </div>
                                 </div>
 
@@ -430,14 +457,11 @@
                         <div id="printdisbook" class="panel-body" style="display: none;">
                             <br>
                             <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
-                            <br>
-                            <center><h5>Polytechnic University of the Philippines Quezon City</h5></center>
-                            <center><h5>Don Fabian St. Commonwealth Quezon City</h5></center>
-                            <center><h6>REQUEST SLIP</h6></center>
-                            <br>
-                            <br>
-                            <br>                        
-
+                            
+                            <center><h4 style="font-family: Arial; font-weight: bold;">PURCHASE REQUEST</h4></center>
+                            <center><u><h4 style="font-family: Times New Roman;">Polytechnic University of the Philippines</h4></u></center>
+                            <center><h4 style="font-family: Arial;">(Agency)</h4></center>
+                            <hr>
                         <?php 
                             $sql = "SELECT URS.URS_PURPOSE, URS.URS_NO, URS.URS_ID, URS.URS_REQUEST_DATE, O.O_NAME, URSTM.URSTM_STATUS_TO_MAIN, URABPO.URA_QUANTITY, ALS.AL_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset_library` AS ALS ON UR.AL_ID = ALS.AL_ID WHERE URS.URS_ID = $ids GROUP BY URS.URS_ID ORDER BY URS.URS_APPROVED_DATE DESC";
 
@@ -452,63 +476,114 @@
                                 $ursid = $row['URS_ID'];
                                 $mainstat = $row['URSTM_STATUS_TO_MAIN'];   
                         ?>
-                            <label>Request To: </label> <u>PUP MAIN</u> <br>
-                            <label>Requested By: </label> <u>PUP Quezon City</u> <br>
-                            <label>Date: </label> <u> <?php echo $ursdatereq; ?> </u> <br>
-                            <label>REQUEST NO: </label> <u> <?php echo $ursno; ?> </u> <br> <br>
-                            <label>PURPOSE: </label> <u> <?php echo $urspurpose; ?> </u> 
+
+                            <table style="width: 100%;" border="1">
+                                <tr>
+                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">Request To : PUP MAIN</h5></td>
+                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">PR No. : <u> <?php echo $ursno; ?> </u> </h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;">Requested By : PUP Quezon City </h5></td>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;">Date: <u> <?php echo $ursdatereq; ?> </u> </h5></td>
+                                </tr>
+                            </table>
 
                         <?php
                             }
                         ?>
-                            <br>
-                            <br>
-                            <table class="display table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Request</th>
-                                        <th style="width: 150px;">Unit</th>
-                                        <th style="width: 150px;">Quantity</th>
-                                    </tr>
-                                </thead>
+                                
+                            <p style="margin-top: 15px;"></p>
 
-                                <tbody>
+                            <table style="width: 100%;" border="1">
+                                <tr>
+                                    <td style="font-family: Arial; width: 70px; padding: 10px; font-size: 18px;"> <center> Quantity </center> </td>                                        
+                                    <td style="font-family: Arial; width: 70px; padding: 10px; font-size: 18px;"> <center> Unit </center> </td>                                        
+                                    <td style="font-family: Arial; padding: 10px; font-size: 18px;">Item Description</th>
+                                </tr>
 
-                                <?php  
-                                    $sql1 = "SELECT URS.URS_PURPOSE, URS.URS_NO, URS.URS_ID, URS.URS_REQUEST_DATE, O.O_NAME, URSTM.URSTM_STATUS_TO_MAIN, UR.UR_UNIT, URABPO.URA_QUANTITY, ALS.AL_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset_library` AS ALS ON UR.AL_ID = ALS.AL_ID WHERE URS.URS_ID = $ids ORDER BY URS.URS_APPROVED_DATE DESC";
+                            <?php  
+                                $sql1 = "SELECT URS.URS_PURPOSE, URS.URS_NO, URS.URS_ID, URS.URS_REQUEST_DATE, O.O_NAME, URSTM.URSTM_STATUS_TO_MAIN, UR.UR_UNIT, URABPO.URA_QUANTITY, ALS.AL_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID INNER JOIN `ams_r_asset_library` AS ALS ON UR.AL_ID = ALS.AL_ID WHERE URS.URS_ID = $ids ORDER BY URS.URS_APPROVED_DATE DESC";
 
-                                    $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+                                $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
-                                    while($row1 = mysqli_fetch_assoc($result1))
-                                    {
-                                        $requestname = $row1['AL_NAME'];
-                                        $requestunit = $row1['UR_UNIT'];
-                                        $requestqty = $row1['URA_QUANTITY'];
-                                ?>
+                                while($row1 = mysqli_fetch_assoc($result1))
+                                {
+                                    $requestname = $row1['AL_NAME'];
+                                    $requestunit = $row1['UR_UNIT'];
+                                    $requestqty = $row1['URA_QUANTITY'];
+                            ?>
 
-                                    <tr>
-                                        <td> <?php echo $requestname; ?> </td>
-                                        <td> <?php echo $requestunit; ?> </td>
-                                        <td> <?php echo $requestqty; ?> </td>
-                                    </tr>
+                                <tr>
+                                    <td style="font-family: Arial; padding: 10px;"> <center> <?php echo $requestqty; ?> </center> </td>                                        
+                                    <td style="font-family: Arial; padding: 10px;"> <center> <?php echo $requestunit; ?> </center> </td>                                        
+                                    <td style="font-family: Arial; padding: 10px;"> <?php echo $requestname; ?> </td>
+                                </tr>
 
                                 <?php
                                     }
                                 ?>
-
-                                </tbody>
                             </table>
+                            
+                            <p style="margin-top: -9px;"></p>
+                            
+                            <table style="width: 100%;" border="1">
+                                <tr>
+                                    <td style="font-family: Arial; padding: 10px;">
+                                        <h5>Purpose: <u><strong> <?php echo $urspurpose; ?> </strong></u></h5>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="margin-top: -9px;"></p>
+                            
+                            <table style="width: 100%;" border="1">                                
+                                <tr>
+                                    <td style="font-family: Arial; padding: 5px; width: 20%"></td>
+                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Requested By: </em> </center> </td>
+                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Approved By: </em> </center> </td>
+                                </tr>
 
-                            <br>
-                            <br>
-                            <br>
-                            <span class="pull-right">
-                                <label>Approved By: </label> <u> <?php echo $_SESSION['mysesi']; ?> </u> <br>
-                            </span>
-                            <br>                            
-                            <span class="pull-right" style="margin-right: -140px;">
+                            <?php  
+                                $sqlty = "SELECT * FROM ams_r_employee_profile WHERE EP_TYPE = 'Director' AND EP_STATUS = 'Active'";
+
+                                $resultty = mysqli_query($connection, $sqlty) or die("Bad Query: $sqlty");
+
+                                while($rowty = mysqli_fetch_assoc($resultty))
+                                {                              
+                                    $fnamety = $rowty['EP_FNAME'];
+                                    $mnamety = $rowty['EP_MNAME'];
+                                    $lnamety = $rowty['EP_LNAME'];
+                                    $eptypety = $rowty['EP_TYPE']; 
+                                    $wholenamety = $fnamety.' '.$mnamety.' '.$lnamety; 
+                            ?>
+
+                                <tr>                                    
+                                    <td style="font-family: Arial; padding: 5px;">Signature :</td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                </tr>
+
+                                <tr>                                    
+                                    <td style="font-family: Arial; padding: 5px;">Printed Name :</td>
+                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($wholenamety) ?> </strong> </center> </td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                </tr>
+
+                                <tr>                                    
+                                    <td style="font-family: Arial; padding: 5px;">Designation :</td>
+                                    <td style="font-family: Arial; padding: 5px;"> <center> <?php echo $eptypety; ?> </center> </td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                </tr>
+
+                            <?php 
+                                }
+                            ?>
+
+                            </table> 
+<!-- 
                                 <label> <?php echo $_SESSION['mytype']; ?> </label>
-                            </span>
+                                Approved By: <u> <?php echo $_SESSION['mysesi']; ?> </u> -->
+                        
                             
                         </div>
                     </section>

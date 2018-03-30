@@ -99,7 +99,7 @@
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
+                <i class="fa fa-comment-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
             
@@ -154,6 +154,19 @@
 
         </li>
         <!-- notification dropdown end -->
+
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-warning"></i>
+                <span class="badge bg-warning count2"></span>
+            </a>
+        </li>
+
+        <li id="" class="">
+            <a style="background-color: white;">
+                <?php echo $_SESSION['mytype']; ?>
+            </a>
+        </li>
     </ul>
     <!--  notification end -->
 </div>
@@ -184,7 +197,6 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -216,9 +228,9 @@
                 <span>Requests</span>
             </a>
             <ul class="sub">
-                <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li><a href="POPPMP.php">[ PPMP Request ]</a></li>  
-                <li><a href="PORequestToMain.php">Request To Main</a></li>                 
+                <li><a href="PODURequests.php">Departmental User Requests</a></li>                        
+                <li><a href="PORequestToMain.php">Request From Main</a></li>
+                <li><a href="POPPMP.php">PPMP</a></li>                 
             </ul>
         </li>
         <li>
@@ -239,7 +251,7 @@
                 <span>Maintenance</span>
             </a>
             <ul class="sub">
-                <li><a href="POMaintenanceYearly.php">[ Maintenance Yearly ]</a></li>
+                <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
                 <li class="active"><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
             </ul>
         </li>
@@ -255,9 +267,9 @@
                 <span>Reports</span>
             </a>
             <ul class="sub">
-                <li><a href="PORequestSlip.php">Request Slip</a></li> 
-                <li><a href="POPPMPReport.php">[ PPMP Report ]</a></li>   
-                <li><a href="POPar.php">Property Acknowledgement Receipt</a></li>
+                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                <li><a href="POPPMPReport.php">PPMP Report</a></li>   
+                <li><a href="POPar.php">Property Accountability Receipt</a></li>
                 <li><a href="POPtr.php">Property Transfer Report</a></li>   
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>

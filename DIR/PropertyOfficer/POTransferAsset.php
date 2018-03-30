@@ -62,7 +62,7 @@
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="fa fa-bell-o"></i>
+                            <i class="fa fa-comment-o"></i>
                             <span class="badge bg-warning count"></span>
                         </a>
                             
@@ -117,6 +117,18 @@
 
                     </li>
                     <!-- notification dropdown end -->
+                    <li id="header_notification_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="fa fa-warning"></i>
+                            <span class="badge bg-warning count2"></span>
+                        </a>
+                    </li>
+
+                    <li id="" class="">
+                        <a style="background-color: white;">
+                            <?php echo $_SESSION['mytype']; ?>
+                        </a>
+                    </li>
                 </ul>
                 <!--  notification end -->
             </div>
@@ -376,7 +388,9 @@
                                                     }
                                                 ?>
 
-                                                    <a class="btn btn-success" id="assignbtn" data-toggle="modal" href="#ModalAssign">Transfer</a>
+                                                    <a class="btn btn-success" id="assignbtn2">Transfer</a>
+
+                                                    <a class="btn btn-success hidden" id="assignbtn" data-toggle="modal" href="#ModalAssign">Transfer</a>
 
                                             </tbody>
                                     </table>
@@ -548,7 +562,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--script for this page only-->
-    <script src="OrganizationCompliance.js"></script>
+    <script src="POTransferAsset/OrganizationCompliance.js"></script>
 
     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="ModalAssign" class="modal fade">
         <div class="modal-dialog">
@@ -620,14 +634,14 @@
                             <div class="row group">  
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Date Assign:</label>
+                                        <label>Date of Transfer:</label>
                                         <input type="date" name="" id="getdate" class="form-control" style="color: black;">
                                     </div>
                                 </div>
 
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label>Person will receive:</label>
+                                        <label>Bearer / Authorized Receiver:</label>
                                         <input type="text" id="getnameofreceiver" maxlength="150" class="form-control" style="color: black;">
                                     </div>
                                 </div>
@@ -648,7 +662,7 @@
                     </div>
 
                     <button class="btn btn-success" id="btnsend" type="button">Transfer</button>
-                    <button data-dismiss="modal" class="btn btn-default" id="" type="button">Close</button>
+                    <button data-dismiss="modal" class="btn btn-default" id="ggss" type="button">Close</button>
 
                 </div>
 
@@ -657,6 +671,54 @@
     </div>
 
     <script type="text/javascript" src="../../js/sweetalert/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#ggss').click(function() {                                
+                document.getElementById('getsel').selectedIndex = "0";
+                document.getElementById('getdate').value = "";
+                document.getElementById('getreason').value = "";
+                document.getElementById('getnameofreceiver').value = "";
+            });
+
+            $('#assignbtn2').click(function() {
+
+                var getthecnt = document.getElementById('getcount').value;
+                var ck = '';
+                var filltable = '';
+                var noofchecked = 0;
+
+                for (var z = getthecnt; z > 0; z--) {
+
+                    var ck = 'chkvalsz' + z;
+                    if (document.getElementById(ck).checked) {
+                        var idz = document.getElementById('getids' + z).innerText;
+                        var statz = document.getElementById('origstats' + z).innerText;
+                        var descz = document.getElementById('origdescs' + z).innerText;
+                        var datez = document.getElementById('origdates' + z).innerText;
+                        filltable = filltable + '<tr><td class="hidden">' + idz + '</td><td>' + statz + '</td><td>' + descz + '</td><td>' + datez + '</td></tr>';
+                        noofchecked = noofchecked + 1;
+                        
+                    }
+                    document.getElementById('newmodalget').innerHTML = filltable;                    
+                }
+                // alert(noofchecked);
+
+                if (noofchecked == 0) 
+                {
+                    // alert('tago');
+                    swal("Please select atleast one item/asset.", "To transfer item/asset please select atleast one.", "warning");
+                }
+                else
+                {
+                    // alert('labas modal');
+                    $('#assignbtn').click();
+                }
+
+            });
+        });
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -696,11 +758,96 @@
                 }
             });
 
+            $('#getsel').click(function(e) {
+                document.getElementById('getsel').options[0].innerText = "";
+                document.getElementById('getsel').style.borderColor = "#00A8B3";
+                document.getElementById('getsel').style.color = "black";
+            });
+
+            $('#getsel').blur(function(e) {
+                document.getElementById('getsel').options[0].innerText = "";
+                document.getElementById('getsel').style.borderColor = "#E2E2E4";
+                document.getElementById('getsel').style.color = "black";
+            });
+
+            $('#getdate').click(function(e) {
+                document.getElementById('getdate').style.borderColor = "#00A8B3";
+                document.getElementById('getdate').style.color = "black";
+
+            });
+
+            $('#getdate').blur(function(e) {
+                document.getElementById('getdate').style.borderColor = "#E2E2E4";
+                document.getElementById('getdate').style.color = "black";
+            });
+
+            $('#getnameofreceiver').click(function(e) {
+                document.getElementById('getnameofreceiver').style.borderColor = "#00A8B3";
+                document.getElementById('getnameofreceiver').style.color = "black";
+
+            });
+
+            $('#getnameofreceiver').blur(function(e) {
+                document.getElementById('getnameofreceiver').style.borderColor = "#E2E2E4";
+                document.getElementById('getnameofreceiver').style.color = "black";
+            });
+
+            $('#getreason').click(function(e) {
+                document.getElementById('getreason').style.borderColor = "#00A8B3";
+                document.getElementById('getreason').style.color = "black";
+
+            });
+
+            $('#getreason').blur(function(e) {
+                document.getElementById('getreason').style.borderColor = "#E2E2E4";
+                document.getElementById('getreason').style.color = "black";
+            });
+
             $('#btnsend').click(function(e) {
                 
                 e.preventDefault();
 
-                swal({
+                var nameofcurruser = document.getElementById('getthenameofuser').innerText;
+                var reason = document.getElementById('getreason').value;
+                var nameofreceiver = document.getElementById('getnameofreceiver').value;
+                var gdate = document.getElementById('getdate').value;
+
+                var getthecnt = document.getElementById('getcount').value;
+                var e = document.getElementById('getsel');
+                var get = e.options[e.selectedIndex].value;
+
+                if (!Date.parse(gdate) || get == "" || nameofreceiver == "" || reason == "") 
+                {
+                    if (document.getElementById('getsel').options[e.selectedIndex].value == '') 
+                    {
+                        document.getElementById('getsel').options[0].innerText = "Please Select";
+                        document.getElementById('getsel').focus();
+                        document.getElementById('getsel').style.borderColor = "#B94A48";
+                        document.getElementById('getsel').style.color = "#B94A48";
+                    }
+                    else if(!Date.parse(gdate))
+                    {
+                        document.getElementById('getdate').focus();
+                        document.getElementById('getdate').style.borderColor = "#B94A48";
+                        document.getElementById('getdate').style.color = "#B94A48";
+                    }
+                    else if(nameofreceiver == "")
+                    {
+                        document.getElementById('getnameofreceiver').focus();
+                        document.getElementById('getnameofreceiver').style.borderColor = "#B94A48";
+                        document.getElementById('getnameofreceiver').style.color = "#B94A48";
+                    }
+                    else if(reason == "")
+                    {
+                        document.getElementById('getreason').focus();
+                        document.getElementById('getreason').style.borderColor = "#B94A48";
+                        document.getElementById('getreason').style.color = "#B94A48";
+                    }
+                }
+                else
+                {
+                    swal({
+
                         title: "Are you sure you want to transfer out this/these asset?",
                         text: "The selected asset(s) will be transferred to the selected campus.",
                         type: "warning",
@@ -710,19 +857,11 @@
                         cancelButtonText: "No",
                         closeOnConfirm: false,
                         closeOnCancel: false
-                    },
 
-                    function(isConfirm) {
-                        if (isConfirm) {
+                        },
 
-                            var nameofcurruser = document.getElementById('getthenameofuser').innerText;
-                            var reason = document.getElementById('getreason').value;
-                            var nameofreceiver = document.getElementById('getnameofreceiver').value;
-                            var gdate = document.getElementById('getdate').value;
-
-                            var getthecnt = document.getElementById('getcount').value;
-                            var e = document.getElementById('getsel');
-                            var get = e.options[e.selectedIndex].value;
+                        function(isConfirm) {
+                        if (isConfirm) {                            
 
                             // alert(nameofcurruser);
                             // alert(reason);
@@ -787,6 +926,7 @@
                         }
 
                     });
+                }            
 
             });
 

@@ -62,7 +62,7 @@
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="fa fa-bell-o"></i>
+                            <i class="fa fa-comment-o"></i>
                             <span class="badge bg-warning count"></span>
                         </a>
                         
@@ -117,6 +117,19 @@
 
                     </li>
                     <!-- notification dropdown end -->
+
+                    <li id="header_notification_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="fa fa-warning"></i>
+                            <span class="badge bg-warning count2"></span>
+                        </a>
+                    </li>
+
+                    <li id="" class="">
+                        <a style="background-color: white;">
+                            <?php echo $_SESSION['mytype']; ?>
+                        </a>
+                    </li>
                 </ul>
                 <!--  notification end -->
             </div>
@@ -277,6 +290,7 @@
                                                 <tr>
                                                     <th style="width: 70px;" class="hidden">ID</th>
                                                     <th style="width: 90px"></th>
+                                                    <!-- <th style="width: 90px"><center><input type="checkbox" id="chkallhehe" class="checkbox form-control" style="width: 20px"></center></th> -->
                                                     <th style="width: 140px;">Acquisition Type</th>
                                                     <th style="width: 100px;">Status</th>
                                                     <th style="word-wrap: break-word;">Description</th>
@@ -782,7 +796,7 @@
                     </div>
 
                     <button class="btn btn-success" id="btnsend" type="button">Assign</button>
-                    <button data-dismiss="modal" class="btn btn-default" id="" type="button">Close</button>
+                    <button data-dismiss="modal" class="btn btn-default" id="ggss" type="button">Close</button>
 
                 </div>
 
@@ -831,6 +845,14 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+            // $('#chkallhehe').click(function() {
+            //     alert();
+            //     if (document.getElementById('chkallhehe').checked) 
+            //     {
+            //         document.getElementById('9').checked = true;
+            //     }
+            // });
+
             $('#assignbtn2').click(function() {
 
                 var getthecnt = document.getElementById('getcount').value;
@@ -871,6 +893,11 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
+            $('#ggss').click(function() {                                
+                document.getElementById('getsel').selectedIndex = "0";
+                document.getElementById('getdate').value = "";
+            });
 
             $('#assignbtn').click(function() {
 
