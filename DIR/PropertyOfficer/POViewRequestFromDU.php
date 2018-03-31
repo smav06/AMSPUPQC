@@ -343,7 +343,7 @@
                                     </div>
                                 </div>
 
-                                <!-- <input type='text' id="chatinput" onkeyup="myFunction()">
+                                <!-- <input type='text' id="chatinput" onkeyup="myFunctionxzc()">
 
                                 <input type='text' id="chatdisplay"> -->
 
@@ -413,7 +413,7 @@
                                                     <td> <?php echo $showunit; ?> </td>
                                                     <td> <p> <?php echo $showqty; ?> </p> </td>
 
-                                                    <td> <center> <input type="text" value="<?php echo $showqty; ?>" class="form-control" style="color: black;" onkeyup="myFunction()" id="chatinput<?php echo $i; ?>" required> </center> </td>                                               
+                                                    <td> <center> <input type="text" value="<?php echo $showqty; ?>" class="form-control" style="color: black;" onkeyup="myFunctionzxc()" id="chatinput<?php echo $i; ?>" required> </center> </td>                                               
 
                                                     <td> <?php echo $showreqperson; ?> </td>
                                                 </tr>
@@ -488,7 +488,7 @@
                                                     <td id="origreq<?php echo $i; ?>"> <?php echo $showlibname; ?> </td>
                                                     <td id="origunit<?php echo $i; ?>"> <?php echo $showunit; ?> </td>
                                                     <td id="origqty<?php echo $i; ?>"> <p id="chatdisplays<?php echo $i; ?>"> <?php echo $showqty; ?> </p> </td>
-                                                    <td> <center> <input type="text" value="<?php echo $showqty; ?>" min="1" max="<?php echo $showqty; ?>" class="form-control" style="color: black;" onkeyup="myFunction()" id="chatinput<?php echo $i; ?>"> </center> </td>
+                                                    <td> <center> <input type="text" value="<?php echo $showqty; ?>" min="1" max="<?php echo $showqty; ?>" class="form-control" style="color: black;" onkeyup="myFunctionzxc()" id="chatinput<?php echo $i; ?>"> </center> </td>
                                                     <td> <?php echo $showreqperson; ?> </td>
                                                 </tr>
 
@@ -738,7 +738,30 @@
 
 <script>
 
-function myFunction() {
+    function myFunction(id) {
+        var id = id;
+         // alert(id);
+
+         $.ajax({
+            type: 'POST',
+            url: 'UpdateNotifByClicked.php',
+            async: false,
+            data: {
+                _id: id
+            },
+            success: function(data2) {
+                // alert(data2);                              
+                // alert("tama");
+            },
+            error: function(response2) {
+                // alert(response2);  
+                // alert("mali");                                
+            }
+
+        });
+    }
+
+function myFunctionzxc() {
 
     var getthecnt = document.getElementById('getcount').value;
 

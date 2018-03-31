@@ -284,7 +284,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequestToMain.php">Requests To Main</a></li>
+                        <li><a href="PORequestToMain.php">Requests From Main</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -310,7 +310,7 @@
                                             <th style="display: none;"></th>
                                             <th style="">Requested By</th> 
                                             <th style="width: 140px;">Date Requested</th>
-                                            <th style="width: 130px;">Status To Main</th>
+                                            <th style="width: 145px;">Status From Main</th>
                                             <th style="width: 90px;"></th>
                                         </tr>
                                     </thead>

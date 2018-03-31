@@ -16,15 +16,19 @@
 
     $currentdate = date('Y-m-d');
 
-    $stmt2 = $dbh2->prepare("INSERT INTO ams_t_user_request_summary(URS_REQUEST_DATE, URS_PURPOSE, URS_NO) VALUES (?, ?, ?)");
+    $stmt2 = $dbh2->prepare("INSERT INTO ams_t_user_request_summary(URS_REQUEST_DATE, URS_PURPOSE, URS_NO, URS_URGENT_DATE, URS_URGENT_TYPE) VALUES (?, ?, ?, ?, ?)");
     $stmt2->bindParam(1, $getdate);
     $stmt2->bindParam(2, $purpose);
     $stmt2->bindParam(3, $ursno);
+    $stmt2->bindParam(4, $ursurgdate);
+    $stmt2->bindParam(5, $ursurgtype);
 
     $arr2 = $_POST;
     $getdate = $currentdate;
     $purpose = $arr2['urs_purpose'];
-    $ursno = $arr2['getthefinalno'];  
+    $ursno = $arr2['getthefinalno'];
+    $ursurgdate = $arr2['urs_dateurgent'];  
+    $ursurgtype = $arr2['urs_dateurgenttype'];
     $stmt2->execute();
 
     echo $getdate;

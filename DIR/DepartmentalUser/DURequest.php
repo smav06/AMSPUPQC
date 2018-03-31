@@ -243,7 +243,7 @@
                             <table class="display table table-bordered table-striped">                                
                                 <tr>
                                     <td>                            
-                                        <form action="InsertDURequest.php" method="POST">
+                                        <form action="InsertDURequest.php" method="POST" id="pnldonationdelay">
 
                                             <div class="form-content">
                                                 <div class="row">
@@ -282,12 +282,37 @@
 
                                                 ?>
 
-                                                <div class="form-group">
-                                                    <label>Purpose Of Request</label>                                                    
-                                                    
-                                                    <textarea class="form-control" name="urs_purpose" required="" style="resize: none; color: black;" maxlength="200"></textarea>
-                                                    
-                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="form-group">
+                                                            <label>Purpose Of Request</label>
+                                                            <textarea class="form-control" id="getpurpose" name="urs_purpose" required="" style="resize: none; color: black;" maxlength="200"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <?php  
+                                                        $currdateofdday = date('Y-m-d');
+                                                    ?>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Request Urgency</label>
+                                                            <select id="getsel" class="form-control" style="color: black;" required="">
+                                                                <option value="" disabled selected></option>
+                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +30 days')) ?>">Not Urgent (30 Days)</option>
+                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +15 days')) ?>">Urgent (15 Days)</option>
+                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +10 days')) ?>">Very Urgent (10 Days)</option>
+                                                            </select>
+
+                                                            <input type="text" name="urs_dateurgent" class="hidden">
+                                                            <input type="text" name="urs_dateurgenttype" class="hidden">
+
+                                                            <!-- <label>Request Urgency</label>
+                                                            <input type="date" name="urs_dateurgent" min="<?php echo $currdateofdday; ?>" max="2028-12-31" required="" style="color: black;" class="form-control"> -->
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
 
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -300,7 +325,7 @@
                                                     <div class="col-md-7">
                                                         <div class="form-group">
                                                             <label>Asset</label>
-                                                            <select name="AL_ID[]" class="form-control" style="color: black;" required="">
+                                                            <select name="AL_ID[]" id="AL_IDgg[]" class="form-control" style="color: black;" required="">
 
                                                            <!--  <select name="AL_ID[]" class="form-control" style="color: black;" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();' required=""> -->
 
@@ -335,10 +360,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Unit</label>
-                                                            <select name="UR_UNIT[]" class="form-control" style="color: black;" required="">
+                                                            <select name="UR_UNIT[]" id="UR_UNITgg[]" class="form-control" style="color: black;" required="">
                                                                 <option selected disabled value=""></option>
 
                                                                 <option value="Piece">Piece</option>
@@ -353,17 +378,17 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label>Quantity</label>
-                                                            <input style="color: black; padding-right: 2px;" type="number" name="UR_QUANTITY[]" class="form-control" required="" minlength="3" min="1" max="100" />
+                                                            <input style="color: black; padding-right: 2px;" type="number" name="UR_QUANTITY[]" id="UR_QUANTITYgg[]" class="form-control" required="" minlength="3" min="1" max="100" />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-7">
                                                         <div class="form-group">
                                                             <label>Request By</label>
-                                                            <select name="EP_ID[]" class="form-control" style="color: black;" required="">
+                                                            <select name="EP_ID[]" id="EP_IDgg[]" class="form-control" style="color: black;" required="">
                                                                 <option selected disabled value=""></option>
 
                                                             <?php  
@@ -412,7 +437,7 @@
                                                 </div>  
                                             </div>
                                             
-                                            <p><button type="submit" class="btn btn-success">Submit</button></p>
+                                            <p><button type="submit" onclick="delaySubmit(); return false;" class="btn btn-success">Submit</button></p>
 
                                         </form>  
                                     </td> 
@@ -441,6 +466,7 @@
                                         <th style="width: 130px;">Request No.</th>
                                         <th style="width: 130px;">Request Date</th> 
                                         <th style="">Purpose</th>
+                                        <th class="hidden"></th>
                                         <th style="width: 120px;">Status</th>
                                         <th style="width: 120px;" class="hidden"></th>
                                     </tr>
@@ -477,6 +503,7 @@
                                             {
                                         ?>
 
+                                        <th class="hidden">2</th>
                                         <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $ursdispstatus; ?> </p> </td>
 
                                         <?php  
@@ -485,6 +512,7 @@
                                             {
                                         ?>
 
+                                        <th class="hidden">3</th>
                                         <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $ursdispstatus; ?> </p> </td>
 
                                         <?php  
@@ -493,6 +521,7 @@
                                             {
                                         ?>
 
+                                        <th class="hidden">1</th>
                                         <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $ursdispstatus; ?> </p> </td>
 
                                         <?php  
@@ -684,7 +713,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--dynamic table initialization -->
-    <script src="../../js/dynamic_table_init.js"></script>
+    <script src="DURequest/dynamic_table_init.js"></script>
 
     <script src="../../js/iCheck/jquery.icheck.js"></script>
 
@@ -703,6 +732,71 @@
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script> 
 
     <script src="../../js/jquery.multifield.min.js"></script>
+
+    <script type="text/javascript">
+        function handleSubmit(){
+              document.getElementById("pnldonationdelay").submit();
+        }
+     
+        function delaySubmit(){ 
+
+            if (document.getElementById("getpurpose").value == '') 
+            {
+                document.getElementById("getpurpose").focus();
+            }
+            else if (document.getElementById("getsel").value == '') 
+            {
+                document.getElementById("getsel").focus();
+            }
+            else if (document.getElementById("AL_IDgg[]").value == '') 
+            {
+                document.getElementById("AL_IDgg[]").focus();
+            }
+            else if(document.getElementById("UR_UNITgg[]").value == '') 
+            {
+                document.getElementById("UR_UNITgg[]").focus();
+            }
+            else if(document.getElementById("UR_QUANTITYgg[]").value == '')     
+            {
+                document.getElementById("UR_QUANTITYgg[]").focus();
+            }
+            else if(document.getElementById("EP_IDgg[]").value == '')     
+            {
+                document.getElementById("EP_IDgg[]").focus();
+            }
+            else
+            {
+                swal("Request Successfully Sent!", "Please wait for the property officer's evaluation of your request.", "success");
+                window.setTimeout(handleSubmit, 2500); 
+            }
+
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#getsel').on('change',function(){                        
+                $('input[name=urs_dateurgent]').val($(this).val());
+
+                $('input[name=urs_dateurgenttype]').val(document.getElementById('getsel').options[getsel.selectedIndex].    innerText);            
+
+                if (document.getElementById('getsel').options[getsel.selectedIndex].innerText == 'Not Urgent (30 Days)') 
+                {
+                    $('input[name=urs_dateurgenttype]').val("Not Urgent");
+                }
+                else if (document.getElementById('getsel').options[getsel.selectedIndex].innerText == 'Urgent (15 Days)') 
+                {
+                    $('input[name=urs_dateurgenttype]').val("Urgent");
+                }
+                else if (document.getElementById('getsel').options[getsel.selectedIndex].innerText == 'Very Urgent (10 Days)') 
+                {
+                    $('input[name=urs_dateurgenttype]').val("Very Urgent");
+                }
+
+            });
+        });
+    </script>
+
     <script>
 
         $('.form-content').multifield({

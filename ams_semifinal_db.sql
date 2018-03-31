@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2018 at 12:33 AM
+-- Generation Time: Mar 31, 2018 at 11:19 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -47,19 +47,19 @@ CREATE TABLE `ams_r_asset` (
 --
 
 INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQUISITION_TYPE`, `A_AVAILABILITY`, `A_DISPOSAL_STATUS`, `AL_ID`, `C_ID`, `URS_ID`, `PPMP_ID`) VALUES
-(1, 'Fujidenzo Aircon', '2018-03-01', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
+(1, 'Fujidenzo Aircon', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
 (2, 'ASUS ROG Computer', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
-(3, 'A4Tech Office Keyboard', '2018-03-03', 'Serviceable', 'Donation', 'Assigned', 0, 4, NULL, NULL, NULL),
+(3, 'A4Tech Office Keyboard', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
 (4, 'Acer Predator Gaming Laptop', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
 (5, 'Hanabishi Stand Fan', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
-(6, 'A4Tech Home Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Assigned', 0, 5, NULL, NULL, NULL),
-(7, 'LG LED TV', '2018-03-07', 'Serviceable', 'Donation', 'Assigned', 0, 7, NULL, NULL, NULL),
-(8, 'Gambel 2MP CCTV', '2018-03-08', 'Serviceable', 'Donation', 'Assigned', 0, 8, NULL, NULL, NULL),
-(9, 'Silvertee Home Speaker', '2018-03-09', 'Serviceable', 'Donation', 'Assigned', 0, 9, NULL, NULL, NULL),
-(10, 'EPSON Projector', '2018-03-10', 'Serviceable', 'Donation', 'Assigned', 0, 10, NULL, NULL, NULL),
-(11, 'Epson Printer', '2018-03-11', 'Serviceable', 'Donation', 'Assigned', 0, 11, NULL, NULL, NULL),
-(12, 'Dell Laptop', '2018-03-15', 'Serviceable', 'Donation', 'Assigned', 0, 2, NULL, NULL, NULL),
-(13, 'Standard Wall Fan', '2018-03-14', 'Serviceable', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
+(6, 'A4Tech Home Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
+(7, 'LG LED TV', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(8, 'Gambel 2MP CCTV', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
+(9, 'Silvertee Home Speaker', '2018-03-09', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(10, 'EPSON Projector', '2018-03-10', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(11, 'Epson Printer', '2018-03-11', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
+(12, 'Dell Laptop', '2018-03-15', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
+(13, 'Standard Wall Fan', '2018-03-14', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
 (14, 'Keymatt Mechanical Keyboard', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
 (15, 'Logitech Gaming Mouse', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
 (16, 'Iwata Aircool Aircon', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
@@ -74,23 +74,23 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (25, 'Asahi Industrial Fan', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
 (26, 'Gigaware Keypress gaming keyboard', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
 (27, 'RedDragon Mirage Gaming Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
-(28, 'QUBE 1.5HP Inverter Aircon', '2018-03-07', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
+(28, 'QUBE 1.5HP Inverter Aircon', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
 (29, 'Itechie 24\" Full HD LED TV', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
 (30, 'iSAFE High Definition DOME and BULLET CCTV', '2018-03-10', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(31, 'Konzert Karaoke Speaker System Speaker', '2018-03-12', 'Serviceable', 'Donation', 'Assigned', 0, 9, NULL, NULL, NULL),
+(31, 'Konzert Karaoke Speaker System Speaker', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
 (32, 'Brand Panther Projector Home LED-86', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
-(33, 'Fuji Xerox P255 DW Brand New Mono Laser Printer', '2018-03-15', 'Serviceable', 'Donation', 'Assigned', 0, 11, NULL, NULL, NULL),
+(33, 'Fuji Xerox P255 DW Brand New Mono Laser Printer', '2018-03-15', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
 (34, 'Nighthawk Entry Level Gaming PC Package', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
-(35, 'Acer Aspire ES1 331 P7AG Laptop', '2018-03-17', 'Serviceable', 'Donation', 'Assigned', 0, 2, NULL, NULL, NULL),
+(35, 'Acer Aspire ES1 331 P7AG Laptop', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
 (36, 'CPT Hanabishi Windmill18GF Ground Fan', '2018-03-18', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
-(37, 'K611 Fighter Fantech RGB Backlit Full Keys Gaming Keyboard', '2018-03-01', 'Serviceable', 'Donation', 'Assigned', 0, 4, NULL, NULL, NULL),
+(37, 'K611 Fighter Fantech RGB Backlit Full Keys Gaming Keyboard', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
 (38, 'Optical Mouse Double Click Usb Interface OP620D', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
-(39, 'Eureka EWA-0.6HP Window Type Air Conditioner', '2018-03-04', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
-(40, 'Avision 32\" HD Ready LED TV Black', '2018-03-03', 'Serviceable', 'Donation', 'Assigned', 0, 7, NULL, NULL, NULL),
+(39, 'Eureka EWA-0.6HP Window Type Air Conditioner', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
+(40, 'Avision 32\" HD Ready LED TV Black', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
 (41, '	\r\nWireless IP Camera CCTV WiFi Home Video Surveillance Camera', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(42, 'Promac HAS-6530BT Home Audio System with Bluetooth', '2018-03-06', 'Serviceable', 'Donation', 'Assigned', 0, 9, NULL, NULL, NULL),
+(42, 'Promac HAS-6530BT Home Audio System with Bluetooth', '2018-03-06', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
 (43, 'Acer ES-13D 3600 Ansi Lumens Projector', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
-(44, 'Xprinter 58mm Thermal Receipt Printer XP-58IIH', '2018-03-08', 'Serviceable', 'Donation', 'Assigned', 0, 11, NULL, NULL, NULL),
+(44, 'Xprinter 58mm Thermal Receipt Printer XP-58IIH', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
 (45, 'Digital Age Fortress AMD A4 6300 Entry Level Computer Package', '2018-03-11', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (46, 'Nextbook Flexx9 8.9\" Intel Atom Quad-Core 1GB Blue', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
 (47, 'Imarflex Digital Eco Mist Fan', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
@@ -100,7 +100,8 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (51, 'Ace 32 Slim LED TV Black LED', '2018-03-18', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
 (52, 'Immix Home Office Buisiness Security 10 Megapixel Camera Kit Black', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
 (53, 'Kevler EON 8 8 250W Plastic Moulded Speaker', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(54, 'UC28 Mini Portable Projector Black With Free Assorted Color Bluetooth Speaker', '2018-03-02', 'Serviceable', 'Donation', 'Assigned', 0, 10, NULL, NULL, NULL);
+(54, 'UC28 Mini Portable Projector Black With Free Assorted Color Bluetooth Speaker', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(55, 'computer na matindi', '2018-03-31', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -161,15 +162,16 @@ INSERT INTO `ams_r_campus` (`C_ID`, `C_CODE`, `C_NAME`) VALUES
 
 CREATE TABLE `ams_r_disposal_location` (
   `DL_ID` int(11) NOT NULL,
-  `DL_NAME` varchar(150) NOT NULL
+  `DL_NAME` varchar(150) NOT NULL,
+  `DL_DESCRIPTION` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ams_r_disposal_location`
 --
 
-INSERT INTO `ams_r_disposal_location` (`DL_ID`, `DL_NAME`) VALUES
-(1, 'Warehouse');
+INSERT INTO `ams_r_disposal_location` (`DL_ID`, `DL_NAME`, `DL_DESCRIPTION`) VALUES
+(1, 'Warehouse', 'This is the disposal location of destroyed/damaged assets/equipment/items near rothlener building.');
 
 -- --------------------------------------------------------
 
@@ -196,11 +198,12 @@ CREATE TABLE `ams_r_employee_profile` (
 --
 
 INSERT INTO `ams_r_employee_profile` (`EP_ID`, `EP_FNAME`, `EP_MNAME`, `EP_LNAME`, `EP_GENDER`, `EP_MOBILE`, `EP_EMAIL`, `EP_TYPE`, `EP_STATUS`, `EP_PICTURE`, `O_ID`) VALUES
-(1, 'Bryan', 'B.', 'Cortesiano', 'Male', NULL, 'cortesianobryanthegreat@gmail.com', 'Administrator', 'Active', 'images/EmployePictures/bryanprofilepic.jpg', NULL),
+(1, 'Shiela Mae', NULL, 'Velga', 'Female', NULL, 'shiela@gmail.com', 'Administrator', 'Active', 'images/EmployePictures/shiela.jpg', NULL),
 (2, 'James Vincent', NULL, 'Nicolas', 'Male', NULL, 'ishallbejv@gmail.com', 'Departmental User', 'Active', 'images/EmployePictures/james.jpg', 1),
-(3, 'Shiela Mae', NULL, 'Velga', 'Female', NULL, 'shiela@gmail.com', 'Property Officer', 'Active', 'images/EmployePictures/shiela.jpg', 2),
+(3, 'Bryan', 'B.', 'Cortesiano', 'Male', NULL, 'cortesianobryanthegreat@gmail.com', 'Property Officer', 'Active', 'images/EmployePictures/bryanprofilepic.jpg', 2),
 (4, 'Esperato', NULL, 'Illaida', 'Male', NULL, 'espe@gmail.com', 'Departmental User', 'Active', 'images/EmployePictures/espe.jpg', 3),
-(5, 'Dan Joseph', NULL, 'Madrazo', 'Male', NULL, 'djmadrazo@gmail.com', 'Employee', 'Active', 'images/EmployePictures/danjo.jpg', 1);
+(5, 'Dan Joseph', NULL, 'Madrazo', 'Male', NULL, 'djmadrazo@gmail.com', 'Employee', 'Active', 'images/EmployePictures/danjo.jpg', 1),
+(6, 'Firmo', 'A.', 'Esguerra', 'Male', NULL, 'FirmoEsguerra@gmail.com', 'Director', 'Active', 'images/EmployePictures/default.png	', NULL);
 
 -- --------------------------------------------------------
 
@@ -333,15 +336,6 @@ CREATE TABLE `ams_t_par` (
   `PAR_ISSUED_BY` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ams_t_par`
---
-
-INSERT INTO `ams_t_par` (`PAR_ID`, `PAR_NO`, `PAR_DATE`, `PAR_ISSUED_BY`) VALUES
-(1, 'PAR-2018-0001', '2018-03-24', 'Shiela Mae Velga'),
-(2, 'PAR-2018-0002', '2018-03-20', 'Shiela Mae Velga'),
-(3, 'PAR-2018-0003', '2018-03-24', 'Shiela Mae Velga');
-
 -- --------------------------------------------------------
 
 --
@@ -357,32 +351,6 @@ CREATE TABLE `ams_t_par_sub` (
   `PAR_ID` int(11) NOT NULL,
   `EP_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ams_t_par_sub`
---
-
-INSERT INTO `ams_t_par_sub` (`PARS_ID`, `PARS_CANCEL`, `PARS_CANCEL_DATE`, `PARS_CANCEL_BY`, `A_ID`, `PAR_ID`, `EP_ID`) VALUES
-(1, 0, NULL, NULL, 1, 1, 2),
-(2, 0, NULL, NULL, 10, 1, 2),
-(3, 0, NULL, NULL, 11, 1, 2),
-(4, 0, NULL, NULL, 13, 1, 2),
-(5, 0, NULL, NULL, 12, 1, 2),
-(6, 0, NULL, NULL, 54, 2, 5),
-(7, 0, NULL, NULL, 6, 2, 5),
-(8, 0, NULL, NULL, 7, 2, 5),
-(9, 0, NULL, NULL, 8, 2, 5),
-(10, 0, NULL, NULL, 9, 2, 5),
-(11, 0, NULL, NULL, 37, 3, 4),
-(12, 0, NULL, NULL, 40, 3, 4),
-(13, 0, NULL, NULL, 3, 3, 4),
-(14, 0, NULL, NULL, 39, 3, 4),
-(15, 0, NULL, NULL, 42, 3, 4),
-(16, 0, NULL, NULL, 28, 3, 4),
-(17, 0, NULL, NULL, 44, 3, 4),
-(18, 0, NULL, NULL, 31, 3, 4),
-(19, 0, NULL, NULL, 33, 3, 4),
-(20, 0, NULL, NULL, 35, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -530,21 +498,18 @@ CREATE TABLE `ams_t_user_request` (
 --
 
 INSERT INTO `ams_t_user_request` (`UR_ID`, `UR_UNIT`, `UR_QUANTITY`, `UR_STATUS`, `UR_APPROVED_DATE_BY_PO`, `UR_REJECT_DATE_BY_PO`, `URS_ID`, `AL_ID`, `EP_ID`) VALUES
-(1, 'Set', 5, 'Approved', '2018-03-24', NULL, 1, 1, 2),
-(2, 'Set', 5, 'Approved', '2018-03-24', NULL, 1, 2, 5),
-(3, 'Piece', 5, 'Approved', '2018-03-24', NULL, 1, 3, 2),
-(4, 'Piece', 1, 'Reject', NULL, '2018-03-24', 2, 1, 5),
-(5, 'Set', 1, 'Pending', NULL, NULL, 3, 2, 2),
-(6, 'Set', 2, 'Pending', NULL, NULL, 4, 2, 2),
-(7, 'Piece', 5, 'Pending', NULL, NULL, 5, 3, 2),
-(8, 'Set', 2, 'Pending', NULL, NULL, 6, 1, 5),
-(9, 'Set', 5, 'Pending', NULL, NULL, 7, 5, 5),
-(10, 'Set', 1, 'Approved', '2018-03-24', NULL, 8, 8, 5),
-(11, 'Piece', 5, 'Approved', '2018-03-24', NULL, 9, 11, 4),
-(12, 'Piece', 5, 'Approved', '2018-03-24', NULL, 9, 10, 4),
-(13, 'Set', 5, 'Reject', NULL, '2018-03-24', 9, 9, 4),
-(14, 'Piece', 5, 'Reject', NULL, '2018-03-24', 9, 8, 4),
-(15, 'Piece', 5, 'Reject', NULL, '2018-03-24', 9, 6, 4);
+(1, 'Piece', 1, 'Reject', NULL, '2018-03-31', 1, 11, 5),
+(2, 'Set', 1, 'Approved', '2018-03-31', NULL, 2, 9, 2),
+(3, 'Piece', 1, 'Pending', NULL, NULL, 3, 4, 2),
+(4, 'Set', 1, 'Approved', '2018-03-31', NULL, 4, 3, 2),
+(5, 'Set', 4, 'Pending', NULL, NULL, 5, 6, 5),
+(6, 'Piece', 5, 'Pending', NULL, NULL, 6, 2, 5),
+(7, 'Set', 5, 'Pending', NULL, NULL, 7, 6, 5),
+(8, 'Piece', 1, 'Reject', NULL, '2018-03-31', 8, 11, 2),
+(9, 'Piece', 1, 'Reject', NULL, '2018-03-31', 8, 10, 2),
+(10, 'Set', 1, 'Reject', NULL, '2018-03-31', 8, 9, 2),
+(11, 'Piece', 2, 'Reject', NULL, '2018-03-31', 8, 3, 2),
+(12, 'Piece', 1, 'Reject', NULL, '2018-03-31', 8, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -578,12 +543,8 @@ CREATE TABLE `ams_t_user_request_approved_by_po` (
 --
 
 INSERT INTO `ams_t_user_request_approved_by_po` (`URABPO_ID`, `URABPO_STATUS`, `URABPO_APPROVED_DATE_BY_MAIN`, `URABPO_REJECT_DATE_BY_MAIN`, `URA_QUANTITY`, `UR_ID`, `URS_ID`) VALUES
-(1, 'Pending', NULL, NULL, 1, 3, 1),
-(2, 'Pending', NULL, NULL, 1, 2, 1),
-(3, 'Pending', NULL, NULL, 1, 1, 1),
-(4, 'Pending', NULL, NULL, 1, 10, 8),
-(5, 'Pending', NULL, NULL, 2, 12, 9),
-(6, 'Pending', NULL, NULL, 2, 11, 9);
+(1, 'Pending', NULL, NULL, 1, 2, 2),
+(2, 'Pending', NULL, NULL, 1, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -605,9 +566,8 @@ CREATE TABLE `ams_t_user_request_status_to_main` (
 --
 
 INSERT INTO `ams_t_user_request_status_to_main` (`URSTM_ID`, `URSTM_STATUS_TO_MAIN`, `URSTM_APPROVED_DATE_BY_MAIN`, `URSTM_REJECT_DATE_BY_MAIN`, `URSTM_REMARKS`, `URS_ID`) VALUES
-(1, 'Pending', NULL, NULL, NULL, 1),
-(2, 'Pending', NULL, NULL, NULL, 8),
-(3, 'Pending', NULL, NULL, NULL, 9);
+(1, 'Pending', NULL, NULL, NULL, 2),
+(2, 'Pending', NULL, NULL, NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -624,6 +584,8 @@ CREATE TABLE `ams_t_user_request_summary` (
   `URS_APPROVED_DATE` date DEFAULT NULL,
   `URS_REJECT_DATE` date DEFAULT NULL,
   `URS_REMARKS` varchar(350) DEFAULT NULL,
+  `URS_URGENT_DATE` date NOT NULL,
+  `URS_URGENT_TYPE` varchar(25) NOT NULL,
   `URS_VIEW_BY_USER` int(11) NOT NULL DEFAULT '0',
   `URS_VIEW_BY_PO` int(11) NOT NULL DEFAULT '0',
   `URS_VIEW_BY_USER_MAIN` int(11) NOT NULL DEFAULT '0',
@@ -634,16 +596,15 @@ CREATE TABLE `ams_t_user_request_summary` (
 -- Dumping data for table `ams_t_user_request_summary`
 --
 
-INSERT INTO `ams_t_user_request_summary` (`URS_ID`, `URS_NO`, `URS_REQUEST_DATE`, `URS_PURPOSE`, `URS_STATUS_TO_PO`, `URS_APPROVED_DATE`, `URS_REJECT_DATE`, `URS_REMARKS`, `URS_VIEW_BY_USER`, `URS_VIEW_BY_PO`, `URS_VIEW_BY_USER_MAIN`, `URS_VIEW_CLICKED`) VALUES
-(1, 'REQ-2018-0001', '2018-03-24', 'Need lang po.', 'Approved', '2018-03-24', NULL, 'Ok.', 0, 1, 0, 1),
-(2, 'REQ-2018-0002', '2018-03-24', 'g', 'Reject', NULL, '2018-03-24', 'yoko', 0, 1, 0, 1),
-(3, 'REQ-2018-0003', '2018-03-24', 'h', 'Pending', NULL, NULL, NULL, 0, 1, 0, 0),
-(4, 'REQ-2018-0004', '2018-03-24', '1', 'Pending', NULL, NULL, NULL, 0, 1, 0, 0),
-(5, 'REQ-2018-0005', '2018-03-24', '123', 'Pending', NULL, NULL, NULL, 0, 1, 0, 0),
-(6, 'REQ-2018-0006', '2018-03-24', '4121', 'Pending', NULL, NULL, NULL, 0, 1, 0, 0),
-(7, 'REQ-2018-0007', '2018-03-24', '5', 'Pending', NULL, NULL, NULL, 0, 1, 0, 0),
-(8, 'REQ-2018-0008', '2018-03-24', 'ttrrt', 'Approved', '2018-03-24', NULL, 'Hehe', 0, 1, 0, 1),
-(9, 'REQ-2018-0009', '2018-03-24', 'Badly Need It.', 'Approved', '2018-03-24', NULL, 'hi', 0, 1, 0, 1);
+INSERT INTO `ams_t_user_request_summary` (`URS_ID`, `URS_NO`, `URS_REQUEST_DATE`, `URS_PURPOSE`, `URS_STATUS_TO_PO`, `URS_APPROVED_DATE`, `URS_REJECT_DATE`, `URS_REMARKS`, `URS_URGENT_DATE`, `URS_URGENT_TYPE`, `URS_VIEW_BY_USER`, `URS_VIEW_BY_PO`, `URS_VIEW_BY_USER_MAIN`, `URS_VIEW_CLICKED`) VALUES
+(1, 'REQ-2018-0001', '2018-03-31', '1', 'Reject', NULL, '2018-03-31', 'reject', '2018-04-10', 'Very Urgent', 0, 1, 0, 1),
+(2, 'REQ-2018-0002', '2018-03-31', '2', 'Approved', '2018-03-31', NULL, 'ok', '2018-04-15', 'Urgent', 0, 1, 0, 0),
+(3, 'REQ-2018-0003', '2018-03-31', 'hehe', 'Pending', NULL, NULL, NULL, '2018-04-30', 'Not Urgent', 0, 1, 0, 0),
+(4, 'REQ-2018-0004', '2018-03-31', 'ajeje', 'Approved', '2018-03-31', NULL, 'oks', '2018-04-30', 'Not Urgent', 0, 1, 0, 1),
+(5, 'REQ-2018-0005', '2018-03-31', 'orgent', 'Pending', NULL, NULL, NULL, '2018-04-15', 'Urgent', 0, 1, 0, 0),
+(6, 'REQ-2018-0006', '2018-03-31', 'berierjent', 'Pending', NULL, NULL, NULL, '2018-04-10', 'Very Urgent', 0, 1, 0, 0),
+(7, 'REQ-2018-0007', '2018-03-31', 'adasdasdad', 'Pending', NULL, NULL, NULL, '2018-04-15', 'Urgent', 0, 1, 0, 1),
+(8, 'REQ-2018-0008', '2018-03-31', 'HALA KA.', 'Reject', NULL, '2018-03-31', 'reject', '2018-04-10', 'Very Urgent', 0, 1, 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -854,7 +815,7 @@ ALTER TABLE `ams_t_user_request_summary`
 -- AUTO_INCREMENT for table `ams_r_asset`
 --
 ALTER TABLE `ams_r_asset`
-  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `ams_r_asset_library`
@@ -878,7 +839,7 @@ ALTER TABLE `ams_r_disposal_location`
 -- AUTO_INCREMENT for table `ams_r_employee_profile`
 --
 ALTER TABLE `ams_r_employee_profile`
-  MODIFY `EP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `EP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ams_r_office`
@@ -914,13 +875,13 @@ ALTER TABLE `ams_t_job_order_sub`
 -- AUTO_INCREMENT for table `ams_t_par`
 --
 ALTER TABLE `ams_t_par`
-  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_par_sub`
 --
 ALTER TABLE `ams_t_par_sub`
-  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_ppmp`
@@ -974,7 +935,7 @@ ALTER TABLE `ams_t_transfer_out_ptr_sub`
 -- AUTO_INCREMENT for table `ams_t_user_request`
 --
 ALTER TABLE `ams_t_user_request`
-  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_main`
@@ -986,19 +947,19 @@ ALTER TABLE `ams_t_user_request_approved_by_main`
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_po`
 --
 ALTER TABLE `ams_t_user_request_approved_by_po`
-  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_status_to_main`
 --
 ALTER TABLE `ams_t_user_request_status_to_main`
-  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_summary`
 --
 ALTER TABLE `ams_t_user_request_summary`
-  MODIFY `URS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `URS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

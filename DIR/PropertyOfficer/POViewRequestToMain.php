@@ -290,7 +290,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequestToMain.php">Requests To Main</a></li>
+                        <li><a href="PORequestToMain.php">Requests From Main</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -300,7 +300,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header style="color: black;" class="panel-heading">
-                            REQUESTS TO MAIN
+                            REQUEST FROM MAIN
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
@@ -355,7 +355,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Status To Main</label>
+                                        <label>Status From Main</label>
 
                                         <?php  
                                             if ($mainstat == 'Pending') 
@@ -472,7 +472,7 @@
                                     </div>
                                     <div class="form-group">
                                         <a id="btnevaluate" class="btn btn-success">Submit</a>
-                                        <a href="PORequestToMain.php" class="btn btn-default">Go to requests to main</a>
+                                        <a href="PORequestToMain.php" class="btn btn-default">Go to requests from main</a>
                                     </div>
                                 </div>
                             </div>
@@ -482,7 +482,7 @@
                                 else
                                 {
                             ?>
-                                <a href="PORequestToMain.php" class="btn btn-default">Go to requests to main</a>
+                                <a href="PORequestToMain.php" class="btn btn-default">Go to requests from main</a>
                             <?php
                                 }
                             ?>
@@ -752,7 +752,7 @@ $(document).ready(function(){
                 }
                 else
                 {
-                    swal("Cancelled", "The confirmation of request to main is cancelled", "error");
+                    swal("Cancelled", "The confirmation of request from main is cancelled", "error");
                 }
 
             });
