@@ -115,7 +115,6 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -138,6 +137,8 @@
                         <li><a href="ADCampus.php">Campus</a></li>
                         <li><a href="ADDepartment.php">Department</a></li>
                         <li class="active"><a href="ADAssetType.php">Asset Library</a></li>
+                        <li><a href="ADAssetCategory.php">Asset Category</a></li>
+                        <li><a href="ADAssetUnit.php">Asset Unit</a></li>
                         <li><a href="ADRequestingPerson.php">Disposal Location</a></li>  
                     </ul>
                 </li>
@@ -188,8 +189,8 @@
                 <div class="col-md-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><a href="ADCampus.php"><i class="fa fa-wrench"></i> System Setup</a></li>
-                        <li><a href="ADCampus.php">Asset Library</a></li>
+                        <li><i class="fa fa-wrench"></i><strong> &nbsp;System Setup</strong></li>
+                        <li><strong>Asset Library</strong></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -222,7 +223,9 @@
                                     <thead>
                                         <tr>
                                             <th style="display: none;">AssetLibrary ID</th>
-                                            <th style="width: 900px">Asset Name</th>
+                                            <th style="width: 430px">Asset Name</th>
+                                            <th style="width: 300px">Category</th>
+                                            <th style="width: 200px">Unit</th>
                                             <th style="width: 70px">Action</th>  
                                         </tr>
                                     </thead>
@@ -231,19 +234,25 @@
 
                                     <?php  
 
-                                        $sql = "SELECT * FROM ams_r_asset_library";
-
+                                        $sql = "SELECT ams_r_asset_library.AL_ID, ams_r_asset_library.AL_NAME, ams_r_asset_category.AC_NAME, ams_r_asset_category.AC_ID, ams_r_asset_unit.UNT_ID, ams_r_asset_unit.UNT_NAME FROM ams_r_asset_library JOIN ams_r_asset_category ON ams_r_asset_library.AC_ID = ams_r_asset_category.AC_ID JOIN ams_r_asset_unit ON ams_r_asset_library.UNT_ID = ams_r_asset_unit.UNT_ID";
                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                                         while($row = mysqli_fetch_assoc($result))
                                             {
                                               $id = $row['AL_ID'];
-                                              $aname = $row['AL_NAME'];    
+                                              $aname = $row['AL_NAME'];
+                                              $aUnit = $row['UNT_NAME'];
+                                              $aCat = $row['AC_NAME'];
+                                              $aCatId = $row['AC_ID'];
+                                              $aUnitId = $row['UNT_ID'];
+
                                     ?>                                      
 
                                         <tr class="gradeX"">
                                             <td style="display: none;"> <?php echo $id; ?> </td>
                                             <td> <?php echo $aname; ?> </td>
+                                            <td> <?php echo $aCat; ?> </td>
+                                            <td> <?php echo $aUnit; ?> </td>
                                             <td>
                                                 <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-pencil"></i></a>
                                             </td>
@@ -262,15 +271,65 @@
 
                                                         <form role="form" method="POST">
                                                             <div class="form-group">
-                                                                <label>Campus Code</label>
-                                                                <input type="hidden" id="id<?php echo $id ?>" name="id" value="<?php echo $id ?>">
-
-                                                                <input style="color: black;" type="text" onfocus="updatecampuscodeOnClick()" onblur="updatecampuscodeOnLeave()" class="form-control" id="updatecampuscode<?php echo $id ?>" value="<?php echo $code; ?>"/>
+                                                                <label><strong>Asset Name</strong></label>
+                                                                <input type="hidden" id="inputId<?php echo $id ?>" value="<?php echo $id ?>">
+                                                                <input style="color: black;" type="text" onfocus="inputANameOnFocus(<?php echo $id ?>)" onblur="inputANameOnBlur(<?php echo $id ?>)" class="form-control" id="inputAName<?php echo $id ?>" value="<?php echo $aname; ?>"/>
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label>Campus Name</label>
-                                                                <input style="color: black;" type="text" onfocus="updatecampusnameOnClick()" onblur="updatecampusnameOnLeave()" class="form-control" id="updatecampusname<?php echo $id ?>" value="<?php echo $name ?>"/>
+                                                                <label><strong>Category</strong></label>
+                                                                <label style="margin-left: 303px;"><strong>Unit</strong></label>
+                                                                <select class="form-control m-bot15" id="selectACat<?php echo $id ?>" onfocus="" onblur="" style="color: black; width: 350px;">
+
+                                                                    <option disabled></option>
+                                                                    <option value="<?php echo $aCatId; ?>" hidden selected><?php echo $aCat; ?></option>
+
+                                                                    <?php  
+
+                                                                    $sqlforemployee = "SELECT AC_NAME, AC_ID FROM ams_r_asset_category";
+
+                                                                    $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                                                                    while($row = mysqli_fetch_assoc($results))
+                                                                    {
+                                                                        $catId = $row['AC_ID'];
+                                                                        $catName = $row['AC_NAME'];
+
+                                                                    ?>
+
+                                                                    <option value= "<?php echo $catId ?>"> <?php echo "$catName"; ?> </option>
+
+                                                                    <?php 
+                                                                        } 
+                                                                    ?>
+
+                                                                </select>
+
+                                                                <select class="form-control m-bot15" id="selectAUnit<?php echo $id ?>" onfocus="" onblur="" style="color: black; width: 200px; float: right; margin-top: -49px;">
+
+                                                                    <option disabled></option>
+                                                                    <option value="<?php echo $aUnitId; ?>" hidden selected><?php echo $aUnit; ?></option>
+
+                                                                    <?php  
+
+                                                                    $sqlforemployee = "SELECT UNT_ID, UNT_NAME FROM ams_r_asset_unit";
+
+                                                                    $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                                                                    while($row = mysqli_fetch_assoc($results))
+                                                                    {
+                                                                        $unitId = $row['UNT_ID'];
+                                                                        $unitName = $row['UNT_NAME'];
+
+                                                                    ?>
+
+                                                                    <option value= "<?php echo $unitId ?>"> <?php echo "$unitName"; ?> </option>
+
+                                                                    <?php 
+                                                                        } 
+                                                                    ?>
+
+                                                                </select>
                                                             </div>
 
                                                             <div class="row">
@@ -279,8 +338,8 @@
                                                                 </div>
                                                             </div>
             
-                                                            <button class="btn btn-success" name="updatecampus" onclick="updateFormValidation(); doTransaction()" id="btn-save-update" style="margin-left: 380px; margin-bottom: -10px" type="button">Save Changes</button>
-                                                            <button data-dismiss="modal" class="btn btn-default" onclick="onClose()" name="refreshpageeditcampus" style="float: right;" type="button">Close</button>
+                                                            <button class="btn btn-success" onclick="btnSubmitForUpOnClick(<?php echo $id ?>)" style="margin-left: 380px; margin-bottom: -10px" type="button">Save Changes</button>
+                                                            <button data-dismiss="modal" class="btn btn-default" onclick="onClose()" style="float: right;" type="button">Close</button>
 
                                                         </form>
                                                     </div>
@@ -408,6 +467,61 @@
                         <input style="color: black;" onfocus="addcampuscodeOnClick()" onblur="addcampuscodeOnLeave()" type="text" class="form-control" id="addcampuscode"/>
                     </div>
 
+                    <div class="form-group">
+                        <label><strong>Category</strong></label>
+                        <label style="margin-left: 303px;"><strong>Unit</strong></label>
+                        <select class="form-control m-bot15" id="deptcampuscode" onfocus="deptcampuscodeOnClick()" onblur="deptcampuscodeOnLeave()" name="assignpassempid" style="color: black; width: 350px;">
+
+                            <option id="firstOption" value="" selected disabled></option>
+
+                            <?php  
+
+                            $sqlforemployee = "SELECT AC_NAME, AC_ID FROM ams_r_asset_category";
+
+                            $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($results))
+                            {
+                                $catId = $row['AC_ID'];
+                                $catName = $row['AC_NAME'];
+
+                            ?>
+
+                            <option value= "<?php echo $catId ?>"> <?php echo "$catName"; ?> </option>
+
+                            <?php 
+                                } 
+                            ?>
+
+                        </select>
+
+                        <select class="form-control m-bot15" id="selectAUnit" onfocus="selectAUnitOnFocus()" onblur="selectAUnitOnBlur()" style="color: black; width: 200px; float: right; margin-top: -49px;">
+
+                            <option id="firstOption2" value="" selected disabled></option>
+
+                            <?php  
+
+                            $sqlforemployee = "SELECT UNT_ID, UNT_NAME FROM ams_r_asset_unit";
+
+                            $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($results))
+                            {
+                                $untId = $row['UNT_ID'];
+                                $untName = $row['UNT_NAME'];
+
+                            ?>
+
+                            <option value= "<?php echo $untId ?>"> <?php echo "$untName"; ?> </option>
+
+                            <?php 
+                                } 
+                            ?>
+
+                        </select>
+                        
+                    </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div style="padding: 1px; margin-bottom: 10px; background-color: #E0E1E7;"></div>
@@ -484,9 +598,27 @@
                 document.getElementById('addcampuscode').style.borderColor = "red";
             }
 
-            if (document.getElementById('addcampuscode').value != "" && document.getElementById('addcampuscode').value != "Empty Fields are not allowed.") 
+            if (document.getElementById('deptcampuscode').value == "" || document.getElementById('deptcampuscode').value == "Empty Fields are not allowed.") 
+            {
+                document.getElementById('firstOption').innerHTML = "Empty Fields are not allowed.";
+                document.getElementById('deptcampuscode').style.color = "red";
+                document.getElementById('deptcampuscode').style.backgroundColor = "#ffffcc";
+                document.getElementById('deptcampuscode').style.borderColor = "red";
+            }
+
+            if (document.getElementById('selectAUnit').value == "" || document.getElementById('selectAUnit').value == "Empty Fields are not allowed.") 
+            {
+                document.getElementById('firstOption2').innerHTML = "Empty Fields are not allowed.";
+                document.getElementById('selectAUnit').style.color = "red";
+                document.getElementById('selectAUnit').style.backgroundColor = "#ffffcc";
+                document.getElementById('selectAUnit').style.borderColor = "red";
+            }
+
+            if (document.getElementById('addcampuscode').value != "Empty Fields are not allowed." && document.getElementById('deptcampuscode').selectedIndex != "0" && document.getElementById('selectAUnit').selectedIndex != "0") 
             {
                 var assetname = document.getElementById('addcampuscode').value;
+                var assetCat = document.getElementById('deptcampuscode').value;
+                var assetUnit = document.getElementById('selectAUnit').value;
 
                 swal(
                 {
@@ -494,9 +626,9 @@
                     text: "This transaction can't be undone. Are you sure you want to do it?",
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Yes, do it!',
-                    cancelButtonText: "No, cancel it!",
+                    confirmButtonColor: '#43A047',
+                    confirmButtonText: 'YES',
+                    cancelButtonText: 'NO',
                     closeOnConfirm: false,
                     closeOnCancel: false
                 },
@@ -512,6 +644,8 @@
                                 data: 
                                 {
                                     _assetname: assetname,
+                                    _assetCat: assetCat,
+                                    _assetUnit: assetUnit
 
                                 },
                                 
@@ -574,156 +708,112 @@
             }//endif{}            
         }//endfunc()
 
-        function updateFormValidation()
+        function btnSubmitForUpOnClick(modId)
         {
-            <?php
-
-                $sqlcmd = "SELECT count(1) FROM ams_r_campus";
-
-                $resulta = mysqli_query($connection, $sqlcmd) or die("Bad Query: $sql");
-                $row1 = mysqli_fetch_array($resulta);
-
-                $kabuuan = $row1[0];
-
-            ?>
-
-            var total = <?php echo $kabuuan ?>;
-
-            for(i = 1; i <= total; i++)
+            if (document.getElementById('inputAName' + modId).value == "" || document.getElementById('inputAName' + modId).value == "Empty Fields are not allowed.") 
             {
+                document.getElementById('inputAName' + modId).value = "Empty Fields are not allowed."
+                document.getElementById('inputAName' + modId).style.color = "red";
+                document.getElementById('inputAName' + modId).style.backgroundColor = "#ffffcc";
+                document.getElementById('inputAName' + modId).style.borderColor = "red";
+            }
 
-                if (document.getElementById('updatecampuscode' + i).value == "" || document.getElementById('updatecampuscode' + i).value == "Empty Fields are not allowed.") 
-                {
-                    document.getElementById('updatecampuscode' + i).value = "Empty Fields are not allowed."
-                    document.getElementById('updatecampuscode' + i).style.color = "red";
-                    document.getElementById('updatecampuscode' + i).style.backgroundColor = "#ffffcc";
-                    document.getElementById('updatecampuscode' + i).style.borderColor = "red";
-                }
-
-                if (document.getElementById('updatecampusname' + i).value == "" || document.getElementById('updatecampusname' + i).value == "Empty Fields are not allowed.") 
-                {
-                    document.getElementById('updatecampusname' + i).value = "Empty Fields are not allowed."
-                    document.getElementById('updatecampusname' + i).style.color = "red";
-                    document.getElementById('updatecampusname' + i).style.backgroundColor = "#ffffcc";
-                    document.getElementById('updatecampusname' + i).style.borderColor = "red";
-                }            
-            }//endfor
-        }//endfunc()
-
-        function doTransaction()
-        {
-            <?php
-
-                $sqlcmd = "SELECT count(1) FROM ams_r_campus";
-
-                $resulta = mysqli_query($connection, $sqlcmd) or die("Bad Query: $sql");
-                $row1 = mysqli_fetch_array($resulta);
-
-                $kabuuan = $row1[0];
-
-            ?>
-
-            var total = <?php echo $kabuuan ?>;
-
-            for(i = 1; i <= total; i++)
+            if (document.getElementById('inputAName' + modId).value != "Empty Fields are not allowed.") 
             {
+                var assName = document.getElementById('inputAName' + modId).value;
+                var assUnit = document.getElementById('selectAUnit' + modId).value;
+                var aCat = document.getElementById('selectACat' + modId).value;
+                var uniqueId = document.getElementById('inputId' + modId).value;
 
-                if (document.getElementById('updatecampuscode' + i).value !== "Empty Fields are not allowed." && document.getElementById('updatecampusname' + i).value !== "Empty Fields are not allowed.") 
+                swal(
                 {
-                    var campuscode = document.getElementById('updatecampuscode' + i).value;
-                    var campusname = document.getElementById('updatecampusname' + i).value;
-                    var id = document.getElementById('id' + i).value;
+                    title: "Warning!",
+                    text: "This transaction can't be undone. Are you sure you want to do it?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#43A047',
+                    confirmButtonText: 'YES',
+                    cancelButtonText: "NO",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
 
-                    swal(
+                    function(isConfirm)
                     {
-                        title: "Warning!",
-                        text: "This transaction can't be undone. Are you sure you want to do it?",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: '#DD6B55',
-                        confirmButtonText: 'Yes, do it!',
-                        cancelButtonText: "No, cancel it!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-
-                        function(isConfirm)
+                        if (isConfirm) 
                         {
-                            if (isConfirm) 
+                            $.ajax(
                             {
-                                $.ajax(
+                                type: 'POST',
+                                url : 'updateassetlibrary.php',
+                                data: 
                                 {
-                                    type: 'POST',
-                                    url : 'updatecampus.php',
-                                    data: 
-                                    {
-                                        _campuscode: campuscode,
-                                        _campusname: campusname,
-                                        _id: id
+                                    _assName: assName,
+                                    _assUnit: assUnit,
+                                    _aCat: aCat,
+                                    _uniqueId: uniqueId
 
-                                    },
+                                },
                                         
-                                    success: function(data)
+                                success: function(data)
+                                {
+
+                                    swal(
                                     {
-
-                                        swal(
-                                        {
-                                            title: 'Successful!',
-                                            text: 'The campus is updated successfully.',
-                                            type: 'success',
-                                            confirmButtonColor: '#43A047',
-                                            confirmButtonText: 'OK',
-                                            closeOnConfirm: false
-                                        },
-
-                                            function(isConfirm)
-                                            {
-                                                if (isConfirm) 
-                                                {
-                                                    window.location=window.location; 
-                                                }
-                                            }
-                                            
-                                        );
-                      
-                                        setTimeout(
-                                        function() 
-                                        {
-                                            window.location = window.location;
-                                        },
-                                        5000
-                                        );
-
+                                        title: 'Successful!',
+                                        text: 'The campus is updated successfully.',
+                                        type: 'success',
+                                        confirmButtonColor: '#43A047',
+                                        confirmButtonText: 'OK',
+                                        closeOnConfirm: false
                                     },
 
-                                    error: function(response)
+                                        function(isConfirm)
+                                        {
+                                            if (isConfirm) 
+                                            {
+                                                window.location=window.location; 
+                                            }
+                                        }
+                                            
+                                    );
+                      
+                                    setTimeout(
+                                    function() 
                                     {
-                                        alert(request.resposeText);
-                                    }
-                                }           
-                                );
-                            }
+                                        window.location = window.location;
+                                    },
+                                    5000
+                                    );
 
-                            else 
-                            {
-                                swal(
+                                },
+
+                                error: function(response)
                                 {
-                                    title: 'Cancelled!',
-                                    text: 'You have cancelled the transaction.',
-                                    type: 'error',
-                                    confirmButtonColor: '#43A047',
-                                    confirmButtonText: 'OK',
-                                    closeOnConfirm: true
+                                    alert(request.resposeText);
                                 }
-                                );
-                                                
-                            }//endelse{}
-                        }//endfunc(isconfirm)
-                    );//endswal()
-                }//endif{}
-            }//endfor{}
-        }//endfunc()
+                            }           
+                            );
+                        }
 
+                        else 
+                        {
+                            swal(
+                            {
+                                title: 'Cancelled!',
+                                text: 'You have cancelled the transaction.',
+                                type: 'error',
+                                confirmButtonColor: '#43A047',
+                                confirmButtonText: 'OK',
+                                closeOnConfirm: true
+                            }
+                            );
+                                                
+                        }//endelse{}
+                    }//endfunc(isconfirm)
+                );//endswal()
+            }//endif{}
+        }//endfunc{}
 
         function addcampuscodeOnClick()
         {
@@ -733,33 +823,6 @@
                 document.getElementById('addcampuscode').style.color = "black";
                 document.getElementById('addcampuscode').style.backgroundColor = "white";
                 document.getElementById('addcampuscode').style.borderColor = "#00A8B3";
-            }
-        }
-
-        function updatecampuscodeOnClick()
-        {
-            <?php
-
-                $sqlcmd = "SELECT count(1) FROM ams_r_campus";
-
-                $resulta = mysqli_query($connection, $sqlcmd) or die("Bad Query: $sql");
-                $row1 = mysqli_fetch_array($resulta);
-
-                $kabuuan = $row1[0];
-
-            ?>
-
-            var total = <?php echo $kabuuan ?>;
-
-            for(i = 1; i <= total; i++)
-            {
-                if (document.getElementById('updatecampuscode' + i).value == "Empty Fields are not allowed.")
-                {
-                    document.getElementById('updatecampuscode' + i).value = "";
-                    document.getElementById('updatecampuscode' + i).style.color = "black";
-                    document.getElementById('updatecampuscode' + i).style.backgroundColor = "white";
-                    document.getElementById('updatecampuscode' + i).style.borderColor = "#00A8B3";
-                }
             }
         }
 
@@ -774,31 +837,52 @@
             }
         }
 
-        function updatecampusnameOnClick()
+        function inputANameOnFocus(modId)
         {
-            <?php
-
-                $sqlcmd = "SELECT count(1) FROM ams_r_campus";
-
-                $resulta = mysqli_query($connection, $sqlcmd) or die("Bad Query: $sql");
-                $row1 = mysqli_fetch_array($resulta);
-
-                $kabuuan = $row1[0];
-
-            ?>
-
-            var total = <?php echo $kabuuan ?>;
-
-            for(i = 1; i <= total; i++)
+            if (document.getElementById('inputAName' + modId).value == "Empty Fields are not allowed.")
             {
-                if (document.getElementById('updatecampusname' + i).value == "Empty Fields are not allowed.")
-                {
-                    document.getElementById('updatecampusname' + i).value = "";
-                    document.getElementById('updatecampusname' + i).style.color = "black";
-                    document.getElementById('updatecampusname' + i).style.backgroundColor = "white";
-                    document.getElementById('updatecampusname' + i).style.borderColor = "#00A8B3";
-                }
+                document.getElementById('inputAName' + modId).value = "";
+                document.getElementById('inputAName' + modId).style.color = "black";
+                document.getElementById('inputAName' + modId).style.backgroundColor = "white";
+                document.getElementById('inputAName' + modId).style.borderColor = "#00A8B3";
             }
+        }
+
+        function deptcampuscodeOnClick()
+        {
+            if (document.getElementById('deptcampuscode').selectedIndex == "0")
+            {
+                document.getElementById('firstOption').innerHTML = "";
+                document.getElementById('deptcampuscode').style.color = "black";
+                document.getElementById('deptcampuscode').style.backgroundColor = "white";
+                document.getElementById('deptcampuscode').style.borderColor = "#00A8B3";
+            }
+        }
+
+        function selectAUnitOnFocus()
+        {
+            if (document.getElementById('selectAUnit').selectedIndex == "0")
+            {
+                document.getElementById('firstOption2').innerHTML = "";
+                document.getElementById('selectAUnit').style.color = "black";
+                document.getElementById('selectAUnit').style.backgroundColor = "white";
+                document.getElementById('selectAUnit').style.borderColor = "#00A8B3";
+            }
+        }
+
+        function inputANameOnBlur(modId)
+        {
+            document.getElementById('inputAName' + modId).style.borderColor = "#E2E2E4";
+        }
+
+        function deptcampuscodeOnLeave()
+        {
+            document.getElementById('deptcampuscode').style.borderColor = "#E2E2E4";
+        }
+
+        function selectAUnitOnBlur()
+        {
+            document.getElementById('selectAUnit').style.borderColor = "#E2E2E4";
         }
 
         function addcampuscodeOnLeave()
@@ -811,469 +895,6 @@
             document.getElementById('addcampusname').style.borderColor = "#E2E2E4";
         }
 
-        function updatecampuscodeOnLeave()
-        {
-            <?php
-
-                $sqlcmd = "SELECT count(1) FROM ams_r_campus";
-
-                $resulta = mysqli_query($connection, $sqlcmd) or die("Bad Query: $sql");
-                $row1 = mysqli_fetch_array($resulta);
-
-                $kabuuan = $row1[0];
-
-            ?>
-
-            var total = <?php echo $kabuuan ?>;
-
-            for(i = 1; i <= total; i++)
-            {
-                document.getElementById('updatecampuscode' + i).style.borderColor = "#E2E2E4";
-            }
-        }
-
-        function updatecampusnameOnLeave()
-        {
-            <?php
-
-                $sqlcmd = "SELECT count(1) FROM ams_r_campus";
-
-                $resulta = mysqli_query($connection, $sqlcmd) or die("Bad Query: $sql");
-                $row1 = mysqli_fetch_array($resulta);
-
-                $kabuuan = $row1[0];
-
-            ?>
-
-            var total = <?php echo $kabuuan ?>;
-
-            for(i = 1; i <= total; i++)
-            {
-                document.getElementById('updatecampusname' + i).style.borderColor = "#E2E2E4";
-            }
-        }
-
-/*        $('.tblCampusData a.updateCampus').click(function (e) 
-        {
-            e.preventDefault();
-
-            $.ajax(
-            {
-                type: "GET",
-                url: 'getcampusdata.php',
-                dataType: 'json',
-
-                success: function(data) 
-                {
-                    document.getElementById('updatecampuscode').value = data.campuscode;
-                    document.getElementById('updatecampusname').value = data.campusname;
-                    document.getElementById('id').value = data.uniqueid;
-                },
-
-                error: function(response) 
-                {
-                    alert(request.responseText);
-                }
-
-            }
-            );
-        }
-        );*/
-
-/*        $(document).on("click", "#btn-save-update", function(event)
-        {
-            <?php
-
-                $sqlcmd = "SELECT count(1) FROM ams_r_campus";
-
-                $resulta = mysqli_query($connection, $sqlcmd) or die("Bad Query: $sql");
-                $row1 = mysqli_fetch_array($resulta);
-
-                $kabuuan = $row1[0];
-
-            ?>
-
-            var total = <?php echo $kabuuan ?>;
-
-            for(i = 1; i <= total; i++)
-            {
-
-                if (document.getElementById('updatecampuscode' + i).value == "" || document.getElementById('updatecampuscode' + i).value == "Empty Fields are not allowed.") 
-                {
-                    document.getElementById('updatecampuscode' + i).value = "Empty Fields are not allowed."
-                    document.getElementById('updatecampuscode' + i).style.color = "red";
-                    document.getElementById('updatecampuscode' + i).style.backgroundColor = "#ffffcc";
-                    document.getElementById('updatecampuscode' + i).style.borderColor = "red";
-                }
-
-                if (document.getElementById('updatecampusname' + i).value == "" || document.getElementById('updatecampusname' + i).value == "Empty Fields are not allowed.") 
-                {
-                    document.getElementById('updatecampusname' + i).value = "Empty Fields are not allowed."
-                    document.getElementById('updatecampusname' + i).style.color = "red";
-                    document.getElementById('updatecampusname' + i).style.backgroundColor = "#ffffcc";
-                    document.getElementById('updatecampusname' + i).style.borderColor = "red";
-                }
-
-                if (document.getElementById('updatecampuscode' + i).value != "" && document.getElementById('updatecampuscode' + i).value != "Empty Fields are not allowed." && document.getElementById('updatecampusname' + i).value != "" && document.getElementById('updatecampusname' + i).value != "Empty Fields are not allowed.") 
-                {
-
-
-                    var campuscode = document.getElementById('updatecampuscode' + i).value;
-                    var campusname = document.getElementById('updatecampusname' + i).value;
-                    var id = document.getElementById('id' + i).value;
-
-                    swal(
-                    {
-                        title: "Warning!",
-                        text: "This transaction can't be undone. Are you sure you want to do it?",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: '#DD6B55',
-                        confirmButtonText: 'Yes, do it!',
-                        cancelButtonText: "No, cancel it!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-
-                        function(isConfirm)
-                        {
-                            if (isConfirm) 
-                            {
-                                $.ajax(
-                                {
-                                    type: 'POST',
-                                    url : 'updatecampus.php',
-                                    data: 
-                                    {
-                                        _campuscode: campuscode,
-                                        _campusname: campusname,
-                                        _id: id
-
-                                    },
-                                    
-                                    success: function(data)
-                                    {
-
-                                        swal(
-                                        {
-                                            title: 'Successful!',
-                                            text: 'The campus is updated successfully.',
-                                            type: 'success',
-                                            confirmButtonColor: '#43A047',
-                                            confirmButtonText: 'OK',
-                                            closeOnConfirm: false
-                                        },
-
-                                            function(isConfirm)
-                                            {
-                                                if (isConfirm) 
-                                                {
-                                                    window.location=window.location; 
-                                                }
-                                            }
-                                        
-                                        );
-                  
-                                        setTimeout(
-                                        function() 
-                                        {
-                                            window.location = window.location;
-                                        },
-                                        5000
-                                        );
-
-                                    },
-
-                                    error: function(response)
-                                    {
-                                        alert(request.resposeText);
-                                    }
-                                }           
-                                );
-                            }
-
-                            else 
-                            {
-                                swal(
-                                {
-                                    title: 'Cancelled!',
-                                    text: 'You have cancelled the transaction.',
-                                    type: 'error',
-                                    confirmButtonColor: '#43A047',
-                                    confirmButtonText: 'OK',
-                                    closeOnConfirm: true
-                                });
-                                            
-                            }//endelse{}
-                        }//endfunc(isconfirm)
-                    );//endswal()
-                }//endif{}            
-            }//endforloop()
-        }//endclickfunc()
-        );//endclickfunc()*/
-
-    </script>   
-
-
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-        "use strict";
-        
-        $('.btn-message').click(function(){
-            swal("Here's a message!");
-        });
-        
-        $('.btn-title-text').click(function(){
-            swal("Here's a message!", "It's pretty, isn't it?")
-        });
-
-        $('.btn-timer').click(function(){
-            swal({
-                title: "Auto close alert!",
-                text: "I will close in 2 seconds.",
-                timer: 2000,
-                showConfirmButton: false
-            });
-        });
-        
-        $('.btn-successs').click(function(){
-            swal("Good job!", "You clicked the button!", "success");
-        });
-        
-        $('.btn-warning-confirm').click(function(){
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes, delete it!',
-                closeOnConfirm: false
-            },
-            function(){
-                swal("Deleted!", "Your imaginary file has been deleted!", "success");
-            });
-        });
-        
-        $('.btn-warning-cancel').click(function(){
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: "No, cancel plx!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function(isConfirm){
-            if (isConfirm){
-              swal("Deleted!", "Your imaginary file has been deleted!", "success");
-            } else {
-              swal("Cancelled", "Your imaginary file is safe :)", "error");
-            }
-            });
-        });
-        
-        $('.btn-custom-icon').click(function(){
-            swal({
-                title: "Sweet!",
-                text: "Here's a custom image.",
-                imageUrl: 'images/favicon/apple-touch-icon-152x152.png'
-            });
-        });
-        
-        $('.btn-message-html').click(function(){
-            swal({
-                title: "HTML <small>Title</small>!",
-                text: 'A custom <span style="color:#F8BB86">html<span> message.',
-                html: true
-            });
-        });
-        
-        $('.btn-input').click(function(){
-            swal({
-                title: "An input!",
-                text: 'Write something interesting:',
-                type: 'input',
-                showCancelButton: true,
-                closeOnConfirm: false,
-                animation: "slide-from-top",
-                inputPlaceholder: "Write something",
-            },
-            function(inputValue){
-                if (inputValue === false) return false;
-        
-                if (inputValue === "") {
-                    swal.showInputError("You need to write something!");
-                    return false;
-                }
-            
-                swal("Nice!", 'You wrote: ' + inputValue, "success");
-        
-            });
-        });
-        
-        $('.btn-theme').click(function(){
-            swal({
-                title: "Themes!",
-                text: "Here's the Twitter theme for SweetAlert!",
-                confirmButtonText: "Cool!",
-                customClass: 'twitter'
-            });
-        });
-        
-        $('.btn-ajax').click(function(){
-          swal({
-            title: 'Ajax request example',
-            text: 'Submit to run ajax request',
-            type: 'info',
-            showCancelButton: true,
-            closeOnConfirm: false,
-            showLoaderOnConfirm: true,
-          }, function(){
-            setTimeout(function() {
-              swal('Ajax request finished!');
-            }, 2000);
-          });
-        });
-
-        /*$('#btn-save-update').click(function(){
-
-
-                var updatecampuscode = document.getElementById('updatecampuscode').value;
-                var updatecampusname = document.getElementById('updatecampusname').value;
-                var id = document.getElementById('id').value;
-
-                $.ajax
-                ({
-
-                    type: 'post',
-                    url: 'sweet-alert-ad-update-campus.php',
-                    data: 
-                    {
-                        _updatecampuscode:updatecampuscode,
-                        _updatecampusname:updatecampusname,
-                        _id:id
-                    },
-
-                    success: function (response) 
-                    {
-
-
-                        swal({
-                             title: 'Successfully Updated!',
-                             type: 'success',
-                             confirmButtonColor: '#43A047',
-                             confirmButtonText: 'OK',
-                             closeOnConfirm: false
-                        },
-
-                        function(isConfirm)
-                        {
-                            if (isConfirm) 
-                            {
-                                window.location=window.location; 
-                            }
-                        });
-
-                        setTimeout(function() 
-                        {
-                            window.location=window.location;
-                        }, 5000);
-
-                        // window.location.reload();
-                    },
-
-                    error: function (response) 
-                    {
-                      swal({
-                            title: 'Update Failed!',
-                            text: 'Please try again.',
-                            confirmButtonText: 'Okay',
-                            confirmButtonColor: 'red'
-                      });
-
-                        setTimeout(function() 
-                        {
-                            window.location=window.location;
-                        }, 5000);
-                    }
-
-            });
-        });
-
-        $('#btn-submit').click(function(){
-
-
-                var addcampuscode = document.getElementById('addcampuscode').value;
-                var addcampusname = document.getElementById('addcampusname').value;
-
-                $.ajax
-                ({
-
-                    type: 'post',
-                    url: 'insert-ad-campus.php',
-                    data: 
-                    {
-                        _addcampuscode:addcampuscode,
-                        _addcampusname:addcampusname
-                    },
-
-                    success: function (response) 
-                    {
-
-                        $('#myModalAdd').hide(100);
-                        $('.modal-backdrop').hide(100);
-
-                        swal({
-                             title: 'Successfully Added!',
-                             type: 'success',
-                             confirmButtonColor: '#43A047',
-                             confirmButtonText: 'OK',
-                             closeOnConfirm: false
-                        },
-
-                        function(isConfirm)
-                        {
-                            if (isConfirm) 
-                            {
-                                window.location=window.location; 
-                            }
-                        });
-
-                        setTimeout(function() 
-                        {
-                            window.location=window.location;
-                        }, 2500);
-
-                        // window.location.reload();
-                    },
-
-                    error: function (response) 
-                    {
-                      swal({
-                            title: 'Update Failed!',
-                            text: 'Please try again.',
-                            confirmButtonText: 'Okay',
-                            confirmButtonColor: 'red'
-                      });
-
-                        setTimeout(function() 
-                        {
-                            window.location=window.location;
-                        }, 5000);
-                    }
-
-            });
-        });
-*/
-
-
-        
-    });
     </script>
 
 </body>

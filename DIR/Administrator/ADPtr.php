@@ -115,7 +115,6 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -138,6 +137,8 @@
                         <li><a href="ADCampus.php">Campus</a></li>
                         <li><a href="ADDepartment.php">Department</a></li>
                         <li><a href="ADAssetType.php">Asset Library</a></li>
+                        <li><a href="ADAssetCategory.php">Asset Category</a></li>
+                        <li><a href="ADAssetUnit.php">Asset Unit</a></li>
                         <li><a href="ADRequestingPerson.php">Disposal Location</a></li>  
                     </ul>
                 </li>
@@ -159,9 +160,8 @@
                         <li><a href="ADQueryAsset.php">Asset</a></li>
                         <li><a href="ADRequest.php">Request</a></li>
                         <li><a href="ADPar.php">Purchase Accountability Receipt</a></li>
-                        <li class="active"><a href="ADPtr.php">Property Transfer Report</a></li>
+                        <li class="active"><a href="ADPtr.php">Property Transfer Report</a></li> 
                         <li><a href="ADDispose.php">Disposed Asset</a></li>
-
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -189,8 +189,8 @@
                 <div class="col-md-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><a href="ADCampus.php"><i class="fa fa-list"></i>&nbsp;Queries</a></li>
-                        <li><a href="ADCampus.php">Property Transfer Report</li>
+                        <li><i class="fa fa-list"></i><strong> &nbsp;Queries</strong></li>
+                        <li><strong>Property Transfer Report</strong></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -215,7 +215,6 @@
                                             <th style="width: 250px">Transferred By</th> 
                                             <th style="width: 250px">Received By</th>
                                             <th style="width: 250px">Campus</th>
-                                        </tr>
                                     </thead>
 
                                     <tbody>  
@@ -233,7 +232,7 @@
                                               $date = $row['PTR_DATE'];
                                               $rec = $row['PTR_RECEIVED_BY'];
                                               $tra = $row['PTR_TRANSFERRED_BY'];
-                                              $camp = $row['C_CODE'];
+                                              $camp = $row['C_CODE'];    
                                     ?>                                      
 
                                         <tr class="gradeX"">
@@ -244,45 +243,6 @@
                                             <td> <?php echo $rec; ?> </td>
                                             <td> <?php echo $camp; ?> </td>
                                         </tr>
-
-                                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModalUpdate<?php echo $id ?>" class="modal fade">
-                                        <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2<?php echo $id; ?>" class="modal fade"> -->
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="background-color: #8C1C1C; color: white">
-                                                        <button aria-hidden="true" data-dismiss="modal" onclick="onClose()" class="close" type="button" style="color: white"><i class="fa-close-modal fa-times-circle"></i></button>
-                                                        <h4 class="modal-title"><i class="fa-modal-ico fa-pencil-square"></i></h4>
-                                                    </div>
-            
-                                                    <div class="modal-body">
-
-                                                        <form role="form" method="POST">
-                                                            <div class="form-group">
-                                                                <label>Campus Code</label>
-                                                                <input type="hidden" id="id<?php echo $id ?>" name="id" value="<?php echo $id ?>">
-
-                                                                <input style="color: black;" type="text" onfocus="updatecampuscodeOnClick()" onblur="updatecampuscodeOnLeave()" class="form-control" id="updatecampuscode<?php echo $id ?>" value="<?php echo $code; ?>"/>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label>Campus Name</label>
-                                                                <input style="color: black;" type="text" onfocus="updatecampusnameOnClick()" onblur="updatecampusnameOnLeave()" class="form-control" id="updatecampusname<?php echo $id ?>" value="<?php echo $name ?>"/>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #E0E1E7;"></div>
-                                                                </div>
-                                                            </div>
-            
-                                                            <button class="btn btn-success" name="updatecampus" onclick="updateFormValidation(); doTransaction()" id="btn-save-update" style="margin-left: 380px; margin-bottom: -10px" type="button">Save Changes</button>
-                                                            <button data-dismiss="modal" class="btn btn-default" onclick="onClose()" name="refreshpageeditcampus" style="float: right;" type="button">Close</button>
-
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                     <?php
                                         }
@@ -387,43 +347,6 @@
 
 </section>
 
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModalAdd" class="modal fade">
-<!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2<?php echo $id; ?>" class="modal fade"> -->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #8C1C1C; color: white">
-                <button aria-hidden="true" onclick="onClose()" data-dismiss="modal" class="close" type="button" style="color: white"><i class="fa-close-modal fa-times-circle"></i></button>
-                <h4 class="modal-title"><i class="fa-modal-ico fa-plus-square   "></i></h4>
-            </div>
-            
-            <div class="modal-body">
-
-                <form role="form" method="POST">
-                    <div class="form-group">
-                        <label><strong>Campus Code</strong></label>
-                        <input style="color: black;" onfocus="addcampuscodeOnClick()" onblur="addcampuscodeOnLeave()" type="text" class="form-control" id="addcampuscode"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label><strong>Campus Name</strong></label>
-                        <input style="color: black;" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
-                    </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="padding: 1px; margin-bottom: 10px; background-color: #E0E1E7;"></div>
-                    </div>
-                </div>
-    
-                <button class="btn btn-success" name="addcampus" id="btn-submit" onclick="formValidation()" type="button" style="margin-left: 425px; margin-bottom: -10px">Submit</button>
-                <button data-dismiss="modal" class="btn btn-default" id="closeAddModal" onclick="onClose()" name="refreshpageaddcampus" type="button" style="float: right">Close</button>
-                
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
@@ -467,7 +390,6 @@
     <script src="../../js/advanced-form.js"></script>
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
-
 
 </body>
 </html>

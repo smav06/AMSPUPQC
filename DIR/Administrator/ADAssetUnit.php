@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Disposal Location</title>
+    <title>Asset Unit</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -115,7 +115,6 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -139,8 +138,8 @@
                         <li><a href="ADDepartment.php">Department</a></li>
                         <li><a href="ADAssetType.php">Asset Library</a></li>
                         <li><a href="ADAssetCategory.php">Asset Category</a></li>
-                        <li><a href="ADAssetUnit.php">Asset Unit</a></li>
-                        <li class="active"><a href="ADRequestingPerson.php">Disposal Location</a></li>  
+                        <li class="active"><a href="ADAssetUnit.php">Asset Unit</a></li>
+                        <li><a href="ADRequestingPerson.php">Disposal Location</a></li>  
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -161,7 +160,7 @@
                         <li><a href="ADQueryAsset.php">Asset</a></li>
                         <li><a href="ADRequest.php">Request</a></li>
                         <li><a href="ADPar.php">Purchase Accountability Receipt</a></li>
-                        <li><a href="ADPtr.php">Property Transfer Report</a></li>
+                        <li><a href="ADPtr.php">Property Transfer Report</a></li> 
                         <li><a href="ADDispose.php">Disposed Asset</a></li>
                     </ul>
                 </li>
@@ -191,7 +190,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><i class="fa fa-wrench"></i><strong> &nbsp;System Setup</strong></li>
-                        <li><strong>Disposal Location</strong></li>
+                        <li><strong>Asset Unit</strong></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -201,14 +200,14 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            List of Disposal Locations
+                            List of Units
                         </header>
 
                         <div class="panel-body">
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus"></i></a>
+                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus" style="font-color"></i></a>
                                 </div>
                             </div>
 
@@ -223,9 +222,8 @@
                                 <table  class="display table table-bordered table-striped tblCampusData" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">DisposalLocation ID</th>
-                                            <th style="width: 330px">Disposal Location Code</th>
-                                            <th style="width: 600px">Description</th>
+                                            <th style="display: none;">Unit ID</th>
+                                            <th style="width: 900px">Unit</th>
                                             <th style="width: 70px">Action</th>  
                                         </tr>
                                     </thead>
@@ -234,21 +232,19 @@
 
                                     <?php  
 
-                                        $sql = "SELECT * FROM ams_r_disposal_location";
+                                        $sql = "SELECT * FROM ams_r_asset_unit";
 
                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                                         while($row = mysqli_fetch_assoc($result))
                                             {
-                                              $id = $row['DL_ID'];
-                                              $dlCode = $row['DL_CODE'];
-                                              $dlDesc = $row['DL_DESC'];    
+                                              $id = $row['UNT_ID'];
+                                              $unit = $row['UNT_NAME'];    
                                     ?>                                      
 
                                         <tr class="gradeX"">
                                             <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $dlCode; ?> </td>
-                                            <td> <?php echo $dlDesc; ?> </td>
+                                            <td> <?php echo $unit; ?> </td>
                                             <td>
                                                 <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-pencil"></i></a>
                                             </td>
@@ -267,13 +263,8 @@
 
                                                         <form role="form" method="POST">
                                                             <div class="form-group">
-                                                                <label><strong>Disposal Location Code</strong></label>
-                                                                <input style="color: black;" type="text" onfocus="inputDlCodeOnFocus(<?php echo $id ?>)" onblur="inputDlCodeOnBlur(<?php echo $id ?>)" class="form-control" id="inputDlCode<?php echo $id ?>" value="<?php echo $dlCode; ?>"/>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label><strong>Description</strong></label>
-                                                                <input style="color: black;" type="text" onfocus="inputDlDescOnFocus(<?php echo $id ?>)" onblur="inputDlDescOnBlur(<?php echo $id ?>)" class="form-control" id="inputDlDesc<?php echo $id ?>" value="<?php echo $dlDesc ?>"/>
+                                                                <label><strong>Category</strong></label>
+                                                                <input style="color: black;" type="text" onfocus="inputCcodeOnClick(<?php echo $id ?>)" onblur="inputCcodeOnLeave(<?php echo $id ?>)" class="form-control" id="inputCcode<?php echo $id ?>" value="<?php echo $unit; ?>"/>
                                                             </div>
 
                                                             <div class="row">
@@ -282,7 +273,7 @@
                                                                 </div>
                                                             </div>
             
-                                                            <button class="btn btn-success" onclick="btnSubmitForUpOnClick(<?php echo $id ?>)" style="margin-left: 380px; margin-bottom: -10px" type="button">Save Changes</button>
+                                                            <button class="btn btn-success" onclick="btnSubmitForUpOnClick(<?php echo $id ?>)" id="btnSubmitForUp" style="margin-left: 380px; margin-bottom: -10px" type="button">Save Changes</button>
                                                             <button data-dismiss="modal" class="btn btn-default" onclick="onClose()" style="float: right;" type="button">Close</button>
 
                                                         </form>
@@ -407,13 +398,8 @@
 
                 <form role="form" method="POST">
                     <div class="form-group">
-                        <label><strong>Disposal Location Code</strong></label>
+                        <label><strong>Unit</strong></label>
                         <input style="color: black;" onfocus="addcampuscodeOnClick()" onblur="addcampuscodeOnLeave()" type="text" class="form-control" id="addcampuscode"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label><strong>Description</strong></label>
-                        <input style="color: black;" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
                     </div>
 
                 <div class="row">
@@ -479,8 +465,10 @@
         
         function onClose()
         {
-            window.location = window.location;
+            // window.location = window.location;
         }
+
+        
 
         function formValidation()
         {
@@ -492,18 +480,9 @@
                 document.getElementById('addcampuscode').style.borderColor = "red";
             }
 
-            if (document.getElementById('addcampusname').value == "" || document.getElementById('addcampusname').value == "Empty Fields are not allowed.") 
+            if (document.getElementById('addcampuscode').value != "Empty Fields are not allowed.") 
             {
-                document.getElementById('addcampusname').value = "Empty Fields are not allowed."
-                document.getElementById('addcampusname').style.color = "red";
-                document.getElementById('addcampusname').style.backgroundColor = "#ffffcc";
-                document.getElementById('addcampusname').style.borderColor = "red";
-            }
-
-            if (document.getElementById('addcampuscode').value != "Empty Fields are not allowed." && document.getElementById('addcampusname').value != "Empty Fields are not allowed.") 
-            {
-                var dlCode = document.getElementById('addcampuscode').value;
-                var dlName = document.getElementById('addcampusname').value;
+                var unit = document.getElementById('addcampuscode').value;
 
                 swal(
                 {
@@ -525,11 +504,10 @@
                             $.ajax(
                             {
                                 type: 'POST',
-                                url : 'insertdisposallocation.php',
+                                url : 'insertunit.php',
                                 data: 
                                 {
-                                    _dlCode: dlCode,
-                                    _dlName: dlName
+                                    _unit: unit
 
                                 },
                                 
@@ -584,7 +562,8 @@
                                 confirmButtonColor: '#43A047',
                                 confirmButtonText: 'OK',
                                 closeOnConfirm: true
-                            });
+                            }  
+                            );
                                         
                         }//endelse{}
                     }
@@ -594,27 +573,18 @@
 
         function btnSubmitForUpOnClick(modId)
         {
-            if (document.getElementById('inputDlCode' + modId).value == "" || document.getElementById('inputDlCode' + modId).value == "Empty Fields are not allowed.") 
+            if (document.getElementById('inputCcode' + modId).value == "" || document.getElementById('inputCcode' + modId).value == "Empty Fields are not allowed.") 
             {
-                document.getElementById('inputDlCode' + modId).value = "Empty Fields are not allowed."
-                document.getElementById('inputDlCode' + modId).style.color = "red";
-                document.getElementById('inputDlCode' + modId).style.backgroundColor = "#ffffcc";
-                document.getElementById('inputDlCode' + modId).style.borderColor = "red";
+                document.getElementById('inputCcode' + modId).value = "Empty Fields are not allowed."
+                document.getElementById('inputCcode' + modId).style.color = "red";
+                document.getElementById('inputCcode' + modId).style.backgroundColor = "#ffffcc";
+                document.getElementById('inputCcode' + modId).style.borderColor = "red";
             }
 
-            if (document.getElementById('inputDlDesc' + modId).value == "" || document.getElementById('inputDlDesc' + modId).value == "Empty Fields are not allowed.") 
+            if (document.getElementById('inputCcode' + modId).value != "Empty Fields are not allowed.") 
             {
-                document.getElementById('inputDlDesc' + modId).value = "Empty Fields are not allowed."
-                document.getElementById('inputDlDesc' + modId).style.color = "red";
-                document.getElementById('inputDlDesc' + modId).style.backgroundColor = "#ffffcc";
-                document.getElementById('inputDlDesc' + modId).style.borderColor = "red";
-            }
-
-            if (document.getElementById('inputDlCode' + modId).value != "Empty Fields are not allowed." && document.getElementById('inputDlDesc' + modId).value != "Empty Fields are not allowed.") 
-            {
-                var upDlCode = document.getElementById('inputDlCode' + modId).value;
-                var upDlDesc = document.getElementById('inputDlDesc' + modId).value;
-                var uniqueId = modId; 
+                var upUnit = document.getElementById('inputCcode' + modId).value;
+                var uniqueId = modId;
 
                 swal(
                 {
@@ -636,11 +606,10 @@
                             $.ajax(
                             {
                                 type: 'POST',
-                                url : 'updatedisposallocation.php',
+                                url : 'updateunit.php',
                                 data: 
                                 {
-                                    _upDlCode: upDlCode,
-                                    _upDlDesc: upDlDesc,
+                                    _upUnit: upUnit,
                                     _uniqueId: uniqueId
 
                                 },
@@ -705,28 +674,6 @@
             }//endif{}
         }//endfunc{}
 
-        function inputDlCodeOnFocus(modId)
-        {
-            if (document.getElementById('inputDlCode' + modId).value == "Empty Fields are not allowed.")
-            {
-                document.getElementById('inputDlCode' + modId).value = "";
-                document.getElementById('inputDlCode' + modId).style.color = "black";
-                document.getElementById('inputDlCode' + modId).style.backgroundColor = "white";
-                document.getElementById('inputDlCode' + modId).style.borderColor = "#00A8B3";
-            }
-        }
-
-        function inputDlDescOnFocus(modId)
-        {
-            if (document.getElementById('inputDlDesc' + modId).value == "Empty Fields are not allowed.")
-            {
-                document.getElementById('inputDlDesc' + modId).value = "";
-                document.getElementById('inputDlDesc' + modId).style.color = "black";
-                document.getElementById('inputDlDesc' + modId).style.backgroundColor = "white";
-                document.getElementById('inputDlDesc' + modId).style.borderColor = "#00A8B3";
-            }
-        }
-
         function addcampuscodeOnClick()
         {
             if (document.getElementById('addcampuscode').value == "Empty Fields are not allowed.")
@@ -738,25 +685,15 @@
             }
         }
 
-        function addcampusnameOnClick()
+        function inputCcodeOnClick(modId)
         {
-            if (document.getElementById('addcampusname').value == "Empty Fields are not allowed.")
+            if (document.getElementById('inputCcode' + modId).value == "Empty Fields are not allowed.")
             {
-                document.getElementById('addcampusname').value = "";
-                document.getElementById('addcampusname').style.color = "black";
-                document.getElementById('addcampusname').style.backgroundColor = "white";
-                document.getElementById('addcampusname').style.borderColor = "#00A8B3";
+                document.getElementById('inputCcode' + modId).value = "";
+                document.getElementById('inputCcode' + modId).style.color = "black";
+                document.getElementById('inputCcode' + modId).style.backgroundColor = "white";
+                document.getElementById('inputCcode' + modId).style.borderColor = "#00A8B3";
             }
-        }
-
-        function inputDlCodeOnBlur(modId)
-        {
-            document.getElementById('inputDlCode' + modId).style.borderColor = "#E2E2E4";
-        }
-
-        function inputDlDescOnBlur(modId)
-        {
-            document.getElementById('inputDlDesc' + modId).style.borderColor = "#E2E2E4";
         }
 
         function addcampuscodeOnLeave()
@@ -764,9 +701,9 @@
             document.getElementById('addcampuscode').style.borderColor = "#E2E2E4";
         }
 
-        function addcampusnameOnLeave()
+        function inputCcodeOnLeave(modId)
         {
-            document.getElementById('addcampusname').style.borderColor = "#E2E2E4";
+            document.getElementById('inputCcode' + modId).style.borderColor = "#E2E2E4";
         }
 
     </script>   

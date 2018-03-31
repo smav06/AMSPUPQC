@@ -115,7 +115,6 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -138,6 +137,8 @@
                         <li><a href="ADCampus.php">Campus</a></li>
                         <li class="active"><a href="ADDepartment.php">Department</a></li>
                         <li><a href="ADAssetType.php">Asset Library</a></li>
+                        <li><a href="ADAssetCategory.php">Asset Category</a></li>
+                        <li><a href="ADAssetUnit.php">Asset Unit</a></li>
                         <li><a href="ADRequestingPerson.php">Disposal Location</a></li>  
                     </ul>
                 </li>
@@ -188,8 +189,8 @@
                 <div class="col-md-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><i class="fa fa-wrench"></i> &nbsp;System Setup</li>
-                        <li>Department</li>
+                        <li><i class="fa fa-wrench"></i><strong> &nbsp;System Setup</strong></li>
+                        <li><strong>Department</strong></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -272,7 +273,7 @@
                                                                 <label><strong>Department Code</strong></label>
                                                                 <label style="margin-left: 179px;"><strong>Campus Code</strong></label>
                                                                 <input type="hidden" id="inputId<?php echo $id ?>" name="id" value="<?php echo $id ?>">
-                                                                <input style="color: black; width: 275px;" type="text" onfocus="" onblur="" class="form-control" id="inputDCode<?php echo $id ?>" value="<?php echo $code; ?>"/>
+                                                                <input style="color: black; width: 275px;" type="text" onfocus="inputDCodeOnFocus(<?php echo $id ?>)" onblur="inputDCodeOnBlur(<?php echo $id ?>)" class="form-control" id="inputDCode<?php echo $id ?>" value="<?php echo $code; ?>"/>
                                                                 <select style="width: 275px; float: right; margin-top: -33px; color: black;" class="form-control m-bot15" id="selectCCode<?php echo $id ?>" onfocus="" onblur="" name="assignpassempid" style="color: black; padding-left: 10px;">
 
                                                                     <option disabled></option>
@@ -302,7 +303,7 @@
 
                                                             <div class="form-group">
                                                                 <label>Department Name</label>
-                                                                <input style="color: black;" type="text" onfocus="" onblur="" class="form-control" id="inputDName<?php echo $id ?>" value="<?php echo $name ?>"/>
+                                                                <input style="color: black;" type="text" onfocus="inputDNameOnFocus(<?php echo $id ?>)" onblur="inputDNameOnBlur(<?php echo $id ?>)" class="form-control" id="inputDName<?php echo $id ?>" value="<?php echo $name ?>"/>
                                                             </div>
 
                                                             <div class="row">
@@ -783,6 +784,28 @@
             }
         }
 
+        function inputDCodeOnFocus(modId)
+        {
+            if (document.getElementById('inputDCode' + modId).value == "Empty Fields are not allowed.")
+            {
+                document.getElementById('inputDCode' + modId).value = "";
+                document.getElementById('inputDCode' + modId).style.color = "black";
+                document.getElementById('inputDCode' + modId).style.backgroundColor = "white";
+                document.getElementById('inputDCode' + modId).style.borderColor = "#00A8B3";
+            }
+        }
+
+        function inputDNameOnFocus(modId)
+        {
+            if (document.getElementById('inputDName' + modId).value == "Empty Fields are not allowed.")
+            {
+                document.getElementById('inputDName' + modId).value = "";
+                document.getElementById('inputDName' + modId).style.color = "black";
+                document.getElementById('inputDName' + modId).style.backgroundColor = "white";
+                document.getElementById('inputDName' + modId).style.borderColor = "#00A8B3";
+            }
+        }
+
         function deptcampuscodeOnClick()
         {
             if (document.getElementById('deptcampuscode').selectedIndex == "0")
@@ -813,6 +836,16 @@
         function addcampusnameOnLeave()
         {
             document.getElementById('addcampusname').style.borderColor = "#E2E2E4";
+        }
+
+        function inputDCodeOnBlur(modId)
+        {
+            document.getElementById('inputDCode' + modId).style.borderColor = "#E2E2E4";
+        }
+
+        function inputDNameOnBlur(modId)
+        {
+            document.getElementById('inputDName' + modId).style.borderColor = "#E2E2E4";
         }
 
         function deptcampuscodeOnLeave()

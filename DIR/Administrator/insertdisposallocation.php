@@ -2,13 +2,14 @@
 	
 	include('db.php');
 
- 	if (isset($_POST['_dlocation'])) 
+ 	if (isset($_POST['_dlCode']) && isset($_POST['_dlName'])) 
  	{
-		$indlocation = $_POST['_dlocation'];
+		$inDlCode  = $_POST['_dlCode'];
+		$inDlName  = $_POST['_dlName'];
 
-   		$upquery = "INSERT INTO ams_r_disposal_location (DL_ID, DL_NAME) VALUES (NULL, '$indlocation')";
+   		$inQuery = "INSERT INTO ams_r_disposal_location (DL_ID, DL_CODE, DL_DESC) VALUES (NULL, '$inDlCode', '$inDlName')";
                                         
-        mysqli_query($connection, $upquery);
+        mysqli_query($connection, $inQuery);
  	}
 
 ?>

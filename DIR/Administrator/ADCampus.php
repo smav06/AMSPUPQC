@@ -115,7 +115,6 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -138,6 +137,8 @@
                         <li class="active"><a href="ADCampus.php">Campus</a></li>
                         <li><a href="ADDepartment.php">Department</a></li>
                         <li><a href="ADAssetType.php">Asset Library</a></li>
+                        <li><a href="ADAssetCategory.php">Asset Category</a></li>
+                        <li><a href="ADAssetUnit.php">Asset Unit</a></li>
                         <li><a href="ADRequestingPerson.php">Disposal Location</a></li>  
                     </ul>
                 </li>
@@ -188,8 +189,8 @@
                 <div class="col-md-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><i class="fa fa-wrench"></i> &nbsp;System Setup</li>
-                        <li>Campus</li>
+                        <li><i class="fa fa-wrench"></i><strong> &nbsp;System Setup</strong></li>
+                        <li><strong>Campus</strong></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
