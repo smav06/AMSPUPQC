@@ -907,7 +907,7 @@
 
                                         setTimeout(function() 
                                         {
-                                            window.location = window.location;
+                                            // window.location = window.location;
                                             window.location = 'POPTR.php';
                                         },2500);
                                     },

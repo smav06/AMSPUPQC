@@ -437,7 +437,7 @@
                                                                     <option value="" disabled ></option>
                                                                     <option value="For Repair" selected>For Repair</option>
                                                                     <option value="Repaired">Repaired</option>
-                                                                    <option value="Ready For Disposal">Ready For Disposal</option>
+                                                                    <option value="For Disposal">For Disposal</option>
                                                                 </select>
                                                             </center>
                                                         </td>
@@ -504,7 +504,7 @@
                                                                     <option value="" disabled ></option>
                                                                     <option value="For Repair" selected>For Repair</option>
                                                                     <option value="Repaired">Repaired</option>
-                                                                    <option value="Ready For Disposal">Ready For Disposal</option>
+                                                                    <option value="For Disposal">For Disposal</option>
                                                                 </select>
                                                             </center>
                                                         </td>
@@ -553,9 +553,9 @@
                                         </div>
                                     </div>
 
-                                    <!-- READY FOR DISPOSAL -->
+                                    <!-- FOR DISPOSAL -->
                                     <div class="col-md-12 hidden" id="clone3">
-                                        <label>DISPOSAL / READY FOR DISPOSAL</label>
+                                        <label>DISPOSAL / FOR DISPOSAL</label>
                                         <div class="adv-table">
                                             <table  class="display table table-bordered table-striped" id=" ">
                                                 <thead>
@@ -931,11 +931,11 @@ $(document).ready(function(){
             // alert(this.id);
             document.getElementById('selvalsz' + this.id).value = 'For Repair'; 
         }
-        else if(this.options[this.selectedIndex].value == 'Ready For Disposal') 
+        else if(this.options[this.selectedIndex].value == 'For Disposal') 
         {
-            // alert('Ready For Disposal');   
+            // alert('For Disposal');   
             // alert(this.id);
-            document.getElementById('selvalsz' + this.id).value = 'Ready For Disposal';
+            document.getElementById('selvalsz' + this.id).value = 'For Disposal';
         }
     });
     
@@ -975,14 +975,14 @@ $(document).ready(function(){
             document.getElementById('newmodalget').innerHTML = filltable;
         }
 
-        // DISPOSAL (READY FOR DISPOSAL)
+        // DISPOSAL (FOR DISPOSAL)
         for (var x = getthecnt; x > 0; x--) {
 
             var ckx = 'selvalsz' + x;
             var ekx = document.getElementById(ckx);
             var getkx = ekx.options[ekx.selectedIndex].value;
 
-            if (document.getElementById(ckx).options[ekx.selectedIndex].value == 'Ready For Disposal') {
+            if (document.getElementById(ckx).options[ekx.selectedIndex].value == 'For Disposal') {
                 var idx = document.getElementById('origrodid' + x).innerText;
                 var reqx = document.getElementById('origaid' + x).innerText;
                 var unitx = document.getElementById('origadesc' + x).innerText;
@@ -1096,7 +1096,7 @@ $(document).ready(function(){
                         });
                     });
 
-                    // FOR READY FOR DISPOSAL
+                    // FOR FOR DISPOSAL
                     $('#newmodalget2 tr').each(function(index, val) {
 
                         $.ajax({

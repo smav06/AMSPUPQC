@@ -366,9 +366,39 @@
 
                 <div class="row">
                     <div class="col-md-6">
+                        For Repair: 
+                        <?php 
+                            $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'For Repair' ";
+                            $result = mysqli_query($connection, $sql);
+
+                            while ($row = mysqli_fetch_array($result)) 
+                            {
+                              $cnt = $row['C'];
+                              echo '<strong>'.$cnt.'</strong>';
+                            }
+                        ?>
+                    </div>                    
+
+                    <div class="col-md-6">
                         Transferred: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Transferred Out' ";
+                            $result = mysqli_query($connection, $sql);
+
+                            while ($row = mysqli_fetch_array($result)) 
+                            {
+                              $cnt = $row['C'];
+                              echo '<strong>'.$cnt.'</strong>';
+                            }
+                        ?>
+                    </div>                    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        For Disposal: 
+                        <?php 
+                            $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'For Disposal' ";
                             $result = mysqli_query($connection, $sql);
 
                             while ($row = mysqli_fetch_array($result)) 
@@ -383,22 +413,6 @@
                         Disposed: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Disposed' ";
-                            $result = mysqli_query($connection, $sql);
-
-                            while ($row = mysqli_fetch_array($result)) 
-                            {
-                              $cnt = $row['C'];
-                              echo '<strong>'.$cnt.'</strong>';
-                            }
-                        ?>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        Ready For Disposal: 
-                        <?php 
-                            $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Ready For Disposal' ";
                             $result = mysqli_query($connection, $sql);
 
                             while ($row = mysqli_fetch_array($result)) 

@@ -378,7 +378,7 @@
 
                                                     <?php
                                                         }
-                                                        elseif ($a_availability =='Assigned' && $a_status == 'Ready For Disposal' || $a_availability =='Available' && $a_status == 'Ready For Disposal') 
+                                                        elseif ($a_availability =='Assigned' && $a_status == 'For Disposal' || $a_availability =='Available' && $a_status == 'For Disposal') 
                                                         {
                                                     ?>
 

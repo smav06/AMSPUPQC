@@ -294,7 +294,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading"> 
-                            Ready For Disposal / Disposed Asset
+                            For Disposal / Disposed Asset
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                             </span>
@@ -318,7 +318,7 @@
 
                                         <?php  
 
-                                            $sql = "SELECT * FROM `ams_t_report_of_damage_sub` AS RODS INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_r_asset` AS A ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'Ready For Disposal' AND A.A_DISPOSAL_STATUS != 1";
+                                            $sql = "SELECT * FROM `ams_t_report_of_damage_sub` AS RODS INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_r_asset` AS A ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'For Disposal' AND A.A_DISPOSAL_STATUS != 1";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
