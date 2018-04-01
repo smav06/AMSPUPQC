@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2018 at 06:52 PM
+-- Generation Time: Apr 01, 2018 at 10:02 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -477,8 +477,10 @@ CREATE TABLE `ams_t_report_of_damage` (
   `ROD_REASON` varchar(350) NOT NULL,
   `ROD_DATE` date NOT NULL,
   `ROD_STATUS` varchar(25) NOT NULL DEFAULT 'Pending',
-  `ROD_VIEW_BY_PO` int(11) DEFAULT '0',
+  `ROD_VIEW_BY_PO` int(11) NOT NULL DEFAULT '0',
   `ROD_VIEW_BY_USER` int(11) NOT NULL DEFAULT '0',
+  `ROD_VIEW_CLICKED` int(11) NOT NULL DEFAULT '0',
+  `ROD_VIEW_BY_USER_EVAL` int(11) NOT NULL DEFAULT '0',
   `ROD_REMARKS` varchar(350) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

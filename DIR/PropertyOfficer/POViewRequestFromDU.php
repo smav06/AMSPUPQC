@@ -159,6 +159,55 @@
                 <i class="fa fa-warning"></i>
                 <span class="badge bg-warning count2"></span>
             </a>
+
+            <?php 
+
+                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_report_of_damage` AS ROD WHERE ROD.ROD_STATUS = 'Pending'");
+
+                while($rowx = mysqli_fetch_assoc($sqlcntx))
+                {
+                    $cnt = $rowx['XXX'];
+                    echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
+                }
+
+                if ($cnt == 0) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif2" style="height: 70px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 1) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif2" style="height: 110px;">
+            </ul>
+
+            <?php
+                }
+                elseif ($cnt == 2) 
+                {
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif2" style="height: 220px;">
+            </ul>
+
+            <?php
+                    
+                }
+                elseif ($cnt >= 3) 
+                {                
+            ?>
+
+            <ul class="dropdown-menu extended notification dispnotif2" style="overflow-y: scroll; height: 330px;">
+            </ul>
+
+            <?php 
+                }
+            ?>
         </li>
 
         <li id="" class="">
@@ -761,6 +810,29 @@
         });
     }
 
+    function myFunction2(id) {
+         var id = id;
+         // alert(id);
+
+         $.ajax({
+            type: 'POST',
+            url: 'UpdateNotifByClickedReport.php',
+            async: false,
+            data: {
+                _id: id
+            },
+            success: function(data2) {
+                // alert(data2);                              
+                // alert("tama");
+            },
+            error: function(response2) {
+                // alert(response2);  
+                // alert("mali");                                
+            }
+
+        });
+    }
+
 function myFunctionzxc() {
 
     var getthecnt = document.getElementById('getcount').value;
@@ -1228,4 +1300,43 @@ $(document).ready(function(){
     });
  
 });
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+ 
+        function load_unseen_notification2(view2 = '') {
+            $.ajax({
+                url:"fetchreport.php",
+                method:"POST",
+                data:{view2:view2},
+                dataType:"json",
+           
+            success:function(data2)
+            {
+                $('.dispnotif2').html(data2.notification2);
+
+                if(data2.unseen_notification2 > 0)
+                {
+                    $('.count2').html(data2.unseen_notification2);
+                }
+            }
+
+            });
+        }
+         
+        load_unseen_notification2();
+         
+        $(document).on('click', '.dropdown-toggle', function() {
+            $('.count2').html('');
+            load_unseen_notification2('yes');
+        });
+         
+        setInterval(function(){ 
+            load_unseen_notification2();; 
+        }, 1000);
+     
+    });
+
 </script>
