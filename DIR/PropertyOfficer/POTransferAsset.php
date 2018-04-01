@@ -300,7 +300,7 @@
 
                                                 <?php  
 
-                                                    $sql = "SELECT * FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' OR A_AVAILABILITY = 'Transferred Out' ORDER BY A_DATE DESC";
+                                                    $sql = "SELECT * FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' AND A_STATUS = 'Serviceable' OR A_STATUS = 'Transferred Out' ORDER BY A_DATE DESC";
 
                                                     $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -400,7 +400,7 @@
                     </div>
                 </div>
 
-                <div id="clone" style="display: none;">
+                <div id="clone" style="">
                     <div class="row">
                         <div class="col-sm-12">
                             <section class="panel">
@@ -440,7 +440,7 @@
 
                                             <?php  
 
-                                                $sql = "SELECT * FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' ORDER BY A_DATE DESC";
+                                                $sql = "SELECT * FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' AND A_STATUS = 'Serviceable' OR A_STATUS = 'Transferred Out' ORDER BY A_DATE DESC";
 
                                                 $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 

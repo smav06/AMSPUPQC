@@ -311,6 +311,7 @@
                                             <th style="">Reason</th> 
                                             <th style="width: 200px;">Reported By</th>
                                             <th style="width: 110px;">Status</th>
+                                            <th class="hidden">numbring</th>
                                             <th style="width: 130px;">Date Reported</th>
                                             <th style="width: 100px;"></th>
                                         </tr>
@@ -320,7 +321,7 @@
 
                                         <?php  
 
-                                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, ROD.ROD_STATUS, O.O_NAME, ROD.ROD_DATE, RODS.RODS_CANCEL_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE RODS.RODS_CANCEL_DATE IS NULL GROUP BY ROD.ROD_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
+                                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, ROD.ROD_STATUS, O.O_NAME, ROD.ROD_DATE, RODS.RODS_CANCEL_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY ROD.ROD_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -346,24 +347,18 @@
                                             ?>
 
                                             <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $rodstatus; ?> </p> </td>
+                                            <td class="hidden">1</td>
 
                                             <?php  
                                                 }
-                                                elseif ($rodstatus == 'Approved') 
+                                                elseif ($rodstatus == 'Evaluated') 
                                                 {
                                             ?>
 
                                             <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $rodstatus; ?> </p> </td>
+                                            <td class="hidden">2</td>
 
                                             <?php  
-                                                }
-                                                elseif ($rodstatus == 'Reject') 
-                                                {
-                                            ?>
-
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $rodstatus; ?> </p> </td>
-
-                                            <?php
                                                 }
                                             ?>
 
@@ -504,7 +499,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--dynamic table initialization -->
-    <script src="../../js/dynamic_table_init.js"></script>
+    <script src="POMaintenanceReport/dynamic_table_init.js"></script>
 
     <script src="../../js/iCheck/jquery.icheck.js"></script>
 

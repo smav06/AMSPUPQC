@@ -414,7 +414,7 @@
 
                                             <?php  
 
-                                                $sql = "SELECT * FROM `ams_r_asset` ORDER BY A_DATE DESC";
+                                                $sql = "SELECT * FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' AND A_STATUS = 'Serviceable' ORDER BY A_DATE DESC";
 
                                                 $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -562,7 +562,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--script for this page only-->
-    <script src="OrganizationCompliance.js"></script>
+    <script src="POMaintenanceInsCheck/OrganizationCompliance.js"></script>
 
     <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="ModalAssign" class="modal fade">
         <div class="modal-dialog">
@@ -871,7 +871,7 @@
                                 var selectObject = tdObject.find("select"); //grab the <select> tag assuming that there will be only single select box within that <td> 
                                 var selCntry = selectObject.val(); // get the selected country from current <tr>
 
-                                alert(selCntry);
+                                // alert(selCntry);
                                 $.ajax({
                                     type: 'POST',
                                     url: 'UpdateTheAssetBaseOnInspection.php',

@@ -527,7 +527,7 @@
                 <hr>
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         Pending: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Pending' ";
@@ -541,26 +541,10 @@
                         ?>
                     </div>
 
-                    <div class="col-md-12">
-                        Approved: 
-                        <?php 
-                            $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Approved' ";
-                            $result = mysqli_query($connection, $sql);
-
-                            while ($row = mysqli_fetch_array($result)) 
-                            {
-                              $cnt = $row['C'];
-                              echo '<strong>'.$cnt.'</strong>';
-                            }
-                        ?>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-md-6">
-                        Reject: 
+                        Evaluated: 
                         <?php 
-                            $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Reject' ";
+                            $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Evaluated' ";
                             $result = mysqli_query($connection, $sql);
 
                             while ($row = mysqli_fetch_array($result)) 
@@ -571,6 +555,11 @@
                         ?>
                     </div>
                 </div>
+
+
+                <br>
+                <br>
+
                 
             </div>
         </div>

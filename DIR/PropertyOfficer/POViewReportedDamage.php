@@ -365,19 +365,11 @@
 
                                         <?php
                                             }
-                                            elseif ($rodstatus == 'Approved') 
+                                            elseif ($rodstatus == 'Evaluated') 
                                             {
                                         ?>
 
                                             <input type="text" value="<?php echo $rodstatus; ?>" class="form-control" style="color: green;" disabled />
-
-                                        <?php      # code...
-                                            }
-                                            elseif ($rodstatus == 'Reject') 
-                                            {
-                                        ?>
-
-                                            <input type="text" value="<?php echo $rodstatus; ?>" class="form-control" style="color: red;" disabled />
 
                                         <?php
                                             }
@@ -414,7 +406,7 @@
 
                                                 <tbody> 
                                                     <?php  
-                                                        $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
+                                                        $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE ROD.ROD_ID = $passedrodid";
 
                                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -449,7 +441,7 @@
                                                     ?>
 
                                                     <?php
-                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_t_report_of_damage_sub` WHERE ROD_ID = $passedrodid AND RODS_CANCEL_DATE IS NULL";
+                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_t_report_of_damage_sub` WHERE ROD_ID = $passedrodid";
 
                                                         $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
@@ -481,7 +473,7 @@
 
                                                 <tbody id="newmodalgetrejected"> 
                                                     <?php  
-                                                        $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
+                                                        $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE ROD.ROD_ID = $passedrodid";
 
                                                         $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -516,7 +508,7 @@
                                                     ?>
 
                                                     <?php
-                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_t_report_of_damage_sub` WHERE ROD_ID = $passedrodid AND RODS_CANCEL_DATE IS NULL";
+                                                        $sql1 = "SELECT COUNT(*) AS AAA FROM `ams_t_report_of_damage_sub` WHERE ROD_ID = $passedrodid";
 
                                                         $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
@@ -597,7 +589,7 @@
 
                                 <?php
                                     }
-                                    elseif ($rodstatus == 'Approved') 
+                                    elseif ($rodstatus == 'Evaluated') 
                                     {
                                 ?>
 
@@ -616,7 +608,7 @@
                                                 <tbody> 
 
                                                 <?php  
-                                                    $sqlx = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
+                                                    $sqlx = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE ROD.ROD_ID = $passedrodid";
 
                                                     $resultx = mysqli_query($connection, $sqlx) or die("Bad Query: $sql");
 
@@ -643,54 +635,7 @@
                                     </div>
 
                                 <?php
-                                    }
-                                    elseif ($rodstatus == 'Reject') 
-                                    {
-                                ?>
-
-                                    <div class="col-md-12" id="cloneqwe">
-                                        <div class="adv-table">
-                                            <table  class="display table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="display: none;">rods id</th>
-                                                        <th style="display: none;">a id</th>
-                                                        <th>Asset</th>
-                                                        <th style="width: 200px; display: none;">Status Of Asset</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody> 
-
-                                                <?php  
-                                                    $sqlxe = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.A_ID = A.A_ID INNER JOIN ams_t_report_of_damage AS ROD ON RODS.ROD_ID = ROD.ROD_ID WHERE RODS.RODS_CANCEL_DATE IS NULL AND ROD.ROD_ID = $passedrodid";
-
-                                                    $resultxe = mysqli_query($connection, $sqlxe) or die("Bad Query: $sql");
-
-                                                    while($rowxe = mysqli_fetch_assoc($resultxe))
-                                                    { 
-                                                        $aidxe = $rowxe['A_ID'];
-                                                        $rodsidxe = $rowxe['RODS_ID'];
-                                                        $adescriptionxe = $rowxe['A_DESCRIPTION'];
-                                                        $rodsevalxe = $rowxe['RODS_EVALUATION'];
-                                                ?>                                               
-                                                    <tr>
-                                                        <td style="display: none;"> <?php echo $rodsidxe; ?> </td>
-                                                        <td style="display: none;"> <?php echo $aidxe; ?> </td>
-                                                        <td> <?php echo $adescriptionxe; ?> </td>
-                                                        <td style="display: none;"> <?php echo $rodsevalxe; ?> </td>
-                                                    </tr>
-
-                                                <?php
-                                                    }
-                                                ?>
-                                                </tbody>                                            
-                                            </table>
-                                        </div>
-                                    </div>
-
-                                <?php
-                                    }
+                                    }                                    
                                 ?>
 
                                 <div class="row">
@@ -718,14 +663,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Evaluation</label>
-                                            <select class="form-control" style="color: black;" id="getseleval">
-                                                <option selected disabled value=""></option>
-                                                <option value="Approved">Approved</option>
-                                                <option value="Reject">Reject</option>
-                                            </select>
-                                        </div>
+                                        <br><br><br><br>
                                         <div class="form-group">
                                             <a id="btnevaluate" class="btn btn-success">Submit</a>
                                             <a href="POMaintenanceReport.php" class="btn btn-default">Go to report of damage</a>
@@ -1010,24 +948,24 @@ $(document).ready(function(){
         }
 
         var remakrsofreport = document.getElementById('evalbymainremarks').value;
-        var gettheeval = document.getElementById('getseleval');
-        var finaleval = gettheeval.options[gettheeval.selectedIndex].value;
+        // var gettheeval = document.getElementById('getseleval');
+        // var finaleval = gettheeval.options[gettheeval.selectedIndex].value;
         var allrodid = document.getElementById('allrodid').value;
         // alert(allrodid);
         // alert(finaleval);
         // alert(remakrsofreport);
 
-        if (finaleval == '') 
-        {
-            alert('Evaluate First!');
-        }
-        else if (finaleval == 'Approved') 
-        {
+        // if (finaleval == '') 
+        // {
+        //     alert('Evaluate First!');
+        // }
+        // else if (finaleval == 'Approved') 
+        // {
             // alert('APPROVED!');
 
             swal({
 
-                title: "Are you sure you want to approve this report?",
+                title: "Are you sure you want to submit this evaluation result?",
                 text: "The departmental user will notify about this action.",
                 type: "warning",
                 showCancelButton: true,
@@ -1047,7 +985,7 @@ $(document).ready(function(){
                         async: false,
                         data: {
                             _rodid: allrodid,
-                            _finaleval: finaleval,
+                            _finaleval: "Evaluated",
                             _remakrsofreport: remakrsofreport
                         },
                         success: function(data2) {
@@ -1074,11 +1012,11 @@ $(document).ready(function(){
                             async: false,
                             data: {
                                 _rodsid: $(this).closest('tr').children('td:first').text(),
-                                _finaleval: finaleval
+                                _finaleval: "Evaluated"
                             },
                             success: function(data2) {
                                 // alert(data2);
-                                swal("Report Approved!", "Approved.", "success");
+                                swal("Evaluation Of Report Submitted!", "The evaluation of report is recorded.", "success");
 
                                 setTimeout(function() 
                                 {
@@ -1106,12 +1044,12 @@ $(document).ready(function(){
                             data: {
                                 _rodsid: $(this).closest('tr').children('td:first').text(),
                                 _aid: $(this).closest('tr').children('td:first').next().text(),
-                                _finaleval: finaleval
+                                _finaleval: "Evaluated"
                             },
                             success: function(data2) {
                                 // alert(data2);
                                 
-                                swal("Report Approved!", "Approved.", "success");
+                                swal("Evaluation Of Report Submitted!", "The evaluation of report is recorded.", "success");
 
                                 setTimeout(function() 
                                 {
@@ -1139,12 +1077,12 @@ $(document).ready(function(){
                             data: {
                                 _rodsid: $(this).closest('tr').children('td:first').text(),
                                 _aid: $(this).closest('tr').children('td:first').next().text(),
-                                _finaleval: finaleval
+                                _finaleval: "Evaluated"
                             },
                             success: function(data2) {
                                 // alert(data2);
 
-                                swal("Report Approved!", "Approved.", "success");
+                                swal("Evaluation Of Report Submitted!", "The evaluation of report is recorded.", "success");
 
                                 setTimeout(function() 
                                 {
@@ -1170,59 +1108,59 @@ $(document).ready(function(){
 
             });
 
-        }
-        else if (finaleval == 'Reject') 
-        {
-            // alert('REJECTED </3');
+        // }
+        // else if (finaleval == 'Reject') 
+        // {
+        //     // alert('REJECTED </3');
 
-            swal({
+        //     swal({
 
-                title: "Are you sure you want to reject this report?",
-                text: "The departmental user will notify about this action.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Yes',
-                cancelButtonText: "No",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
+        //         title: "Are you sure you want to reject this report?",
+        //         text: "The departmental user will notify about this action.",
+        //         type: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#DD6B55',
+        //         confirmButtonText: 'Yes',
+        //         cancelButtonText: "No",
+        //         closeOnConfirm: false,
+        //         closeOnCancel: false
+        //     },
 
-            function(isConfirm) {
-                if (isConfirm) {
+        //     function(isConfirm) {
+        //         if (isConfirm) {
 
-                    $.ajax({
-                        type: 'POST',
-                        url: 'RejectReport.php',
-                        async: false,
-                        data: {
-                            _rodid: allrodid,
-                            _finaleval: finaleval,
-                            _remakrsofreport: remakrsofreport
-                        },
-                        success: function(data2) {
-                            // alert(data2);    
-                            swal("Report Rejected!", "Rejected.", "error");
+        //             $.ajax({
+        //                 type: 'POST',
+        //                 url: 'RejectReport.php',
+        //                 async: false,
+        //                 data: {
+        //                     _rodid: allrodid,
+        //                     _finaleval: finaleval,
+        //                     _remakrsofreport: remakrsofreport
+        //                 },
+        //                 success: function(data2) {
+        //                     // alert(data2);    
+        //                     swal("Report Rejected!", "Rejected.", "error");
 
-                            setTimeout(function() 
-                            {
-                                window.location = 'POMaintenanceReport.php';
-                            },2500);                                
-                        },
-                        error: function(response2) {
-                            //alert(response2);                                    
-                        }
+        //                     setTimeout(function() 
+        //                     {
+        //                         window.location = 'POMaintenanceReport.php';
+        //                     },2500);                                
+        //                 },
+        //                 error: function(response2) {
+        //                     //alert(response2);                                    
+        //                 }
 
-                    });
-                } 
-                else
-                {
-                    swal("Cancelled", "The transaction is cancelled", "error");
-                }
+        //             });
+        //         } 
+        //         else
+        //         {
+        //             swal("Cancelled", "The transaction is cancelled", "error");
+        //         }
 
-            });
+        //     });
 
-        }
+        // }
 
     });
 
