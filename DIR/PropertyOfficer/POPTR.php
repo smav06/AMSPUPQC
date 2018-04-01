@@ -431,7 +431,7 @@
                             </div>
 
                             <span class="pull-right">
-                                <button type="button" class="btn btn-success" onclick="printonly()"><i class="fa fa-print"> PRINT</i></button>
+                                <button type="button" class="btn btn-success" onclick="printonly()"><i class="fa fa-print"></i> Print</button>
                             </span>
                             
                         </div>

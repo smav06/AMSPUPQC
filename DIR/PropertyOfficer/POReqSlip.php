@@ -276,12 +276,12 @@
             </a>
         </li>
         <li class="sub-menu">
-            <a href="javascript:;">
+            <a href="javascript:;" class="active">
                 <i class="fa fa fa-table"></i>
                 <span>Reports</span>
             </a>
             <ul class="sub">
-                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                <li class="active"><a href="POPurchaseRequest.php">Purchase Request</a></li> 
                 <li><a href="POPPMPReport.php">PPMP Report</a></li>
                 <li><a href="POPar.php">Property Accountability Receipt</a></li>
                 <li><a href="POPtr.php">Property Transfer Report</a></li>  
@@ -436,7 +436,7 @@
                             </div>
 
                             <span class="pull-right">
-                                <button type="button" class="btn btn-success" onclick="printonly()"><i class="fa fa-print"> PRINT</i></button>
+                                <button type="button" class="btn btn-success" onclick="printonly()"><i class="fa fa-print"></i> Print</button>
                             </span>
 
                         </div>

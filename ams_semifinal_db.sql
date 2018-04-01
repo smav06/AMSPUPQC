@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2018 at 11:57 PM
+-- Generation Time: Apr 01, 2018 at 06:52 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -121,8 +121,7 @@ INSERT INTO `ams_r_asset_category` (`AC_ID`, `AC_NAME`) VALUES
 (1, 'Electronic Equipment'),
 (2, 'Electronic Device'),
 (3, 'Mobile Device'),
-(4, 'Furniture'),
-(5, 'Office Supplies');
+(4, 'Furniture');
 
 -- --------------------------------------------------------
 
@@ -157,8 +156,7 @@ INSERT INTO `ams_r_asset_library` (`AL_ID`, `AL_NAME`, `UNT_ID`, `AC_ID`) VALUES
 (13, 'Headset', 3, 2),
 (14, 'System Unit', 3, 2),
 (15, 'AVR', 3, 2),
-(16, 'Webcam', 3, 2),
-(17, 'Bond paper', 2, 5);
+(16, 'Webcam', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -177,9 +175,7 @@ CREATE TABLE `ams_r_asset_unit` (
 
 INSERT INTO `ams_r_asset_unit` (`UNT_ID`, `UNT_NAME`) VALUES
 (1, 'Set'),
-(2, 'Ream'),
-(3, 'Piece'),
-(4, 'Bundle/Box/Package');
+(3, 'Piece');
 
 -- --------------------------------------------------------
 
@@ -223,9 +219,7 @@ CREATE TABLE `ams_r_disposal_location` (
 
 INSERT INTO `ams_r_disposal_location` (`DL_ID`, `DL_CODE`, `DL_DESC`) VALUES
 (1, 'PUPQC WAREHOUSE', 'Polytechnic University of the Philippines Quezon City - Warehouse'),
-(2, 'PUPQC BARRACKS', 'Polytechnic University of the Philippines Quezon City - Barracks'),
-(3, 'PUPMNL WAREHOUSE', 'Polytechnic University of the Philippines Sta. Mesa City - Warehouse'),
-(4, 'PAYATAS DUMP SITE', 'Payatas, Quezon City Dumpsite');
+(2, 'PUPQC BARRACKS', 'Polytechnic University of the Philippines Quezon City - Barracks');
 
 -- --------------------------------------------------------
 
@@ -256,7 +250,8 @@ INSERT INTO `ams_r_employee_profile` (`EP_ID`, `EP_FNAME`, `EP_MNAME`, `EP_LNAME
 (2, 'James Vincent', NULL, 'Nicolas', 'Male', NULL, 'ishallbejv@gmail.com', 'Departmental User', 'Active', 'images/EmployePictures/james.jpg', 1),
 (3, 'Bryan', 'B.', 'Cortesiano', 'Male', NULL, 'cortesianobryanthegreat@gmail.com', 'Property Officer', 'Active', 'images/EmployePictures/bryanprofilepic.jpg', 2),
 (4, 'Esperato', NULL, 'Illaida', 'Male', NULL, 'espe@gmail.com', 'Departmental User', 'Active', 'images/EmployePictures/espe.jpg', 3),
-(5, 'Dan Joseph', NULL, 'Madrazo', 'Male', NULL, 'djmadrazo@gmail.com', 'Employee', 'Active', 'images/EmployePictures/danjo.jpg', 1);
+(5, 'Dan Joseph', NULL, 'Madrazo', 'Male', NULL, 'djmadrazo@gmail.com', 'Employee', 'Active', 'images/EmployePictures/danjo.jpg', 1),
+(6, 'Firmo', 'A.', 'Esguerra', 'Male', NULL, 'firmoesguerra@gmail.com', 'Director', 'Active', 'images/EmployePictures/default.png	', NULL);
 
 -- --------------------------------------------------------
 
@@ -346,7 +341,7 @@ CREATE TABLE `ams_t_dispose` (
   `D_TYPE` varchar(15) NOT NULL,
   `D_REMARKS` varchar(250) NOT NULL,
   `D_DISPOSED_BY` varchar(120) NOT NULL,
-  `DL_ID` int(11) NOT NULL,
+  `DL_ID` int(11) DEFAULT NULL,
   `A_ID` int(11) NOT NULL,
   `PARS_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -850,19 +845,19 @@ ALTER TABLE `ams_r_asset`
 -- AUTO_INCREMENT for table `ams_r_asset_category`
 --
 ALTER TABLE `ams_r_asset_category`
-  MODIFY `AC_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `AC_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ams_r_asset_library`
 --
 ALTER TABLE `ams_r_asset_library`
-  MODIFY `AL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `AL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ams_r_asset_unit`
 --
 ALTER TABLE `ams_r_asset_unit`
-  MODIFY `UNT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UNT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ams_r_campus`
@@ -874,13 +869,13 @@ ALTER TABLE `ams_r_campus`
 -- AUTO_INCREMENT for table `ams_r_disposal_location`
 --
 ALTER TABLE `ams_r_disposal_location`
-  MODIFY `DL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `DL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_r_employee_profile`
 --
 ALTER TABLE `ams_r_employee_profile`
-  MODIFY `EP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `EP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ams_r_office`

@@ -398,7 +398,7 @@
                                                         $showqty = $row['UR_QUANTITY'];
 
                                                         $showfname = $row['EP_FNAME'];
-                                                        $showmname = $row['EP_FNAME'];
+                                                        $showmname = $row['EP_MNAME'];
                                                         $showlname = $row['EP_LNAME'];
 
                                                         $showreqperson = $showfname.' '.$showmname.' '.$showlname;

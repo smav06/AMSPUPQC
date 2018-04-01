@@ -400,7 +400,7 @@
                     </div>
                 </div>
 
-                <div id="clone" style="">
+                <div id="clone" style="display: none;">
                     <div class="row">
                         <div class="col-sm-12">
                             <section class="panel">

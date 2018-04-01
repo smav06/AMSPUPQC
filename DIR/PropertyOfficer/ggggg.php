@@ -15,21 +15,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <style type="text/css" media="print">
-        @media print
-          {
-             @page {
-               margin-top: 0;
-               margin-bottom: 0;
-             }
-             body  {
-               padding-top: 72px;
-               padding-bottom: 72px ;
-             }
-          } 
-    </style>
-
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>PAR</title>
+    <title>Disposal</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -205,8 +190,8 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="../logout.php"><i class="fa fa-key"></i>Log Out</a></li>
+                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
+                <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
     </ul>
@@ -237,9 +222,9 @@
                 <span>Requests</span>
             </a>
             <ul class="sub">
-                <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li><a href="PORequestToMain.php">Request From Main</a></li>            
-                <li><a href="POPPMP.php">PPMP</a></li>                   
+                <li><a href="PODURequests.php">Departmental User Requests</a></li>                        
+                <li><a href="PORequestToMain.php">Request From Main</a></li>
+                <li><a href="POPPMP.php">PPMP</a></li>                
             </ul>
         </li>
         <li>
@@ -265,7 +250,7 @@
             </ul>
         </li>
         <li>
-            <a href="PODisposal.php">
+            <a href="PODisposal.php" class="active">
                 <i class="fa fa-trash-o"></i>
                 <span>Disposal</span>
             </a>
@@ -277,9 +262,9 @@
             </a>
             <ul class="sub">
                 <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
-                <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                <li><a href="POPPMPReport.php">PPMP Report</a></li>   
                 <li><a href="POPar.php">Property Accountability Receipt</a></li>
-                <li><a href="POPtr.php">Property Transfer Report</a></li>  
+                <li><a href="POPtr.php">Property Transfer Report</a></li>   
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
         </li>
@@ -299,7 +284,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="POAsset.php">Assets</a></li>
+                        <li><a href="PODisposal.php">Disposal</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -308,228 +293,153 @@
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            Property acknowledgement Receipt
+                        <header class="panel-heading"> 
+                            For Disposal / Disposed Asset
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                             </span>
-                        </header>                        
-
-                        <?php
-                            $sql = "SELECT MAX(PAR_ID) AS AAA FROM `ams_t_par`";
-
-                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
-
-                            while($row = mysqli_fetch_assoc($result))
-                            {
-                                $maxparid = $row['AAA'];
-                                echo '<input type="text" class="hidden" id="maxparid" value="'.$maxparid.'" />';
-                            }
-                        ?>
-
-                        <?php  
-                            $sql = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID WHERE PAR.PAR_ID = $maxparid GROUP BY PAR.PAR_ID";
-
-                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
-
-                            while($row = mysqli_fetch_assoc($result))
-                            {                              
-                              $parno = $row['PAR_NO'];
-                              $fname = $row['EP_FNAME'];
-                              $mname = $row['EP_MNAME'];
-                              $lname = $row['EP_LNAME'];
-                              $wholename = $fname.' '.$mname.' '.$lname;
-                              $pardate = $row['PAR_DATE'];
-                              $parassignby = $row['PAR_ISSUED_BY'];
-
-                        ?>
+                        </header>
 
                         <div class="panel-body">
-                            <div class="row group">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>PAR No.</label>
-                                        <input type="hid" value="<?php echo $parno; ?>" class="form-control" style="color: black;" disabled  />
-                                    </div>
-                                </div>
+                            <div class="adv-table">
+                                <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="display: none;">A ID</th>
+                                            <th style="">Asset</th>
+                                            <!-- <th style="">Reason</th>  -->
+                                            <!-- <th style="">Reported By</th> -->
+                                            <th style="width: 140px;">Date Reported</th>
+                                            <th style="width: 100px;"></th>
+                                        </tr>
+                                    </thead>
 
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Accountable Person / Assigned To</label>
-                                        <input type="text" value="<?php echo $wholename; ?>" class="form-control" style="color: black;" disabled  />
-                                    </div>
-                                </div>
+                                    <tbody> 
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Assigned Date</label>
-                                        <input type="Date" value="<?php echo $pardate; ?>" class="form-control" style="color: black;" disabled />
-                                    </div>
-                                </div>
+                                        <?php  
 
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Assigned By</label>
-                                        <input type="text" value="<?php echo $parassignby; ?>" class="form-control" style="color: black;" disabled />
-                                    </div>
-                                </div>
+                                            $sql = "SELECT * FROM `ams_t_report_of_damage_sub` AS RODS INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_r_asset` AS A ON RODS.A_ID = A.A_ID WHERE A.A_STATUS = 'For Disposal' AND A.A_DISPOSAL_STATUS != 1";
 
-                        <?php
-                            }
-                        ?>
-                                <div class="col-md-12">
-                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">
-                                    </div>
-                                </div>  
+                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
-                                <div class="col-md-12">
-                                    <div class="adv-table">
-                                        <table class="display table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Assets</th>
-                                                </tr>
-                                            </thead>
+                                            while($row = mysqli_fetch_assoc($result))
+                                            {
+                                                $aid = $row['A_ID'];
+                                                $adescription = $row['A_DESCRIPTION'];
+                                                // $rodreason = $row['ROD_REASON'];
+                                                // $rodreportby = $row['O_NAME'];
+                                                $roddate = $row['ROD_DATE'];
+                                        ?>
 
-                                            <tbody>
+                                        <tr class="gradeX">
+                                            <td style="display: none;"> <?php echo $aid; ?> </td>
+                                            <td style=""> <?php echo $adescription; ?> </td>
+                                            <!-- <td style=""> <?php echo $rodreason; ?> </td>  -->
+                                            <!-- <td style=""> <?php echo $rodreportby; ?> </td> -->
+                                            <td style=""> <?php echo $roddate; ?> </td>
+                                            <td style="">
+                                                <a class="btn btn-success" href="#myModals<?php echo $aid; ?>" data-toggle="modal">Evaluate</a>
+                                            </td>
+                                        </tr>
 
-                                            <?php  
-                                                $sql1 = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_asset` AS A ON PARS.A_ID = A.A_ID WHERE PAR.PAR_ID = $maxparid";
+                                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModals<?php echo $aid; ?>" class="modal fade">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background-color: #8C1C1C; color: white">
+                                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                                        <h4 class="modal-title">Dispose an asset</h4>
+                                                    </div>
+                                                    <div class="modal-body">
 
-                                                $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+                                                        <form method="POST">
+                                                            <input type="hidden" id="passaid" value="<?php echo $aid; ?>">
+                                                            <input type="hidden" id="passdisposedby" value="<?php echo $_SESSION['mysesi']; ?>">
+                                                            <div class="form-group">
+                                                                <label>Asset</label>
+                                                                <input style="color: black; word-wrap: break-word;" type="text" value="<?php echo $adescription; ?>" class="form-control" disabled />
+                                                            </div>
 
-                                                while($row1 = mysqli_fetch_assoc($result1))
-                                                {
-                                                    $adesc = $row1['A_DESCRIPTION'];
-                                            ?>
-                                                <tr>
-                                                    <td> <?php echo $adesc; ?> </td>
-                                                </tr>
+                                                            <div class="row group">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label>Select disposal type</label>
+                                                                        <select class="form-control m-bot15" id="passdisposetype" style="color: black; padding-left: 10px;" required>
 
-                                            <?php
-                                                }
-                                            ?>
+                                                                            <option value="" selected disabled></option>
+                                                                            <option value="Keep">Keep</option>
+                                                                            <option value="Return">Return</option>
+                                                                        
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                                                <div class="col-sm-8">
+                                                                    <div class="form-group">
+                                                                        <label>Disposal Location</label>
+                                                                        <select class="form-control m-bot15" id="passlocation" style="color: black; padding-left: 10px;" required>
+
+                                                                            <option value="" selected disabled></option>
+
+                                                                            <?php  
+
+                                                                                $sqlforemployee = "SELECT * FROM ams_r_disposal_location";
+
+                                                                                $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
+
+                                                                                while($row = mysqli_fetch_assoc($results))
+                                                                                {
+                                                                                    $dlid = $row['DL_ID'];
+                                                                                    $dlname = $row['DL_NAME'];
+
+                                                                            ?>
+
+                                                                            <option value="<?php echo $dlid ?>"><?php echo "$dlname"; ?></option>
+                                                                            
+                                                                            <?php
+                                                                                }
+                                                                            ?>
+                                                                        
+                                                                        </select>
+                                                                    </div>             
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>Remarks</label>
+                                                                <textarea style="color: black; word-wrap: break-word; resize: none; height: 85px;" class="form-control" maxlength="200" id="passremarks" required=""></textarea>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label>Date of Disposal</label>
+                                                                <input style="color: black;" type="date" id="passdate" class="form-control" required="">
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">                                                             
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <button type="button" id="btndispose" class="btn btn-default" style="background-color: #43A047">Dispose</button>
+                                                            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                            }
+                                        ?>
+
+                                    </tbody>
+                                </table>
+
                             </div>
-
-                            <span class="pull-right">
-                                <button type="button" class="btn btn-success" onclick="printonly()"><i class="fa fa-print"></i> Print</button>
-                            </span>
-                            
                         </div>
 
-
-                        
-                    </section>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <section class="panel">
-                        <div id="printdisbook" class="panel-body" style="display: none;">
-                            <br>
-                            <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
-                            
-                            <center><h4 style="font-family: Arial; font-weight: bold;">PROPERTY ACCOUNTABILITY RECEIPT</h4></center>
-                            <center><u><h4 style="font-family: Times New Roman;">Polytechnic University of the Philippines</h4></u></center>
-                            <center><h4 style="font-family: Arial;">Quezon City Branch</h4></center>
-                            <hr>                       
-
-                        <?php 
-                            $sql = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID WHERE PAR.PAR_ID = $maxparid GROUP BY PAR.PAR_ID";
-
-                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
-
-                            while($row = mysqli_fetch_assoc($result))
-                            {                              
-                              $parno = $row['PAR_NO'];
-                              $fname = $row['EP_FNAME'];
-                              $mname = $row['EP_MNAME'];
-                              $lname = $row['EP_LNAME'];
-                              $wholename = $fname.' '.$mname.' '.$lname;
-                              $pardate = $row['PAR_DATE'];
-                              $parassignby = $row['PAR_ISSUED_BY'];
-                        ?>
-
-                            <!-- <label>Date: </label> <u> <?php echo $pardate; ?> </u> <br>
-                            <label>PAR NO: </label> <u> <?php echo $parno; ?> </u> <br>
-                            <label>Accountable Person: </label> <u> <?php echo $wholename; ?> </u> -->
-
-                            <table style="width: 100%;" border="1">
-                                <tr>
-                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">PAR No. : <strong> <u> <?php echo $parno; ?> </u> <strong> </h5></td>
-                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">Assigned To : <strong> <u> <?php echo $wholename; ?> </u> </strong> </h5></td>
-                                </tr>
-                                <tr>
-                                    <td><h5 style="font-family: Arial; padding-left: 10px;">Date : <strong> <u> <?php echo $pardate; ?> </u> </strong> </h5></td>
-                                    <td><h5 style="font-family: Arial; padding-left: 10px;"></h5></td>
-                                </tr>
-                            </table>
-
-                        <?php
-                            }
-                        ?>
-                            <p style="margin-top: 15px;"></p>
-
-                            <table style="width: 100%;" border="1">
-                                <thead>
-                                    <tr>
-                                        <th style="font-family: Arial; width: 70px; padding: 10px; font-size: 18px;"> Asset / Item / Equipment</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-
-                                <?php  
-                                    $sql1 = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_asset` AS A ON PARS.A_ID = A.A_ID WHERE PAR.PAR_ID = $maxparid";
-
-                                    $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
-
-                                    while($row1 = mysqli_fetch_assoc($result1))
-                                    {
-                                        $adesc = $row1['A_DESCRIPTION'];
-                                        $issedby = $row1['PAR_ISSUED_BY'];
-                                ?>
-
-                                    <tr>
-                                        <td style="font-family: Arial; padding: 10px;"> <?php echo $adesc; ?> </td>
-                                    </tr>
-
-                                <?php
-                                    }
-                                ?>
-
-                                </tbody>
-                            </table>
-
-                            <p style="margin-top: -8px;"></p>
-                            
-                            <table style="width: 100%;" border="1">                                
-                                <tr>
-                                    <td style="font-family: Arial; padding: 5px; width: 20%"></td>
-                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned To: </em> </center> </td>
-                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned/Issued By: </em> </center> </td>
-                                </tr>
-
-                                <tr>                                    
-                                    <td style="font-family: Arial; padding: 5px;">Signature :</td>
-                                    <td style="font-family: Arial; padding: 5px;"></td>
-                                    <td style="font-family: Arial; padding: 5px;"></td>
-                                </tr>
-
-                                <tr>                                    
-                                    <td style="font-family: Arial; padding: 5px;">Printed Name :</td>
-                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($wholename) ?> </strong> </center> </td>
-                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($issedby) ?> </strong> </center> </td>
-                                </tr>
-                            </table>
-
-                        </div>
                     </section>
                 </div>
             </div>
@@ -538,7 +448,7 @@
     </section>
     <!--main content end-->
 <!--right sidebar start-->
-<div class="right-sidebar" >
+<div class="right-sidebar">
     <div class="search-row">
         <input type="text" placeholder="Search" class="form-control">
     </div>
@@ -667,60 +577,113 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
-    <script src="../../js/jquery.multifield.min.js"></script>
-    <script src="../../js/jquery.multifield.js"></script>
-
-    <script>
-
-        $('.form-content').multifield({
-            section: '.group',
-            btnAdd:'#btnAdd',
-            btnRemove:'.btnRemove',
-        });
-
-        $(function(){
-            $('select').on('change',function(){                        
-                $('input[name=place]').val($(this).val());            
-            });
-        });
-
-        function myFunction(id) {
-            var id = id;
-             // alert(id);
-
-             $.ajax({
-                type: 'POST',
-                url: 'UpdateNotifByClicked.php',
-                async: false,
-                data: {
-                    _id: id
-                },
-                success: function(data2) {
-                    // alert(data2);                              
-                    // alert("tama");
-                },
-                error: function(response2) {
-                    // alert(response2);  
-                    // alert("mali");                                
-                }
-
-            });
-        }
-
-    </script>    
-
 </body>
 </html>
+
+<script type="text/javascript">
+    function myFunction(id) {
+         var id = id;
+         // alert(id);
+
+         $.ajax({
+            type: 'POST',
+            url: 'UpdateNotifByClicked.php',
+            async: false,
+            data: {
+                _id: id
+            },
+            success: function(data2) {
+                // alert(data2);                              
+                // alert("tama");
+            },
+            error: function(response2) {
+                // alert(response2);  
+                // alert("mali");                                
+            }
+
+        });
+    }
+</script>
 
 <script>
 
 $(document).ready(function(){
 
-    // btnsubmitthedonation
+    $('#btndispose').click(function() {
+        var ddate = document.getElementById('passdate').value;
+        // alert(ddate+' = date');
 
-    // $('#btnsubmitthedonation').click(function(e) {
-    //     // alert();
-    // });
+        var dtype = document.getElementById('passdisposetype');
+        var origdtype = dtype.options[dtype.selectedIndex].innerText;
+        // alert(origdtype+' = disposal type');
+
+        var dremarks = document.getElementById('passremarks').value;
+        // alert(dremarks+' = remakrs');
+
+        var ddisposedby = document.getElementById('passdisposedby').value;
+        // alert(ddisposedby+' = disposed by');
+
+        var ddlid = document.getElementById('passlocation');
+        var origddlid = ddlid.options[ddlid.selectedIndex].value;        
+        // alert(origddlid+' = dl id');
+
+        var daid = document.getElementById('passaid').value;
+        // alert(daid+' = a id');
+
+        swal({
+
+                title: "Are you sure you want to dispose this asset?",
+                text: "The selected asset will dispose.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Yes',
+                cancelButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+
+            function(isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'InsertToDisposal.php',
+                        async: false,
+                        data: {
+                            _ddate: ddate,
+                            _origdtype: origdtype,
+                            _dremarks: dremarks,
+                            _ddisposedby: ddisposedby,
+                            _origddlid: origddlid,
+                            _daid: daid
+                        },
+                        success: function(data2) {
+                            // alert(data2); 
+                            swal("Asset Successfully Disposed!", "The selected asset is disposed.", "success");
+
+                            setTimeout(function() 
+                            {
+                                window.location=window.location;
+                            },2500); 
+                        },
+                        error: function(response2) {
+                            // alert(response2);      
+
+                            swal("Error", "May mali bry eh!", "error");                              
+                        }
+
+                    });
+                    
+                }
+                else
+                {
+                    swal("Cancelled", "The confirmation of request to main is cancelled", "error");
+                }
+
+            });
+       
+    });
  
     function load_unseen_notification(view = '') {
         $.ajax({
@@ -752,25 +715,6 @@ $(document).ready(function(){
     setInterval(function(){ 
         load_unseen_notification();; 
     }, 1000);
-
+ 
 });
-</script>
-
-<script>
-
-    function printonly() {
-
-        var restorepage = document.body.innerHTML;
-        var printcont = document.getElementById('printdisbook').innerHTML;
-        document.body.innerHTML = printcont;
-        window.print();
-        document.body.innerHTML = restorepage;
-
-            setTimeout(function() 
-            {
-                window.location = window.location;
-            }, 100);
-
-    }
-
 </script>

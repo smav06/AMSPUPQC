@@ -881,7 +881,7 @@
                                         _inspectresult: selCntry
                                     },
                                     success: function(data2) {
-                                        alert(data2);
+                                        // alert(data2);
 
                                         swal("Inspection Result Submitted!", "The result of inspection/checking of asset successfully recorded.", "success");
 
@@ -892,7 +892,7 @@
                                         },2500);
                                     },
                                     error: function(response2) {
-                                        alert(response2);
+                                        // alert(response2);
                                         swal("Error", "May mali bry eh!", "error");
                                     }
 
