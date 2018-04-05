@@ -550,69 +550,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="mini-stat clearfix">
-            <span class="mini-stat-icon orange"><i class="fa fa-warning"></i></span>
-            <div class="mini-stat-info">
-                <?php 
 
-                    // $con = mysqli_connect("localhost", "root", "", "ams_sample_db");
-
-                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage`";
-                    $result = mysqli_query($connection, $sql);
-
-                    while ($row = mysqli_fetch_array($result)) 
-                    {
-                      $cnt = $row['C'];
-                      
-                ?>
-                
-                <span><?php echo $cnt; ?></span>
-                
-                <?php
-                    }
-                ?>
-                Total No. Of Report
-                <hr>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        Pending: 
-                        <?php 
-                            $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Pending' ";
-                            $result = mysqli_query($connection, $sql);
-
-                            while ($row = mysqli_fetch_array($result)) 
-                            {
-                              $cnt = $row['C'];
-                              echo '<strong>'.$cnt.'</strong>';
-                            }
-                        ?>
-                    </div>
-
-                    <div class="col-md-6">
-                        Evaluated: 
-                        <?php 
-                            $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Evaluated' ";
-                            $result = mysqli_query($connection, $sql);
-
-                            while ($row = mysqli_fetch_array($result)) 
-                            {
-                              $cnt = $row['C'];
-                              echo '<strong>'.$cnt.'</strong>';
-                            }
-                        ?>
-                    </div>
-                </div>
-
-
-                <br>
-                <br>
-
-                
-            </div>
-        </div>
-    </div>
     <div class="col-md-3">
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon green"><i class="fa fa-comment"></i></span>
@@ -687,6 +625,79 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-3">
+        <div class="mini-stat clearfix">
+            <span class="mini-stat-icon orange"><i class="fa fa-warning"></i></span>
+            <div class="mini-stat-info">
+                <?php 
+
+                    // $con = mysqli_connect("localhost", "root", "", "ams_sample_db");
+
+                    $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage`";
+                    $result = mysqli_query($connection, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) 
+                    {
+                      $cnt = $row['C'];
+                      
+                ?>
+                
+                <span><?php echo $cnt; ?></span>
+                
+                <?php
+                    }
+                ?>
+                Total No. Of Report
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        Pending: 
+                        <?php 
+                            $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Pending' ";
+                            $result = mysqli_query($connection, $sql);
+
+                            while ($row = mysqli_fetch_array($result)) 
+                            {
+                              $cnt = $row['C'];
+                              echo '<strong>'.$cnt.'</strong>';
+                            }
+                        ?>
+                    </div>
+
+                    <div class="col-md-6">
+                        Evaluated: 
+                        <?php 
+                            $sql = "SELECT COUNT(*) AS C FROM `ams_t_report_of_damage` WHERE ROD_STATUS = 'Evaluated' ";
+                            $result = mysqli_query($connection, $sql);
+
+                            while ($row = mysqli_fetch_array($result)) 
+                            {
+                              $cnt = $row['C'];
+                              echo '<strong>'.$cnt.'</strong>';
+                            }
+                        ?>
+                    </div>
+                </div>
+
+
+                <br>
+                <br>
+
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                jkasdahs
+            </div>
+        </section>
+    </div>
+
 </div>
 <!--mini statistics end-->
 

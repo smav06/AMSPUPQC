@@ -53,7 +53,7 @@ if(isset($_POST["view2"]))
  {
   $output .= '<li style="margin-top: 10px;">
                 <div class="alert alert-warning clearfix">
-                  <center>No Notification Found</center>
+                  <center>No Report Found</center>
                 </div>
               </li>';
  }
