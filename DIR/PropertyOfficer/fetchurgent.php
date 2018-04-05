@@ -1,10 +1,10 @@
 <?php
 //fetch.php;
 $connect = mysqli_connect("localhost", "root", "", "ams_semifinal_db");
-if(isset($_POST["view2"]))
+if(isset($_POST["view3"]))
 {
  // include("connect.php");
- if($_POST["view2"] != '')
+ if($_POST["view3"] != '')
  {
   $update_query = "UPDATE ams_t_report_of_damage SET ROD_VIEW_BY_PO = 1 WHERE ROD_VIEW_BY_PO = 0";
   mysqli_query($connect, $update_query);
@@ -22,7 +22,7 @@ if(isset($_POST["view2"]))
 
     if ($ifuserclicked == 0) 
     {
-      $output .= '<a href="POViewReportedDamage.php?passedrodid='.$id.'" onclick="myFunction2('.$id.')">
+      $output .= '<a href="POViewReportedDamage.php?passedrodid='.$id.'" onclick="myFunction3('.$id.')">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
                         Date: <strong> '.$row["ROD_DATE"].' </strong><br/>
@@ -53,7 +53,7 @@ if(isset($_POST["view2"]))
  {
   $output .= '<li style="margin-top: 10px;">
                 <div class="alert alert-warning clearfix">
-                  <center>No Report Found</center>
+                  <center>No Unread Urgent Request Found</center>
                 </div>
               </li>';
  }
@@ -62,8 +62,8 @@ if(isset($_POST["view2"]))
  $result_1 = mysqli_query($connect, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(
-  'notification2'   => $output,
-  'unseen_notification2' => $count
+  'notification3'   => $output,
+  'unseen_notification3' => $count
  );
  echo json_encode($data);
 }

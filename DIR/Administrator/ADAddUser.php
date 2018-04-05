@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Property Transfer Report</title>
+    <title>Add User</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -110,11 +110,11 @@
 
                   ?> 
 
-                <span class="username"> <?php echo $_SESSION['mysesi']; ?> </span>
+                <span class="username"> <?php echo $_SESSION['mysesi']; ?> <label> | Administrator</label> </span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="profile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="ADprofile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -152,7 +152,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;" class="active">
+                    <a href="javascript:;">
                         <i class="fa fa-list"></i>
                         <span>Queries</span>
                     </a>
@@ -160,7 +160,7 @@
                         <li><a href="ADQueryAsset.php">Asset</a></li>
                         <li><a href="ADRequest.php">Request</a></li>
                         <li><a href="ADPar.php">Purchase Accountability Receipt</a></li>
-                        <li class="active"><a href="ADPtr.php">Property Transfer Report</a></li> 
+                        <li><a href="ADPtr.php">Property Transfer Report</a></li> 
                         <li><a href="ADDispose.php">Disposed Asset</a></li>
                     </ul>
                 </li>
@@ -189,73 +189,136 @@
                 <div class="col-md-12">
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
-                        <li><i class="fa fa-list"></i><strong> &nbsp;Queries</strong></li>
-                        <li><strong>Property Transfer Report</strong></li>
+                        <li><i class="fa fa-user"></i><strong> &nbsp;User Management</strong></li>
+                        <li><strong>Users</strong></li>
+                        <li><strong>Add User</strong></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            List of PTR's
+                            Add User
                         </header>
-
+                            
                         <div class="panel-body">
+                            <div class="position-center">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <label style="margin-left: 248px;">Middle Initial</label>
+                                        <label style="margin-left: 84px;">Last Name</label>
+                                        <label style="margin-left: 249px;">Nickname (For Username)</label>
+                                        <input type="text" class="form-control" id="inputFN" style="color: black; width: 300px;">
+                                        <input type="text" class="form-control" id="inputMI" style="color: black; width: 150px; margin-left: 315px; margin-top: -34px;">
+                                        <input type="text" class="form-control" id="inputLN" style="color: black; width: 300px; margin-left: 480px; margin-top: -34px;">
+                                        <input type="text" class="form-control" id="inputNick" style="color: black; width: 205px; margin-left: 795px; margin-top: -34px;">
+                                    </div>
 
-                            <div class="adv-table">
-                                <table  class="display table table-bordered table-striped tblCampusData" id="dynamic-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="display: none;">Ptr ID</th>
-                                            <th style="width: 250px">PTR No.</th>
-                                            <th style="width: 250px">Date</th>
-                                            <th style="width: 250px">Transferred By</th> 
-                                            <th style="width: 250px">Received By</th>
-                                            <th style="width: 250px">Campus</th>
-                                    </thead>
+                                    <div class="form-group">
+                                        <label>Department</label>
+                                        <label style="margin-left: 742px;">Role</label>
+                                        <select class="form-control m-bot15" id="selectDept" onfocus="" onblur="" style="color: black; width: 800px;">
 
-                                    <tbody>  
+                                            <option selected disabled></option>
 
-                                    <?php  
+                                            <?php  
 
-                                        $sql = "SELECT ams_t_transfer_out_ptr.PTR_ID, ams_t_transfer_out_ptr.PTR_NO, ams_t_transfer_out_ptr.PTR_DATE, ams_t_transfer_out_ptr.PTR_RECEIVED_BY, ams_t_transfer_out_ptr.PTR_TRANSFERRED_BY, ams_r_campus.C_CODE FROM ams_t_transfer_out_ptr JOIN ams_r_campus ON ams_t_transfer_out_ptr.C_ID = ams_r_campus.C_ID";
+                                            $sqlforemployee = "SELECT O_CODE, O_ID FROM ams_r_office";
 
-                                        $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+                                            $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
 
-                                        while($row = mysqli_fetch_assoc($result))
+                                            while($row = mysqli_fetch_assoc($results))
                                             {
-                                              $id = $row['PTR_ID'];
-                                              $no = $row['PTR_NO'];
-                                              $date = $row['PTR_DATE'];
-                                              $rec = $row['PTR_RECEIVED_BY'];
-                                              $tra = $row['PTR_TRANSFERRED_BY'];
-                                              $camp = $row['C_CODE'];    
-                                    ?>                                      
+                                                $deptCode = $row['O_CODE'];
+                                                $deptID = $row['O_ID'];
 
-                                        <tr class="gradeX"">
-                                            <td style="display: none;"> <?php echo $id; ?> </td>
-                                            <td> <?php echo $no; ?> </td>
-                                            <td> <?php echo $date; ?> </td>
-                                            <td> <?php echo $tra; ?> </td>
-                                            <td> <?php echo $rec; ?> </td>
-                                            <td> <?php echo $camp; ?> </td>
-                                        </tr>
+                                            ?>
 
-                                    <?php
-                                        }
-                                    ?>
+                                            <option value= "<?php echo $deptID ?>"> <?php echo "$deptCode"; ?> </option>
 
-                                    </tbody>
-                                </table>
+                                            <?php 
+                                                } 
+                                            ?>
+
+                                            </select>
+
+                                        <select class="form-control m-bot15" id="selectType" onfocus="" onblur="" style="color: black; width: 185px; margin-left: 815px; margin-top: -48px;">
+                                            <option selected disabled></option>
+                                            <option value="Male">Administrator</option>
+                                            <option value="Female">Property Officer</option>
+                                            <option value="Female">Departmental User</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <label style="margin-left: 527px;">Contact No.</label>
+                                        <label style="margin-left: 192px;">Gender</label>
+                                        <input type="email" class="form-control" id="inputEmail" style="color: black; width: 600px;">
+                                        <input type="text" class="form-control" id="inputCont" style="color: black; width: 250px; margin-left: 615px; margin-top: -33px;">
+                                        <select class="form-control m-bot15" id="selectGender" onfocus="" onblur="" style="color: black; width: 122px; margin-left: 880px; margin-top: -33px;">
+                                            <option selected disabled></option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div style="padding: 1px; margin-bottom: 10px; background-color: #E0E1E7;"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <label style="margin-left: 447px;">Password</label>
+
+                                        <?php
+
+                                            $bytes = openssl_random_pseudo_bytes(4);
+
+                                            a:
+                                            $pwd = bin2hex($bytes);
+
+                                            $sql = "SELECT * FROM ams_r_user WHERE U_PASSWORD = '".$pwd."'";
+
+                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                                            if (mysqli_num_rows($result) > 0) 
+                                            {
+                                                goto a;
+                                            }
+
+                                        ?>
+
+                                        <input type="text" class="form-control" id="uname" style="color: black; width: 495px;" disabled>
+                                        <input type="password" class="form-control" id="password" style="color: black; width: 495px; margin-left: 510px; margin-top: -34px;" value="<?php echo $pwd; ?>" disabled>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label style="float: right;">
+                                            <input type="checkbox" id="showPass" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'"> Show Password
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input type="file" name="img">
+                                    </div>
+
+                                    <button type="button" class="btn btn-success">Submit</button>
+
+                                </form>
+                                </div>
+
                             </div>
-                        </div>
-
                     </section>
-                </div>
-            </div>
+
+                </div> 
+            </div> 
 
         <!-- page end-->
         </section>
@@ -390,6 +453,28 @@
     <script src="../../js/advanced-form.js"></script>
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        
+/*        function generateUsername(deptName)
+        {
+
+            document.getElementByID('uname').value = document.getElementByID('selectDept').innerHTML + "-" + document.getElementByID('inputNick').value;
+            alert(document.getElementByID('try').value);
+
+        }
+*/
+
+        $('#selectDept').change(function()
+        {
+            var val = $("#selectDept option:selected").text().trim();
+            document.getElementById('uname').value = val + "-" + document.getElementById('inputNick').value.toUpperCase();
+        }
+        );
+
+
+
+    </script>
 
 </body>
 </html>

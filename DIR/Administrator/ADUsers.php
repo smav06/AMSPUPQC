@@ -205,7 +205,7 @@
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a data-toggle="modal" class="btn btn-success" href="#myModalAdd"><i class="fa fa-plus"></i> Add </a>
+                                    <a class="btn btn-success" href="ADAddUser.php"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -221,10 +221,10 @@
                                     <thead>
                                         <tr>
                                             <th style="display: none;">Employee ID</th>
-                                            <th style="width: 350px">Name</th>
-                                            <th style="width: 350px">Role</th>
-                                            <th style="width: 200px">Status</th>
-                                            <th style="width: 100px">Action</th>  
+                                            <th style="width: 400px">Name</th>
+                                            <th style="width: 400px">Role</th>
+                                            <th style="width: 400px">Status</th>
+                                            <th style="width: 95px">Action</th>  
                                         </tr>
                                     </thead>
 
@@ -250,7 +250,8 @@
                                             <td> <?php echo $epType; ?> </td>
                                             <td> <?php echo $epStatus; ?> </td>
                                             <td>
-                                                <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-eye"></i> View</a>
+                                                <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-eye"></i></a>
+                                                <a data-toggle="modal" class="btn btn-success updateCampus" href="#myModalUpdate<?php echo $id ?>"><i class="fa fa-pencil"></i></a>
                                             </td>
                                         </tr>
 
@@ -396,108 +397,7 @@
 
 </section>
 
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModalAdd" class="modal fade">
-<!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2<?php echo $id; ?>" class="modal fade"> -->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #8C1C1C; color: white">
-                <button aria-hidden="true" onclick="onClose()" data-dismiss="modal" class="close" type="button" style="color: white"><i class="fa-close-modal fa-times-circle"></i></button>
-                <h4 class="modal-title"><i class="fa-modal-ico fa-plus-square   "></i></h4>
-            </div>
-            
-            <div class="modal-body">
 
-                <form role="form" method="POST">
-
-                    <div class="row-group">
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input style="color: black;" placeholder="First Name" onfocus="addcampuscodeOnClick()" onblur="addcampuscodeOnLeave()" type="text" class="form-control" id="addcampuscode"/>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input style="color: black;" placeholder="Middle Initial" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input style="color: black;" placeholder="Last Name" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
-                            </div>
-                        </div>
-
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input style="color: black;" placeholder="Email Address" onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
-                            </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <input style="color: black;" placeholder="Mobile No." onfocus="addcampusnameOnClick()" onblur="addcampusnameOnLeave()" type="text" class="form-control" id="addcampusname"/>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <select class="form-control m-bot15" id="deptcampuscode" onfocus="deptcampuscodeOnClick()" onblur="deptcampuscodeOnLeave()" name="assignpassempid" style="color: #A09FA0; padding-left: 10px;">
-                                    <option hidden selected disabled>Gender</option>
-                                    <option disabled></option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <select class="form-control m-bot15" id="deptcampuscode" onfocus="deptcampuscodeOnClick()" onblur="deptcampuscodeOnLeave()" name="assignpassempid" style="color: #A09FA0; padding-left: 10px;">
-
-                                    <option hidden selected disabled>Department</option>
-                                    <option disabled></option>
-
-                                    <?php  
-
-                                    $sqlforemployee = "SELECT O_NAME, O_ID FROM ams_r_office";
-
-                                    $results = mysqli_query($connection, $sqlforemployee) or die("Bad Query: $sql");
-
-                                    while($row = mysqli_fetch_assoc($results))
-                                    {
-                                        $deptName = $row['O_NAME'];
-                                        $deptID = $row['O_ID'];
-
-                                    ?>
-
-                                    <option value= "<?php echo $deptID ?>"> <?php echo "$deptName"; ?> </option>
-
-                                    <?php 
-                                        } 
-                                    ?>
-
-                                </select>
-                            </div>
-                        </div>
-
-                    </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="padding: 1px; margin-bottom: 10px; background-color: #E0E1E7;"></div>
-                    </div>
-                </div>
-    
-                <button class="btn btn-success" name="addcampus" id="btn-submit" onclick="formValidation()" type="button" style="margin-left: 425px; margin-bottom: -10px">Submit</button>
-                <button data-dismiss="modal" class="btn btn-default" id="closeAddModal" onclick="onClose()" name="refreshpageaddcampus" type="button" style="float: right">Close</button>
-                
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Placed js at the end of the document so the pages load faster -->
 

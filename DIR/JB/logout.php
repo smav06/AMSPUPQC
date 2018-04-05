@@ -2,7 +2,7 @@
 
 	session_start();
 
-	include('Connection/db.php');
+	include('db.php');
 
 	$myid = $_SESSION['myid'];
 

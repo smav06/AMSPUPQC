@@ -95,7 +95,7 @@
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
+                <span class="badge bg-warning"></span>
             </a>
             <ul class="dropdown-menu extended notification">
                 <li>
@@ -300,9 +300,9 @@
                                                             <label>Request Urgency</label>
                                                             <select id="getsel" class="form-control" style="color: black;" required="">
                                                                 <option value="" disabled selected></option>
-                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +30 days')) ?>">Not Urgent (30 Days)</option>
-                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +15 days')) ?>">Urgent (15 Days)</option>
-                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +10 days')) ?>">Very Urgent (10 Days)</option>
+                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +30 days')) ?>">Not Urgent (30 Days process)</option>
+                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +15 days')) ?>">Urgent (15 Days process)</option>
+                                                                <option value="<?php echo date('Y-m-d',strtotime(date('Y-m-d').' +10 days')) ?>">Very Urgent (10 Days process)</option>
                                                             </select>
 
                                                             <input type="text" name="urs_dateurgent" class="hidden">

@@ -95,7 +95,7 @@
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
+                <span class="badge bg-warning"></span>
             </a>
             <ul class="dropdown-menu extended notification">
                 <li>

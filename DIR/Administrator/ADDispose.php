@@ -114,7 +114,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="ADProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="profile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
