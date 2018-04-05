@@ -73,15 +73,8 @@
                 $_SESSION['myid']=$myid;
                 $_SESSION['myoid']=$myoffice;
 
-                include('Connection/db.php');
-
-                $inQuery = "INSERT INTO ams_r_users_log (UL_LOGGED_DATE, UL_LOGGED_TYPE, EP_ID) VALUES (CURRENT_TIMESTAMP, 'logged in', $myid)";
-
-                mysqli_query($connection, $inQuery);
-
                 echo "<script>window.location.assign('PropertyOfficer/PODashboard.php')</script>";
-              }
-
+              } 
               else if($type == "Administrator")
               {
                 $_SESSION['mysesi']=$name;
@@ -90,15 +83,8 @@
                 $_SESSION['myid']=$myid;
                 $_SESSION['myoid']=$myoffice;
 
-                include('Connection/db.php');
-
-                $inQuery = "INSERT INTO ams_r_users_log (UL_LOGGED_DATE, UL_LOGGED_TYPE, EP_ID) VALUES (CURRENT_TIMESTAMP, 'logged in', $myid)";
-
-                mysqli_query($connection, $inQuery);
-
                 echo "<script>window.location.assign('Administrator/ADCampus.php')</script>";
               }
-
               else if($type == "Departmental User")
               {
                 $_SESSION['mysesi']=$name;
@@ -106,12 +92,6 @@
                 $_SESSION['myuser']=$user;
                 $_SESSION['myid']=$myid;
                 $_SESSION['myoid']=$myoffice;
-
-                include('Connection/db.php');
-
-                $inQuery = "INSERT INTO ams_r_users_log (UL_LOGGED_DATE, UL_LOGGED_TYPE, EP_ID) VALUES (CURRENT_TIMESTAMP, 'logged in', $myid)";
-
-                mysqli_query($connection, $inQuery);
                 
                 echo "<script>window.location.assign('DepartmentalUser/DUDashboard.php')</script>";
               } 

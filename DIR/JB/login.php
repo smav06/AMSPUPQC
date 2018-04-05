@@ -73,7 +73,7 @@
                 $_SESSION['myid']=$myid;
                 $_SESSION['myoid']=$myoffice;
 
-                include('Connection/db.php');
+                include('db.php');
 
                 $inQuery = "INSERT INTO ams_r_users_log (UL_LOGGED_DATE, UL_LOGGED_TYPE, EP_ID) VALUES (CURRENT_TIMESTAMP, 'logged in', $myid)";
 
@@ -90,7 +90,7 @@
                 $_SESSION['myid']=$myid;
                 $_SESSION['myoid']=$myoffice;
 
-                include('Connection/db.php');
+                include('db.php');
 
                 $inQuery = "INSERT INTO ams_r_users_log (UL_LOGGED_DATE, UL_LOGGED_TYPE, EP_ID) VALUES (CURRENT_TIMESTAMP, 'logged in', $myid)";
 
@@ -107,7 +107,7 @@
                 $_SESSION['myid']=$myid;
                 $_SESSION['myoid']=$myoffice;
 
-                include('Connection/db.php');
+                include('db.php');
 
                 $inQuery = "INSERT INTO ams_r_users_log (UL_LOGGED_DATE, UL_LOGGED_TYPE, EP_ID) VALUES (CURRENT_TIMESTAMP, 'logged in', $myid)";
 
