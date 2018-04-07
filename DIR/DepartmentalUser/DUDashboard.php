@@ -122,6 +122,25 @@
                     ?>
                     
                 </li>
+
+                <li id="" class="">
+                    <a style="background-color: white;">
+                        <?php 
+                            // echo $_SESSION['mytype']; 
+
+                            $oid = $_SESSION['myoid'];                            
+
+                            $reszxc = mysqli_query($connection, "SELECT * FROM ams_r_office WHERE O_ID = $oid");
+
+                            while($row = mysqli_fetch_assoc($reszxc))
+                            {
+                                $oname = $row['O_NAME'];
+                                echo $oname;
+                            }
+
+                        ?>
+                    </a>
+                </li>
                 <!-- notification dropdown end -->
             </ul>
         </div>
@@ -152,7 +171,6 @@
                     </a>
                     <ul class="dropdown-menu extended logout">
                         <li><a href="DUProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                        <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                         <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
                     </ul>
                 </li>
@@ -236,7 +254,11 @@
                         <span class="mini-stat-icon tar"><i class="fa fa-comment-o"></i></span>
                         <div class="mini-stat-info">
                             <?php 
-                                $sql = "SELECT COUNT(PAR.PAR_ID) AS C FROM ams_t_par AS PAR INNER JOIN ams_t_par_sub AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN ams_r_employee_profile AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE O.O_ID = ".$_SESSION['myoid']." GROUP BY PAR.PAR_ID";
+
+                                $officeid = $_SESSION['myoid'];
+                                // echo $officeid;
+
+                                $sql = "SELECT COUNT(URS.URS_ID) AS C FROM ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE O.O_ID = $officeid GROUP BY URS.URS_ID";
                                 $result = mysqli_query($connection, $sql);
 
                                 $i=0;

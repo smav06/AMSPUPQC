@@ -87,47 +87,56 @@
     </div>
 </div>
 <!--logo end-->
+<input type="hidden" name="" id="officeidofuser" value="<?php echo $_SESSION["myoid"]; ?>">
 
 <div class="nav notify-row" id="top_menu">
     <!--  notification start -->
     <ul class="nav top-menu">
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning"></span>
+            <a data-toggle="dropdown" class="dropdown-toggles" href="#">
+                <i class="fa fa-comment-o"></i>
+                <span class="badge bg-warning count"></span>
             </a>
-            <ul class="dropdown-menu extended notification">
-                <li>
-                    <p>Notifications</p>
-                </li>
-                <li>
-                    <div class="alert alert-info clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #1 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-danger clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #2 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-success clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #3 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
+                
+            <?php 
 
-            </ul>
+                $aydiopyuser = $_SESSION['myoid'];
+                // echo $aydiopyuser;
+
+                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXXz FROM ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE URS.URS_STATUS_TO_PO != 'Pending' AND O.O_ID = $aydiopyuser GROUP BY URS.URS_ID");
+
+                while($rowx = mysqli_fetch_assoc($sqlcntx))
+                {
+                    $cntx = $rowx['XXXz'];
+                    echo '<input type="hidden" id="cntofrequests" value="'.$cntx.'" />';
+                }
+
+                echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                </ul>';
+
+            ?>
+            
         </li>
+
+        <li id="" class="">
+            <a style="background-color: white;">
+                <?php 
+                    // echo $_SESSION['mytype']; 
+
+                    $oid = $_SESSION['myoid'];                            
+
+                    $reszxc = mysqli_query($connection, "SELECT * FROM ams_r_office WHERE O_ID = $oid");
+
+                    while($row = mysqli_fetch_assoc($reszxc))
+                    {
+                        $oname = $row['O_NAME'];
+                        echo $oname;
+                    }
+
+                ?>
+            </a>
+        </li>   
         <!-- notification dropdown end -->
     </ul>
     <!--  notification end -->
@@ -159,8 +168,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="DUProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="DUProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -852,7 +860,43 @@
 
     </script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function load_unseen_notification(view = '') {
 
+                var officeidofuser = document.getElementById('officeidofuser').value;
+
+                $.ajax({
+                    url:"fetchreqDU.php",
+                    method:"POST",
+                    data:{view:view, officeidofuser: officeidofuser},
+                    dataType:"json",
+               
+                success:function(data)
+                {
+                    $('.dispnotif').html(data.notification);
+
+                    if(data.unseen_notification > 0)
+                    {
+                        $('.count').html(data.unseen_notification);
+                    }
+                }
+
+                });
+            }
+             
+            load_unseen_notification();
+             
+            $(document).on('click', '.dropdown-toggles', function() {
+                $('.count').html('');
+                load_unseen_notification('yes');
+            });
+             
+            setInterval(function(){ 
+                load_unseen_notification();; 
+            }, 1000);
+        });
+    </script>
 
 </body>
 </html>

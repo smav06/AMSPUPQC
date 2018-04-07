@@ -57,18 +57,55 @@
             </div>
             <!--logo end-->
 
+            <input type="hidden" name="" id="officeidofuser" value="<?php echo $_SESSION["myoid"]; ?>">
+
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <ul class="nav top-menu">
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="fa fa-bell-o"></i>
+                        <a data-toggle="dropdown" class="dropdown-toggles" href="#">
+                            <i class="fa fa-comment-o"></i>
                             <span class="badge bg-warning count"></span>
                         </a>
+                            
+                        <?php 
+
+                            $aydiopyuser = $_SESSION['myoid'];
+                            // echo $aydiopyuser;
+
+                            $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXXz FROM ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE URS.URS_STATUS_TO_PO != 'Pending' AND O.O_ID = $aydiopyuser GROUP BY URS.URS_ID");
+
+                            while($rowx = mysqli_fetch_assoc($sqlcntx))
+                            {
+                                $cntx = $rowx['XXXz'];
+                                echo '<input type="hidden" id="cntofrequests" value="'.$cntx.'" />';
+                            }
+
+                            echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                            </ul>';
+
+                        ?>
                         
-                        <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 375px;">
-                        </ul>
+                    </li>
+
+                    <li id="" class="">
+                        <a style="background-color: white;">
+                            <?php 
+                                // echo $_SESSION['mytype']; 
+
+                                $oid = $_SESSION['myoid'];                            
+
+                                $reszxc = mysqli_query($connection, "SELECT * FROM ams_r_office WHERE O_ID = $oid");
+
+                                while($row = mysqli_fetch_assoc($reszxc))
+                                {
+                                    $oname = $row['O_NAME'];
+                                    echo $oname;
+                                }
+
+                            ?>
+                        </a>
                     </li>
                     <!-- notification dropdown end -->
                 </ul>
@@ -517,7 +554,7 @@
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!--Core js-->
-    <script src="../../js/jquery-1.8.3.min.js"></script>
+    <script src="../../js/jquery.js"></script>
     <script src="../../bs3/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="../../js/jquery.scrollTo.min.js"></script>
@@ -804,40 +841,46 @@
 
     </script>
 
-    <!-- <script>
+    <script>
         $(document).ready(function() {
 
             function load_unseen_notification(view = '') {
+
+                var officeidofuser = document.getElementById('officeidofuser').value;
+
                 $.ajax({
-                    url: "fetch.php",
-                    method: "POST",
-                    data: {
-                        view: view
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $('.dispnotif').html(data.notification);
-                        if (data.unseen_notification > 0) {
-                            $('.count').html(data.unseen_notification);
-                        }
+                    url:"fetchreqDU.php",
+                    method:"POST",
+                    data:{view:view, officeidofuser: officeidofuser},
+                    dataType:"json",
+               
+                success:function(data)
+                {
+                    $('.dispnotif').html(data.notification);
+
+                    if(data.unseen_notification > 0)
+                    {
+                        $('.count').html(data.unseen_notification);
                     }
+                }
+
                 });
             }
-
+             
             load_unseen_notification();
-
-            $(document).on('click', '.dropdown-toggle', function() {
+             
+            $(document).on('click', '.dropdown-toggles', function() {
                 $('.count').html('');
                 load_unseen_notification('yes');
             });
-
-            setInterval(function() {
-                load_unseen_notification();;
+             
+            setInterval(function(){ 
+                load_unseen_notification();; 
             }, 1000);
 
         });
 
-    </script> -->
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {

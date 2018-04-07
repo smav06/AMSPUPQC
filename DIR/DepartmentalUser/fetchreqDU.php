@@ -12,7 +12,7 @@ if(isset($_POST["view"]))
   $update_query = "UPDATE ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID SET URS.URS_VIEW_BY_USER = 1 WHERE URS.URS_VIEW_BY_USER = 0 AND O.O_ID = $officeidofuser AND URS.URS_STATUS_TO_PO != 'Pending'";
   mysqli_query($connect, $update_query);
  }
- $query = "SELECT * FROM ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE URS.URS_STATUS_TO_PO != 'Pending' AND O.O_ID = $officeidofuser GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC";
+ $query = "SELECT * FROM ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE URS.URS_STATUS_TO_PO != 'Pending' AND O.O_ID = $officeidofuser GROUP BY URS.URS_ID ORDER BY URS.URS_ID DESC";
  $result = mysqli_query($connect, $query);
  $output = '';
  
@@ -32,7 +32,7 @@ if(isset($_POST["view"]))
                         Request No: <strong> '.$row["URS_NO"].' </strong><br/>
                         Status: <strong> '.$row["URS_STATUS_TO_PO"].' </strong><br/>
                         Approved Date: <strong> '.$row["URS_APPROVED_DATE"].' </strong><br/>
-                        Remarks: <strong> Approved By Property Officer and will be evaluated by main. </strong>
+                        Remarks: <strong> '.$row["URS_REMARKS"].' </strong>
                       </div>
                     </li>
                   </a>
@@ -46,7 +46,7 @@ if(isset($_POST["view"]))
                         Request No: <strong> '.$row["URS_NO"].' </strong><br/>
                         Status: <strong> '.$row["URS_STATUS_TO_PO"].' </strong><br/>
                         Reject Date: <strong> '.$row["URS_REJECT_DATE"].' </strong><br/>
-                        Remarks: <strong> This Request is reject by Property Officer. </strong>
+                        Remarks: <strong> '.$row["URS_REMARKS"].' </strong>
                       </div>
                     </li>
                   </a>
