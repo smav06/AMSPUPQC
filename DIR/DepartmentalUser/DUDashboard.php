@@ -68,6 +68,9 @@
     <link href="../../js/plugins/sweetalert/sweetalert.css" type="text/css" rel="stylesheet" media="screen,projection">
 
     <link rel="icon" href="../../images/PUPLogo.png" sizes="32x32">
+    <script src="../../code/highcharts.js"></script>
+    <script src="../../code/modules/data.js"></script>
+    <script src="../../code/modules/drilldown.js"></script>
 
 </head>
 
@@ -89,43 +92,35 @@
         </div>
         <!--logo end-->
 
+        <input type="hidden" name="" id="officeidofuser" value="<?php echo $_SESSION["myoid"]; ?>">
+
         <div class="nav notify-row" id="top_menu">
             <ul class="nav top-menu">
                 <!-- notification dropdown start-->
                 <li id="header_notification_bar" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="badge bg-warning"></span>
+                    <a data-toggle="dropdown" class="dropdown-toggles" href="#">
+                        <i class="fa fa-comment-o"></i>
+                        <span class="badge bg-warning count"></span>
                     </a>
-                    <ul class="dropdown-menu extended notification">
-                        <li>
-                            <p>Notifications</p>
-                        </li>
-                        <li>
-                            <div class="alert alert-info clearfix">
-                                <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                <div class="noti-info">
-                                    <a href="#"> Server #1 overloaded.</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="alert alert-danger clearfix">
-                                <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                <div class="noti-info">
-                                    <a href="#"> Server #2 overloaded.</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="alert alert-success clearfix">
-                                <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                <div class="noti-info">
-                                    <a href="#"> Server #3 overloaded.</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                        
+                    <?php 
+
+                        $aydiopyuser = $_SESSION['myoid'];
+                        // echo $aydiopyuser;
+
+                        $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXXz FROM ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE URS.URS_STATUS_TO_PO != 'Pending' AND O.O_ID = $aydiopyuser GROUP BY URS.URS_ID");
+
+                        while($rowx = mysqli_fetch_assoc($sqlcntx))
+                        {
+                            $cntx = $rowx['XXXz'];
+                            echo '<input type="hidden" id="cntofrequests" value="'.$cntx.'" />';
+                        }
+
+                        echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                        </ul>';
+
+                    ?>
+                    
                 </li>
                 <!-- notification dropdown end -->
             </ul>
@@ -289,6 +284,15 @@
                         </div>
                     </div>
                 </div> -->
+
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div id="containerzxc"></div>
+                        </div>
+                    </section>
+                </div>
+
             </div>
 
         </section>
@@ -481,8 +485,298 @@
         });
         // // $('#submit-data').click(function() { // // // });
 
+        function load_unseen_notification(view = '') {
+
+            var officeidofuser = document.getElementById('officeidofuser').value;
+
+            $.ajax({
+                url:"fetchreqDU.php",
+                method:"POST",
+                data:{view:view, officeidofuser: officeidofuser},
+                dataType:"json",
+           
+            success:function(data)
+            {
+                $('.dispnotif').html(data.notification);
+
+                if(data.unseen_notification > 0)
+                {
+                    $('.count').html(data.unseen_notification);
+                }
+            }
+
+            });
+        }
+         
+        load_unseen_notification();
+         
+        $(document).on('click', '.dropdown-toggles', function() {
+            $('.count').html('');
+            load_unseen_notification('yes');
+        });
+         
+        setInterval(function(){ 
+            load_unseen_notification();; 
+        }, 1000);
+
     });
 
+</script>
+
+<script type="text/javascript">
+
+    // Create the chart
+    Highcharts.chart('containerzxc', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Polytechnic University of the Philippines Quezon City Branch <br> Asset Management System'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Total percent market share'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Microsoft Internet Explorer',
+                y: 56.33,
+                drilldown: 'Microsoft Internet Explorer'
+            }, {
+                name: 'Chrome',
+                y: 24.03,
+                drilldown: 'Chrome'
+            }, {
+                name: 'Firefox',
+                y: 10.38,
+                drilldown: 'Firefox'
+            }, {
+                name: 'Safari',
+                y: 4.77,
+                drilldown: 'Safari'
+            }, {
+                name: 'Opera',
+                y: 0.91,
+                drilldown: 'Opera'
+            }, {
+                name: 'Proprietary or Undetectable',
+                y: 0.2,
+                drilldown: null
+            }]
+        }],
+        drilldown: {
+            series: [{
+                name: 'Microsoft Internet Explorer',
+                id: 'Microsoft Internet Explorer',
+                data: [
+                    [
+                        'v11.0',
+                        24.13
+                    ],
+                    [
+                        'v8.0',
+                        17.2
+                    ],
+                    [
+                        'v9.0',
+                        8.11
+                    ],
+                    [
+                        'v10.0',
+                        5.33
+                    ],
+                    [
+                        'v6.0',
+                        1.06
+                    ],
+                    [
+                        'v7.0',
+                        0.5
+                    ]
+                ]
+            }, {
+                name: 'Chrome',
+                id: 'Chrome',
+                data: [
+                    [
+                        'v40.0',
+                        5
+                    ],
+                    [
+                        'v41.0',
+                        4.32
+                    ],
+                    [
+                        'v42.0',
+                        3.68
+                    ],
+                    [
+                        'v39.0',
+                        2.96
+                    ],
+                    [
+                        'v36.0',
+                        2.53
+                    ],
+                    [
+                        'v43.0',
+                        1.45
+                    ],
+                    [
+                        'v31.0',
+                        1.24
+                    ],
+                    [
+                        'v35.0',
+                        0.85
+                    ],
+                    [
+                        'v38.0',
+                        0.6
+                    ],
+                    [
+                        'v32.0',
+                        0.55
+                    ],
+                    [
+                        'v37.0',
+                        0.38
+                    ],
+                    [
+                        'v33.0',
+                        0.19
+                    ],
+                    [
+                        'v34.0',
+                        0.14
+                    ],
+                    [
+                        'v30.0',
+                        0.14
+                    ]
+                ]
+            }, {
+                name: 'Firefox',
+                id: 'Firefox',
+                data: [
+                    [
+                        'v35',
+                        2.76
+                    ],
+                    [
+                        'v36',
+                        2.32
+                    ],
+                    [
+                        'v37',
+                        2.31
+                    ],
+                    [
+                        'v34',
+                        1.27
+                    ],
+                    [
+                        'v38',
+                        1.02
+                    ],
+                    [
+                        'v31',
+                        0.33
+                    ],
+                    [
+                        'v33',
+                        0.22
+                    ],
+                    [
+                        'v32',
+                        0.15
+                    ]
+                ]
+            }, {
+                name: 'Safari',
+                id: 'Safari',
+                data: [
+                    [
+                        'v8.0',
+                        2.56
+                    ],
+                    [
+                        'v7.1',
+                        0.77
+                    ],
+                    [
+                        'v5.1',
+                        0.42
+                    ],
+                    [
+                        'v5.0',
+                        0.3
+                    ],
+                    [
+                        'v6.1',
+                        0.29
+                    ],
+                    [
+                        'v7.0',
+                        0.26
+                    ],
+                    [
+                        'v6.2',
+                        0.17
+                    ]
+                ]
+            }, {
+                name: 'Opera',
+                id: 'Opera',
+                data: [
+                    [
+                        'v12.x',
+                        0.34
+                    ],
+                    [
+                        'v28',
+                        0.24
+                    ],
+                    [
+                        'v27',
+                        0.17
+                    ],
+                    [
+                        'v29',
+                        0.16
+                    ]
+                ]
+            }]
+        }
+    });
 </script>
 
 </body>

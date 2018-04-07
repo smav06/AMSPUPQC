@@ -98,7 +98,7 @@
     <ul class="nav top-menu">
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a data-toggle="dropdown" class="dropdown-toggle dt" href="#">
                 <i class="fa fa-comment-o"></i>
                 <span class="badge bg-warning count"></span>
             </a>
@@ -113,50 +113,15 @@
                     echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
                 }
 
-                if ($cnt == 0) 
-                {
-            ?>
-
-            <ul class="dropdown-menu extended notification dispnotif" style="height: 70px;">
-            </ul>
-
-            <?php
-                }
-                elseif ($cnt == 1) 
-                {
-            ?>
-
-            <ul class="dropdown-menu extended notification dispnotif" style="height: 110px;">
-            </ul>
-
-            <?php
-                }
-                elseif ($cnt == 2) 
-                {
-            ?>
-
-            <ul class="dropdown-menu extended notification dispnotif" style="height: 220px;">
-            </ul>
-
-            <?php
-                    
-                }
-                elseif ($cnt >= 3) 
-                {                
-            ?>
-
-            <ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
-            </ul>
-
-            <?php 
-                }
-            ?>
+                echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+            </ul>';
+            ?> 
 
         </li>
         <!-- notification dropdown end -->
 
         <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a data-toggle="dropdown" class="dropdown-toggle dt2" href="#">
                 <i class="fa fa-warning"></i>
                 <span class="badge bg-warning count2"></span>
             </a>
@@ -1258,7 +1223,7 @@ $(document).ready(function(){
      
     load_unseen_notification();
      
-    $(document).on('click', '.dropdown-toggle', function() {
+    $(document).on('click', '.dt', function() {
         $('.count').html('');
         load_unseen_notification('yes');
     });
@@ -1296,7 +1261,7 @@ $(document).ready(function(){
          
         load_unseen_notification2();
          
-        $(document).on('click', '.dropdown-toggle', function() {
+        $(document).on('click', '.dt2', function() {
             $('.count2').html('');
             load_unseen_notification2('yes');
         });
