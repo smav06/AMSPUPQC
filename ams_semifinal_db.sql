@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2018 at 07:01 AM
+-- Generation Time: Apr 08, 2018 at 04:01 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -64,10 +64,10 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (15, 'Logitech Gaming Mouse', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
 (16, 'Iwata Aircool Aircon', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
 (17, 'SONY Bravia TV', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
-(18, 'Cube Cory CCTV', '2018-03-18', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(19, 'Crown Home Speaker', '2018-03-19', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(20, 'APPO YG Projector', '2018-03-20', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
-(21, 'Canon Pixma', '2018-03-21', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
+(18, 'Cube Cory CCTV', '2018-03-18', 'For Repair', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
+(19, 'Crown Home Speaker', '2018-03-19', 'For Repair', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(20, 'APPO YG Projector', '2018-03-20', 'For Repair', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(21, 'Canon Pixma', '2018-03-21', 'For Repair', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
 (22, 'Lenovo Gaming Computer', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (23, 'Lenovo Home Computer', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (24, 'HP Elite Laptop', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
@@ -97,7 +97,7 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (48, 'ZYG 800 LED Colorful Backlight Gaming USB Keyboard Black', '2018-03-14', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
 (49, 'Logitech M170 Wireless USB mouse', '2018-03-15', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
 (50, 'Daikin 1 0HP Cooling King Standard Split Type Air Conditioner White', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
-(51, 'Ace 32 Slim LED TV Black LED', '2018-03-18', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(51, 'Ace 32 Slim LED TV Black LED', '2018-03-18', 'For Repair', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
 (52, 'Immix Home Office Buisiness Security 10 Megapixel Camera Kit Black', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
 (53, 'Kevler EON 8 8 250W Plastic Moulded Speaker', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
 (54, 'UC28 Mini Portable Projector Black With Free Assorted Color Bluetooth Speaker', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL);
@@ -486,7 +486,11 @@ INSERT INTO `ams_r_users_log` (`UL_LOGGED_DATE`, `UL_LOGGED_TYPE`, `EP_ID`) VALU
 ('2018-04-07 12:57:24', 'logged in', 2),
 ('2018-04-07 13:00:24', 'logged out', 2),
 ('2018-04-07 13:00:27', 'logged in', 3),
-('2018-04-07 13:00:48', 'logged out', 3);
+('2018-04-07 13:00:48', 'logged out', 3),
+('2018-04-07 13:03:42', 'logged in', 2),
+('2018-04-08 11:58:21', 'logged in', 3),
+('2018-04-08 14:18:38', 'logged in', 2),
+('2018-04-08 17:57:15', 'logged in', 3);
 
 -- --------------------------------------------------------
 

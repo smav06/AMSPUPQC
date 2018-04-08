@@ -260,7 +260,8 @@
             </a>
             <ul class="sub">
                 <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
-                <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
+                <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>
+                <li><a href="POMaintenanceJobOrder.php">Job Order</a></li>                        
             </ul>
         </li>
         <li>
