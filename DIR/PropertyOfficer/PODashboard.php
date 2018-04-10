@@ -470,6 +470,20 @@
 
                 <div class="row">
                     <div class="col-md-6">
+                        On Job Order: 
+                        <?php 
+                            $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'On Job Order' ";
+                            $result = mysqli_query($connection, $sql);
+
+                            while ($row = mysqli_fetch_array($result)) 
+                            {
+                              $cnt = $row['C'];
+                              echo '<strong>'.$cnt.'</strong>';
+                            }
+                        ?>
+                    </div>
+
+                    <div class="col-md-6">
                         For Disposal: 
                         <?php 
                             $sql = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'For Disposal' ";
@@ -482,7 +496,10 @@
                             }
                         ?>
                     </div>
+                    
+                </div>
 
+                <div class="row">
                     <div class="col-md-6">
                         Disposed: 
                         <?php 
@@ -570,7 +587,9 @@
                             }
                         ?>  
                     </div>
-                </div>                
+                </div>  
+
+                <br>              
 
             </div>
         </div>
@@ -647,6 +666,8 @@
                     </div>
                 </div>
                 
+                <br>
+                
             </div>
         </div>
     </div>
@@ -706,10 +727,9 @@
                     </div>
                 </div>
 
-
                 <br>
                 <br>
-
+                <br>
                 
             </div>
         </div>
@@ -728,6 +748,449 @@
 
 </section>
 </section>
+
+
+
+
+<?php 
+    
+    include('../Connection/db.php');
+
+    $sql = "SELECT * FROM `ams_r_asset` GROUP BY A_STATUS, A_AVAILABILITY";
+    $result = mysqli_query($connection, $sql);
+
+    $getthewholestring = "";
+    $getthewholestringfinal = "";
+    $i=1;
+
+    while ($row = mysqli_fetch_array($result)) 
+    {
+
+        $a_status = $row['A_STATUS'];
+        $a_availability = $row['A_AVAILABILITY'];
+
+        // echo $i.'<br>';
+        if ($a_availability == 'Available' && $a_status == 'Serviceable') 
+        {
+
+            $sqlcntofavailorserv = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Available' AND A_STATUS = 'Serviceable' ";
+            $resultcntofavailorserv = mysqli_query($connection, $sqlcntofavailorserv);
+
+            while ($rowcntofavailorserv = mysqli_fetch_array($resultcntofavailorserv)) 
+            {
+              $cntcntofavailorserv = $rowcntofavailorserv['C'];
+            }
+
+            $getthewholestring = "{name: '$a_availability', y: $cntcntofavailorserv, drilldown: '$a_availability'},";
+            
+            // echo $getthewholestring;
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'Serviceable') 
+        {
+
+            $sqlcntofavailassigned = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_AVAILABILITY = 'Assigned' AND A_STATUS = 'Serviceable' ";
+            $resultcntofavailassigned = mysqli_query($connection, $sqlcntofavailassigned);
+
+            while ($rowcntofavailassigned = mysqli_fetch_array($resultcntofavailassigned)) 
+            {
+              $cntcntofavailassigned = $rowcntofavailassigned['C'];
+            }
+
+            $getthewholestring = "{name: '$a_availability', y: $cntcntofavailassigned, drilldown: '$a_availability'},";
+
+            // echo $getthewholestring;
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'For Disposal' || $a_availability =='Available' && $a_status == 'For Disposal') 
+        {
+
+            $sqlcntoffordisposal = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'For Disposal' ";
+            $resultcntoffordisposal = mysqli_query($connection, $sqlcntoffordisposal);
+
+            while ($rowcntoffordisposal = mysqli_fetch_array($resultcntoffordisposal)) 
+            {
+              $cntcntoffordisposal = $rowcntoffordisposal['C'];
+            }
+
+            $getthewholestring = "{name: '$a_status', y: $cntcntoffordisposal, drilldown: '$a_status'},";
+
+            // echo $getthewholestring;
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'For Repair' || $a_availability =='Available' && $a_status == 'For Repair' ) 
+        {
+
+            $sqlcntcntofrepair = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'For Repair' ";
+            $resultcntcntofrepair = mysqli_query($connection, $sqlcntcntofrepair);
+
+            while ($rowcntcntofrepair = mysqli_fetch_array($resultcntcntofrepair)) 
+            {
+              $cntcntcntofrepair = $rowcntcntofrepair['C'];
+            }
+
+            $getthewholestring = "{name: '$a_status', y: $cntcntcntofrepair, drilldown: '$a_status'},";
+
+            // echo $getthewholestring;
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'On Job Order' || $a_availability =='Available' && $a_status == 'On Job Order' ) 
+        {
+
+            $sqlcntojborder = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'On Job Order' ";
+            $resultcntojborder = mysqli_query($connection, $sqlcntojborder);
+
+            while ($rowcntojborder = mysqli_fetch_array($resultcntojborder)) 
+            {
+              $cntcntojborder = $rowcntojborder['C'];
+            }
+
+            $getthewholestring = "{name: '$a_status', y: $cntcntojborder, drilldown: '$a_status'},";
+
+            // echo $getthewholestring;
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'Disposed' || $a_availability =='Available' && $a_status == 'Disposed' ) 
+        {
+
+            $sqlcntofdisposed = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Disposed' ";
+            $resultcntofdisposed = mysqli_query($connection, $sqlcntofdisposed);
+
+            while ($rowcntofdisposed = mysqli_fetch_array($resultcntofdisposed)) 
+            {
+              $cntcntofdisposed = $rowcntofdisposed['C'];
+            }
+
+            $getthewholestring = "{name: '$a_status', y: $cntcntofdisposed, drilldown: '$a_status'},";
+
+            // echo $getthewholestring;
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'Transferred Out' || $a_availability =='Available' && $a_status == 'Transferred Out' ) 
+        {
+
+            $sqlcntoftransfer = "SELECT COUNT(*) AS C FROM `ams_r_asset` WHERE A_STATUS = 'Transferred Out' ";
+            $resultcntoftransfer = mysqli_query($connection, $sqlcntoftransfer);
+
+            while ($rowcntoftransfer = mysqli_fetch_array($resultcntoftransfer)) 
+            {
+              $cntcntoftransfer = $rowcntoftransfer['C'];
+            }
+
+            $getthewholestring = "{name: '$a_status', y: $cntcntoftransfer, drilldown: '$a_status'},";
+
+            // echo $getthewholestring;
+
+            $i++;
+        }
+    
+        $getthewholestringfinal = $getthewholestringfinal.$getthewholestring;
+        
+    }
+
+    // echo "<br><br><br><br>";
+    // echo $getthewholestringfinal;
+
+    $hehe = substr($getthewholestringfinal, 0, strlen($getthewholestringfinal) - 1);
+
+    // echo $hehe;
+
+?>
+
+
+
+
+<?php 
+    
+    include('../Connection/db.php');
+
+    $sql = "SELECT * FROM `ams_r_asset` GROUP BY A_STATUS, A_AVAILABILITY";
+    $result = mysqli_query($connection, $sql);
+
+    $getthewholestring2 = "";
+    $getthewholestringfinal2 = "";
+    $i=1;
+
+    while ($row = mysqli_fetch_array($result)) 
+    {
+
+        $a_status = $row['A_STATUS'];
+        $a_availability = $row['A_AVAILABILITY'];
+
+        // echo $i.'<br>';
+        if ($a_availability == 'Available' && $a_status == 'Serviceable') 
+        {
+
+            $sqltyu = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_AVAILABILITY = 'Available' GROUP BY AL.AL_ID";
+            $resultsqltyu = mysqli_query($connection, $sqltyu);
+
+            $getwholeinnerfinalsss = "";
+
+            while ($rowiop = mysqli_fetch_array($resultsqltyu)) 
+            { 
+
+                $al_name = $rowiop['AL_NAME'];  
+
+                $kwiri = "SELECT COUNT(*) AS QWEQWE FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE AL.AL_NAME = '$al_name' AND A.A_STATUS = 'Serviceable' AND A.A_AVAILABILITY = 'Available' ";
+                
+                $resultkwiri = mysqli_query($connection, $kwiri);
+                
+                while ($rowkwiri = mysqli_fetch_array($resultkwiri)) 
+                {
+                    $asdasdasd = $rowkwiri['QWEQWE'];
+                } 
+                            
+                // echo $al_name;
+                $getwholeinnerfinal = "['$al_name', $asdasdasd],";     
+                $getwholeinnerfinalsss = $getwholeinnerfinalsss.$getwholeinnerfinal; 
+            }
+
+            
+            $ertert = substr($getwholeinnerfinalsss, 0, strlen($getwholeinnerfinalsss) - 1);
+
+            $getthewholestring2 = "{name: '$a_availability', id: '$a_availability', data: [ $ertert ]},";
+            
+            // echo $getthewholestring."<br>";
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'Serviceable') 
+        {
+
+            $sqltyu = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE A.A_STATUS = 'Serviceable' AND A.A_AVAILABILITY = 'Assigned' GROUP BY AL.AL_ID";
+            $resultsqltyu = mysqli_query($connection, $sqltyu);
+
+            $getwholeinnerfinalsss = "";
+
+            while ($rowiop = mysqli_fetch_array($resultsqltyu)) 
+            { 
+
+                $al_name = $rowiop['AL_NAME'];  
+
+                $kwiri = "SELECT COUNT(*) AS QWEQWE FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE AL.AL_NAME = '$al_name' AND A.A_STATUS = 'Serviceable' AND A.A_AVAILABILITY = 'Assigned' ";
+                
+                $resultkwiri = mysqli_query($connection, $kwiri);
+                
+                while ($rowkwiri = mysqli_fetch_array($resultkwiri)) 
+                {
+                    $asdasdasd = $rowkwiri['QWEQWE'];
+                } 
+                            
+                // echo $al_name;
+                $getwholeinnerfinal = "['$al_name', $asdasdasd],";     
+                $getwholeinnerfinalsss = $getwholeinnerfinalsss.$getwholeinnerfinal; 
+            }
+
+            
+            $ertert = substr($getwholeinnerfinalsss, 0, strlen($getwholeinnerfinalsss) - 1);
+
+            $getthewholestring2 = "{name: '$a_availability', id: '$a_availability', data: [ $ertert ]},";
+
+            // echo $getthewholestring."<br>";
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'For Disposal' || $a_availability =='Available' && $a_status == 'For Disposal') 
+        {
+
+            $sqltyu = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE A.A_STATUS = 'For Disposal' GROUP BY AL.AL_ID";
+            $resultsqltyu = mysqli_query($connection, $sqltyu);
+
+            $getwholeinnerfinalsss = "";
+
+            while ($rowiop = mysqli_fetch_array($resultsqltyu)) 
+            { 
+
+                $al_name = $rowiop['AL_NAME'];  
+
+                $kwiri = "SELECT COUNT(*) AS QWEQWE FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE AL.AL_NAME = '$al_name' AND A.A_STATUS = 'For Disposal'";
+                
+                $resultkwiri = mysqli_query($connection, $kwiri);
+                
+                while ($rowkwiri = mysqli_fetch_array($resultkwiri)) 
+                {
+                    $asdasdasd = $rowkwiri['QWEQWE'];
+                } 
+                            
+                // echo $al_name;
+                $getwholeinnerfinal = "['$al_name', $asdasdasd],";     
+                $getwholeinnerfinalsss = $getwholeinnerfinalsss.$getwholeinnerfinal; 
+            }
+
+            
+            $ertert = substr($getwholeinnerfinalsss, 0, strlen($getwholeinnerfinalsss) - 1);
+
+            $getthewholestring2 = "{name: '$a_status', id: '$a_status', data: [ $ertert ]},";
+
+            // echo $getthewholestring."<br>";
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'For Repair' || $a_availability =='Available' && $a_status == 'For Repair' ) 
+        {
+
+           $sqltyu = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE A.A_STATUS = 'For Repair' GROUP BY AL.AL_ID";
+            $resultsqltyu = mysqli_query($connection, $sqltyu);
+
+            $getwholeinnerfinalsss = "";
+
+            while ($rowiop = mysqli_fetch_array($resultsqltyu)) 
+            { 
+
+                $al_name = $rowiop['AL_NAME'];  
+
+                $kwiri = "SELECT COUNT(*) AS QWEQWE FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE AL.AL_NAME = '$al_name' AND A.A_STATUS = 'For Repair'";
+                
+                $resultkwiri = mysqli_query($connection, $kwiri);
+                
+                while ($rowkwiri = mysqli_fetch_array($resultkwiri)) 
+                {
+                    $asdasdasd = $rowkwiri['QWEQWE'];
+                } 
+                            
+                // echo $al_name;
+                $getwholeinnerfinal = "['$al_name', $asdasdasd],";     
+                $getwholeinnerfinalsss = $getwholeinnerfinalsss.$getwholeinnerfinal; 
+            }
+
+            
+            $ertert = substr($getwholeinnerfinalsss, 0, strlen($getwholeinnerfinalsss) - 1);
+
+            $getthewholestring2 = "{name: '$a_status', id: '$a_status', data: [ $ertert ]},";
+
+            // echo $getthewholestring."<br>";
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'On Job Order' || $a_availability =='Available' && $a_status == 'On Job Order' ) 
+        {
+
+            $sqltyu = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE A.A_STATUS = 'On Job Order' GROUP BY AL.AL_ID";
+            $resultsqltyu = mysqli_query($connection, $sqltyu);
+
+            $getwholeinnerfinalsss = "";
+
+            while ($rowiop = mysqli_fetch_array($resultsqltyu)) 
+            { 
+
+                $al_name = $rowiop['AL_NAME'];  
+
+                $kwiri = "SELECT COUNT(*) AS QWEQWE FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE AL.AL_NAME = '$al_name' AND A.A_STATUS = 'On Job Order'";
+                
+                $resultkwiri = mysqli_query($connection, $kwiri);
+                
+                while ($rowkwiri = mysqli_fetch_array($resultkwiri)) 
+                {
+                    $asdasdasd = $rowkwiri['QWEQWE'];
+                } 
+                            
+                // echo $al_name;
+                $getwholeinnerfinal = "['$al_name', $asdasdasd],";     
+                $getwholeinnerfinalsss = $getwholeinnerfinalsss.$getwholeinnerfinal; 
+            }
+
+            
+            $ertert = substr($getwholeinnerfinalsss, 0, strlen($getwholeinnerfinalsss) - 1);
+
+            $getthewholestring2 = "{name: '$a_status', id: '$a_status', data: [ $ertert ]},";
+
+            // echo $getthewholestring."<br>";
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'Disposed' || $a_availability =='Available' && $a_status == 'Disposed' ) 
+        {
+
+            $sqltyu = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE A.A_STATUS = 'Disposed' GROUP BY AL.AL_ID";
+            $resultsqltyu = mysqli_query($connection, $sqltyu);
+
+            $getwholeinnerfinalsss = "";
+
+            while ($rowiop = mysqli_fetch_array($resultsqltyu)) 
+            { 
+
+                $al_name = $rowiop['AL_NAME'];  
+
+                $kwiri = "SELECT COUNT(*) AS QWEQWE FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE AL.AL_NAME = '$al_name' AND A.A_STATUS = 'Disposed'";
+                
+                $resultkwiri = mysqli_query($connection, $kwiri);
+                
+                while ($rowkwiri = mysqli_fetch_array($resultkwiri)) 
+                {
+                    $asdasdasd = $rowkwiri['QWEQWE'];
+                } 
+                            
+                // echo $al_name;
+                $getwholeinnerfinal = "['$al_name', $asdasdasd],";     
+                $getwholeinnerfinalsss = $getwholeinnerfinalsss.$getwholeinnerfinal; 
+            }
+
+            
+            $ertert = substr($getwholeinnerfinalsss, 0, strlen($getwholeinnerfinalsss) - 1);
+
+            $getthewholestring2 = "{name: '$a_status', id: '$a_status', data: [ $ertert ]},";
+
+            // echo $getthewholestring."<br>";
+
+            $i++;
+        }
+        elseif ($a_availability =='Assigned' && $a_status == 'Transferred Out' || $a_availability =='Available' && $a_status == 'Transferred Out' ) 
+        {
+
+            $sqltyu = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE A.A_STATUS = 'Transferred Out' GROUP BY AL.AL_ID";
+            $resultsqltyu = mysqli_query($connection, $sqltyu);
+
+            $getwholeinnerfinalsss = "";
+
+            while ($rowiop = mysqli_fetch_array($resultsqltyu)) 
+            { 
+
+                $al_name = $rowiop['AL_NAME'];  
+
+                $kwiri = "SELECT COUNT(*) AS QWEQWE FROM ams_r_asset AS A INNER JOIN ams_r_asset_library AS AL ON A.AL_ID = AL.AL_ID WHERE AL.AL_NAME = '$al_name' AND A.A_STATUS = 'Transferred Out'";
+                
+                $resultkwiri = mysqli_query($connection, $kwiri);
+                
+                while ($rowkwiri = mysqli_fetch_array($resultkwiri)) 
+                {
+                    $asdasdasd = $rowkwiri['QWEQWE'];
+                } 
+                            
+                // echo $al_name;
+                $getwholeinnerfinal = "['$al_name', $asdasdasd],";     
+                $getwholeinnerfinalsss = $getwholeinnerfinalsss.$getwholeinnerfinal; 
+            }
+
+            
+            $ertert = substr($getwholeinnerfinalsss, 0, strlen($getwholeinnerfinalsss) - 1);
+            // echo $ertert;
+
+            $getthewholestring2 = "{name: '$a_status', id: '$a_status', data: [ $ertert ]},";
+
+            // echo $getthewholestring."<br>";
+
+            $i++;
+        }
+    
+        $getthewholestringfinal2 = $getthewholestringfinal2.$getthewholestring2;
+        
+    }
+
+    // echo "<br><br><br><br>";
+    // echo $getthewholestringfinal;
+
+    $hehe2 = substr($getthewholestringfinal2, 0, strlen($getthewholestringfinal2) - 1);
+
+    // echo $hehe2;
+
+?>
+
 <!--main content end-->
 <!--right sidebar start-->
 <div class="right-sidebar">
@@ -1003,7 +1466,7 @@ $(document).ready(function(){
         },
         yAxis: {
             title: {
-                text: 'Total percent market share'
+                text: 'TOTAL OF ASSET IN PUPQC'
             }
 
         },
@@ -1015,228 +1478,31 @@ $(document).ready(function(){
                 borderWidth: 0,
                 dataLabels: {
                     enabled: true,
-                    format: '{point.y:.1f}%'
+                    format: '{point.y}'
                 }
             }
         },
 
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
         },
 
         series: [{
-            name: 'Brands',
+            name: 'Asset',
             colorByPoint: true,
-            data: [{
-                name: 'Microsoft Internet Explorer',
-                y: 56.33,
-                drilldown: 'Microsoft Internet Explorer'
-            }, {
-                name: 'Chrome',
-                y: 24.03,
-                drilldown: 'Chrome'
-            }, {
-                name: 'Firefox',
-                y: 10.38,
-                drilldown: 'Firefox'
-            }, {
-                name: 'Safari',
-                y: 4.77,
-                drilldown: 'Safari'
-            }, {
-                name: 'Opera',
-                y: 0.91,
-                drilldown: 'Opera'
-            }, {
-                name: 'Proprietary or Undetectable',
-                y: 0.2,
-                drilldown: null
-            }]
+            data: [
+                    <?php 
+                        echo $hehe; 
+                    ?>
+                ]
         }],
         drilldown: {
-            series: [{
-                name: 'Microsoft Internet Explorer',
-                id: 'Microsoft Internet Explorer',
-                data: [
-                    [
-                        'v11.0',
-                        24.13
-                    ],
-                    [
-                        'v8.0',
-                        17.2
-                    ],
-                    [
-                        'v9.0',
-                        8.11
-                    ],
-                    [
-                        'v10.0',
-                        5.33
-                    ],
-                    [
-                        'v6.0',
-                        1.06
-                    ],
-                    [
-                        'v7.0',
-                        0.5
-                    ]
-                ]
-            }, {
-                name: 'Chrome',
-                id: 'Chrome',
-                data: [
-                    [
-                        'v40.0',
-                        5
-                    ],
-                    [
-                        'v41.0',
-                        4.32
-                    ],
-                    [
-                        'v42.0',
-                        3.68
-                    ],
-                    [
-                        'v39.0',
-                        2.96
-                    ],
-                    [
-                        'v36.0',
-                        2.53
-                    ],
-                    [
-                        'v43.0',
-                        1.45
-                    ],
-                    [
-                        'v31.0',
-                        1.24
-                    ],
-                    [
-                        'v35.0',
-                        0.85
-                    ],
-                    [
-                        'v38.0',
-                        0.6
-                    ],
-                    [
-                        'v32.0',
-                        0.55
-                    ],
-                    [
-                        'v37.0',
-                        0.38
-                    ],
-                    [
-                        'v33.0',
-                        0.19
-                    ],
-                    [
-                        'v34.0',
-                        0.14
-                    ],
-                    [
-                        'v30.0',
-                        0.14
-                    ]
-                ]
-            }, {
-                name: 'Firefox',
-                id: 'Firefox',
-                data: [
-                    [
-                        'v35',
-                        2.76
-                    ],
-                    [
-                        'v36',
-                        2.32
-                    ],
-                    [
-                        'v37',
-                        2.31
-                    ],
-                    [
-                        'v34',
-                        1.27
-                    ],
-                    [
-                        'v38',
-                        1.02
-                    ],
-                    [
-                        'v31',
-                        0.33
-                    ],
-                    [
-                        'v33',
-                        0.22
-                    ],
-                    [
-                        'v32',
-                        0.15
-                    ]
-                ]
-            }, {
-                name: 'Safari',
-                id: 'Safari',
-                data: [
-                    [
-                        'v8.0',
-                        2.56
-                    ],
-                    [
-                        'v7.1',
-                        0.77
-                    ],
-                    [
-                        'v5.1',
-                        0.42
-                    ],
-                    [
-                        'v5.0',
-                        0.3
-                    ],
-                    [
-                        'v6.1',
-                        0.29
-                    ],
-                    [
-                        'v7.0',
-                        0.26
-                    ],
-                    [
-                        'v6.2',
-                        0.17
-                    ]
-                ]
-            }, {
-                name: 'Opera',
-                id: 'Opera',
-                data: [
-                    [
-                        'v12.x',
-                        0.34
-                    ],
-                    [
-                        'v28',
-                        0.24
-                    ],
-                    [
-                        'v27',
-                        0.17
-                    ],
-                    [
-                        'v29',
-                        0.16
-                    ]
-                ]
-            }]
+            series: [
+                <?php 
+                    echo $hehe2;
+                ?>
+            ]
         }
     });
 </script>

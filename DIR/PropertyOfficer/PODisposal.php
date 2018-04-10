@@ -835,7 +835,7 @@
                                         _daid: $(this).closest('tr').children('td:first').text()
                                     },
                                     success: function(data2) {
-                                        alert(data2); 
+                                        // alert(data2); 
                                         swal("Asset Successfully Disposed!", "The selected asset is disposed.", "success");
 
                                         setTimeout(function() 
@@ -844,7 +844,7 @@
                                         },2500); 
                                     },
                                     error: function(response2) {
-                                        alert(response2);      
+                                        // alert(response2);      
 
                                         swal("Error", "May mali bry eh!", "error");                              
                                     }
@@ -892,7 +892,7 @@
                                         _daid: $(this).closest('tr').children('td:first').text()
                                     },
                                     success: function(data2) {
-                                        alert(data2); 
+                                        // alert(data2); 
                                         swal("Asset Successfully Disposed!", "The selected asset is disposed.", "success");
 
                                         setTimeout(function() 
@@ -901,7 +901,7 @@
                                         },2500); 
                                     },
                                     error: function(response2) {
-                                        alert(response2);      
+                                        // alert(response2);      
 
                                         swal("Error", "May mali bry eh!", "error");                              
                                     }

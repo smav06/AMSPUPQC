@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2018 at 04:01 PM
+-- Generation Time: Apr 10, 2018 at 07:53 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -58,16 +58,16 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (9, 'Silvertee Home Speaker', '2018-03-09', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
 (10, 'EPSON Projector', '2018-03-10', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
 (11, 'Epson Printer', '2018-03-11', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
-(12, 'Dell Laptop', '2018-03-15', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
-(13, 'Standard Wall Fan', '2018-03-14', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
-(14, 'Keymatt Mechanical Keyboard', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
-(15, 'Logitech Gaming Mouse', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
-(16, 'Iwata Aircool Aircon', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
-(17, 'SONY Bravia TV', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(12, 'Dell Laptop', '2018-03-15', 'Disposed', 'Donation', 'Available', 1, 2, NULL, NULL, NULL),
+(13, 'Standard Wall Fan', '2018-03-14', 'Disposed', 'Donation', 'Available', 1, 3, NULL, NULL, NULL),
+(14, 'Keymatt Mechanical Keyboard', '2018-03-13', 'For Disposal', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
+(15, 'Logitech Gaming Mouse', '2018-03-12', 'For Disposal', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
+(16, 'Iwata Aircool Aircon', '2018-03-16', 'For Disposal', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
+(17, 'SONY Bravia TV', '2018-03-17', 'Transferred Out', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
 (18, 'Cube Cory CCTV', '2018-03-18', 'For Repair', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
 (19, 'Crown Home Speaker', '2018-03-19', 'For Repair', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(20, 'APPO YG Projector', '2018-03-20', 'For Repair', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
-(21, 'Canon Pixma', '2018-03-21', 'For Repair', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
+(20, 'APPO YG Projector', '2018-03-20', 'On Job Order', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(21, 'Canon Pixma', '2018-03-21', 'On Job Order', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
 (22, 'Lenovo Gaming Computer', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (23, 'Lenovo Home Computer', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (24, 'HP Elite Laptop', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
@@ -77,12 +77,12 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (28, 'QUBE 1.5HP Inverter Aircon', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
 (29, 'Itechie 24\" Full HD LED TV', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
 (30, 'iSAFE High Definition DOME and BULLET CCTV', '2018-03-10', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(31, 'Konzert Karaoke Speaker System Speaker', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(32, 'Brand Panther Projector Home LED-86', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
-(33, 'Fuji Xerox P255 DW Brand New Mono Laser Printer', '2018-03-15', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
-(34, 'Nighthawk Entry Level Gaming PC Package', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
-(35, 'Acer Aspire ES1 331 P7AG Laptop', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
-(36, 'CPT Hanabishi Windmill18GF Ground Fan', '2018-03-18', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
+(31, 'Konzert Karaoke Speaker System Speaker', '2018-03-12', 'Transferred Out', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(32, 'Brand Panther Projector Home LED-86', '2018-03-13', 'Disposed', 'Donation', 'Available', 1, 10, NULL, NULL, NULL),
+(33, 'Fuji Xerox P255 DW Brand New Mono Laser Printer', '2018-03-15', 'For Disposal', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
+(34, 'Nighthawk Entry Level Gaming PC Package', '2018-03-16', 'For Disposal', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
+(35, 'Acer Aspire ES1 331 P7AG Laptop', '2018-03-17', 'Transferred Out', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
+(36, 'CPT Hanabishi Windmill18GF Ground Fan', '2018-03-18', 'Serviceable', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
 (37, 'K611 Fighter Fantech RGB Backlit Full Keys Gaming Keyboard', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
 (38, 'Optical Mouse Double Click Usb Interface OP620D', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
 (39, 'Eureka EWA-0.6HP Window Type Air Conditioner', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
@@ -93,14 +93,15 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (44, 'Xprinter 58mm Thermal Receipt Printer XP-58IIH', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
 (45, 'Digital Age Fortress AMD A4 6300 Entry Level Computer Package', '2018-03-11', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (46, 'Nextbook Flexx9 8.9\" Intel Atom Quad-Core 1GB Blue', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
-(47, 'Imarflex Digital Eco Mist Fan', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
-(48, 'ZYG 800 LED Colorful Backlight Gaming USB Keyboard Black', '2018-03-14', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
-(49, 'Logitech M170 Wireless USB mouse', '2018-03-15', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
-(50, 'Daikin 1 0HP Cooling King Standard Split Type Air Conditioner White', '2018-03-16', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
-(51, 'Ace 32 Slim LED TV Black LED', '2018-03-18', 'For Repair', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
-(52, 'Immix Home Office Buisiness Security 10 Megapixel Camera Kit Black', '2018-03-17', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(53, 'Kevler EON 8 8 250W Plastic Moulded Speaker', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(54, 'UC28 Mini Portable Projector Black With Free Assorted Color Bluetooth Speaker', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL);
+(47, 'Imarflex Digital Eco Mist Fan', '2018-03-13', 'For Disposal', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
+(48, 'ZYG 800 LED Colorful Backlight Gaming USB Keyboard Black', '2018-03-14', 'Disposed', 'Donation', 'Available', 1, 4, NULL, NULL, NULL),
+(49, 'Logitech M170 Wireless USB mouse', '2018-03-15', 'For Disposal', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
+(50, 'Daikin 1 0HP Cooling King Standard Split Type Air Conditioner White', '2018-03-16', 'For Disposal', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
+(51, 'Ace 32 Slim LED TV Black LED', '2018-03-18', 'On Job Order', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(52, 'Immix Home Office Buisiness Security 10 Megapixel Camera Kit Black', '2018-03-17', 'Transferred Out', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
+(53, 'Kevler EON 8 8 250W Plastic Moulded Speaker', '2018-03-01', 'Transferred Out', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(54, 'UC28 Mini Portable Projector Black With Free Assorted Color Bluetooth Speaker', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(55, 'Samsung S8+', '2018-04-10', 'Serviceable', 'Donation', 'Assigned', 0, 12, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -490,7 +491,10 @@ INSERT INTO `ams_r_users_log` (`UL_LOGGED_DATE`, `UL_LOGGED_TYPE`, `EP_ID`) VALU
 ('2018-04-07 13:03:42', 'logged in', 2),
 ('2018-04-08 11:58:21', 'logged in', 3),
 ('2018-04-08 14:18:38', 'logged in', 2),
-('2018-04-08 17:57:15', 'logged in', 3);
+('2018-04-08 17:57:15', 'logged in', 3),
+('2018-04-09 19:58:10', 'logged in', 3),
+('2018-04-09 22:40:13', 'logged in', 3),
+('2018-04-10 09:28:31', 'logged in', 3);
 
 -- --------------------------------------------------------
 
@@ -509,6 +513,16 @@ CREATE TABLE `ams_t_dispose` (
   `PARS_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ams_t_dispose`
+--
+
+INSERT INTO `ams_t_dispose` (`D_ID`, `D_DATE`, `D_TYPE`, `D_REMARKS`, `D_DISPOSED_BY`, `DL_ID`, `A_ID`, `PARS_ID`) VALUES
+(1, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 32, NULL),
+(2, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 13, NULL),
+(3, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 48, NULL),
+(4, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 12, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -518,9 +532,16 @@ CREATE TABLE `ams_t_dispose` (
 CREATE TABLE `ams_t_job_order` (
   `JO_ID` int(11) NOT NULL,
   `JO_NO` varchar(15) NOT NULL,
-  `JO_DATE` date NOT NULL,
-  `ROD_ID` int(11) NOT NULL
+  `JO_DATE` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_job_order`
+--
+
+INSERT INTO `ams_t_job_order` (`JO_ID`, `JO_NO`, `JO_DATE`) VALUES
+(1, 'JO-2018-0001', '2018-04-10'),
+(2, 'JO-2018-0002', '2018-04-10');
 
 -- --------------------------------------------------------
 
@@ -532,11 +553,19 @@ CREATE TABLE `ams_t_job_order_sub` (
   `JOS_ID` int(11) NOT NULL,
   `JOS_REPAIRED_DATE` date DEFAULT NULL,
   `JOS_READY_FOR_DISPOSE_DATE` date DEFAULT NULL,
-  `JOS_REMARKS` varchar(350) DEFAULT NULL,
   `JOS_STATUS` varchar(25) NOT NULL DEFAULT 'For Repair',
-  `RODS_ID` int(11) NOT NULL,
+  `A_ID` int(11) NOT NULL,
   `JO_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_job_order_sub`
+--
+
+INSERT INTO `ams_t_job_order_sub` (`JOS_ID`, `JOS_REPAIRED_DATE`, `JOS_READY_FOR_DISPOSE_DATE`, `JOS_STATUS`, `A_ID`, `JO_ID`) VALUES
+(1, NULL, NULL, 'For Repair', 51, 1),
+(2, NULL, NULL, 'For Repair', 21, 1),
+(3, NULL, NULL, 'For Repair', 20, 2);
 
 -- --------------------------------------------------------
 
@@ -550,6 +579,13 @@ CREATE TABLE `ams_t_par` (
   `PAR_DATE` date NOT NULL,
   `PAR_ISSUED_BY` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_par`
+--
+
+INSERT INTO `ams_t_par` (`PAR_ID`, `PAR_NO`, `PAR_DATE`, `PAR_ISSUED_BY`) VALUES
+(1, 'PAR-2018-0001', '2018-04-10', 'Bryan B. Cortesiano');
 
 -- --------------------------------------------------------
 
@@ -566,6 +602,14 @@ CREATE TABLE `ams_t_par_sub` (
   `PAR_ID` int(11) NOT NULL,
   `EP_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_par_sub`
+--
+
+INSERT INTO `ams_t_par_sub` (`PARS_ID`, `PARS_CANCEL`, `PARS_CANCEL_DATE`, `PARS_CANCEL_BY`, `A_ID`, `PAR_ID`, `EP_ID`) VALUES
+(1, 0, NULL, NULL, 36, 1, 4),
+(2, 0, NULL, NULL, 55, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -680,6 +724,15 @@ CREATE TABLE `ams_t_transfer_out_ptr` (
   `C_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ams_t_transfer_out_ptr`
+--
+
+INSERT INTO `ams_t_transfer_out_ptr` (`PTR_ID`, `PTR_NO`, `PTR_DATE`, `PTR_RECEIVED_BY`, `PTR_REMARKS`, `PTR_TRANSFERRED_BY`, `C_ID`) VALUES
+(1, 'PTR-2018-0001', '2018-04-10', 'AASDSA', 'ASDASDAS', 'Bryan B. Cortesiano', 6),
+(2, 'PTR-2018-0002', '2018-04-10', 'adsa', 'asdasd', 'Bryan B. Cortesiano', 2),
+(3, 'PTR-2018-0003', '2018-04-17', 'sadsa', 'dasda', 'Bryan B. Cortesiano', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -691,6 +744,17 @@ CREATE TABLE `ams_t_transfer_out_ptr_sub` (
   `A_ID` int(11) NOT NULL,
   `PTR_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ams_t_transfer_out_ptr_sub`
+--
+
+INSERT INTO `ams_t_transfer_out_ptr_sub` (`PTRS_ID`, `A_ID`, `PTR_ID`) VALUES
+(1, 35, 1),
+(2, 17, 1),
+(3, 52, 1),
+(4, 31, 2),
+(5, 53, 3);
 
 -- --------------------------------------------------------
 
@@ -708,17 +772,6 @@ CREATE TABLE `ams_t_user_request` (
   `URS_ID` int(11) NOT NULL,
   `AL_ID` int(11) NOT NULL,
   `EP_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ams_t_user_request_approved_by_main`
---
-
-CREATE TABLE `ams_t_user_request_approved_by_main` (
-  `URABM_ID` int(11) NOT NULL,
-  `URABPO_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -867,8 +920,7 @@ ALTER TABLE `ams_t_dispose`
 -- Indexes for table `ams_t_job_order`
 --
 ALTER TABLE `ams_t_job_order`
-  ADD PRIMARY KEY (`JO_ID`),
-  ADD KEY `ROD_ID` (`ROD_ID`);
+  ADD PRIMARY KEY (`JO_ID`);
 
 --
 -- Indexes for table `ams_t_job_order_sub`
@@ -876,7 +928,7 @@ ALTER TABLE `ams_t_job_order`
 ALTER TABLE `ams_t_job_order_sub`
   ADD PRIMARY KEY (`JOS_ID`),
   ADD KEY `JO_ID` (`JO_ID`),
-  ADD KEY `RODS_ID` (`RODS_ID`);
+  ADD KEY `A_ID` (`A_ID`);
 
 --
 -- Indexes for table `ams_t_par`
@@ -968,13 +1020,6 @@ ALTER TABLE `ams_t_user_request`
   ADD KEY `EP_ID` (`EP_ID`);
 
 --
--- Indexes for table `ams_t_user_request_approved_by_main`
---
-ALTER TABLE `ams_t_user_request_approved_by_main`
-  ADD PRIMARY KEY (`URABM_ID`),
-  ADD KEY `URABPO_ID` (`URABPO_ID`);
-
---
 -- Indexes for table `ams_t_user_request_approved_by_po`
 --
 ALTER TABLE `ams_t_user_request_approved_by_po`
@@ -1004,7 +1049,7 @@ ALTER TABLE `ams_t_user_request_summary`
 -- AUTO_INCREMENT for table `ams_r_asset`
 --
 ALTER TABLE `ams_r_asset`
-  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `ams_r_asset_category`
@@ -1058,31 +1103,31 @@ ALTER TABLE `ams_r_ppmp_period`
 -- AUTO_INCREMENT for table `ams_t_dispose`
 --
 ALTER TABLE `ams_t_dispose`
-  MODIFY `D_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `D_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ams_t_job_order`
 --
 ALTER TABLE `ams_t_job_order`
-  MODIFY `JO_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `JO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_job_order_sub`
 --
 ALTER TABLE `ams_t_job_order_sub`
-  MODIFY `JOS_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `JOS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ams_t_par`
 --
 ALTER TABLE `ams_t_par`
-  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ams_t_par_sub`
 --
 ALTER TABLE `ams_t_par_sub`
-  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_ppmp`
@@ -1124,25 +1169,19 @@ ALTER TABLE `ams_t_report_of_damage_sub`
 -- AUTO_INCREMENT for table `ams_t_transfer_out_ptr`
 --
 ALTER TABLE `ams_t_transfer_out_ptr`
-  MODIFY `PTR_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PTR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ams_t_transfer_out_ptr_sub`
 --
 ALTER TABLE `ams_t_transfer_out_ptr_sub`
-  MODIFY `PTRS_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PTRS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request`
 --
 ALTER TABLE `ams_t_user_request`
   MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ams_t_user_request_approved_by_main`
---
-ALTER TABLE `ams_t_user_request_approved_by_main`
-  MODIFY `URABM_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_po`
@@ -1209,17 +1248,11 @@ ALTER TABLE `ams_t_dispose`
   ADD CONSTRAINT `ams_t_dispose_ibfk_3` FOREIGN KEY (`PARS_ID`) REFERENCES `ams_t_par_sub` (`PARS_ID`);
 
 --
--- Constraints for table `ams_t_job_order`
---
-ALTER TABLE `ams_t_job_order`
-  ADD CONSTRAINT `ams_t_job_order_ibfk_1` FOREIGN KEY (`ROD_ID`) REFERENCES `ams_t_report_of_damage` (`ROD_ID`);
-
---
 -- Constraints for table `ams_t_job_order_sub`
 --
 ALTER TABLE `ams_t_job_order_sub`
   ADD CONSTRAINT `ams_t_job_order_sub_ibfk_1` FOREIGN KEY (`JO_ID`) REFERENCES `ams_t_job_order` (`JO_ID`),
-  ADD CONSTRAINT `ams_t_job_order_sub_ibfk_2` FOREIGN KEY (`RODS_ID`) REFERENCES `ams_t_report_of_damage_sub` (`RODS_ID`);
+  ADD CONSTRAINT `ams_t_job_order_sub_ibfk_2` FOREIGN KEY (`A_ID`) REFERENCES `ams_r_asset` (`A_ID`);
 
 --
 -- Constraints for table `ams_t_par_sub`
@@ -1279,12 +1312,6 @@ ALTER TABLE `ams_t_user_request`
   ADD CONSTRAINT `ams_t_user_request_ibfk_1` FOREIGN KEY (`AL_ID`) REFERENCES `ams_r_asset_library` (`AL_ID`),
   ADD CONSTRAINT `ams_t_user_request_ibfk_2` FOREIGN KEY (`URS_ID`) REFERENCES `ams_t_user_request_summary` (`URS_ID`),
   ADD CONSTRAINT `ams_t_user_request_ibfk_3` FOREIGN KEY (`EP_ID`) REFERENCES `ams_r_employee_profile` (`EP_ID`);
-
---
--- Constraints for table `ams_t_user_request_approved_by_main`
---
-ALTER TABLE `ams_t_user_request_approved_by_main`
-  ADD CONSTRAINT `ams_t_user_request_approved_by_main_ibfk_1` FOREIGN KEY (`URABPO_ID`) REFERENCES `ams_t_user_request_approved_by_po` (`URABPO_ID`);
 
 --
 -- Constraints for table `ams_t_user_request_approved_by_po`

@@ -415,7 +415,7 @@
                                                             <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
-                                                        <td class="hidden">4</td>
+                                                        <td class="hidden">5</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -449,6 +449,34 @@
 
                                                     <?php
                                                         }
+                                                        elseif ($a_availability =='Assigned' && $a_status == 'On Job Order' || $a_availability =='Available' && $a_status == 'On Job Order' ) 
+                                                        {
+                                                    ?>
+
+                                                        <td class="hidden">
+                                                            <a id="getid<?php echo $i; ?>">
+                                                                <?php echo $a_id; ?>
+                                                            </a>
+                                                        </td>
+
+                                                        <td>
+                                                            <center>
+                                                                <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px;" disabled>
+                                                            </center>
+                                                        </td>
+
+                                                        <td id="origtype<?php echo $i; ?>">
+                                                            <?php echo $a_acquistion_type; ?> </td>
+                                                        <td id="origstat<?php echo $i; ?>">
+                                                            <p class="label label-warning label-mini" style="font-size: 11px; background-color: #1FB5AD"> <?php echo $a_status; ?> </p> </td>
+                                                        <td id="origdesc<?php echo $i; ?>">
+                                                            <?php echo $a_description; ?> </td>
+                                                        <td class="hidden">4</td>
+                                                        <td id="origdate<?php echo $i; ?>">
+                                                            <?php echo $a_date; ?> </td>
+
+                                                    <?php
+                                                        }
                                                         elseif ($a_availability =='Assigned' && $a_status == 'Disposed' || $a_availability =='Available' && $a_status == 'Disposed' ) 
                                                         {
                                                     ?>
@@ -471,7 +499,7 @@
                                                             <p class="label label-default label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
-                                                        <td class="hidden">6</td>
+                                                        <td class="hidden">7</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 
@@ -499,7 +527,7 @@
                                                             <p class="label label-info label-mini" style="font-size: 11px;"> <?php echo $a_status; ?> </p> </td>
                                                         <td id="origdesc<?php echo $i; ?>">
                                                             <?php echo $a_description; ?> </td>
-                                                        <td class="hidden">5</td>
+                                                        <td class="hidden">6</td>
                                                         <td id="origdate<?php echo $i; ?>">
                                                             <?php echo $a_date; ?> </td>
 

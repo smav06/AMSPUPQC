@@ -276,7 +276,7 @@
                                                     <th style="width: 140px;">Acquisition Type</th>
                                                     <th style="width: 100px;">Status</th>
                                                     <th style="word-wrap: break-word;">Description</th>
-                                                    <th class="hidden">available</th>
+                                                    <th class="hidden">Hide/Show</th>
                                                     <th style="width: 130px;">Date Acquired</th>
                                                 </tr>
                                             </thead>
@@ -285,7 +285,7 @@
 
                                                 <?php  
 
-                                                    $sql = "SELECT * FROM `ams_r_asset` WHERE A_STATUS = 'For Repair' ORDER BY A_DATE DESC";
+                                                    $sql = "SELECT * FROM `ams_r_asset` WHERE A_STATUS = 'For Repair' OR A_STATUS = 'On Job Order' ORDER BY A_DATE DESC";
 
                                                     $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -304,6 +304,11 @@
 
                                                 <tr class="gradeX">
 
+                                                    <?php  
+                                                        if ($a_status == 'For Repair') 
+                                                        {
+                                                    ?>
+                                                    
                                                     <td class="hidden">
                                                         <a id="getid<?php echo $i; ?>">
                                                             <?php echo $a_id; ?>
@@ -325,6 +330,38 @@
                                                     <td class="hidden">1</td>
                                                     <td id="origdate<?php echo $i; ?>">
                                                         <?php echo $a_date; ?> </td>
+
+                                                    <?php
+                                                        }
+                                                        elseif ($a_status == 'On Job Order') 
+                                                        {
+                                                    ?>
+
+                                                    <td class="hidden">
+                                                        <a id="getid<?php echo $i; ?>">
+                                                            <?php echo $a_id; ?>
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        <center>
+                                                            <input type="checkbox" id="<?php echo $i; ?>" class="checkbox form-control ckthis" style="width: 20px" disabled>
+                                                        </center>
+                                                    </td>
+
+                                                    <td id="origtype<?php echo $i; ?>">
+                                                        <?php echo $a_acquistion_type; ?> </td>
+                                                    <td id="origstat<?php echo $i; ?>">
+                                                        <p class="label label-warning label-mini" style="font-size: 11px; background-color: #1FB5AD"> <?php echo $a_status; ?> </p> </td>
+                                                    <td id="origdesc<?php echo $i; ?>">
+                                                        <?php echo $a_description; ?> </td>
+                                                    <td class="hidden">2</td>
+                                                    <td id="origdate<?php echo $i; ?>">
+                                                        <?php echo $a_date; ?> </td>
+
+                                                    <?php
+                                                        }
+                                                    ?>
 
                                                 </tr>
 
@@ -356,7 +393,7 @@
                     </div>
                 </div>
 
-                <div id="clone" style="display: none;">
+                <div id="clone" class="hidden">
                     <div class="row">
                         <div class="col-sm-12">
                             <section class="panel">
@@ -396,7 +433,7 @@
 
                                             <?php  
 
-                                                $sql = "SELECT * FROM `ams_r_asset` WHERE A_STATUS = 'For Repair' ORDER BY A_DATE DESC";
+                                                $sql = "SELECT * FROM `ams_r_asset` WHERE A_STATUS = 'For Repair' OR A_STATUS = 'On Job Order' ORDER BY A_DATE DESC";
 
                                                 $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
@@ -836,25 +873,35 @@
                     function(isConfirm) {
                     if (isConfirm) {
 
+                        $.ajax({
+                            type: 'POST',
+                            url: 'InsertJO.php',
+                            async: false,
+                            data: {
+
+                            },
+                            success: function(data2) {
+                                // alert(data2);                                    
+                            },
+                            error: function(response2) {
+                                // alert(response2);                                    
+                            }
+
+                        });
+
                         $('#newmodalget tr').each(function(index, val) {
 
-                            var tdObject = $(this).find('td:eq(3)'); //locate the <td> holding select;
-                            var selectObject = tdObject.find("select"); //grab the <select> tag assuming that there will be only single select box within that <td> 
-                            var selCntry = selectObject.val(); // get the selected country from current <tr>
-
-                            // alert(selCntry);
                             $.ajax({
                                 type: 'POST',
-                                url: 'UpdateTheAssetBaseOnInspection.php',
+                                url: 'InsertJOSub.php',
                                 async: false,
                                 data: {
-                                    _aid: $(this).closest('tr').children('td:first').text(),
-                                    _inspectresult: selCntry
+                                    _aid: $(this).closest('tr').children('td:first').text()
                                 },
                                 success: function(data2) {
                                     // alert(data2);
 
-                                    swal("Inspection Result Submitted!", "The result of inspection/checking of asset successfully recorded.", "success");
+                                    swal("Job order successfully generated!", "", "success");
 
                                     setTimeout(function() 
                                     {
