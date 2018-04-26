@@ -150,44 +150,11 @@
                     echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
                 }
 
-                if ($cnt == 0) 
-                {
+                
+                echo '<ul class="dropdown-menu extended notification dispnotif2" style="overflow-y: scroll; height: 330px;"></ul>';
+                
             ?>
 
-            <ul class="dropdown-menu extended notification dispnotif2" style="height: 70px;">
-            </ul>
-
-            <?php
-                }
-                elseif ($cnt == 1) 
-                {
-            ?>
-
-            <ul class="dropdown-menu extended notification dispnotif2" style="height: 110px;">
-            </ul>
-
-            <?php
-                }
-                elseif ($cnt == 2) 
-                {
-            ?>
-
-            <ul class="dropdown-menu extended notification dispnotif2" style="height: 220px;">
-            </ul>
-
-            <?php
-                    
-                }
-                elseif ($cnt >= 3) 
-                {                
-            ?>
-
-            <ul class="dropdown-menu extended notification dispnotif2" style="overflow-y: scroll; height: 330px;">
-            </ul>
-
-            <?php 
-                }
-            ?>
         </li>
 
         <li id="" class="">
@@ -258,7 +225,7 @@
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
                 <li><a href="PORequestToMain.php">Request From Main</a></li>            
-                <li><a href="POPPMP.php">PPMP</a></li>                
+                <!-- <li><a href="POPPMP.php">PPMP</a></li>                 -->
             </ul>
         </li>
         <li>
@@ -297,7 +264,7 @@
             </a>
             <ul class="sub">
                 <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
-                <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                <!-- <li><a href="POPPMPReport.php">PPMP Report</a></li> -->
                 <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
                 <li class="active"><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>  
                 <li><a href="POJobOrder.php">Job Order</a></li> 

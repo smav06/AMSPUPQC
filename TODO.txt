@@ -3,7 +3,6 @@
 
 ♥ - MEANS TAPOS NA
 
-
 PPMP
 FILTER
 HISTORY [meron ako sa lumang system]
@@ -12,11 +11,14 @@ POJobOrder.php
 
 
 
+[PROPERTY OFFICER]
+
  Property Officer UI	
 	 - Request Notif dapat may days remaining
-	 - Report Notif dapat mahaba na agad
+	♥ - Report Notif dapat mahaba na agad [ALL PAGES, DAMI HAHA]
 	 - Urgent Request Notif dapat lahat meron at ayusin
 	 - Profile ni property officer
+	♥ - Hide lahat about sa PPMP [ALL PAGES, DAMI HAHA]
 
 
 	 POViewRequestFromDU.php
@@ -25,15 +27,14 @@ POJobOrder.php
 
 	 PODisposal.php
 		 - Validation
-		 - Lagyan ng disposal type yung table
 
 
-	 PODURequests.php
-		 - Gawin glyphicons yung button sa table instead of button na nakaword
+	♥ PODURequests.php
+		♥ - Gawin glyphicons yung button sa table instead of button na nakaword
 
 
-	 PORequestToMain.php
-		 - Gawin glyphicons yung button sa table instead of button na nakaword
+	♥ PORequestToMain.php
+		♥ - Gawin glyphicons yung button sa table instead of button na nakaword
 
 
 	 POAcquisition.php
@@ -41,19 +42,22 @@ POJobOrder.php
 
 
 	 POMaintenanceInsCheck.php
-		 - Kapag 2 na yung iinspect sa modal lumalabas agad  yung sweetalert, pakiayos
+		 - Kapag 2 na yung iinspect sa modal lumalabas agad yung sweetalert, pakiayos
 
 
 	 POMaintenanceJobOrder.php
 		 - gawing detailed yung job order sa modal
+		 - maggawa na ng job order page at printable na job order [diko nagawa kasi walang format, hirap mag imbento lol]
 
 
 
 
-------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 
 
 
+
+[DEPARTMENTAL USER]
 
  Departmental User UI	
 	 - Profile ni departmental user
@@ -77,6 +81,7 @@ POJobOrder.php
 
 	 DURequest.php
 		 - kapag 2 na yung irerequest, validation
+		 - tanggalin ang list ng requests, ilipat yon sa queries
 
 
 	 DUReportDamagedAsset.php
@@ -85,3 +90,14 @@ POJobOrder.php
 
 	 DUReportForTransfer.php
 		 - dapat di per item, dapat by batch
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+[ADMINISTRATOR]
+	- halos lahat
