@@ -55,7 +55,7 @@
 
     <link href="../../js/iCheck/skins/flat/grey.css" rel="stylesheet">
     <link href="../../js/iCheck/skins/flat/red.css" rel="stylesheet">
-    <link href="../../s/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="../../js/iCheck/skins/flat/green.css" rel="stylesheet">
     <link href="../../js/iCheck/skins/flat/blue.css" rel="stylesheet">
     <link href="../../js/iCheck/skins/flat/yellow.css" rel="stylesheet">
     <link href="../../js/iCheck/skins/flat/purple.css" rel="stylesheet">

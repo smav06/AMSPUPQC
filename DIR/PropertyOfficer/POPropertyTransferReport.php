@@ -22,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Requests From Main</title>
+    <title>Property Transfer Report</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -111,9 +111,10 @@
                 echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
             </ul>';
             ?>
-            
+
         </li>
         <!-- notification dropdown end -->
+
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle dt2" href="#">
                 <i class="fa fa-warning"></i>
@@ -217,75 +218,75 @@
     <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
         <div class="leftside-navigation">
-    <ul class="sidebar-menu" id="nav-accordion">
-        <li>
-            <a href="PODashboard.php">
-                <i class="fa fa-dashboard"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="POAsset.php">
-                <i class="fa fa-laptop"></i>
-                <span>Assets</span>
-            </a>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;" class="active">
-                <i class="fa fa-comment-o"></i>
-                <span>Requests</span>
-            </a>
-            <ul class="sub">
-                <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li class="active"><a href="PORequestToMain.php">Request From Main</a></li>
-                <li><a href="POPPMP.php">PPMP</a></li>                
-            </ul>
-        </li>
-        <li>
-            <a href="POAcquisition.php">
-                <i class="fa fa-download"></i>
-                <span>Acquisition</span>
-            </a>
-        </li>
-        <li>
-            <a href="POTransferAsset.php">
-                <i class="fa fa-sign-out"></i>
-                <span>Transfer Asset</span>
-            </a>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-wrench"></i>
-                <span>Maintenance</span>
-            </a>
-            <ul class="sub">
-                <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
-                <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>
-                <li><a href="POMaintenanceJobOrder.php">Job Order</a></li>                        
-            </ul>
-        </li>
-        <li>
-            <a href="PODisposal.php">
-                <i class="fa fa-trash-o"></i>
-                <span>Disposal</span>
-            </a>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa fa-table"></i>
-                <span>Reports</span>
-            </a>
-            <ul class="sub">
-                <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
-                <li><a href="POPPMPReport.php">PPMP Report</a></li>
-                <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
-                <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
-                <li><a href="POJobOrder.php">Job Order</a></li>   
-                <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
-            </ul>
-        </li>
-    </ul>            
-</div
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a href="PODashboard.php">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="POAsset.php">
+                        <i class="fa fa-laptop"></i>
+                        <span>Assets</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-comment-o"></i>
+                        <span>Requests</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="PODURequests.php">Departmental User Requests</a></li>
+                        <li><a href="PORequestToMain.php">Request From Main</a></li>                
+                        <li><a href="POPPMP.php">PPMP</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="POAcquisition.php">
+                        <i class="fa fa-download"></i>
+                        <span>Acquisition</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="POTransferAsset.php">
+                        <i class="fa fa-sign-out"></i>
+                        <span>Transfer Asset</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-wrench"></i>
+                        <span>Maintenance</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
+                        <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>
+                        <li><a href="POMaintenanceJobOrder.php">Job Order</a></li>                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="PODisposal.php">
+                        <i class="fa fa-trash-o"></i>
+                        <span>Disposal</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="active">
+                        <i class="fa fa fa-table"></i>
+                        <span>Reports</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                        <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                        <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
+                        <li class="active"><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
+                        <li><a href="POJobOrder.php">Job Order</a></li> 
+                        <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
+                    </ul>
+                </li>
+            </ul>            
+        </div>
         <!-- sidebar menu end-->
     </div>
 </aside>
@@ -300,7 +301,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequestToMain.php">Requests From Main</a></li>
+                        <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -309,8 +310,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            Requests approved by property officer
+                        <header class="panel-heading" style="color: black;">
+                            Property Transfer Report
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
@@ -321,94 +322,51 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">URS ID</th>
-                                            <th style="">Request No.</th>
-                                            <th style="display: none;"></th>
-                                            <th style="">Requested By</th> 
-                                            <th style="width: 140px;">Date Requested</th>
-                                            <th style="width: 145px;">Status From Main</th>
-                                            <th style="width: 90px;"></th>
+                                            <th class="hidden">URS ID</th>
+                                            <th style="width: 140px;">PTR No.</th>
+                                            <th style="">Transferred To</th>
+                                           
+                                            <th style="width: 140px;">Date Transferred</th>
+                                            <th style="width: 55px;"></th>
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-
-                                    <?php  
-
-                                    $sql = "SELECT URS.URS_ID, URS.URS_NO, URS.URS_REQUEST_DATE, URSTM.URSTM_STATUS_TO_MAIN, O.O_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_APPROVED_DATE DESC";
-
-                                        $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
-
-                                        while($row = mysqli_fetch_assoc($result))
-                                        {
-                                            $ursid = $row['URS_ID'];
-                                            $ursno = $row['URS_NO'];
-                                            $reqby = $row['O_NAME'];
-                                            $reqdate = $row['URS_REQUEST_DATE'];
-                                            $status = $row['URSTM_STATUS_TO_MAIN'];
-                                    ?>
-
-                                        <tr>                                        
+                                    <tbody> 
 
                                         <?php  
-                                            if ($status == 'Pending') 
+
+                                            $sql = "SELECT PTR.PTR_ID, PTR.PTR_NO, PTR.PTR_DATE, CAM.C_NAME FROM ams_t_transfer_out_ptr AS PTR INNER JOIN ams_r_campus AS CAM ON PTR.C_ID = CAM.C_ID GROUP BY PTR.PTR_ID";
+
+                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                                            while($row = mysqli_fetch_assoc($result))
                                             {
+                                              $id = $row['PTR_ID'];
+                                              $no = $row['PTR_NO'];
+                                              $date = $row['PTR_DATE'];
+                                                 
+                                              $officename = $row['C_NAME'];
+                                              
                                         ?>
 
-                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
-                                            <td> <?php echo $ursno; ?> </td>
-                                            <td style="display: none;">1</td>
-                                            <td> <?php echo $reqby; ?> </td>
-                                            <td> <?php echo $reqdate; ?> </td>
+                                        <tr class="gradeX">  
 
-                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
-                                            <td> 
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
+                                            <td class="hidden"> <?php echo $id; ?> </td>
+                                            <td> <?php echo $no; ?> </td>                                        
+                                            <td> <?php echo $officename; ?> </td>
+                                            <td> <?php echo $date; ?> </td>                                            
+
+                                            <td>
+                                                <a class="btn btn-success" style="margin: -5px;" href="POPTRReports.php?receiveptrid=<?php echo $id; ?>"><i class="fa fa-eye"></i></a>
+
+                                                <!-- <a class="btn btn-success" style="margin: -5px;" onclick="printonly('<?php echo $id; ?>');"><i class="fa fa-print"></i> Print</a> -->
                                             </td>
-
-                                        <?php
-                                            }
-                                            elseif ($status == 'Approved') 
-                                            {
-                                        ?>
-
-                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
-                                            <td> <?php echo $ursno; ?> </td>
-                                            <td style="display: none;">2</td>
-                                            <td> <?php echo $reqby; ?> </td>
-                                            <td> <?php echo $reqdate; ?> </td>
-
-                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
-                                            <td> 
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
-                                            </td>
-
-                                        <?php
-                                            }
-                                            elseif ($status == 'Reject') 
-                                            {
-                                        ?>
-
-                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
-                                            <td> <?php echo $ursno; ?> </td>
-                                            <td style="display: none;">3</td>
-                                            <td> <?php echo $reqby; ?> </td>
-                                            <td> <?php echo $reqdate; ?> </td>
-
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
-                                            <td> 
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
-                                            </td>
-
-                                        <?php
-                                            }
-                                        ?>
-
+                                            
                                         </tr>
 
-                                    <?php  
-                                        }
-                                    ?>
+                                        <?php
+                                            }
+                                        ?>
 
                                     </tbody>
                                 </table>
@@ -535,7 +493,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--dynamic table initialization -->
-    <script src="PORequestToMain/dynamic_table_init.js"></script>
+    <script src="POPurchaseRequest/dynamic_table_init.js"></script>
 
     <script src="../../js/iCheck/jquery.icheck.js"></script>
 
@@ -606,36 +564,58 @@ function myFunction2(id) {
 
 $(document).ready(function(){
  
- function load_unseen_notification(view = '')
- {
-  $.ajax({
-   url:"fetch.php",
-   method:"POST",
-   data:{view:view},
-   dataType:"json",
-   success:function(data)
-   {
-    $('.dispnotif').html(data.notification);
-    if(data.unseen_notification > 0)
-    {
-     $('.count').html(data.unseen_notification);
+    function load_unseen_notification(view = '') {
+        $.ajax({
+            url:"fetch.php",
+            method:"POST",
+            data:{view:view},
+            dataType:"json",
+       
+        success:function(data)
+        {
+            $('.dispnotif').html(data.notification);
+
+            if(data.unseen_notification > 0)
+            {
+                $('.count').html(data.unseen_notification);
+            }
+        }
+
+        });
     }
-   }
-  });
- }
- 
- load_unseen_notification();
- 
- $(document).on('click', '.dt', function(){
-  $('.count').html('');
-  load_unseen_notification('yes');
- });
- 
- setInterval(function(){ 
-  load_unseen_notification();; 
- }, 1000);
+     
+    load_unseen_notification();
+     
+    $(document).on('click', '.dt', function() {
+        $('.count').html('');
+        load_unseen_notification('yes');
+    });
+     
+    setInterval(function(){ 
+        load_unseen_notification();; 
+    }, 1000);
  
 });
+</script>
+
+<script>
+
+    function printonly(get) {
+        alert(get);        
+
+        // var restorepage = document.body.innerHTML;
+        // var printcont = document.getElementById('printdisbook').innerHTML;
+        // document.body.innerHTML = printcont;
+        // window.print();
+        // document.body.innerHTML = restorepage;
+
+        //     setTimeout(function() 
+        //     {
+        //         window.location = window.location;
+        //     }, 100);
+
+    }
+
 </script>
 
 <script type="text/javascript">

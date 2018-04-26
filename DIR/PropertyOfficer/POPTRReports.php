@@ -10,6 +10,11 @@
 
     }
 
+    if (isset($_GET['receiveptrid'])) 
+    {
+        $ids = $_GET['receiveptrid'];
+    } 
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +42,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>PAR</title>
+    <title>PTR</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -219,8 +224,8 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="../logout.php"><i class="fa fa-key"></i>Log Out</a></li>
+                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
+                <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
     </ul>
@@ -253,7 +258,7 @@
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
                 <li><a href="PORequestToMain.php">Request From Main</a></li>            
-                <li><a href="POPPMP.php">PPMP</a></li>                   
+                <li><a href="POPPMP.php">PPMP</a></li>                
             </ul>
         </li>
         <li>
@@ -275,8 +280,8 @@
             </a>
             <ul class="sub">
                 <li><a href="POMaintenanceInsCheck.php">Inspection/Checking</a></li>
-                <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>
-                <li><a href="POMaintenanceJobOrder.php">Job Order</a></li>                        
+                <li><a href="POMaintenanceReport.php">Report Of Damage</a></li>                        
+                <li><a href="POMaintenanceJobOrder.php">Job Order</a></li>
             </ul>
         </li>
         <li>
@@ -286,7 +291,7 @@
             </a>
         </li>
         <li class="sub-menu">
-            <a href="javascript:;">
+            <a href="javascript:;" class="active">
                 <i class="fa fa fa-table"></i>
                 <span>Reports</span>
             </a>
@@ -294,8 +299,8 @@
                 <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
                 <li><a href="POPPMPReport.php">PPMP Report</a></li>
                 <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
-                <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
-                <li><a href="POJobOrder.php">Job Order</a></li>  
+                <li class="active"><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>  
+                <li><a href="POJobOrder.php">Job Order</a></li> 
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
         </li>
@@ -315,7 +320,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="POAsset.php">Assets</a></li>
+                        <li><a href="POPropertyTransferReport.php">PROPERTY TRANSFER REPORT</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -325,68 +330,82 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Property Accountability Receipt
+                            Property Transfer Report
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                             </span>
                         </header>                        
 
                         <?php
-                            $sql = "SELECT MAX(PAR_ID) AS AAA FROM `ams_t_par`";
+                            $sql = "SELECT MAX(PTR_ID) AS AAA FROM `ams_t_transfer_out_ptr`";
 
                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                             while($row = mysqli_fetch_assoc($result))
                             {
-                                $maxparid = $row['AAA'];
-                                echo '<input type="text" class="hidden" id="maxparid" value="'.$maxparid.'" />';
+                                $maxptrid = $row['AAA'];
+                                echo '<input type="text" class="hidden" id="maxptrid" value="'.$maxptrid.'" />';
                             }
                         ?>
 
                         <?php  
-                            $sql = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID WHERE PAR.PAR_ID = $maxparid GROUP BY PAR.PAR_ID";
+                            $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $ids GROUP BY PTR.PTR_ID";
 
                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                             while($row = mysqli_fetch_assoc($result))
                             {                              
-                              $parno = $row['PAR_NO'];
-                              $fname = $row['EP_FNAME'];
-                              $mname = $row['EP_MNAME'];
-                              $lname = $row['EP_LNAME'];
-                              $wholename = $fname.' '.$mname.' '.$lname;
-                              $pardate = $row['PAR_DATE'];
-                              $parassignby = $row['PAR_ISSUED_BY'];
+                              $ptrno = $row['PTR_NO'];
+                              $ptrdate = $row['PTR_DATE'];
+                              $receivedby = $row['PTR_RECEIVED_BY'];
+                              $reason = $row['PTR_REMARKS'];
+                              $transferredby = $row['PTR_TRANSFERRED_BY'];
+                              $transferto = $row['C_NAME'];
+                              $transfertocode = $row['C_CODE'];
 
                         ?>
 
                         <div class="panel-body">
                             <div class="row group">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>PAR No.</label>
-                                        <input type="hid" value="<?php echo $parno; ?>" class="form-control" style="color: black;" disabled  />
+                                        <label>PTR No.</label>
+                                        <input type="text" value="<?php echo $ptrno; ?>" class="form-control" style="color: black;" disabled  />
                                     </div>
                                 </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label>Accountable Person / Assigned To</label>
-                                        <input type="text" value="<?php echo $wholename; ?>" class="form-control" style="color: black;" disabled  />
+                                        <label>Transfer To</label>
+                                        <input type="text" value="<?php echo $transferto; ?> (<?php echo $transfertocode; ?>)" class="form-control" style="color: black;" disabled  />
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Assigned Date</label>
-                                        <input type="Date" value="<?php echo $pardate; ?>" class="form-control" style="color: black;" disabled />
+                                        <label>Date</label>
+                                        <input type="text" value="<?php echo $ptrdate; ?>" class="form-control" style="color: black;" disabled />
                                     </div>
                                 </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label>Assigned By</label>
-                                        <input type="text" value="<?php echo $parassignby; ?>" class="form-control" style="color: black;" disabled />
+                                        <label>Transfer From</label>
+                                        <input type="text" value="Polytechnic University of the Philippines Quezon City (PUP QC)" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Receiver</label>
+                                        <input type="text" value="<?php echo $receivedby; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Transfer By</label>
+                                        <input type="text" value="<?php echo $transferredby; ?>" class="form-control" style="color: black;" disabled />
                                     </div>
                                 </div>
 
@@ -410,7 +429,7 @@
                                             <tbody>
 
                                             <?php  
-                                                $sql1 = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_asset` AS A ON PARS.A_ID = A.A_ID WHERE PAR.PAR_ID = $maxparid";
+                                                $sql1 = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $ids";
 
                                                 $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
@@ -449,101 +468,170 @@
                     <section class="panel">
                         <div id="printdisbook" class="panel-body" style="display: none;">
                             <br>
-                            <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
                             
-                            <center><h4 style="font-family: Arial; font-weight: bold;">PROPERTY ACCOUNTABILITY RECEIPT</h4></center>
-                            <center><u><h4 style="font-family: Times New Roman;">Polytechnic University of the Philippines</h4></u></center>
-                            <center><h4 style="font-family: Arial;">Quezon City Branch</h4></center>
-                            <hr>                       
+                            <!-- <hr> -->
+                            <br>
+                        <table style="width: 100%;" border="1">   
 
+                        <tr>
+                            <td>
+                            <br>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
+                                        <center><h4 style="font-family: Times New Roman; font-weight: bold;"> POLYTECHNIC UNIVERSITY OF THE PHILIPPINES </h4></center>
+                                        <center> <h4 style="font-family: Times New Roman;"> PROPERTY TRANSFER REPORT </h4> </center>
+                                        <center><h4 style="font-family: Times New Roman;">Don Fabian, Commonwealth, Quezon City</h4></center>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <br>
+                            <br>
                         <?php 
-                            $sql = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID WHERE PAR.PAR_ID = $maxparid GROUP BY PAR.PAR_ID";
+                            $sql = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $ids GROUP BY PTR.PTR_ID";
 
                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                             while($row = mysqli_fetch_assoc($result))
                             {                              
-                              $parno = $row['PAR_NO'];
-                              $fname = $row['EP_FNAME'];
-                              $mname = $row['EP_MNAME'];
-                              $lname = $row['EP_LNAME'];
-                              $wholename = $fname.' '.$mname.' '.$lname;
-                              $pardate = $row['PAR_DATE'];
-                              $parassignby = $row['PAR_ISSUED_BY'];
+                              $ptrno = $row['PTR_NO'];
+                              $ptrdate = $row['PTR_DATE'];
+                              $receivedby = $row['PTR_RECEIVED_BY'];
+                              $reason = $row['PTR_REMARKS'];
+                              $transferredby = $row['PTR_TRANSFERRED_BY'];
+                              $transferto = $row['C_NAME'];
+                              $transfertocode = $row['C_CODE'];
+                              $transfertoname = $row['C_NAME'];
                         ?>
 
-                            <!-- <label>Date: </label> <u> <?php echo $pardate; ?> </u> <br>
-                            <label>PAR NO: </label> <u> <?php echo $parno; ?> </u> <br>
-                            <label>Accountable Person: </label> <u> <?php echo $wholename; ?> </u> -->
-
-                            <table style="width: 100%;" border="1">
+                            <table style="width: 100%;">
                                 <tr>
-                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">PAR No. : <strong> <u> <?php echo $parno; ?> </u> <strong> </h5></td>
-                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">Assigned To : <strong> <u> <?php echo $wholename; ?> </u> </strong> </h5></td>
+                                    <td style="width: 80%;"><h5 style="font-family: Arial; padding-left: 10px;">PTR No. : <strong> <u> <?php echo $ptrno; ?> </u> <strong> </h5></td>
+                                    <td style="width: 20%;"><h5 style="font-family: Arial; padding-left: 10px;">Date : <strong> <u> <?php echo $ptrdate; ?> </u> </strong> </h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h5 style="font-family: Arial; padding-left: 10px;">Date : <strong> <u> <?php echo $pardate; ?> </u> </strong> </h5></td>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;"> To the Security Guard on Duty : </h5></td>
                                     <td><h5 style="font-family: Arial; padding-left: 10px;"></h5></td>
-                                </tr>
+                                </tr>                                
                             </table>
+
+                            <table style="width: 100%">
+                                <tr>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Please Allow the Bearer, <strong> MR./MS. </strong> _<u> <em> <strong> <?php echo $receivedby; ?> </strong> </em> </u>_ to take Out/Transfer the following from _<u> <em> <strong> PUP Quezon City </strong> </em> </u>_ </h5></td>
+                                </tr>                                
+                            </table>
+                            <br>
+
+                            <!-- <label>Date: </label> <u> <?php echo $ptrdate; ?> </u> 
+                            <label>Transfer From: </label> <u> PUP QC </u>  
+                            <br>
+                            <label>PTR NO: </label> <u> <?php echo $ptrno; ?> </u> 
+                            <label>Transfer To: </label> <u> <?php echo $transfertocode; ?> </u>
+                            <br>
+                            <label>Receiver: </label> <u> <?php echo $receivedby; ?> </u>
+                            <br>
+                            <br>
+                            <label>Reason For Transfer: </label> <u> <?php echo $reason; ?> </u>  -->
 
                         <?php
                             }
                         ?>
-                            <p style="margin-top: 15px;"></p>
+                            </td>
+                        </tr>                                                     
+                        </table>
+                        <!-- <hr> -->
 
-                            <table style="width: 100%;" border="1">
-                                <thead>
-                                    <tr>
-                                        <th style="font-family: Arial; width: 70px; padding: 10px; font-size: 18px;"> Asset / Item / Equipment</th>
-                                    </tr>
-                                </thead>
+                        <table style="width: 100%; margin-top: -1px;" border="1">
+                            <tr>
+                                <td>
+                                    <h5 style="font-family: Times New Roman; padding-left: 10px;">
+                                        <strong><center> PLACE OF DESTINATION : <u> <?php echo $transfertoname; ?> (<?php echo $transfertocode; ?>) </u> </center></strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
 
-                                <tbody>
+                        <table style="width: 100%; margin-top: 2px;" border="1">
+                            <tr>
+                                <td>
+                                    <h5 style="font-family: Times New Roman; padding-left: 10px;">
+                                        <strong><center><em>Items of Equipment, Supplies, or Materials</em></center></strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
 
-                                <?php  
-                                    $sql1 = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_asset` AS A ON PARS.A_ID = A.A_ID WHERE PAR.PAR_ID = $maxparid";
-
-                                    $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
-
-                                    while($row1 = mysqli_fetch_assoc($result1))
-                                    {
-                                        $adesc = $row1['A_DESCRIPTION'];
-                                        $issedby = $row1['PAR_ISSUED_BY'];
-                                ?>
-
-                                    <tr>
-                                        <td style="font-family: Arial; padding: 10px;"> <?php echo $adesc; ?> </td>
-                                    </tr>
-
-                                <?php
-                                    }
-                                ?>
-
-                                </tbody>
-                            </table>
-
-                            <p style="margin-top: -8px;"></p>
-                            
-                            <table style="width: 100%;" border="1">                                
+                        <table style="width: 100%; margin-top: 2px;" border="1">
+                            <thead>
                                 <tr>
-                                    <td style="font-family: Arial; padding: 5px; width: 20%"></td>
-                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned To: </em> </center> </td>
-                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned/Issued By: </em> </center> </td>
+                                    <th style="font-family: Times New Roman; padding: 10px; font-size: 18px;">DESCRIPTION</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <?php  
+                                $sql1 = "SELECT * FROM ams_r_asset AS A INNER JOIN ams_t_transfer_out_ptr_sub AS PTRS ON PTRS.A_ID = A.A_ID INNER JOIN ams_t_transfer_out_ptr AS PTR ON PTRS.PTR_ID = PTR.PTR_ID INNER JOIN ams_r_campus AS C ON PTR.C_ID = C.C_ID WHERE PTR.PTR_ID = $ids";
+
+                                $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+
+                                while($row1 = mysqli_fetch_assoc($result1))
+                                {
+                                    $adesc = $row1['A_DESCRIPTION'];
+                            ?>
+
+                                <tr>
+                                    <td style="font-family: Arial; padding: 10px;"> <?php echo $adesc; ?> </td>
                                 </tr>
 
-                                <tr>                                    
-                                    <td style="font-family: Arial; padding: 5px;">Signature :</td>
-                                    <td style="font-family: Arial; padding: 5px;"></td>
-                                    <td style="font-family: Arial; padding: 5px;"></td>
-                                </tr>
+                            <?php
+                                }
+                            ?>
 
-                                <tr>                                    
-                                    <td style="font-family: Arial; padding: 5px;">Printed Name :</td>
-                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($wholename) ?> </strong> </center> </td>
-                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($issedby) ?> </strong> </center> </td>
-                                </tr>
-                            </table>
+                            </tbody>
+                        </table>
+
+                        <table style="width: 100%; margin-top: -1px;" border="1">
+                            <tr>
+
+                                <td>
+                                    <table style="width: 100%;">
+                                        <br>
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> __<u> <?php echo $receivedby; ?> </u>__ </center> <center> Print/Sign Name of Authorized Receiver </center> </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> __<u> <?php echo $transferredby; ?> </u>__ </center> <center> Print/Sign Name of Property Official </center> </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> ________________________________ </center> <center> Print/Sign Name of Driver </center> </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; padding-left: 68px; width: 33%"> Date : _<u> <?php echo $ptrdate; ?> </u>__________ <br> Time Out : __________________ </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; padding-left: 80px; width: 33%"> Date : _<u> <?php echo $ptrdate; ?> </u>__________ <br> Time Out : __________________  </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"> <center> ________________________________ </center> <center> (Print/Sign Name of Guard on Duty) </center> </td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-family: Arial; padding: 10px; width: 33%">NOTE: The Security Guard  on Duty is hereby instructed to check the above supplies and/or equipment aboard the herein vehicle.</td>
+                                            <!-- <td style="font-family: Arial; padding: 10px; width: 33%"></td> -->
+                                            <td style="font-family: Arial; padding: 10px; width: 33%"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>                        
 
                         </div>
                     </section>

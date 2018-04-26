@@ -10,11 +10,31 @@
 
     }
 
+    if (isset($_GET['receiveparid'])) 
+    {
+        $ids = $_GET['receiveparid'];
+    } 
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <style type="text/css" media="print">
+        @media print
+          {
+             @page {
+               margin-top: 0;
+               margin-bottom: 0;
+             }
+             body  {
+               padding-top: 72px;
+               padding-bottom: 72px ;
+             }
+          } 
+    </style>
+
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +42,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Requests From Main</title>
+    <title>PAR</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -111,7 +131,7 @@
                 echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
             </ul>';
             ?>
-            
+
         </li>
         <!-- notification dropdown end -->
         <li id="header_notification_bar" class="dropdown">
@@ -204,8 +224,8 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
-                <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="../logout.php"><i class="fa fa-key"></i>Log Out</a></li>
             </ul>
         </li>
     </ul>
@@ -231,14 +251,14 @@
             </a>
         </li>
         <li class="sub-menu">
-            <a href="javascript:;" class="active">
+            <a href="javascript:;">
                 <i class="fa fa-comment-o"></i>
                 <span>Requests</span>
             </a>
             <ul class="sub">
                 <li><a href="PODURequests.php">Departmental User Requests</a></li>
-                <li class="active"><a href="PORequestToMain.php">Request From Main</a></li>
-                <li><a href="POPPMP.php">PPMP</a></li>                
+                <li><a href="PORequestToMain.php">Request From Main</a></li>                
+                <li><a href="POPPMP.php">PPMP</a></li>
             </ul>
         </li>
         <li>
@@ -271,22 +291,22 @@
             </a>
         </li>
         <li class="sub-menu">
-            <a href="javascript:;">
+            <a href="javascript:;" class="active">
                 <i class="fa fa fa-table"></i>
                 <span>Reports</span>
             </a>
             <ul class="sub">
                 <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
                 <li><a href="POPPMPReport.php">PPMP Report</a></li>
-                <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
+                <li class="active"><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
                 <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
-                <li><a href="POJobOrder.php">Job Order</a></li>   
+                <li><a href="POJobOrder.php">Job Order</a></li>
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
         </li>
     </ul>            
-</div
-        <!-- sidebar menu end-->
+</div>
+         <!-- sidebar menu end-->
     </div>
 </aside>
 <!--sidebar end-->
@@ -300,7 +320,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="PODashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="PORequestToMain.php">Requests From Main</a></li>
+                        <li><a href="POAsset.php">Assets</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -310,112 +330,228 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Requests approved by property officer
+                            Property Accountability Receipt
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
-                             </span>
-                        </header>
+                            </span>
+                        </header>                        
+
+                        <?php
+                            $sql = "SELECT MAX(PAR_ID) AS AAA FROM `ams_t_par`";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                                $maxparid = $row['AAA'];
+                                echo '<input type="text" class="hidden" id="maxparid" value="'.$maxparid.'" />';
+                            }
+                        ?>
+
+                        <?php  
+                            $sql = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID WHERE PAR.PAR_ID = $ids GROUP BY PAR.PAR_ID";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {                              
+                              $parno = $row['PAR_NO'];
+                              $fname = $row['EP_FNAME'];
+                              $mname = $row['EP_MNAME'];
+                              $lname = $row['EP_LNAME'];
+                              $wholename = $fname.' '.$mname.' '.$lname;
+                              $pardate = $row['PAR_DATE'];
+                              $parassignby = $row['PAR_ISSUED_BY'];
+
+                        ?>
 
                         <div class="panel-body">
-                            <div class="adv-table">
-                                <table  class="display table table-bordered table-striped" id="dynamic-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="display: none;">URS ID</th>
-                                            <th style="">Request No.</th>
-                                            <th style="display: none;"></th>
-                                            <th style="">Requested By</th> 
-                                            <th style="width: 140px;">Date Requested</th>
-                                            <th style="width: 145px;">Status From Main</th>
-                                            <th style="width: 90px;"></th>
-                                        </tr>
-                                    </thead>
+                            <div class="row group">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>PAR No.</label>
+                                        <input type="hid" value="<?php echo $parno; ?>" class="form-control" style="color: black;" disabled  />
+                                    </div>
+                                </div>
 
-                                    <tbody>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Accountable Person / Assigned To</label>
+                                        <input type="text" value="<?php echo $wholename; ?>" class="form-control" style="color: black;" disabled  />
+                                    </div>
+                                </div>
 
-                                    <?php  
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Assigned Date</label>
+                                        <input type="Date" value="<?php echo $pardate; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                    $sql = "SELECT URS.URS_ID, URS.URS_NO, URS.URS_REQUEST_DATE, URSTM.URSTM_STATUS_TO_MAIN, O.O_NAME FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request_status_to_main` AS URSTM ON URSTM.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_t_user_request_approved_by_po` AS URABPO ON URABPO.UR_ID = UR.UR_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID GROUP BY URS.URS_ID ORDER BY URS.URS_APPROVED_DATE DESC";
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Assigned By</label>
+                                        <input type="text" value="<?php echo $parassignby; ?>" class="form-control" style="color: black;" disabled />
+                                    </div>
+                                </div>
 
-                                        $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+                        <?php
+                            }
+                        ?>
+                                <div class="col-md-12">
+                                    <div style="padding: 1px; margin-bottom: 10px; background-color: #757575;">
+                                    </div>
+                                </div>  
 
-                                        while($row = mysqli_fetch_assoc($result))
-                                        {
-                                            $ursid = $row['URS_ID'];
-                                            $ursno = $row['URS_NO'];
-                                            $reqby = $row['O_NAME'];
-                                            $reqdate = $row['URS_REQUEST_DATE'];
-                                            $status = $row['URSTM_STATUS_TO_MAIN'];
-                                    ?>
+                                <div class="col-md-12">
+                                    <div class="adv-table">
+                                        <table class="display table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Assets</th>
+                                                </tr>
+                                            </thead>
 
-                                        <tr>                                        
+                                            <tbody>
 
-                                        <?php  
-                                            if ($status == 'Pending') 
-                                            {
-                                        ?>
+                                            <?php  
+                                                $sql1 = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_asset` AS A ON PARS.A_ID = A.A_ID WHERE PAR.PAR_ID = $ids";
 
-                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
-                                            <td> <?php echo $ursno; ?> </td>
-                                            <td style="display: none;">1</td>
-                                            <td> <?php echo $reqby; ?> </td>
-                                            <td> <?php echo $reqdate; ?> </td>
+                                                $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
 
-                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
-                                            <td> 
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
-                                            </td>
+                                                while($row1 = mysqli_fetch_assoc($result1))
+                                                {
+                                                    $adesc = $row1['A_DESCRIPTION'];
+                                            ?>
+                                                <tr>
+                                                    <td> <?php echo $adesc; ?> </td>
+                                                </tr>
 
-                                        <?php
-                                            }
-                                            elseif ($status == 'Approved') 
-                                            {
-                                        ?>
+                                            <?php
+                                                }
+                                            ?>
 
-                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
-                                            <td> <?php echo $ursno; ?> </td>
-                                            <td style="display: none;">2</td>
-                                            <td> <?php echo $reqby; ?> </td>
-                                            <td> <?php echo $reqdate; ?> </td>
-
-                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
-                                            <td> 
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
-                                            </td>
-
-                                        <?php
-                                            }
-                                            elseif ($status == 'Reject') 
-                                            {
-                                        ?>
-
-                                            <td style="display: none;"> <?php echo $ursid; ?> </td>
-                                            <td> <?php echo $ursno; ?> </td>
-                                            <td style="display: none;">3</td>
-                                            <td> <?php echo $reqby; ?> </td>
-                                            <td> <?php echo $reqdate; ?> </td>
-
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $status; ?> </p> </td>
-                                            <td> 
-                                                <a href="POViewRequestToMain.php?reqmain=<?php echo $ursid; ?>" class="btn btn-success" style="margin: -5px;">View</a>
-                                            </td>
-
-                                        <?php
-                                            }
-                                        ?>
-
-                                        </tr>
-
-                                    <?php  
-                                        }
-                                    ?>
-
-                                    </tbody>
-                                </table>
-
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+
+                            <span class="pull-right">
+                                <a href="POPropertyAccountabilityReceipt.php" class="btn btn-default"><i class="fa fa-caret-left"></i> Back</a>
+                                <button type="button" class="btn btn-success" onclick="printonly()"><i class="fa fa-print"></i> Print</button>
+                            </span>
+                            
                         </div>
 
+
+                        
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <div id="printdisbook" class="panel-body" style="display: none;">
+                            <br>
+                            <center><img src="../../images/PUPLogo.png" height="100" width="100" /></center>
+                            
+                            <center><h4 style="font-family: Arial; font-weight: bold;">PROPERTY ACCOUNTABILITY RECEIPT</h4></center>
+                            <center><u><h4 style="font-family: Times New Roman;">Polytechnic University of the Philippines</h4></u></center>
+                            <center><h4 style="font-family: Arial;">Quezon City Branch</h4></center>
+                            <hr>                       
+
+                        <?php 
+                            $sql = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID WHERE PAR.PAR_ID = $ids GROUP BY PAR.PAR_ID";
+
+                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
+
+                            while($row = mysqli_fetch_assoc($result))
+                            {                              
+                              $parno = $row['PAR_NO'];
+                              $fname = $row['EP_FNAME'];
+                              $mname = $row['EP_MNAME'];
+                              $lname = $row['EP_LNAME'];
+                              $wholename = $fname.' '.$mname.' '.$lname;
+                              $pardate = $row['PAR_DATE'];
+                              $parassignby = $row['PAR_ISSUED_BY'];
+                        ?>
+
+                            <!-- <label>Date: </label> <u> <?php echo $pardate; ?> </u> <br>
+                            <label>PAR NO: </label> <u> <?php echo $parno; ?> </u> <br>
+                            <label>Accountable Person: </label> <u> <?php echo $wholename; ?> </u> -->
+
+                            <table style="width: 100%;" border="1">
+                                <tr>
+                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">PAR No. : <strong> <u> <?php echo $parno; ?> </u> <strong> </h5></td>
+                                    <td style="width: 50%;"><h5 style="font-family: Arial; padding-left: 10px;">Assigned To : <strong> <u> <?php echo $wholename; ?> </u> </strong> </h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;">Date : <strong> <u> <?php echo $pardate; ?> </u> </strong> </h5></td>
+                                    <td><h5 style="font-family: Arial; padding-left: 10px;"></h5></td>
+                                </tr>
+                            </table>
+
+                        <?php
+                            }
+                        ?>
+                            <p style="margin-top: 15px;"></p>
+
+                            <table style="width: 100%;" border="1">
+                                <thead>
+                                    <tr>
+                                        <th style="font-family: Arial; width: 70px; padding: 10px; font-size: 18px;"> Asset / Item / Equipment</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <?php  
+                                    $sql1 = "SELECT * FROM `ams_t_par` AS PAR INNER JOIN `ams_t_par_sub` AS PARS ON PARS.PAR_ID = PAR.PAR_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_asset` AS A ON PARS.A_ID = A.A_ID WHERE PAR.PAR_ID = $ids";
+
+                                    $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+
+                                    while($row1 = mysqli_fetch_assoc($result1))
+                                    {
+                                        $adesc = $row1['A_DESCRIPTION'];
+                                        $issedby = $row1['PAR_ISSUED_BY'];
+                                ?>
+
+                                    <tr>
+                                        <td style="font-family: Arial; padding: 10px;"> <?php echo $adesc; ?> </td>
+                                    </tr>
+
+                                <?php
+                                    }
+                                ?>
+
+                                </tbody>
+                            </table>
+
+                            <p style="margin-top: -8px;"></p>
+                            
+                            <table style="width: 100%;" border="1">                                
+                                <tr>
+                                    <td style="font-family: Arial; padding: 5px; width: 20%"></td>
+                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned To: </em> </center> </td>
+                                    <td style="font-family: Arial; padding: 5px; width: 40%""> <center> <em> Assigned/Issued By: </em> </center> </td>
+                                </tr>
+
+                                <tr>                                    
+                                    <td style="font-family: Arial; padding: 5px;">Signature :</td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                    <td style="font-family: Arial; padding: 5px;"></td>
+                                </tr>
+
+                                <tr>                                    
+                                    <td style="font-family: Arial; padding: 5px;">Printed Name :</td>
+                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($wholename) ?> </strong> </center> </td>
+                                    <td style="font-family: Arial; padding: 5px;"> <center> <strong> <?php echo strtoupper($issedby) ?> </strong> </center> </td>
+                                </tr>
+                            </table>
+
+                        </div>
                     </section>
                 </div>
             </div>
@@ -424,7 +560,7 @@
     </section>
     <!--main content end-->
 <!--right sidebar start-->
-<div class="right-sidebar">
+<div class="right-sidebar" >
     <div class="search-row">
         <input type="text" placeholder="Search" class="form-control">
     </div>
@@ -535,7 +671,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--dynamic table initialization -->
-    <script src="PORequestToMain/dynamic_table_init.js"></script>
+    <script src="../../js/dynamic_table_init.js"></script>
 
     <script src="../../js/iCheck/jquery.icheck.js"></script>
 
@@ -553,89 +689,135 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
+    <script src="../../js/jquery.multifield.min.js"></script>
+    <script src="../../js/jquery.multifield.js"></script>
+
+    <script>
+
+        $('.form-content').multifield({
+            section: '.group',
+            btnAdd:'#btnAdd',
+            btnRemove:'.btnRemove',
+        });
+
+        $(function(){
+            $('select').on('change',function(){                        
+                $('input[name=place]').val($(this).val());            
+            });
+        });
+
+        function myFunction(id) {
+            var id = id;
+             // alert(id);
+
+             $.ajax({
+                type: 'POST',
+                url: 'UpdateNotifByClicked.php',
+                async: false,
+                data: {
+                    _id: id
+                },
+                success: function(data2) {
+                    // alert(data2);                              
+                    // alert("tama");
+                },
+                error: function(response2) {
+                    // alert(response2);  
+                    // alert("mali");                                
+                }
+
+            });
+        }
+
+        function myFunction2(id) {
+             var id = id;
+             // alert(id);
+
+             $.ajax({
+                type: 'POST',
+                url: 'UpdateNotifByClickedReport.php',
+                async: false,
+                data: {
+                    _id: id
+                },
+                success: function(data2) {
+                    // alert(data2);                              
+                    // alert("tama");
+                },
+                error: function(response2) {
+                    // alert(response2);  
+                    // alert("mali");                                
+                }
+
+            });
+        }
+
+    </script>    
+
 </body>
 </html>
 
 <script>
 
-function myFunction(id) {
-     var id = id;
-     // alert(id);
-
-     $.ajax({
-        type: 'POST',
-        url: 'UpdateNotifByClicked.php',
-        async: false,
-        data: {
-            _id: id
-        },
-        success: function(data2) {
-            // alert(data2);                              
-            // alert("tama");
-        },
-        error: function(response2) {
-            // alert(response2);  
-            // alert("mali");                                
-        }
-
-    });
-}
-
-function myFunction2(id) {
-     var id = id;
-     // alert(id);
-
-     $.ajax({
-        type: 'POST',
-        url: 'UpdateNotifByClickedReport.php',
-        async: false,
-        data: {
-            _id: id
-        },
-        success: function(data2) {
-            // alert(data2);                              
-            // alert("tama");
-        },
-        error: function(response2) {
-            // alert(response2);  
-            // alert("mali");                                
-        }
-
-    });
-}
-
 $(document).ready(function(){
+
+    // btnsubmitthedonation
+
+    // $('#btnsubmitthedonation').click(function(e) {
+    //     // alert();
+    // });
  
- function load_unseen_notification(view = '')
- {
-  $.ajax({
-   url:"fetch.php",
-   method:"POST",
-   data:{view:view},
-   dataType:"json",
-   success:function(data)
-   {
-    $('.dispnotif').html(data.notification);
-    if(data.unseen_notification > 0)
-    {
-     $('.count').html(data.unseen_notification);
+    function load_unseen_notification(view = '') {
+        $.ajax({
+            url:"fetch.php",
+            method:"POST",
+            data:{view:view},
+            dataType:"json",
+       
+        success:function(data)
+        {
+            $('.dispnotif').html(data.notification);
+
+            if(data.unseen_notification > 0)
+            {
+                $('.count').html(data.unseen_notification);
+            }
+        }
+
+        });
     }
-   }
-  });
- }
- 
- load_unseen_notification();
- 
- $(document).on('click', '.dt', function(){
-  $('.count').html('');
-  load_unseen_notification('yes');
- });
- 
- setInterval(function(){ 
-  load_unseen_notification();; 
- }, 1000);
- 
+     
+    load_unseen_notification();
+     
+    $(document).on('click', '.dt', function() {
+        $('.count').html('');
+        load_unseen_notification('yes');
+    });
+     
+    setInterval(function(){ 
+        load_unseen_notification();; 
+    }, 1000);
+
 });
+</script>
+
+<script>
+
+    function printonly() {
+
+        var restorepage = document.body.innerHTML;
+        var printcont = document.getElementById('printdisbook').innerHTML;
+        document.body.innerHTML = printcont;
+        window.print();
+        document.body.innerHTML = restorepage;
+
+            setTimeout(function() 
+            {
+                window.location = window.location;
+            }, 100);
+
+    }
+
 </script>
 
 <script type="text/javascript">

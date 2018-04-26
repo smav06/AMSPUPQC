@@ -1,0 +1,87 @@
+
+
+
+♥ - MEANS TAPOS NA
+
+
+PPMP
+FILTER
+HISTORY [meron ako sa lumang system]
+POJobOrder.php
+
+
+
+
+ Property Officer UI	
+	 - Request Notif dapat may days remaining
+	 - Report Notif dapat mahaba na agad
+	 - Urgent Request Notif dapat lahat meron at ayusin
+	 - Profile ni property officer
+
+
+	 POViewRequestFromDU.php
+		 - Validation ng quantity at quantity approve
+
+
+	 PODisposal.php
+		 - Validation
+		 - Lagyan ng disposal type yung table
+
+
+	 PODURequests.php
+		 - Gawin glyphicons yung button sa table instead of button na nakaword
+
+
+	 PORequestToMain.php
+		 - Gawin glyphicons yung button sa table instead of button na nakaword
+
+
+	 POAcquisition.php
+		 - From Request gawin na
+
+
+	 POMaintenanceInsCheck.php
+		 - Kapag 2 na yung iinspect sa modal lumalabas agad  yung sweetalert, pakiayos
+
+
+	 POMaintenanceJobOrder.php
+		 - gawing detailed yung job order sa modal
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+ Departmental User UI	
+	 - Profile ni departmental user
+	 - Notification para sa pag may inassign na item
+	 - Notification para sa result ng report of damage
+
+
+	 DUDepartmentAsset.php
+		 - Validation ng release
+		 - Validation ng report		
+		 - Dapat di mawawala yung nirelease
+		 - Dapat di mawawala yung nireport
+		 - Dapat di pede ireport yung nirelease
+		 - Dapat di pede ireport yung nireport
+
+
+	 DUDashboard.php
+		 - Drilldown
+		 - Detailed dapat yung dashboard
+
+
+	 DURequest.php
+		 - kapag 2 na yung irerequest, validation
+
+
+	 DUReportDamagedAsset.php
+		 - dapat di per item, dapat by batch
+
+
+	 DUReportForTransfer.php
+		 - dapat di per item, dapat by batch

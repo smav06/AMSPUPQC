@@ -249,8 +249,9 @@
                             <ul class="sub">
                                 <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
                                 <li><a href="POPPMPReport.php">PPMP Report</a></li>
-                                <li><a href="POPar.php">Property Accountability Receipt</a></li>
-                                <li><a href="POPtr.php">Property Transfer Report</a></li>
+                                <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
+                                <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
+                                <li><a href="POJobOrder.php">Job Order</a></li>  
                                 <!-- <li><a href="PORod.php">Report Of Damage</a></li> -->
                             </ul>
                         </li>
@@ -698,6 +699,34 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Testing for QR CODE [Online] -->
+
+                <!-- <div class="container">
+                    <h1 class="page-header text-center">QRCode using Google QRCode API</h1>
+                    <div class="row">
+                        <div class="col-sm-3 col-sm-offset-3">
+                            <form method="POST">
+                                <div class="form-group">
+                                    <label for="">Text to Convert to QRCode</label>
+                                    <input type="text" class="form-control" name="text_code">
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="generate">Generate QRCode</button>
+                            </form>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <?php
+                                // if(isset($_POST['generate'])){
+                                //     $code = $_POST['text_code'];
+
+                                //     echo '<img style="width: 100px; height: 100px;" src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl='.$code.'&choe=UTF-8"/>';
+                                // }
+                            ?>
+                        </div>
+                    </div>
+                </div> -->
+
                 <!-- page end-->
             </section>
         </section>

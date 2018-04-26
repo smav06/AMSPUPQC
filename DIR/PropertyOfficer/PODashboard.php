@@ -303,9 +303,10 @@
                     </a>
                     <ul class="sub">
                         <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
-                        <li><a href="POPPMPReport.php">PPMP Report</a></li>   
-                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
-                        <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                        <li><a href="POPPMPReport.php">PPMP Report</a></li>
+                        <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
+                        <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
+                        <li><a href="POJobOrder.php">Job Order</a></li>   
                         <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
                     </ul>
                 </li>

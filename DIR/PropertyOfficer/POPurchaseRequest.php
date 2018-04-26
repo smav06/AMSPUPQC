@@ -277,10 +277,11 @@
                         <span>Reports</span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a href="POPurchaseRequest.php">Purchase Request</a></li> 
+                        <li class="active"><a href="POPurchaseRequest.php">Purchase Request</a></li>
                         <li><a href="POPPMPReport.php">PPMP Report</a></li>
-                        <li><a href="POPar.php">Property Accountability Receipt</a></li>
-                        <li><a href="POPtr.php">Property Transfer Report</a></li>
+                        <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
+                        <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
+                        <li><a href="POJobOrder.php">Job Order</a></li>
                         <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
                     </ul>
                 </li>
@@ -357,7 +358,7 @@
                                             <td> <?php echo $date; ?> </td>                                            
 
                                             <td>
-                                                <a class="btn btn-success" style="margin: -5px;" href="POReqSlip.php?receiveursid=<?php echo $id; ?>">View</a>
+                                                <a class="btn btn-success" style="margin: -5px;" href="POReqSlip.php?receiveursid=<?php echo $id; ?>"><i class="fa fa-eye"></i></a>
 
                                                 <!-- <a class="btn btn-success" style="margin: -5px;" onclick="printonly('<?php echo $id; ?>');"><i class="fa fa-print"></i> Print</a> -->
                                             </td>

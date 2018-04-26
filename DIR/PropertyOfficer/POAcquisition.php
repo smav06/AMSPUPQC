@@ -278,8 +278,9 @@
             <ul class="sub">
                 <li><a href="POPurchaseRequest.php">Purchase Request</a></li> 
                 <li><a href="POPPMPReport.php">PPMP Report</a></li>   
-                <li><a href="POPar.php">Property Accountability Receipt</a></li>
-                <li><a href="POPtr.php">Property Transfer Report</a></li>   
+                <li><a href="POPropertyAccountabilityReceipt.php">Property Accountability Receipt</a></li>
+                <li><a href="POPropertyTransferReport.php">Property Transfer Report</a></li>
+                <li><a href="POJobOrder.php">Job Order</a></li>   
                 <!-- <li><a href="PORod.php">Report Of Damage</a></li>   -->
             </ul>
         </li>
@@ -315,9 +316,9 @@
                                     <div class="form-group">
                                         <label> Select acquisition type: </label>
                                         <select class="form-control" style="color: black;" id="getsel">
-                                            <option selected value="Donation">Donation</option>
-                                            <option value="Requests">Requests</option>
-                                            <option value="PPMP">PPMP</option>
+                                            <option selected value="Donation">From Donation</option>
+                                            <option value="Requests">From Request</option>
+                                            <!-- <option value="PPMP">From PPMP</option> -->
                                         </select>
                                     </div>
                                 </div>
