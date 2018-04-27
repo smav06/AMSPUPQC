@@ -1,7 +1,9 @@
 
 
 
-♥ - MEANS TAPOS NA
+♥ - Akin [Bryan]
+۞ - [Mica / Ron / Jocer / Vigan / Espe / Paolo] 
+
 
 PPMP
 FILTER
@@ -14,19 +16,20 @@ POJobOrder.php
 [PROPERTY OFFICER]
 
  Property Officer UI	
-	 - Request Notif dapat may days remaining
+	۞ - Request Notif dapat may days remaining = [mica / ron] 
 	♥ - Report Notif dapat mahaba na agad [ALL PAGES, DAMI HAHA]
-	 - Urgent Request Notif dapat lahat meron at ayusin
-	 - Profile ni property officer
+	۞ - Urgent Request Notif dapat lahat meron at ayusin = [mica / ron]
+	۞ - Profile ni property officer = [mica / ron]
 	♥ - Hide lahat about sa PPMP [ALL PAGES, DAMI HAHA]
 
 
 	 POViewRequestFromDU.php
 		 - Validation ng quantity at quantity approve
+		 - di dapat mag ssweetalert, 
 
 
-	 PODisposal.php
-		 - Validation
+	۞ PODisposal.php
+		۞ - Validation = [mica / ron]
 
 
 	♥ PODURequests.php
@@ -60,7 +63,7 @@ POJobOrder.php
 [DEPARTMENTAL USER]
 
  Departmental User UI	
-	 - Profile ni departmental user
+	۞ - Profile ni departmental user = [mica / ron]
 	 - Notification para sa pag may inassign na item
 	 - Notification para sa result ng report of damage
 
@@ -79,17 +82,17 @@ POJobOrder.php
 		 - Detailed dapat yung dashboard
 
 
-	 DURequest.php
+	۞ DURequest.php = [espe / paolo]
 		 - kapag 2 na yung irerequest, validation
-		 - tanggalin ang list ng requests, ilipat yon sa queries
+		۞ - tanggalin ang list ng requests, ilipat yon sa queries = [espe / paolo]
 
 
-	 DUReportDamagedAsset.php
-		 - dapat di per item, dapat by batch
+	۞ DUReportDamagedAsset.php = [vigan / jocer]
+		۞ - dapat di per item, dapat by batch = [vigan / jocer]
 
 
-	 DUReportForTransfer.php
-		 - dapat di per item, dapat by batch
+	۞ DUReportForTransfer.php = [espe / paolo]
+		۞ - dapat di per item, dapat by batch = [espe / paolo]
 
 
 

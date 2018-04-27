@@ -211,7 +211,8 @@
                     </a>
                     <ul class="sub">
                         <li><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
-                        <li><a href="DUReportForTransfer.php">Released Asset</a></li>                  
+                        <li><a href="DUReportForTransfer.php">Released Asset</a></li>
+                        <li><a href="DUListOfRequest.php">List Of Request</a></li>                  
                     </ul>
                 </li>
             </ul>            
@@ -456,6 +457,7 @@
                 </section>
             </div>
 
+            <!-- ESPE ETO ICUT MO GAWA KA PANIBAGO PAGE -->
             <div class="col-md-12">
                 <section class="panel">
                     <header class="panel-heading">

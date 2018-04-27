@@ -105,6 +105,7 @@
             ?>
         </li>
 
+        <!-- COPY NYO TO SA IBA MICA -->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle dt3" href="#">
                 <i class="fa fa-exclamation-circle"></i>
@@ -1244,6 +1245,8 @@ function myFunction2(id) {
     });
 }
 
+
+// COPY NYO ULIT TO MICA
 function myFunction3(id) {
      var id = id;
      // alert(id);
@@ -1342,6 +1345,8 @@ $(document).ready(function(){
 
 </script>
 
+
+<!-- COPY NYO TO MICA -->
 <script type="text/javascript">
 
     $(document).ready(function(){
