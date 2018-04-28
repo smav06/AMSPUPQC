@@ -43,6 +43,7 @@
 </head>
 <body>
 <section id="container">
+ <?php include 'POProfileModal.php'; ?> 
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
@@ -112,9 +113,10 @@
                 <span class="badge bg-warning count3"></span>
             </a>
 
+               
             <?php 
 
-                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_report_of_damage` AS ROD WHERE ROD.ROD_STATUS = 'Pending'");
+                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
 
                 while($rowx = mysqli_fetch_assoc($sqlcntx))
                 {
@@ -125,7 +127,6 @@
                 echo '<ul class="dropdown-menu extended notification dispnotif3" style="overflow-y: scroll; height: 330px;">
             </ul>';
             ?>
-
         </li>
 
         <li id="" class="">
@@ -162,7 +163,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                 <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>

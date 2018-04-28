@@ -1,8 +1,8 @@
 
 
+✓ - Done Task
+☼ - Ako nalang magbabago
 
-♥ - Akin [Bryan]
-۞ - [Mica / Ron / Jocer / Vigan / Espe / Paolo] 
 
 
 PPMP
@@ -16,36 +16,36 @@ POJobOrder.php
 [PROPERTY OFFICER]
 
  Property Officer UI	
-	۞ - Request Notif dapat may days remaining = [mica / ron] 
-	♥ - Report Notif dapat mahaba na agad [ALL PAGES, DAMI HAHA]
-	۞ - Urgent Request Notif dapat lahat meron at ayusin = [mica / ron]
-	۞ - Profile ni property officer = [mica / ron]
-	♥ - Hide lahat about sa PPMP [ALL PAGES, DAMI HAHA]
+	✓ - [mica / ron]	- Request Notif dapat may days remaining  
+	✓ - [Bryan]			- Report Notif dapat mahaba na agad [ALL PAGES, DAMI HAHA]
+	✓ ☼ - [mica / ron]	- Urgent Request Notif dapat lahat meron at ayusin
+	✓ - [mica / ron]	- Profile ni property officer
+	✓ - [Bryan]			- Hide lahat about sa PPMP [ALL PAGES, DAMI HAHA]
 
 
-	 POViewRequestFromDU.php
-		 - Validation ng quantity at quantity approve
-		 - di dapat mag ssweetalert, 
+	 - [Bryan]			- POViewRequestFromDU.php
+	 - [Bryan]			-	 - Validation ng quantity at quantity approve
+	 - [Bryan]			-	 - di dapat mag ssweetalert, 
 
 
-	۞ PODisposal.php
-		۞ - Validation = [mica / ron]
+	✓ - [mica / ron]	- PODisposal.php
+	✓ - [mica / ron]	- Validation
 
 
-	♥ PODURequests.php
-		♥ - Gawin glyphicons yung button sa table instead of button na nakaword
+	✓ - [Bryan]			- PODURequests.php
+	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword
 
 
-	♥ PORequestToMain.php
-		♥ - Gawin glyphicons yung button sa table instead of button na nakaword
+	✓ - [Bryan]			- PORequestToMain.php
+	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword
 
 
-	 POAcquisition.php
-		 - From Request gawin na
+	 - [Bryan]			- POAcquisition.php
+	 - [Bryan]			- From Request gawin na
 
 
-	 POMaintenanceInsCheck.php
-		 - Kapag 2 na yung iinspect sa modal lumalabas agad yung sweetalert, pakiayos
+	 - [Bryan]			- POMaintenanceInsCheck.php
+	 - [Bryan]			- Kapag 2 na yung iinspect sa modal lumalabas agad yung sweetalert, pakiayos
 
 
 	 POMaintenanceJobOrder.php
@@ -63,36 +63,36 @@ POJobOrder.php
 [DEPARTMENTAL USER]
 
  Departmental User UI	
-	۞ - Profile ni departmental user = [mica / ron]
-	 - Notification para sa pag may inassign na item
-	 - Notification para sa result ng report of damage
+	 - [mica / ron]		- Profile ni departmental user
+	 - [Bryan]			- Notification para sa pag may inassign na item
+	 - [Bryan]			- Notification para sa result ng report of damage
 
 
-	 DUDepartmentAsset.php
-		 - Validation ng release
-		 - Validation ng report		
-		 - Dapat di mawawala yung nirelease
-		 - Dapat di mawawala yung nireport
-		 - Dapat di pede ireport yung nirelease
-		 - Dapat di pede ireport yung nireport
+	 - [Bryan]			- DUDepartmentAsset.php
+	 - [Bryan]			- Validation ng release
+	 - [Bryan]			- Validation ng report		
+	 - [Bryan]			- Dapat di mawawala yung nirelease
+	 - [Bryan]			- Dapat di mawawala yung nireport
+	 - [Bryan]			- Dapat di pede ireport yung nirelease
+	 - [Bryan]			- Dapat di pede ireport yung nireport
 
 
-	 DUDashboard.php
-		 - Drilldown
-		 - Detailed dapat yung dashboard
+	 - [Bryan]			- DUDashboard.php
+	 - [Bryan]			- Drilldown
+	 - [Bryan]			- Detailed dapat yung dashboard
 
 
-	۞ DURequest.php = [espe / paolo]
-		 - kapag 2 na yung irerequest, validation
-		۞ - tanggalin ang list ng requests, ilipat yon sa queries = [espe / paolo]
+	 - [espe / paolo]	- DURequest.php
+	 - [espe / paolo]	- kapag 2 na yung irerequest, validation
+	 - [espe / paolo]	- tanggalin ang list ng requests, ilipat yon sa queries
 
 
-	۞ DUReportDamagedAsset.php = [vigan / jocer]
-		۞ - dapat di per item, dapat by batch = [vigan / jocer]
+	 - [vigan / jocer]	- DUReportDamagedAsset.php
+	 - [vigan / jocer]	- dapat di per item, dapat by batch
 
 
-	۞ DUReportForTransfer.php = [espe / paolo]
-		۞ - dapat di per item, dapat by batch = [espe / paolo]
+	 - [espe / paolo]	- DUReportForTransfer.php
+	 - [espe / paolo]	- Dapat di per item, dapat by batch
 
 
 

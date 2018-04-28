@@ -606,7 +606,7 @@
                                 <div class="col-sm-8 hidden" id="disploc">
                                     <div class="form-group">
                                         <label>Disposal Location</label>
-                                        <select class="form-control m-bot15" id="passlocation" style="color: black; padding-left: 10px;" required>
+                                        <select class="form-control m-bot15" id="passlocation" style="color: black; padding-left: 10px;">
 
                                             <option value="" selected disabled></option>
 
@@ -636,12 +636,12 @@
 
                             <div class="form-group">
                                 <label>Remarks</label>
-                                <textarea style="color: black; word-wrap: break-word; resize: none; height: 85px;" class="form-control" maxlength="200" id="passremarks" required=""></textarea>
+                                <textarea style="color: black; word-wrap: break-word; resize: none; height: 85px;" class="form-control" maxlength="200" id="passremarks"></textarea>
                             </div>
                             
                             <div class="form-group">
                                 <label>Date of Disposal</label>
-                                <input style="color: black;" type="date" id="passdate" class="form-control" required="">
+                                <input style="color: black;" type="date" id="passdate" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -750,7 +750,53 @@
                     var e = document.getElementById('chkvalsz' + this.id).checked
                     document.getElementById('chkvalsz' + this.id).checked = false;
                 }
+            });
+
+            $('#ggss').click(function() {                                
+                document.getElementById('passdisposetype').selectedIndex = "0";
+                document.getElementById('passdate').value = "";
+                document.getElementById('passremarks').value = "";
+                $('#disploc').addClass('hidden');
+
+            }); 
+            $('#passdate').click(function(e) {
+                document.getElementById('passdate').style.borderColor = "#00A8B3";
+                document.getElementById('passdate').style.color = "black";
+            });
+            $('#passdisposetype').click(function(e) {
+                document.getElementById('passdisposetype').options[0].innerText = "";
+                document.getElementById('passdisposetype').style.borderColor = "#00A8B3";
+                document.getElementById('passdisposetype').style.color = "black";
+            });
+            $('#passremarks').click(function(e) {
+                document.getElementById('passremarks').style.borderColor = "#00A8B3";
+                document.getElementById('passremarks').style.color = "black";
+            });
+            $('#passlocation').click(function(e) {
+                document.getElementById('passlocation').options[0].innerText = "";
+                document.getElementById('passlocation').style.borderColor = "#00A8B3";
+                document.getElementById('passlocation').style.color = "black";
+            });
+            $('#passdate').blur(function(e) {
+                document.getElementById('passdate').style.borderColor = "#E2E2E4";
+                document.getElementById('passdate').style.color = "black";
+            });
+
+            $('#passdisposetype').blur(function(e) {
+                 document.getElementById('passdisposetype').options[0].innerText = "";
+                document.getElementById('passdisposetype').style.borderColor = "#E2E2E4";
+                document.getElementById('passdisposetype').style.color = "black";
+            });
+            $('#passremarks').blur(function(e) {
+                document.getElementById('passremarks').style.borderColor = "#E2E2E4";
+                document.getElementById('passremarks').style.color = "black";
+            });
+            $('#passlocation').blur(function(e) {
+                 document.getElementById('passlocation').options[0].innerText = "";
+                document.getElementById('passlocation').style.borderColor = "#E2E2E4";
+                document.getElementById('passlocation').style.color = "black";
             });            
+           
 
             $('#btnsend').click(function(e) {
                 
@@ -771,8 +817,32 @@
                 var origddlid = ddlid.options[ddlid.selectedIndex].value;        
                 // alert(origddlid+' = dl id');
 
+                 
+                    
+                if(document.getElementById('passdisposetype').options[dtype.selectedIndex].value == '')
+                {
+                    document.getElementById('passdisposetype').options[0].innerText = "Please Select";
+                    document.getElementById('passdisposetype').focus();
+                    document.getElementById('passdisposetype').style.borderColor = "#B94A48";
+                    document.getElementById('passdisposetype').style.color = "#B94A48";
+                }
+
                 if (origdtype == 'Keep') 
                 {
+                    if (document.getElementById('passlocation').options[ddlid.selectedIndex].value == ''){
+                        document.getElementById('passlocation').options[0].innerText = "Please Select";
+                        document.getElementById('passlocation').focus();
+                        document.getElementById('passlocation').style.borderColor = "#B94A48";
+                        document.getElementById('passlocation').style.color = "#B94A48";
+                    }
+                    else if(!Date.parse(ddate)){
+                    
+                        
+                        document.getElementById('passdate').focus();
+                        document.getElementById('passdate').style.borderColor = "#B94A48";
+                        document.getElementById('passdate').style.color = "#B94A48";
+                    }
+                    else{
                     swal({
 
                         title: "Are you sure you want to dispose this/these asset?",
@@ -827,9 +897,17 @@
                         }
 
                     });
-                }
+                }}
                 else if (origdtype == 'Return') 
                 {
+                    if(!Date.parse(ddate)){
+                    
+                        
+                        document.getElementById('passdate').focus();
+                        document.getElementById('passdate').style.borderColor = "#B94A48";
+                        document.getElementById('passdate').style.color = "#B94A48";
+                    }
+                    else{
                     swal({
 
                         title: "Are you sure you want to dispose this/these asset?",
@@ -885,6 +963,8 @@
 
                     });
                 }
+                }
+
 
                 
 

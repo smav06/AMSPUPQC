@@ -89,6 +89,7 @@
 <body>
 
 <section id="container" >
+    <?php include 'POProfileModal.php'; ?>
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
@@ -152,6 +153,27 @@
 
         </li>
 
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle dt3" href="#">
+                <i class="fa fa-exclamation-circle"></i>
+                <span class="badge bg-warning count3"></span>
+            </a>
+
+             <?php 
+
+                $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
+
+                while($rowx = mysqli_fetch_assoc($sqlcntx))
+                {
+                    $cnt = $rowx['XXX'];
+                    echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
+                }
+
+                echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+            </ul>';
+            ?>
+        </li>
+
         <li id="" class="">
             <a style="background-color: white;">
                 <?php echo $_SESSION['mytype']; ?>
@@ -186,7 +208,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
+                 <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>                
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -796,6 +818,29 @@
             });
         }
 
+        function myFunction3(id) {
+         var id = id;
+         // alert(id);
+
+         $.ajax({
+            type: 'POST',
+            url: 'UpdateNotifByClickedReport.php',
+            async: false,
+            data: {
+                _id: id
+            },
+            success: function(data2) {
+                // alert(data2);                              
+                // alert("tama");
+            },
+            error: function(response2) {
+                // alert(response2);  
+                // alert("mali");                                
+            }
+
+        });
+    }
+
     </script>    
 
 </body>
@@ -897,6 +942,45 @@ $(document).ready(function(){
          
         setInterval(function(){ 
             load_unseen_notification2();; 
+        }, 1000);
+     
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+ 
+        function load_unseen_notification3(view3 = '') {
+            $.ajax({
+                url:"fetchurgent.php",
+                method:"POST",
+                data:{view3:view3},
+                dataType:"json",
+           
+            success:function(data3)
+            {
+                $('.dispnotif3').html(data3.notification3);
+
+                if(data3.unseen_notification3 > 0)
+                {
+                    $('.count3').html(data3.unseen_notification3);
+                }
+            }
+
+            });
+        }
+         
+        load_unseen_notification3();
+         
+        $(document).on('click', '.dt3', function() {
+            $('.count3').html('');
+            load_unseen_notification3('yes');
+        });
+         
+        setInterval(function(){ 
+            load_unseen_notification3();; 
         }, 1000);
      
     });

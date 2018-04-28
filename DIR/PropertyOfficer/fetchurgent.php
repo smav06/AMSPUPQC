@@ -25,9 +25,7 @@ if(isset($_POST["view3"]))
       $output .= '<a href="POViewReportedDamage.php?passedrodid='.$id.'" onclick="myFunction3('.$id.')">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
-                        Date: <strong> '.$row["ROD_DATE"].' </strong><br/>
-                        Request No: <strong> '.$row["ROD_NO"].' </strong><br/>
-                        Request By: <strong> '.$row["O_CODE"].' </strong>
+                        A
                       </div>
                     </li>
                 </a>
@@ -38,9 +36,7 @@ if(isset($_POST["view3"]))
       $output .= '<a href="POViewReportedDamage.php?passedrodid='.$id.'">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
-                        Date: <strong> '.$row["ROD_DATE"].' </strong><br/>
-                        Request No: <strong> '.$row["ROD_NO"].' </strong><br/>
-                        Request By: <strong> '.$row["O_CODE"].' </strong>
+                        A
                       </div>
                     </li>
                 </a>
