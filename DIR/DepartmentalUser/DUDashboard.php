@@ -123,6 +123,59 @@
                     
                 </li>
 
+                <li id="header_notification_bar" class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggles" href="#">
+                        <i class="fa fa-tag"></i>
+                        <span class="badge bg-warning count"></span>
+                    </a>
+                        
+                    <?php 
+
+                        $aydiopyuser = $_SESSION['myoid'];
+                        // echo $aydiopyuser;
+
+                        $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXXz FROM ams_t_user_request_summary AS URS INNER JOIN ams_t_user_request AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN ams_r_employee_profile AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE URS.URS_STATUS_TO_PO != 'Pending' AND O.O_ID = $aydiopyuser GROUP BY URS.URS_ID");
+
+                        while($rowx = mysqli_fetch_assoc($sqlcntx))
+                        {
+                            $cntx = $rowx['XXXz'];
+                            echo '<input type="hidden" id="cntofrequests" value="'.$cntx.'" />';
+                        }
+
+                        echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                        </ul>';
+
+                    ?>
+                    
+                </li>
+
+                <!-- PARA SA REPORT -->
+                <li id="header_notification_bar" class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle dt3" href="#">
+                        <i class="fa fa-warning"></i>
+                        <span class="badge bg-warning count3"></span>
+                    </a>
+                        
+                    <?php 
+
+                        $aydiopyuser = $_SESSION['myoid'];
+                        // echo $aydiopyuser;
+
+                        $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXXz FROM ams_t_report_of_damage AS ROD INNER JOIN ams_t_report_of_damage_sub AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN ams_t_par_sub AS PARS ON PARS.A_ID = RODS.A_ID INNER JOIN ams_r_employee_profile AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN ams_r_office AS O ON EP.O_ID = O.O_ID WHERE ROD.ROD_STATUS != 'Pending' AND O.O_ID = $aydiopyuser GROUP BY ROD.ROD_ID");
+
+                        while($rowx = mysqli_fetch_assoc($sqlcntx))
+                        {
+                            $cntx = $rowx['XXXz'];
+                            echo '<input type="hidden" id="cntofrequests" value="'.$cntx.'" />';
+                        }
+
+                        echo '<ul class="dropdown-menu extended notification dispnotif3" style="overflow-y: scroll; height: 390px;">
+                        </ul>';
+
+                    ?>
+                    
+                </li>
+
                 <li id="" class="">
                     <a style="background-color: white;">
                         <?php 
@@ -541,6 +594,48 @@
             load_unseen_notification();; 
         }, 1000);
 
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+ 
+        function load_unseen_notification3(view3 = '') {
+
+            var officeidofuser = document.getElementById('officeidofuser').value;
+
+            $.ajax({
+                url:"fetchbackreport.php",
+                method:"POST",
+                data:{view3:view3, officeidofuser: officeidofuser},
+                dataType:"json",
+           
+            success:function(data3)
+            {
+                $('.dispnotif3').html(data3.notification3);
+
+                if(data3.unseen_notification3 > 0)
+                {
+                    $('.count3').html(data3.unseen_notification3);
+                }
+            }
+
+            });
+        }
+         
+        load_unseen_notification3();
+         
+        $(document).on('click', '.dt3', function() {
+            $('.count3').html('');
+            load_unseen_notification3('yes');
+        });
+         
+        setInterval(function(){ 
+            load_unseen_notification3();; 
+        }, 1000);
+     
     });
 
 </script>

@@ -1,7 +1,9 @@
 
 
-✓ - Done Task
-☼ - Ako nalang magbabago
+✓ - Done
+☼ - Gawin ko buong function
+ñ - May binago ako
+
 
 
 
@@ -16,11 +18,11 @@ POJobOrder.php
 [PROPERTY OFFICER]
 
  Property Officer UI	
-	✓ - [mica / ron]	- Request Notif dapat may days remaining  
-	✓ - [Bryan]			- Report Notif dapat mahaba na agad [ALL PAGES, DAMI HAHA]
-	✓ ☼ - [mica / ron]	- Urgent Request Notif dapat lahat meron at ayusin
-	✓ - [mica / ron]	- Profile ni property officer
-	✓ - [Bryan]			- Hide lahat about sa PPMP [ALL PAGES, DAMI HAHA]
+	✓ - [mica / ron]	- Request Notif dapat may days remaining  								ñ
+	✓ - [Bryan]			- Report Notif dapat mahaba na agad [ALL PAGES / 15mins] 				
+	✓ - [mica / ron]	- Urgent Request Notif dapat lahat meron at ayusin						☼
+	✓ - [mica / ron]	- Profile ni property Officer 											ñ
+	✓ - [Bryan]			- Hide lahat about sa PPMP [ALL PAGES / 5mins]
 
 
 	 - [Bryan]			- POViewRequestFromDU.php
@@ -32,12 +34,12 @@ POJobOrder.php
 	✓ - [mica / ron]	- Validation
 
 
-	✓ - [Bryan]			- PODURequests.php
-	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword
+	✓ - [Bryan]			- PODURequests.php [15mins]
+	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword [1min]
 
 
-	✓ - [Bryan]			- PORequestToMain.php
-	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword
+	✓ - [Bryan]			- PORequestToMain.php [10mins]
+	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword [1min]
 
 
 	 - [Bryan]			- POAcquisition.php
@@ -46,6 +48,8 @@ POJobOrder.php
 
 	 - [Bryan]			- POMaintenanceInsCheck.php
 	 - [Bryan]			- Kapag 2 na yung iinspect sa modal lumalabas agad yung sweetalert, pakiayos
+
+	✓ - [Bryan]			- POMaintenanceReport.php [5mins]
 
 
 	 POMaintenanceJobOrder.php
@@ -65,7 +69,7 @@ POJobOrder.php
  Departmental User UI	
 	 - [mica / ron]		- Profile ni departmental user
 	 - [Bryan]			- Notification para sa pag may inassign na item
-	 - [Bryan]			- Notification para sa result ng report of damage
+	✓ - [Bryan]			- Notification para sa result ng report of damage [2hrs]
 
 
 	 - [Bryan]			- DUDepartmentAsset.php
@@ -104,3 +108,36 @@ POJobOrder.php
 
 [ADMINISTRATOR]
 	- halos lahat
+
+
+UPDATE `ams_r_asset` SET `A_STATUS`= 'Serviceable', `A_AVAILABILITY`= 'Available', `A_DISPOSAL_STATUS`= 0
+
+ALTER TABLE `ams_t_dispose` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_job_order_sub` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_job_order` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_par_sub` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_par` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_release_of_asset_sub` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_release_of_asset` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_report_of_damage_sub` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_report_of_damage` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_transfer_out_ptr_sub` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_transfer_out_ptr` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_user_request_status_to_main` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_user_request_approved_by_po` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_user_request` AUTO_INCREMENT = 1
+
+ALTER TABLE `ams_t_user_request_summary` AUTO_INCREMENT = 1

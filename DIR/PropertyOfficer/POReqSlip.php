@@ -129,7 +129,7 @@
                     echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
                 }
 
-                echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 390px;">
             </ul>';
             ?>
             
@@ -173,7 +173,7 @@
                     echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
                 }
 
-                echo '<ul class="dropdown-menu extended notification dispnotif" style="overflow-y: scroll; height: 330px;">
+                echo '<ul class="dropdown-menu extended notification dispnotif3" style="overflow-y: scroll; height: 330px;">
             </ul>';
             ?>
         </li>

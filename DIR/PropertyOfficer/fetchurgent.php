@@ -9,7 +9,7 @@ if(isset($_POST["view3"]))
   $update_query = "UPDATE ams_t_report_of_damage SET ROD_VIEW_BY_PO = 1 WHERE ROD_VIEW_BY_PO = 0";
   mysqli_query($connect, $update_query);
  }
- $query = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, ROD.ROD_VIEW_CLICKED, ROD.ROD_STATUS, O.O_NAME, O.O_CODE, ROD.ROD_DATE, RODS.RODS_CANCEL_DATE FROM `ams_t_report_of_damage` AS ROD INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON RODS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE ROD.ROD_STATUS = 'Pending' GROUP BY ROD.ROD_ID ORDER BY ROD.ROD_DATE DESC, ROD.ROD_ID DESC";
+ $query = "SELECT *, datediff(URS_URGENT_DATE,CURRENT_DATE) as remainingdays  FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE URS.URS_STATUS_TO_PO = 'Pending' GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
  $result = mysqli_query($connect, $query);
  $output = '';
  
@@ -17,30 +17,51 @@ if(isset($_POST["view3"]))
  {
   while($row = mysqli_fetch_array($result))
   {
-    $id = $row['ROD_ID'];
-    $ifuserclicked =  $row['ROD_VIEW_CLICKED'];
+    $id = $row['URS_ID'];
+    $ifuserclicked =  $row['URS_VIEW_CLICKED'];
+    $ursurgentdate = $row['URS_URGENT_DATE'];
 
-    if ($ifuserclicked == 0) 
+    $Date1 = $ursurgentdate;
+    $date = new DateTime($Date1);
+    $date -> modify('-5 day');
+    $ursurgentdateminusfivedays = $date->format('Y-m-d');
+
+    $curredate = Date('Y-m-d');
+
+    if ($ursurgentdateminusfivedays > $curredate) 
     {
-      $output .= '<a href="POViewReportedDamage.php?passedrodid='.$id.'" onclick="myFunction3('.$id.')">
-                    <li style="margin-top: 10px;">
-                      <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
-                        A
-                      </div>
-                    </li>
-                </a>
-                <li class="divider"></li>';
+      if ($ifuserclicked == 0) 
+      {
+        $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'" onclick="myFunction('.$id.')">
+                      <li style="margin-top: 10px;">
+                        <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
+                          Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
+                          Request No: <strong> '.$row["URS_NO"].' </strong><br/>
+                          Request By: <strong> '.$row["O_CODE"].' </strong><br/>
+                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong>
+                        </div>
+                      </li>
+                  </a>
+                  <li class="divider"></li>';
+      }
+      else
+      {
+        $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'">
+                      <li style="margin-top: 10px;">
+                        <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
+                          Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
+                          Request No: <strong> '.$row["URS_NO"].' </strong><br/>
+                          Request By: <strong> '.$row["O_CODE"].' </strong><br/>
+                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong>
+                        </div>
+                      </li>
+                  </a>
+                  <li class="divider"></li>';
+      }
     }
     else
     {
-      $output .= '<a href="POViewReportedDamage.php?passedrodid='.$id.'">
-                    <li style="margin-top: 10px;">
-                      <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
-                        A
-                      </div>
-                    </li>
-                </a>
-                <li class="divider"></li>';
+      
     }
 
   }
@@ -49,12 +70,12 @@ if(isset($_POST["view3"]))
  {
   $output .= '<li style="margin-top: 10px;">
                 <div class="alert alert-warning clearfix">
-                  <center>No Unread Urgent Request Found</center>
+                  <center>No Request Found</center>
                 </div>
               </li>';
  }
  
- $query_1 = "SELECT * FROM ams_t_report_of_damage WHERE ROD_VIEW_BY_PO = 0";
+ $query_1 = "SELECT * FROM ams_t_user_request_summary WHERE URS_VIEW_BY_PO = 0";
  $result_1 = mysqli_query($connect, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(

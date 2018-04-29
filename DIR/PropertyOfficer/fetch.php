@@ -19,34 +19,49 @@ if(isset($_POST["view"]))
   {
     $id = $row['URS_ID'];
     $ifuserclicked =  $row['URS_VIEW_CLICKED'];
+    $ursurgentdate = $row['URS_URGENT_DATE'];
 
-    if ($ifuserclicked == 0) 
+    $Date1 = $ursurgentdate;
+    $date = new DateTime($Date1);
+    $date -> modify('-5 day');
+    $ursurgentdateminusfivedays = $date->format('Y-m-d');
+
+    $curredate = Date('Y-m-d');
+
+    if ($ursurgentdateminusfivedays > $curredate) 
     {
-      $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'" onclick="myFunction('.$id.')">
-                    <li style="margin-top: 10px;">
-                      <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
-                        Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
-                        Request No: <strong> '.$row["URS_NO"].' </strong><br/>
-                        Request By: <strong> '.$row["O_CODE"].' </strong><br/>
-                        Remaining Days: <strong> '.$row['remainingdays'].' </strong>
-                      </div>
-                    </li>
-                </a>
-                <li class="divider"></li>';
+      if ($ifuserclicked == 0) 
+      {
+        $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'" onclick="myFunction('.$id.')">
+                      <li style="margin-top: 10px;">
+                        <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
+                          Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
+                          Request No: <strong> '.$row["URS_NO"].' </strong><br/>
+                          Request By: <strong> '.$row["O_CODE"].' </strong><br/>
+                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong>
+                        </div>
+                      </li>
+                  </a>
+                  <li class="divider"></li>';
+      }
+      else
+      {
+        $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'">
+                      <li style="margin-top: 10px;">
+                        <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
+                          Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
+                          Request No: <strong> '.$row["URS_NO"].' </strong><br/>
+                          Request By: <strong> '.$row["O_CODE"].' </strong><br/>
+                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong>
+                        </div>
+                      </li>
+                  </a>
+                  <li class="divider"></li>';
+      }
     }
     else
     {
-      $output .= '<a href="POViewRequestFromDU.php?viewrequests='.$id.'">
-                    <li style="margin-top: 10px;">
-                      <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
-                        Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
-                        Request No: <strong> '.$row["URS_NO"].' </strong><br/>
-                        Request By: <strong> '.$row["O_CODE"].' </strong><br/>
-                        Remaining Days: <strong> '.$row['remainingdays'].' </strong>
-                      </div>
-                    </li>
-                </a>
-                <li class="divider"></li>';
+      
     }
 
   }
