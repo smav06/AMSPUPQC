@@ -74,6 +74,8 @@
 <body>
 
 <section id="container" >
+<?php include 'DUProfileModal.php'; ?> 
+
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
@@ -118,6 +120,9 @@
             ?>
             
         </li>
+
+        <!-- PARA SA REPORT -->
+        <?php include 'ReportNotifUI.php'; ?>
 
         <li id="" class="">
             <a style="background-color: white;">
@@ -167,7 +172,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="POProfile.php"><i class=" fa fa-suitcase"></i>Profile</a></li>                
+                <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>                
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -200,7 +205,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="DURequest.php">Request</a></li>
-                        <li><a href="DURpmpRequest.php">PPMP Request</a></li>                    
+                        <!-- <li><a href="DURpmpRequest.php">PPMP Request</a></li>                     -->
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -557,6 +562,12 @@
         });
 
     </script>
+
+    <!-- REPORT NOTIF -->
+    <?php include 'ReportNotif.php'; ?> 
+
+    <!-- REPORT CLICKED STATUS -->
+    <?php include 'ReportNotifClickedBtnScript.php'; ?> 
 
 </body>
 </html>

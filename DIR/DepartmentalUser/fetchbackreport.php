@@ -22,15 +22,17 @@ if(isset($_POST["view3"]))
   {
     $id = $row['ROD_ID'];
     $ifuserclicked =  $row['ROD_VIEW_BY_USER_EVAL'];
+    $origdate = $row["RODS_DATE_INSPECT"];
+    $finaldate = substr($origdate, 0, 10);
 
     if ($ifuserclicked == 0) 
     {
-      $output .= '<a href="">
+      $output .= '<a href="DUDashboard.php" onclick="myFunction3('.$id.')">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
                         Report No: <strong> '.$row["ROD_NO"].' </strong> </br>
                         Date Reported: <strong> '.$row["ROD_DATE"].' </strong> </br>                        
-                        Date Evaluated: <strong> '.$row["RODS_DATE_INSPECT"].' </strong> </br>
+                        Date Evaluated: <strong> '.$finaldate.' </strong> </br>
                         <strong style="font-size: 11px;"><u>Click for more details.</u></strong>
                       </div>
                     </li>
@@ -39,12 +41,12 @@ if(isset($_POST["view3"]))
     }
     else
     {
-      $output .= '<a href="">
+      $output .= '<a href="DUDashboard.php">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
                         Report No: <strong> '.$row["ROD_NO"].' </strong> </br>
                         Date Reported: <strong> '.$row["ROD_DATE"].' </strong> </br>                        
-                        Date Evaluated: <strong> '.$row["RODS_DATE_INSPECT"].' </strong> </br>
+                        Date Evaluated: <strong> '.$finaldate.' </strong> </br>
                         <strong style="font-size: 11px;"><u>Click for more details.</u></strong>
                       </div>
                     </li>

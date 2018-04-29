@@ -43,6 +43,7 @@
 <body>
 
     <section id="container">
+        <?php include 'DUProfileModal.php'; ?> 
 
         <header class="header fixed-top clearfix">
             <!--logo start-->
@@ -88,6 +89,9 @@
                         ?>
                         
                     </li>
+
+                    <!-- PARA SA REPORT -->
+                    <?php include 'ReportNotifUI.php'; ?>
 
                     <li id="" class="">
                         <a style="background-color: white;">
@@ -138,7 +142,7 @@
                         </a>
 
                         <ul class="dropdown-menu extended logout">
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                            <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>
                             <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
                         </ul>
                     </li>
@@ -171,7 +175,7 @@
                             </a>
                             <ul class="sub">
                                 <li><a href="DURequest.php">Request</a></li>
-                                <li><a href="DUPpmpRequest.php">PPMP Request</a></li>                  
+                                <!-- <li><a href="DUPpmpRequest.php">PPMP Request</a></li>                   -->
                             </ul>
                         </li>
                         <li class="sub-menu">
@@ -354,8 +358,13 @@
                                                     }
                                                 ?>
 
-                                                    <a class="btn btn-warning" id="assignbtn" data-toggle="modal" href="#ModalAssign">Release</a>
-                                                    <a style="margin-left: 5px;" class="btn btn-danger" id="reportbtn" data-toggle="modal" href="#ModalReport">Report</a>
+                                                    <a class="btn btn-warning" id="assignbtn2">Release</a>
+
+                                                    <a class="btn btn-warning hidden" id="assignbtn" data-toggle="modal" href="#ModalAssign">Release</a>
+
+                                                    <a style="margin-left: 5px;" class="btn btn-danger" id="reportbtn2">Report</a>
+
+                                                    <a style="margin-left: 5px;" class="btn btn-danger hidden" id="reportbtn" data-toggle="modal" href="#ModalReport">Report</a>
 
                                             </tbody>
                                     </table>
@@ -718,6 +727,88 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
+            $('#assignbtn2').click(function() {
+
+                var getthecnt = document.getElementById('getcount').value;
+                var ck = '';
+                var filltable = '';
+                var noofchecked = 0;
+
+                for (var z = getthecnt; z > 0; z--) {
+
+                    var ck = 'chkvalsz' + z;
+                    if (document.getElementById(ck).checked) {
+                        var idz = document.getElementById('getids' + z).innerText;
+                        var paridz = document.getElementById('getidqwes' + z).innerText;
+                        var statz = document.getElementById('origdescripts' + z).innerText;
+                        var descz = document.getElementById('origasstos' + z).innerText;
+                        filltable = filltable + '<tr><td class="hidden">' + idz + '</td><td class="hidden">' + paridz + '</td><td>' + statz + '</td><td>' + descz + '</tr>';
+                        noofchecked = noofchecked + 1;
+                    }
+                    document.getElementById('newmodalget').innerHTML = filltable;
+                }
+                // alert(noofchecked);
+
+                if (noofchecked == 0) 
+                {
+                    // alert('tago');
+                    swal("Please select atleast one item/asset.", "To release item/asset from your department please select atleast one.", "warning");
+                }
+                else
+                {
+                    // alert('labas modal');
+                    $('#assignbtn').click();
+                }
+
+            });
+        });
+    </script>
+
+    <!-- REPORT -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#reportbtn2').click(function() {
+
+                var getthecnt = document.getElementById('getcount').value;
+                var ck = '';
+                var filltable = '';
+                var noofchecked = 0;
+
+                for (var z = getthecnt; z > 0; z--) {
+
+                    var ck = 'chkvalsz' + z;
+                    if (document.getElementById(ck).checked) {
+                        var idz = document.getElementById('getids' + z).innerText;
+                        var statz = document.getElementById('origdescripts' + z).innerText;
+                        var descz = document.getElementById('origasstos' + z).innerText;
+                        filltable = filltable + '<tr><td class="hidden">' + idz + '</td><td>' + statz + '</td><td>' + descz + '</tr>';
+                        noofchecked = noofchecked + 1;
+                    }
+                    document.getElementById('newmodalgets').innerHTML = filltable;
+                }
+
+
+                // alert(noofchecked);
+
+                if (noofchecked == 0) 
+                {
+                    // alert('tago');
+                    swal("Please select atleast one item/asset.", "To report item/asset please select atleast one.", "warning");
+                }
+                else
+                {
+                    // alert('labas modal');
+                    $('#reportbtn').click();
+                }
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
                 
             $('#assignbtn').click(function() {
 
@@ -881,6 +972,12 @@
         });
 
     </script>
+
+    <!-- REPORT NOTIF -->
+    <?php include 'ReportNotif.php'; ?> 
+
+    <!-- REPORT CLICKED STATUS -->
+    <?php include 'ReportNotifClickedBtnScript.php'; ?> 
 
     <script type="text/javascript">
         $(document).ready(function() {

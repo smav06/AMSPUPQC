@@ -2,7 +2,7 @@
 
 ✓ - Done
 ☼ - Gawin ko buong function
-ñ - May binago ako
+ñ - May binago ako konti
 
 
 
@@ -18,10 +18,10 @@ POJobOrder.php
 [PROPERTY OFFICER]
 
  Property Officer UI	
-	✓ - [mica / ron]	- Request Notif dapat may days remaining  								ñ
+	✓ - [mica / ron]	- Request Notif dapat may days remaining  									ñ
 	✓ - [Bryan]			- Report Notif dapat mahaba na agad [ALL PAGES / 15mins] 				
-	✓ - [mica / ron]	- Urgent Request Notif dapat lahat meron at ayusin						☼
-	✓ - [mica / ron]	- Profile ni property Officer 											ñ
+	✓ - [mica / ron]	- Urgent Request Notif dapat lahat meron at ayusin							☼
+	✓ - [mica / ron]	- Profile ni property Officer 												ñ
 	✓ - [Bryan]			- Hide lahat about sa PPMP [ALL PAGES / 5mins]
 
 
@@ -35,11 +35,11 @@ POJobOrder.php
 
 
 	✓ - [Bryan]			- PODURequests.php [15mins]
-	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword [1min]
+	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead na nakaword [1min]
 
 
 	✓ - [Bryan]			- PORequestToMain.php [10mins]
-	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead of button na nakaword [1min]
+	✓ - [Bryan]			- Gawin glyphicons yung button sa table instead na nakaword [1min]
 
 
 	 - [Bryan]			- POAcquisition.php
@@ -47,14 +47,14 @@ POJobOrder.php
 
 
 	 - [Bryan]			- POMaintenanceInsCheck.php
-	 - [Bryan]			- Kapag 2 na yung iinspect sa modal lumalabas agad yung sweetalert, pakiayos
+	 - [Bryan]			- Kapag 2 na yung iinspect lumalabas agad yung sweetalert, ayusin
 
 	✓ - [Bryan]			- POMaintenanceReport.php [5mins]
 
 
 	 POMaintenanceJobOrder.php
 		 - gawing detailed yung job order sa modal
-		 - maggawa na ng job order page at printable na job order [diko nagawa kasi walang format, hirap mag imbento lol]
+		 - maggawa na ng job order page at printable na job order
 
 
 
@@ -67,14 +67,14 @@ POJobOrder.php
 [DEPARTMENTAL USER]
 
  Departmental User UI	
-	 - [mica / ron]		- Profile ni departmental user
+	✓ - [mica / ron]	- Profile ni departmental user 												ñ
 	 - [Bryan]			- Notification para sa pag may inassign na item
-	✓ - [Bryan]			- Notification para sa result ng report of damage [2hrs]
+	✓ - [Bryan]			- Notification para sa result ng report of damage [ALL PAGES / 2.30hrs]
 
 
 	 - [Bryan]			- DUDepartmentAsset.php
-	 - [Bryan]			- Validation ng release
-	 - [Bryan]			- Validation ng report		
+	✓ - [Bryan]			- Validation ng release [10mins]
+	✓ - [Bryan]			- Validation ng report [10mins]
 	 - [Bryan]			- Dapat di mawawala yung nirelease
 	 - [Bryan]			- Dapat di mawawala yung nireport
 	 - [Bryan]			- Dapat di pede ireport yung nirelease
@@ -108,6 +108,8 @@ POJobOrder.php
 
 [ADMINISTRATOR]
 	- halos lahat
+
+
 
 
 UPDATE `ams_r_asset` SET `A_STATUS`= 'Serviceable', `A_AVAILABILITY`= 'Available', `A_DISPOSAL_STATUS`= 0

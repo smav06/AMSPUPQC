@@ -38,7 +38,8 @@ if(isset($_POST["view"]))
                           Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
                           Request No: <strong> '.$row["URS_NO"].' </strong><br/>
                           Request By: <strong> '.$row["O_CODE"].' </strong><br/>
-                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong>
+                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong><br/>
+                          <strong style="font-size: 11px;"><u>Click for more details.</u></strong>
                         </div>
                       </li>
                   </a>
@@ -52,7 +53,8 @@ if(isset($_POST["view"]))
                           Date: <strong> '.$row["URS_REQUEST_DATE"].' </strong><br/>
                           Request No: <strong> '.$row["URS_NO"].' </strong><br/>
                           Request By: <strong> '.$row["O_CODE"].' </strong><br/>
-                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong>
+                          Request will expired within: <strong> '.$row['remainingdays'].' days </strong><br/>
+                          <strong style="font-size: 11px;"><u>Click for more details.</u></strong>
                         </div>
                       </li>
                   </a>

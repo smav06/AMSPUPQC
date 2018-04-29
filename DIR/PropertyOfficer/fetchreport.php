@@ -26,8 +26,9 @@ if(isset($_POST["view2"]))
                     <li style="margin-top: 10px;">
                       <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
                         Date: <strong> '.$row["ROD_DATE"].' </strong><br/>
-                        Request No: <strong> '.$row["ROD_NO"].' </strong><br/>
-                        Request By: <strong> '.$row["O_CODE"].' </strong>
+                        Report No: <strong> '.$row["ROD_NO"].' </strong><br/>
+                        Report By: <strong> '.$row["O_CODE"].' </strong><br/>
+                        <strong style="font-size: 11px;"><u>Click for more details.</u></strong>
                       </div>
                     </li>
                 </a>
@@ -39,8 +40,9 @@ if(isset($_POST["view2"]))
                     <li style="margin-top: 10px;">
                       <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
                         Date: <strong> '.$row["ROD_DATE"].' </strong><br/>
-                        Request No: <strong> '.$row["ROD_NO"].' </strong><br/>
-                        Request By: <strong> '.$row["O_CODE"].' </strong>
+                        Report No: <strong> '.$row["ROD_NO"].' </strong><br/>
+                        Report By: <strong> '.$row["O_CODE"].' </strong><br/>
+                        <strong style="font-size: 11px;"><u>Click for more details.</u></strong>
                       </div>
                     </li>
                 </a>
