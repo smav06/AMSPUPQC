@@ -89,10 +89,10 @@ POJobOrder.php
 
 	 - [espe / paolo]	- DURequest.php
 	 - [espe / paolo]	- kapag 2 na yung irerequest, validation
-	 - [espe / paolo]	- tanggalin ang list ng requests, ilipat yon sa queries
+	✓ - [espe / paolo]	- tanggalin ang list ng requests, ilipat yon sa queries
 
 
-	✓ - [vigan / jocer]	- DUReportDamagedAsset.php
+	 - [vigan / jocer]	- DUReportDamagedAsset.php - gawing detailed
 	✓ - [vigan / jocer]	- dapat di per item, dapat by batch
 
 

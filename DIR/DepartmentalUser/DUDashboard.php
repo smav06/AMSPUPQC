@@ -217,6 +217,7 @@
                         <ul class="sub">
                             <li><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
                             <li><a href="DUReportForTransfer.php">Released Asset</a></li>                  
+                            <li><a href="DUListOfRequest.php">List Of Request</a></li>
                         </ul>
                     </li>
                 </ul>            

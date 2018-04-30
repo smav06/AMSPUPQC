@@ -27,7 +27,7 @@ if(isset($_POST["view3"]))
 
     if ($ifuserclicked == 0) 
     {
-      $output .= '<a href="DUDashboard.php" onclick="myFunction3('.$id.')">
+      $output .= '<a href="DUReportDamagedAssetContent.php?receiverodid='.$id.'" onclick="myFunction3('.$id.')">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
                         Report No: <strong> '.$row["ROD_NO"].' </strong> </br>
@@ -41,7 +41,7 @@ if(isset($_POST["view3"]))
     }
     else
     {
-      $output .= '<a href="DUDashboard.php">
+      $output .= '<a href="DUReportDamagedAssetContent.php?receiverodid='.$id.'">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
                         Report No: <strong> '.$row["ROD_NO"].' </strong> </br>

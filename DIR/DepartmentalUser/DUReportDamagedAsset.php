@@ -172,7 +172,8 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>                
+                <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>
+
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -216,6 +217,7 @@
                     <ul class="sub">
                         <li class="active"><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
                         <li><a href="DUReportForTransfer.php">Released Asset</a></li>                  
+                        <li><a href="DUListOfRequest.php">List Of Request</a></li>
                     </ul>
                 </li>
             </ul>            
@@ -234,7 +236,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="DUDashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="DUreportDamagedAsset.php">Report Damaged Asset</a></li>
+                        <li><a href="DUReportDamagedAsset.php">Report Damaged Asset</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -255,12 +257,13 @@
                                 <table class="display table table-bordered table-striped classtbl2" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">RODS ID</th>
-                                            <th style="width: 135px;">Date Reported</th>
-                                            <th style="">Asset</th> 
-                                            <th style="width: 105px;">Status</th>
-                                            <th style="width: 205px;">Accountable Person</th>
-                                            <th style="width: 120px;"></th>
+                                            <th style="display: none;">ROD ID</th>
+                                            <th style="width: 140px;">Report No</th>
+                                            <th style="display: none;">Accountable Person</th> 
+                                            <th style="">Reason</th> 
+                                            <th style="width: 135px">Date Reported</th>
+                                            <th style="width: 110px;">Status</th>
+                                            <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>
 
@@ -270,35 +273,64 @@
 
                                             $getuserid = $_SESSION['myoid'];
 
-                                            $sql = "SELECT ROD.ROD_DATE, ROD.ROD_NO, RODS.RODS_ID, RODS.RODS_STATUS, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME, A.A_DESCRIPTION, ROD.ROD_REASON, RODS.RODS_CANCEL_DATE FROM `ams_r_asset` AS A INNER JOIN `ams_t_report_of_damage_sub` AS RODS ON RODS.A_ID = A.A_ID INNER JOIN `ams_t_report_of_damage` AS ROD ON RODS.ROD_ID = ROD.ROD_ID INNER JOIN `ams_t_par_sub` AS PARS ON PARS.A_ID = A.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID  WHERE RODS.RODS_STATUS = 'Pending' AND RODS.RODS_CANCEL_DATE IS NULL AND O.O_ID = $getuserid ORDER BY ROD.ROD_DATE DESC";
+                                            $sql = "SELECT ROD.ROD_ID, ROD.ROD_NO, ROD.ROD_REASON, ROD.ROD_DATE, ROD.ROD_STATUS, EP.EP_FNAME, EP.EP_MNAME, EP.EP_LNAME 
+                                            FROM `ams_r_asset` AS A 
+                                            INNER JOIN `ams_t_report_of_damage_sub` AS RODS 
+                                                ON RODS.A_ID = A.A_ID 
+                                            INNER JOIN `ams_t_report_of_damage` AS ROD 
+                                                ON RODS.ROD_ID = ROD.ROD_ID 
+                                            INNER JOIN `ams_t_par_sub` AS PARS 
+                                                ON PARS.A_ID = A.A_ID 
+                                            INNER JOIN `ams_r_employee_profile` AS EP 
+                                                ON PARS.EP_ID = EP.EP_ID 
+                                            INNER JOIN `ams_r_office` AS O 
+                                                ON EP.O_ID = O.O_ID  
+                                            WHERE O.O_ID = $getuserid 
+                                            GROUP BY ROD.ROD_ID";
 
                                             $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
                                             while($row = mysqli_fetch_assoc($result))
                                             {
+                                                $rodid = $row['ROD_ID'];
                                                 $rodno = $row['ROD_NO'];
                                                 $dates = $row['ROD_DATE'];
-                                                $stats = $row['RODS_STATUS'];
+                                                $stats = $row['ROD_STATUS'];
+                                                $reason = $row['ROD_REASON'];
                                                 $fnames = $row['EP_FNAME'];
                                                 $mnames = $row['EP_MNAME'];
                                                 $lnames = $row['EP_LNAME'];
                                                 $wholenames = $fnames.' '.$mnames.' '.$lnames;
-                                                $descriptions = $row['A_DESCRIPTION'];
-                                                $report = $row['ROD_REASON'];
-                                                $rodsid = $row['RODS_ID'];
                                         ?>
 
                                         <tr class="gradeX">
-                                            <td style="display: none;"> <?php echo $rodsid; ?> </td>
-                                            <td> <?php echo $dates; ?> </td>
-                                            <td> <?php echo $descriptions; ?> </td>
-                                            <td> <?php echo $stats; ?></td>
-                                            <td> <?php echo $wholenames; ?> </td>
+                                            <td style="display: none;"> <?php echo $rodid; ?> </td>
+                                            <td> <?php echo $rodno; ?> </td>
+                                            <td style="display: none;"> <?php echo $wholenames; ?> </td>
+                                            <td> <?php echo $reason; ?> </td>
+                                            <td> <?php echo $dates; ?></td>
+
+                                            <?php  
+                                                if ($stats == 'Pending') 
+                                                {
+                                            ?>
+                                                    <td>
+                                                        <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $stats; ?> </p> 
+                                                    </td>
+                                            <?php
+                                                }
+                                                elseif ($stats == 'Evaluated') 
+                                                {
+                                            ?>
+                                                    <td>
+                                                        <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $stats; ?> </p>
+                                                    </td>
+                                            <?php
+                                                }
+                                            ?>
+
                                             <td>
-                                                <center>
-                                                    <a data-toggle="modal" class="btn btn-success" href="#myModal<?php echo $rodno; ?>"><i class="fa fa-eye"></i></a>
-                                                    <a class="btn btn-danger btncancels" href="javascript:;"><i class="fa fa-times-circle"></i></a>
-                                                </center>
+                                                 <a class="btn btn-success" style="margin: -5px;" href="DUReportDamagedAssetContent.php?receiverodid=<?php echo $rodid; ?>"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
 
@@ -476,7 +508,7 @@
 	<script src="../../js/scripts.js"></script>
 
 	<!--dynamic table initialization -->
-	<script src="../../js/dynamic_table_init.js"></script>
+	<script src="DUReportDamagedAsset/dynamic_table_init.js"></script>
 
 	<script src="../../js/iCheck/jquery.icheck.js"></script>
 
