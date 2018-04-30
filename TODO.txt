@@ -25,9 +25,9 @@ POJobOrder.php
 	✓ - [Bryan]			- Hide lahat about sa PPMP [ALL PAGES / 5mins]
 
 
-	 - [Bryan]			- POViewRequestFromDU.php
-	 - [Bryan]			-	 - Validation ng quantity at quantity approve
-	 - [Bryan]			-	 - di dapat mag ssweetalert, 
+	 - [vigan / jocer]	- POViewRequestFromDU.php
+	 - [vigan / jocer]	- Validation ng quantity at quantity approve
+	 - [vigan / jocer]	- di dapat mag ssweetalert, 
 
 
 	✓ - [mica / ron]	- PODisposal.php
@@ -46,15 +46,16 @@ POJobOrder.php
 	 - [Bryan]			- From Request gawin na
 
 
-	 - [Bryan]			- POMaintenanceInsCheck.php
-	 - [Bryan]			- Kapag 2 na yung iinspect lumalabas agad yung sweetalert, ayusin
+	 - [vigan / jocer]	- POMaintenanceInsCheck.php
+	 - [vigan / jocer]	- Kapag 2 na yung iinspect lumalabas agad yung sweetalert, ayusin
+
 
 	✓ - [Bryan]			- POMaintenanceReport.php [5mins]
 
 
-	 POMaintenanceJobOrder.php
-		 - gawing detailed yung job order sa modal
-		 - maggawa na ng job order page at printable na job order
+	 - [mica / ron]		- POMaintenanceJobOrder.php
+	 - [mica / ron]		- gawing detailed yung job order sa modal
+	 - [mica / ron]		- maggawa na ng job order page at printable na job order
 
 
 
@@ -81,9 +82,9 @@ POJobOrder.php
 	 - [Bryan]			- Dapat di pede ireport yung nireport
 
 
-	 - [Bryan]			- DUDashboard.php
-	 - [Bryan]			- Drilldown
-	 - [Bryan]			- Detailed dapat yung dashboard
+	 - [mica / ron]		- DUDashboard.php
+	 - [mica / ron]		- Drilldown
+	 - [mica / ron]		- Detailed dapat yung dashboard
 
 
 	 - [espe / paolo]	- DURequest.php
@@ -91,8 +92,8 @@ POJobOrder.php
 	 - [espe / paolo]	- tanggalin ang list ng requests, ilipat yon sa queries
 
 
-	 - [vigan / jocer]	- DUReportDamagedAsset.php
-	 - [vigan / jocer]	- dapat di per item, dapat by batch
+	✓ - [vigan / jocer]	- DUReportDamagedAsset.php
+	✓ - [vigan / jocer]	- dapat di per item, dapat by batch
 
 
 	 - [espe / paolo]	- DUReportForTransfer.php
@@ -108,6 +109,8 @@ POJobOrder.php
 
 [ADMINISTRATOR]
 	- halos lahat
+
+	 - [Bryan]			- WHOLE EMPLOYEES / ACCOUNT
 
 
 
