@@ -124,6 +124,9 @@
                     
                 </li>
 
+                <!-- PARA SA ASSIGN -->                
+                <?php include 'AssignNotifUI.php'; ?> 
+
                 <!-- PARA SA REPORT -->                
                 <?php include 'ReportNotifUI.php'; ?> 
 
@@ -553,8 +556,14 @@
 <!-- REPORT NOTIF -->
 <?php include 'ReportNotif.php'; ?> 
 
+<!-- ASSIGN NOTIF -->
+<?php include 'AssignNotif.php'; ?> 
+
 <!-- REPORT CLICKED STATUS -->
 <?php include 'ReportNotifClickedBtnScript.php'; ?> 
+
+<!-- ASSIGN CLICKED STATUS -->
+<?php include 'AssignNotifClickedBtnScript.php'; ?> 
 
 <script type="text/javascript">
 
