@@ -69,7 +69,7 @@ POJobOrder.php
 
  Departmental User UI	
 	✓ - [mica / ron]	- Profile ni departmental user 												ñ
-	 - [Bryan]			- Notification para sa pag may inassign na item
+	 - [Bryan]			- Notification para sa pag may inassign na item	- kulang pa release
 	✓ - [Bryan]			- Notification para sa result ng report of damage [ALL PAGES / 2.30hrs]
 
 
