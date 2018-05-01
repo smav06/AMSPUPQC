@@ -106,26 +106,7 @@
 
                     </li>
 
-                    <li id="header_notification_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle dt3" href="#">
-                            <i class="fa fa-exclamation-circle"></i>
-                            <span class="badge bg-warning count3"></span>
-                        </a>
-
-                         <?php 
-
-                            $sqlcntx = mysqli_query($connection, "SELECT COUNT(*) AS XXX FROM `ams_t_user_request_summary` AS URS WHERE URS.URS_STATUS_TO_PO = 'Pending'");
-
-                            while($rowx = mysqli_fetch_assoc($sqlcntx))
-                            {
-                                $cnt = $rowx['XXX'];
-                                echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
-                            }
-
-                            echo '<ul class="dropdown-menu extended notification dispnotif3" style="overflow-y: scroll; height: 330px;">
-                        </ul>';
-                        ?>
-                    </li>
+                    <?php include 'UrgentNotifUI.php'; ?> 
 
                     <li id="" class="">
                         <a style="background-color: white;">
@@ -718,7 +699,7 @@
 
              $.ajax({
                 type: 'POST',
-                url: 'UpdateNotifByClickedReport.php',
+                url: 'UpdateNotifByClickedUrgent.php',
                 async: false,
                 data: {
                     _id: id

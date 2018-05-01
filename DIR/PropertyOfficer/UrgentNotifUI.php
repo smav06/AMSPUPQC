@@ -15,7 +15,7 @@
             echo '<input type="text" class="hidden" id="cntofreqs" value="'.$cnt.'" />';
         }
 
-        echo '<ul class="dropdown-menu extended21 notification dispnotif3" style="overflow-y: scroll; height: 330px;">
+        echo '<ul class="dropdown-menu extended21 notification dispnotif3" style="overflow-y: scroll; height: 475px;">
     </ul>';
     ?>
 </li>
