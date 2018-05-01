@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2018 at 03:27 PM
+-- Generation Time: May 02, 2018 at 12:28 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -50,58 +50,58 @@ INSERT INTO `ams_r_asset` (`A_ID`, `A_DESCRIPTION`, `A_DATE`, `A_STATUS`, `A_ACQ
 (1, 'Fujidenzo Aircon', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
 (2, 'ASUS ROG Computer', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (3, 'A4Tech Office Keyboard', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
-(4, 'Acer Predator Gaming Laptop', '2018-03-04', 'Serviceable', 'Donation', 'Assigned', 0, 2, NULL, NULL, NULL),
-(5, 'Hanabishi Stand Fan', '2018-03-05', 'Serviceable', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
+(4, 'Acer Predator Gaming Laptop', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
+(5, 'Hanabishi Stand Fan', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
 (6, 'A4Tech Home Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Assigned', 0, 5, NULL, NULL, NULL),
-(7, 'LG LED TV', '2018-03-07', 'Serviceable', 'Donation', 'Assigned', 0, 7, NULL, NULL, NULL),
-(8, 'Gambel 2MP CCTV', '2018-03-08', 'Serviceable', 'Donation', 'Assigned', 0, 8, NULL, NULL, NULL),
-(9, 'Silvertee Home Speaker', '2018-03-09', 'Serviceable', 'Donation', 'Assigned', 0, 9, NULL, NULL, NULL),
-(10, 'EPSON Projector', '2018-03-10', 'Serviceable', 'Donation', 'Assigned', 0, 10, NULL, NULL, NULL),
+(7, 'LG LED TV', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(8, 'Gambel 2MP CCTV', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
+(9, 'Silvertee Home Speaker', '2018-03-09', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(10, 'EPSON Projector', '2018-03-10', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
 (11, 'Epson Printer', '2018-03-11', 'Serviceable', 'Donation', 'Assigned', 0, 11, NULL, NULL, NULL),
-(12, 'Dell Laptop', '2018-03-15', 'Disposed', 'Donation', 'Available', 1, 2, NULL, NULL, NULL),
-(13, 'Standard Wall Fan', '2018-03-14', 'Disposed', 'Donation', 'Available', 1, 3, NULL, NULL, NULL),
-(14, 'Keymatt Mechanical Keyboard', '2018-03-13', 'For Disposal', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
-(15, 'Logitech Gaming Mouse', '2018-03-12', 'For Disposal', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
-(16, 'Iwata Aircool Aircon', '2018-03-16', 'For Disposal', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
-(17, 'SONY Bravia TV', '2018-03-17', 'Transferred Out', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
-(18, 'Cube Cory CCTV', '2018-03-18', 'For Repair', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(19, 'Crown Home Speaker', '2018-03-19', 'For Repair', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(20, 'APPO YG Projector', '2018-03-20', 'On Job Order', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
-(21, 'Canon Pixma', '2018-03-21', 'On Job Order', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
+(12, 'Dell Laptop', '2018-03-15', 'Serviceable', 'Donation', 'Assigned', 0, 2, NULL, NULL, NULL),
+(13, 'Standard Wall Fan', '2018-03-14', 'Serviceable', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
+(14, 'Keymatt Mechanical Keyboard', '2018-03-13', 'Serviceable', 'Donation', 'Assigned', 0, 4, NULL, NULL, NULL),
+(15, 'Logitech Gaming Mouse', '2018-03-12', 'Serviceable', 'Donation', 'Assigned', 0, 5, NULL, NULL, NULL),
+(16, 'Iwata Aircool Aircon', '2018-03-16', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
+(17, 'SONY Bravia TV', '2018-03-17', 'For Repair', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(18, 'Cube Cory CCTV', '2018-03-18', 'For Repair', 'Donation', 'Assigned', 0, 8, NULL, NULL, NULL),
+(19, 'Crown Home Speaker', '2018-03-19', 'For Repair', 'Donation', 'Assigned', 0, 9, NULL, NULL, NULL),
+(20, 'APPO YG Projector', '2018-03-20', 'For Repair', 'Donation', 'Assigned', 0, 10, NULL, NULL, NULL),
+(21, 'Canon Pixma', '2018-03-21', 'For Repair', 'Donation', 'Assigned', 0, 11, NULL, NULL, NULL),
 (22, 'Lenovo Gaming Computer', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (23, 'Lenovo Home Computer', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
 (24, 'HP Elite Laptop', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
 (25, 'Asahi Industrial Fan', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
-(26, 'Gigaware Keypress gaming keyboard', '2018-03-05', 'Serviceable', 'Donation', 'Assigned', 0, 4, NULL, NULL, NULL),
-(27, 'RedDragon Mirage Gaming Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Assigned', 0, 5, NULL, NULL, NULL),
-(28, 'QUBE 1.5HP Inverter Aircon', '2018-03-07', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
-(29, 'Itechie 24\" Full HD LED TV', '2018-03-08', 'Serviceable', 'Donation', 'Assigned', 0, 7, NULL, NULL, NULL),
-(30, 'iSAFE High Definition DOME and BULLET CCTV', '2018-03-10', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(31, 'Konzert Karaoke Speaker System Speaker', '2018-03-12', 'Transferred Out', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(32, 'Brand Panther Projector Home LED-86', '2018-03-13', 'Disposed', 'Donation', 'Available', 1, 10, NULL, NULL, NULL),
-(33, 'Fuji Xerox P255 DW Brand New Mono Laser Printer', '2018-03-15', 'For Disposal', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
-(34, 'Nighthawk Entry Level Gaming PC Package', '2018-03-16', 'For Disposal', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
-(35, 'Acer Aspire ES1 331 P7AG Laptop', '2018-03-17', 'Transferred Out', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
-(36, 'CPT Hanabishi Windmill18GF Ground Fan', '2018-03-18', 'Serviceable', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
+(26, 'Gigaware Keypress gaming keyboard', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
+(27, 'RedDragon Mirage Gaming Mouse', '2018-03-06', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
+(28, 'QUBE 1.5HP Inverter Aircon', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
+(29, 'Itechie 24\" Full HD LED TV', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(30, 'iSAFE High Definition DOME and BULLET CCTV', '2018-03-10', 'Serviceable', 'Donation', 'Assigned', 0, 8, NULL, NULL, NULL),
+(31, 'Konzert Karaoke Speaker System Speaker', '2018-03-12', 'Serviceable', 'Donation', 'Assigned', 0, 9, NULL, NULL, NULL),
+(32, 'Brand Panther Projector Home LED-86', '2018-03-13', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(33, 'Fuji Xerox P255 DW Brand New Mono Laser Printer', '2018-03-15', 'Serviceable', 'Donation', 'Assigned', 0, 11, NULL, NULL, NULL),
+(34, 'Nighthawk Entry Level Gaming PC Package', '2018-03-16', 'Serviceable', 'Donation', 'Assigned', 0, 1, NULL, NULL, NULL),
+(35, 'Acer Aspire ES1 331 P7AG Laptop', '2018-03-17', 'For Repair', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
+(36, 'CPT Hanabishi Windmill18GF Ground Fan', '2018-03-18', 'For Repair', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
 (37, 'K611 Fighter Fantech RGB Backlit Full Keys Gaming Keyboard', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 4, NULL, NULL, NULL),
 (38, 'Optical Mouse Double Click Usb Interface OP620D', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
-(39, 'Eureka EWA-0.6HP Window Type Air Conditioner', '2018-03-04', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
+(39, 'Eureka EWA-0.6HP Window Type Air Conditioner', '2018-03-04', 'Serviceable', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
 (40, 'Avision 32\" HD Ready LED TV Black', '2018-03-03', 'Serviceable', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
-(41, '	\r\nWireless IP Camera CCTV WiFi Home Video Surveillance Camera', '2018-03-05', 'Serviceable', 'Donation', 'Assigned', 0, 8, NULL, NULL, NULL),
+(41, '	\r\nWireless IP Camera CCTV WiFi Home Video Surveillance Camera', '2018-03-05', 'Serviceable', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
 (42, 'Promac HAS-6530BT Home Audio System with Bluetooth', '2018-03-06', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
-(43, 'Acer ES-13D 3600 Ansi Lumens Projector', '2018-03-07', 'Serviceable', 'Donation', 'Assigned', 0, 10, NULL, NULL, NULL),
-(44, 'Xprinter 58mm Thermal Receipt Printer XP-58IIH', '2018-03-08', 'Serviceable', 'Donation', 'Assigned', 0, 11, NULL, NULL, NULL),
-(45, 'Digital Age Fortress AMD A4 6300 Entry Level Computer Package', '2018-03-11', 'Serviceable', 'Donation', 'Assigned', 0, 1, NULL, NULL, NULL),
-(46, 'Nextbook Flexx9 8.9\" Intel Atom Quad-Core 1GB Blue', '2018-03-12', 'Serviceable', 'Donation', 'Available', 0, 2, NULL, NULL, NULL),
-(47, 'Imarflex Digital Eco Mist Fan', '2018-03-13', 'For Disposal', 'Donation', 'Available', 0, 3, NULL, NULL, NULL),
-(48, 'ZYG 800 LED Colorful Backlight Gaming USB Keyboard Black', '2018-03-14', 'Disposed', 'Donation', 'Available', 1, 4, NULL, NULL, NULL),
-(49, 'Logitech M170 Wireless USB mouse', '2018-03-15', 'For Disposal', 'Donation', 'Available', 0, 5, NULL, NULL, NULL),
-(50, 'Daikin 1 0HP Cooling King Standard Split Type Air Conditioner White', '2018-03-16', 'For Disposal', 'Donation', 'Available', 0, 6, NULL, NULL, NULL),
-(51, 'Ace 32 Slim LED TV Black LED', '2018-03-18', 'On Job Order', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
-(52, 'Immix Home Office Buisiness Security 10 Megapixel Camera Kit Black', '2018-03-17', 'Transferred Out', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
-(53, 'Kevler EON 8 8 250W Plastic Moulded Speaker', '2018-03-01', 'Transferred Out', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
+(43, 'Acer ES-13D 3600 Ansi Lumens Projector', '2018-03-07', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
+(44, 'Xprinter 58mm Thermal Receipt Printer XP-58IIH', '2018-03-08', 'Serviceable', 'Donation', 'Available', 0, 11, NULL, NULL, NULL),
+(45, 'Digital Age Fortress AMD A4 6300 Entry Level Computer Package', '2018-03-11', 'Serviceable', 'Donation', 'Available', 0, 1, NULL, NULL, NULL),
+(46, 'Nextbook Flexx9 8.9\" Intel Atom Quad-Core 1GB Blue', '2018-03-12', 'Serviceable', 'Donation', 'Assigned', 0, 2, NULL, NULL, NULL),
+(47, 'Imarflex Digital Eco Mist Fan', '2018-03-13', 'Serviceable', 'Donation', 'Assigned', 0, 3, NULL, NULL, NULL),
+(48, 'ZYG 800 LED Colorful Backlight Gaming USB Keyboard Black', '2018-03-14', 'Serviceable', 'Donation', 'Assigned', 0, 4, NULL, NULL, NULL),
+(49, 'Logitech M170 Wireless USB mouse', '2018-03-15', 'Serviceable', 'Donation', 'Assigned', 0, 5, NULL, NULL, NULL),
+(50, 'Daikin 1 0HP Cooling King Standard Split Type Air Conditioner White', '2018-03-16', 'Serviceable', 'Donation', 'Assigned', 0, 6, NULL, NULL, NULL),
+(51, 'Ace 32 Slim LED TV Black LED', '2018-03-18', 'For Repair', 'Donation', 'Available', 0, 7, NULL, NULL, NULL),
+(52, 'Immix Home Office Buisiness Security 10 Megapixel Camera Kit Black', '2018-03-17', 'For Repair', 'Donation', 'Available', 0, 8, NULL, NULL, NULL),
+(53, 'Kevler EON 8 8 250W Plastic Moulded Speaker', '2018-03-01', 'Serviceable', 'Donation', 'Available', 0, 9, NULL, NULL, NULL),
 (54, 'UC28 Mini Portable Projector Black With Free Assorted Color Bluetooth Speaker', '2018-03-02', 'Serviceable', 'Donation', 'Available', 0, 10, NULL, NULL, NULL),
-(55, 'Samsung S8+', '2018-04-10', 'Serviceable', 'Donation', 'Assigned', 0, 12, NULL, NULL, NULL);
+(55, 'Samsung S8+', '2018-04-10', 'For Repair', 'Donation', 'Assigned', 0, 12, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -519,7 +519,239 @@ INSERT INTO `ams_r_users_log` (`UL_LOGGED_DATE`, `UL_LOGGED_TYPE`, `EP_ID`) VALU
 ('2018-04-26 18:53:50', 'logged out', 3),
 ('2018-04-26 18:53:54', 'logged in', 2),
 ('2018-04-26 18:54:19', 'logged out', 2),
-('2018-04-26 18:55:03', 'logged in', 3);
+('2018-04-26 18:55:03', 'logged in', 3),
+('2018-04-26 23:21:29', 'logged in', 4),
+('2018-04-26 23:21:42', 'logged out', 4),
+('2018-04-26 23:21:45', 'logged in', 2),
+('2018-04-26 23:42:17', 'logged out', 3),
+('2018-04-26 23:42:24', 'logged in', 1),
+('2018-04-26 23:43:38', 'logged out', 1),
+('2018-04-26 23:43:41', 'logged in', 3),
+('2018-04-26 23:48:23', 'logged in', 2),
+('2018-04-26 23:50:15', 'logged out', 2),
+('2018-04-26 23:50:23', 'logged in', 4),
+('2018-04-27 05:40:02', 'logged in', 2),
+('2018-04-27 05:50:32', 'logged out', 2),
+('2018-04-27 05:50:36', 'logged in', 3),
+('2018-04-28 11:13:04', 'logged in', 3),
+('2018-04-28 11:35:38', 'logged out', 3),
+('2018-04-28 11:35:42', 'logged in', 2),
+('2018-04-28 11:37:20', 'logged out', 2),
+('2018-04-28 11:37:24', 'logged in', 4),
+('2018-04-28 11:39:33', 'logged out', 4),
+('2018-04-28 11:39:37', 'logged in', 3),
+('2018-04-28 12:14:00', 'logged out', 3),
+('2018-04-28 12:14:05', 'logged in', 3),
+('2018-04-28 13:07:27', 'logged in', 2),
+('2018-04-28 18:02:19', 'logged in', 3),
+('2018-04-28 20:21:29', 'logged in', 3),
+('2018-04-28 20:36:34', 'logged out', 3),
+('2018-04-29 09:12:21', 'logged in', 3),
+('2018-04-29 09:30:23', 'logged out', 3),
+('2018-04-29 09:30:27', 'logged in', 2),
+('2018-04-29 09:34:49', 'logged in', 3),
+('2018-04-29 09:44:07', 'logged out', 2),
+('2018-04-29 09:44:11', 'logged in', 4),
+('2018-04-29 09:44:18', 'logged out', 4),
+('2018-04-29 09:44:22', 'logged in', 2),
+('2018-04-29 10:00:55', 'logged in', 3),
+('2018-04-29 10:43:27', 'logged in', 3),
+('2018-04-29 10:45:09', 'logged out', 2),
+('2018-04-29 10:45:12', 'logged in', 4),
+('2018-04-29 10:47:34', 'logged out', 4),
+('2018-04-29 10:47:39', 'logged in', 2),
+('2018-04-29 10:47:43', 'logged out', 2),
+('2018-04-29 10:47:47', 'logged in', 4),
+('2018-04-29 10:51:32', 'logged out', 4),
+('2018-04-29 10:51:36', 'logged in', 2),
+('2018-04-29 10:51:50', 'logged out', 2),
+('2018-04-29 10:51:54', 'logged in', 4),
+('2018-04-29 10:54:17', 'logged out', 4),
+('2018-04-29 10:54:22', 'logged in', 2),
+('2018-04-29 10:54:43', 'logged in', 3),
+('2018-04-29 10:55:07', 'logged out', 2),
+('2018-04-29 10:55:12', 'logged in', 2),
+('2018-04-29 10:55:14', 'logged out', 2),
+('2018-04-29 10:55:17', 'logged in', 4),
+('2018-04-29 10:55:35', 'logged out', 4),
+('2018-04-29 10:55:38', 'logged in', 2),
+('2018-04-29 10:58:30', 'logged out', 2),
+('2018-04-29 10:58:39', 'logged in', 4),
+('2018-04-29 11:01:08', 'logged out', 4),
+('2018-04-29 11:01:11', 'logged in', 3),
+('2018-04-29 11:01:37', 'logged in', 2),
+('2018-04-29 11:01:59', 'logged out', 2),
+('2018-04-29 11:02:02', 'logged in', 4),
+('2018-04-29 11:02:15', 'logged out', 4),
+('2018-04-29 11:02:19', 'logged in', 2),
+('2018-04-29 11:02:29', 'logged out', 2),
+('2018-04-29 11:02:32', 'logged in', 4),
+('2018-04-29 11:03:40', 'logged out', 3),
+('2018-04-29 11:04:01', 'logged in', 3),
+('2018-04-29 11:04:20', 'logged in', 2),
+('2018-04-29 11:04:24', 'logged out', 2),
+('2018-04-29 11:04:28', 'logged in', 4),
+('2018-04-29 11:05:01', 'logged out', 4),
+('2018-04-29 11:05:04', 'logged in', 2),
+('2018-04-29 11:05:07', 'logged out', 2),
+('2018-04-29 11:05:12', 'logged in', 4),
+('2018-04-29 11:07:37', 'logged out', 3),
+('2018-04-29 11:07:41', 'logged in', 2),
+('2018-04-29 11:07:48', 'logged out', 2),
+('2018-04-29 11:07:53', 'logged in', 3),
+('2018-04-29 11:09:18', 'logged in', 4),
+('2018-04-29 11:24:50', 'logged out', 3),
+('2018-04-29 11:24:54', 'logged in', 2),
+('2018-04-29 11:25:57', 'logged out', 2),
+('2018-04-29 11:26:00', 'logged in', 4),
+('2018-04-29 11:36:18', 'logged out', 4),
+('2018-04-29 11:37:11', 'logged in', 3),
+('2018-04-29 11:37:20', 'logged in', 2),
+('2018-04-29 11:43:22', 'logged out', 2),
+('2018-04-29 11:43:26', 'logged in', 4),
+('2018-04-29 11:43:31', 'logged out', 4),
+('2018-04-29 11:45:59', 'logged in', 2),
+('2018-04-29 11:46:57', 'logged out', 2),
+('2018-04-29 11:47:01', 'logged in', 4),
+('2018-04-29 11:48:32', 'logged in', 2),
+('2018-04-29 12:40:14', 'logged out', 3),
+('2018-04-29 12:40:18', 'logged in', 2),
+('2018-04-29 12:41:01', 'logged out', 2),
+('2018-04-29 12:41:05', 'logged in', 3),
+('2018-04-29 12:42:41', 'logged out', 3),
+('2018-04-29 12:42:45', 'logged in', 2),
+('2018-04-29 12:58:43', 'logged out', 2),
+('2018-04-29 12:58:47', 'logged in', 3),
+('2018-04-29 13:00:04', 'logged out', 3),
+('2018-04-29 13:00:07', 'logged in', 2),
+('2018-04-29 13:34:28', 'logged in', 3),
+('2018-04-29 13:53:32', 'logged in', 3),
+('2018-04-29 13:55:52', 'logged out', 2),
+('2018-04-29 13:55:57', 'logged in', 3),
+('2018-04-29 14:09:33', 'logged out', 3),
+('2018-04-29 14:09:38', 'logged in', 2),
+('2018-04-29 23:10:33', 'logged in', 3),
+('2018-04-29 23:32:22', 'logged out', 3),
+('2018-04-29 23:32:27', 'logged in', 2),
+('2018-04-29 23:34:28', 'logged out', 2),
+('2018-04-29 23:34:33', 'logged in', 4),
+('2018-04-29 23:37:52', 'logged out', 4),
+('2018-04-29 23:37:58', 'logged in', 2),
+('2018-04-30 00:02:46', 'logged in', 3),
+('2018-04-30 00:03:11', 'logged out', 2),
+('2018-04-30 00:03:18', 'logged in', 4),
+('2018-04-30 00:03:37', 'logged out', 4),
+('2018-04-30 00:03:40', 'logged in', 2),
+('2018-04-30 00:07:24', 'logged out', 2),
+('2018-04-30 00:07:27', 'logged in', 3),
+('2018-04-30 00:39:22', 'logged in', 2),
+('2018-04-30 00:41:20', 'logged in', 3),
+('2018-04-30 00:42:23', 'logged in', 3),
+('2018-04-30 00:44:13', 'logged out', 3),
+('2018-04-30 00:44:16', 'logged in', 2),
+('2018-04-30 00:44:28', 'logged out', 2),
+('2018-04-30 00:44:31', 'logged in', 3),
+('2018-04-30 00:44:37', 'logged out', 3),
+('2018-04-30 00:44:41', 'logged in', 4),
+('2018-04-30 00:44:57', 'logged out', 4),
+('2018-04-30 00:45:01', 'logged in', 3),
+('2018-04-30 22:16:46', 'logged in', 3),
+('2018-04-30 23:07:17', 'logged out', 3),
+('2018-04-30 23:07:22', 'logged in', 2),
+('2018-04-30 23:14:55', 'logged out', 2),
+('2018-04-30 23:14:58', 'logged in', 3),
+('2018-04-30 23:15:33', 'logged out', 3),
+('2018-04-30 23:15:37', 'logged in', 2),
+('2018-04-30 23:24:20', 'logged in', 3),
+('2018-05-01 00:08:18', 'logged out', 2),
+('2018-05-01 00:08:21', 'logged in', 4),
+('2018-05-01 00:08:28', 'logged out', 4),
+('2018-05-01 00:08:31', 'logged in', 3),
+('2018-05-01 00:08:54', 'logged out', 3),
+('2018-05-01 00:08:58', 'logged in', 2),
+('2018-05-01 00:17:07', 'logged out', 2),
+('2018-05-01 00:17:11', 'logged in', 3),
+('2018-05-01 00:17:48', 'logged out', 3),
+('2018-05-01 00:17:59', 'logged in', 4),
+('2018-05-01 00:18:11', 'logged out', 4),
+('2018-05-01 00:18:14', 'logged in', 3),
+('2018-05-01 00:18:19', 'logged out', 3),
+('2018-05-01 00:18:24', 'logged in', 2),
+('2018-05-01 00:43:17', 'logged out', 2),
+('2018-05-01 00:43:20', 'logged in', 3),
+('2018-05-01 00:43:55', 'logged out', 3),
+('2018-05-01 00:44:01', 'logged in', 2),
+('2018-05-01 00:50:05', 'logged out', 2),
+('2018-05-01 00:50:08', 'logged in', 3),
+('2018-05-01 00:50:46', 'logged out', 3),
+('2018-05-01 00:50:50', 'logged in', 2),
+('2018-05-01 00:50:57', 'logged out', 2),
+('2018-05-01 00:51:00', 'logged in', 4),
+('2018-05-01 00:54:34', 'logged out', 4),
+('2018-05-01 00:54:37', 'logged in', 2),
+('2018-05-01 00:55:43', 'logged out', 2),
+('2018-05-01 00:55:47', 'logged in', 4),
+('2018-05-01 00:55:58', 'logged out', 4),
+('2018-05-01 00:56:01', 'logged in', 2),
+('2018-05-01 00:56:32', 'logged out', 2),
+('2018-05-01 00:56:35', 'logged in', 4),
+('2018-05-01 01:00:41', 'logged out', 4),
+('2018-05-01 01:00:44', 'logged in', 2),
+('2018-05-01 07:40:20', 'logged in', 3),
+('2018-05-01 11:10:02', 'logged out', 3),
+('2018-05-01 11:10:10', 'logged in', 2),
+('2018-05-01 11:59:46', 'logged out', 2),
+('2018-05-01 11:59:50', 'logged in', 4),
+('2018-05-01 12:04:37', 'logged out', 4),
+('2018-05-01 12:04:41', 'logged in', 3),
+('2018-05-01 12:07:41', 'logged out', 3),
+('2018-05-01 12:07:46', 'logged in', 2),
+('2018-05-01 12:07:53', 'logged out', 2),
+('2018-05-01 12:07:56', 'logged in', 4),
+('2018-05-01 12:09:21', 'logged out', 4),
+('2018-05-01 12:09:24', 'logged in', 2),
+('2018-05-01 12:10:04', 'logged in', 3),
+('2018-05-01 12:10:45', 'logged out', 2),
+('2018-05-01 12:10:48', 'logged in', 4),
+('2018-05-01 12:11:06', 'logged out', 4),
+('2018-05-01 12:11:10', 'logged in', 2),
+('2018-05-01 14:43:19', 'logged out', 2),
+('2018-05-01 14:43:22', 'logged in', 3),
+('2018-05-01 14:43:46', 'logged in', 2),
+('2018-05-01 21:49:08', 'logged out', 3),
+('2018-05-01 21:49:12', 'logged in', 2),
+('2018-05-01 21:52:29', 'logged in', 3),
+('2018-05-01 21:52:38', 'logged out', 2),
+('2018-05-01 21:52:41', 'logged in', 4),
+('2018-05-01 21:54:18', 'logged out', 4),
+('2018-05-01 21:54:21', 'logged in', 2),
+('2018-05-01 21:55:44', 'logged out', 2),
+('2018-05-01 21:55:47', 'logged in', 4),
+('2018-05-01 21:56:14', 'logged out', 4),
+('2018-05-01 21:56:18', 'logged in', 2),
+('2018-05-01 21:58:07', 'logged out', 2),
+('2018-05-01 21:58:10', 'logged in', 4),
+('2018-05-01 21:59:40', 'logged out', 4),
+('2018-05-01 21:59:44', 'logged in', 2),
+('2018-05-01 22:19:09', 'logged in', 3),
+('2018-05-01 22:29:42', 'logged in', 3),
+('2018-05-01 23:11:52', 'logged out', 2),
+('2018-05-01 23:11:55', 'logged in', 1),
+('2018-05-01 23:15:34', 'logged out', 1),
+('2018-05-01 23:15:38', 'logged in', 2),
+('2018-05-01 23:15:43', 'logged out', 2),
+('2018-05-01 23:15:46', 'logged in', 4),
+('2018-05-01 23:18:06', 'logged out', 4),
+('2018-05-01 23:18:12', 'logged in', 2),
+('2018-05-01 23:29:24', 'logged in', 3),
+('2018-05-01 23:53:01', 'logged out', 2),
+('2018-05-01 23:53:04', 'logged in', 3),
+('2018-05-01 23:53:15', 'logged out', 3),
+('2018-05-01 23:53:21', 'logged in', 2),
+('2018-05-01 23:53:28', 'logged out', 2),
+('2018-05-01 23:53:31', 'logged in', 3),
+('2018-05-01 23:54:11', 'logged out', 3),
+('2018-05-01 23:54:19', 'logged in', 2);
 
 -- --------------------------------------------------------
 
@@ -538,16 +770,6 @@ CREATE TABLE `ams_t_dispose` (
   `PARS_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ams_t_dispose`
---
-
-INSERT INTO `ams_t_dispose` (`D_ID`, `D_DATE`, `D_TYPE`, `D_REMARKS`, `D_DISPOSED_BY`, `DL_ID`, `A_ID`, `PARS_ID`) VALUES
-(1, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 32, NULL),
-(2, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 13, NULL),
-(3, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 48, NULL),
-(4, '2018-04-04', 'Keep', 'DSADA', 'Bryan B. Cortesiano', 2, 12, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -559,14 +781,6 @@ CREATE TABLE `ams_t_job_order` (
   `JO_NO` varchar(15) NOT NULL,
   `JO_DATE` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ams_t_job_order`
---
-
-INSERT INTO `ams_t_job_order` (`JO_ID`, `JO_NO`, `JO_DATE`) VALUES
-(1, 'JO-2018-0001', '2018-04-10'),
-(2, 'JO-2018-0002', '2018-04-10');
 
 -- --------------------------------------------------------
 
@@ -583,15 +797,6 @@ CREATE TABLE `ams_t_job_order_sub` (
   `JO_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ams_t_job_order_sub`
---
-
-INSERT INTO `ams_t_job_order_sub` (`JOS_ID`, `JOS_REPAIRED_DATE`, `JOS_READY_FOR_DISPOSE_DATE`, `JOS_STATUS`, `A_ID`, `JO_ID`) VALUES
-(1, NULL, NULL, 'For Repair', 51, 1),
-(2, NULL, NULL, 'For Repair', 21, 1),
-(3, NULL, NULL, 'For Repair', 20, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -602,27 +807,26 @@ CREATE TABLE `ams_t_par` (
   `PAR_ID` int(11) NOT NULL,
   `PAR_NO` varchar(15) NOT NULL,
   `PAR_DATE` date NOT NULL,
-  `PAR_ISSUED_BY` varchar(120) NOT NULL
+  `PAR_ISSUED_BY` varchar(120) NOT NULL,
+  `PAR_DU_VIEW` int(11) NOT NULL DEFAULT '0',
+  `PAR_DU_CLICKED` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ams_t_par`
 --
 
-INSERT INTO `ams_t_par` (`PAR_ID`, `PAR_NO`, `PAR_DATE`, `PAR_ISSUED_BY`) VALUES
-(1, 'PAR-2018-0001', '2018-04-10', 'Bryan B. Cortesiano'),
-(2, 'PAR-2018-0002', '2018-04-26', 'Bryan B. Cortesiano'),
-(3, 'PAR-2018-0003', '2018-04-27', 'Bryan B. Cortesiano'),
-(4, 'PAR-2018-0004', '2018-04-25', 'Bryan B. Cortesiano'),
-(5, 'PAR-2018-0005', '2018-04-26', 'Bryan B. Cortesiano'),
-(6, 'PAR-2018-0006', '2018-04-26', 'Bryan B. Cortesiano'),
-(7, 'PAR-2018-0007', '2018-04-26', 'Bryan B. Cortesiano'),
-(8, 'PAR-2018-0008', '2018-04-26', 'Bryan B. Cortesiano'),
-(9, 'PAR-2018-0009', '2018-04-26', 'Bryan B. Cortesiano'),
-(10, 'PAR-2018-0010', '2018-04-26', 'Bryan B. Cortesiano'),
-(11, 'PAR-2018-0011', '2018-04-26', 'Bryan B. Cortesiano'),
-(12, 'PAR-2018-0012', '2018-04-26', 'Bryan B. Cortesiano'),
-(13, 'PAR-2018-0013', '2018-04-26', 'Bryan B. Cortesiano');
+INSERT INTO `ams_t_par` (`PAR_ID`, `PAR_NO`, `PAR_DATE`, `PAR_ISSUED_BY`, `PAR_DU_VIEW`, `PAR_DU_CLICKED`) VALUES
+(1, 'PAR-2018-0001', '2018-04-29', 'Bryan B. Cortesiano', 1, 1),
+(2, 'PAR-2018-0002', '2018-04-30', 'Bryan B. Cortesiano', 1, 1),
+(3, 'PAR-2018-0003', '2018-04-30', 'Bryan B. Cortesiano', 1, 1),
+(4, 'PAR-2018-0004', '2018-04-30', 'Bryan B. Cortesiano', 1, 1),
+(5, 'PAR-2018-0005', '2018-04-30', 'Bryan B. Cortesiano', 1, 1),
+(6, 'PAR-2018-0006', '2018-04-30', 'Bryan B. Cortesiano', 1, 1),
+(7, 'PAR-2018-0007', '2018-04-30', 'Bryan B. Cortesiano', 1, 0),
+(8, 'PAR-2018-0008', '2018-05-01', 'Bryan B. Cortesiano', 1, 1),
+(9, 'PAR-2018-0009', '2018-05-01', 'Bryan B. Cortesiano', 1, 0),
+(10, 'PAR-2018-0010', '2018-05-01', 'Bryan B. Cortesiano', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -645,28 +849,36 @@ CREATE TABLE `ams_t_par_sub` (
 --
 
 INSERT INTO `ams_t_par_sub` (`PARS_ID`, `PARS_CANCEL`, `PARS_CANCEL_DATE`, `PARS_CANCEL_BY`, `A_ID`, `PAR_ID`, `EP_ID`) VALUES
-(1, 0, NULL, NULL, 36, 1, 4),
-(2, 0, NULL, NULL, 55, 1, 4),
-(3, 0, NULL, NULL, 11, 2, 2),
-(4, 1, '2018-04-26', 'James Vincent Nicolas', 46, 2, 2),
-(5, 0, NULL, NULL, 10, 3, 3),
-(6, 0, NULL, NULL, 45, 3, 3),
-(7, 0, NULL, NULL, 9, 4, 5),
-(8, 1, '2018-04-26', 'James Vincent Nicolas', 30, 4, 5),
-(9, 0, NULL, NULL, 7, 5, 6),
-(10, 0, NULL, NULL, 43, 5, 6),
-(11, 0, NULL, NULL, 8, 5, 6),
-(12, 0, NULL, NULL, 44, 5, 6),
-(13, 0, NULL, NULL, 29, 5, 6),
-(14, 0, NULL, NULL, 28, 6, 2),
-(15, 0, NULL, NULL, 6, 7, 4),
-(16, 0, NULL, NULL, 27, 8, 3),
-(17, 1, '2018-04-26', 'James Vincent Nicolas', 42, 9, 5),
-(18, 0, NULL, NULL, 26, 10, 6),
-(19, 0, NULL, NULL, 5, 11, 2),
-(20, 0, NULL, NULL, 41, 12, 3),
-(21, 0, NULL, NULL, 39, 13, 3),
-(22, 0, NULL, NULL, 4, 13, 3);
+(1, 0, NULL, NULL, 18, 1, 2),
+(2, 0, NULL, NULL, 19, 1, 2),
+(3, 0, NULL, NULL, 20, 1, 2),
+(4, 0, NULL, NULL, 21, 1, 2),
+(5, 0, NULL, NULL, 55, 1, 2),
+(6, 0, NULL, NULL, 34, 2, 5),
+(7, 0, NULL, NULL, 50, 3, 5),
+(8, 0, NULL, NULL, 16, 4, 2),
+(9, 0, NULL, NULL, 6, 5, 5),
+(10, 0, NULL, NULL, 49, 6, 2),
+(11, 0, NULL, NULL, 12, 6, 2),
+(12, 1, '2018-04-30', 'James Vincent Nicolas', 33, 6, 2),
+(13, 0, NULL, NULL, 14, 7, 4),
+(14, 0, NULL, NULL, 48, 7, 4),
+(15, 0, NULL, NULL, 13, 7, 4),
+(16, 1, '2018-04-30', 'James Vincent Nicolas', 31, 8, 2),
+(17, 0, NULL, NULL, 46, 8, 2),
+(18, 1, '2018-05-01', 'James Vincent Nicolas', 32, 8, 2),
+(19, 1, '2018-04-30', 'James Vincent Nicolas', 47, 8, 2),
+(20, 1, '2018-04-30', 'James Vincent Nicolas', 33, 8, 2),
+(21, 0, NULL, NULL, 30, 9, 4),
+(22, 1, '2018-05-01', 'Esperato Illaida', 10, 9, 4),
+(23, 1, '2018-05-01', 'Esperato Illaida', 45, 9, 4),
+(24, 0, NULL, NULL, 11, 9, 4),
+(25, 0, NULL, NULL, 15, 9, 4),
+(26, 1, '2018-05-01', 'James Vincent Nicolas', 29, 10, 5),
+(27, 1, '2018-05-01', 'James Vincent Nicolas', 9, 10, 5),
+(28, 0, NULL, NULL, 31, 10, 5),
+(29, 0, NULL, NULL, 47, 10, 5),
+(30, 0, NULL, NULL, 33, 10, 5);
 
 -- --------------------------------------------------------
 
@@ -722,7 +934,10 @@ CREATE TABLE `ams_t_release_of_asset` (
 --
 
 INSERT INTO `ams_t_release_of_asset` (`ROA_ID`, `ROA_REASON`, `ROA_DATE`, `ROA_VIEW_BY_PO`, `ROA_RELEASED_BY`) VALUES
-(1, 'release\n', '2018-04-26', 0, 'James Vincent Nicolas');
+(1, 'oks', '2018-04-30', 0, 'James Vincent Nicolas'),
+(2, 'konzert fuji imarflex', '2018-04-30', 0, 'James Vincent Nicolas'),
+(3, 'itechie silver brand', '2018-05-01', 0, 'James Vincent Nicolas'),
+(4, 'epson digital', '2018-05-01', 0, 'Esperato Illaida');
 
 -- --------------------------------------------------------
 
@@ -741,9 +956,15 @@ CREATE TABLE `ams_t_release_of_asset_sub` (
 --
 
 INSERT INTO `ams_t_release_of_asset_sub` (`ROAS_ID`, `A_ID`, `ROA_ID`) VALUES
-(1, 42, 1),
-(2, 30, 1),
-(3, 46, 1);
+(1, 33, 1),
+(2, 33, 2),
+(3, 47, 2),
+(4, 31, 2),
+(5, 9, 3),
+(6, 29, 3),
+(7, 32, 3),
+(8, 45, 4),
+(9, 10, 4);
 
 -- --------------------------------------------------------
 
@@ -769,7 +990,14 @@ CREATE TABLE `ams_t_report_of_damage` (
 --
 
 INSERT INTO `ams_t_report_of_damage` (`ROD_ID`, `ROD_NO`, `ROD_REASON`, `ROD_DATE`, `ROD_STATUS`, `ROD_VIEW_BY_PO`, `ROD_VIEW_BY_USER`, `ROD_VIEW_CLICKED`, `ROD_VIEW_BY_USER_EVAL`, `ROD_REMARKS`) VALUES
-(1, 'ROD-2018-0001', 'sira', '2018-04-26', 'Pending', 1, 0, 1, 0, NULL);
+(1, 'ROD-2018-0001', 'report numawan', '2018-04-29', 'Evaluated', 1, 1, 1, 1, 'paayos muna natin'),
+(2, 'ROD-2018-0002', 'asd', '2018-04-29', 'Evaluated', 1, 1, 0, 1, 'paayos'),
+(3, 'ROD-2018-0003', 'asd', '2018-04-29', 'Evaluated', 1, 1, 0, 1, 'asdasd'),
+(4, 'ROD-2018-0004', '1', '2018-04-29', 'Pending', 1, 0, 1, 0, NULL),
+(5, 'ROD-2018-0005', '2', '2018-04-29', 'Pending', 1, 0, 1, 0, NULL),
+(6, 'ROD-2018-0006', '3', '2018-04-29', 'Pending', 1, 0, 1, 0, NULL),
+(7, 'ROD-2018-0007', '4', '2018-04-29', 'Pending', 1, 0, 1, 0, NULL),
+(8, 'ROD-2018-0008', 'dell logi', '2018-04-30', 'Pending', 1, 0, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -780,7 +1008,7 @@ INSERT INTO `ams_t_report_of_damage` (`ROD_ID`, `ROD_NO`, `ROD_REASON`, `ROD_DAT
 CREATE TABLE `ams_t_report_of_damage_sub` (
   `RODS_ID` int(11) NOT NULL,
   `RODS_CANCEL_DATE` date DEFAULT NULL,
-  `RODS_DATE_INSPECT` date DEFAULT NULL,
+  `RODS_DATE_INSPECT` datetime DEFAULT CURRENT_TIMESTAMP,
   `RODS_STATUS` varchar(25) NOT NULL DEFAULT 'Pending',
   `RODS_EVALUATION` varchar(25) DEFAULT NULL,
   `RODS_SHOW` int(11) NOT NULL DEFAULT '0',
@@ -793,8 +1021,17 @@ CREATE TABLE `ams_t_report_of_damage_sub` (
 --
 
 INSERT INTO `ams_t_report_of_damage_sub` (`RODS_ID`, `RODS_CANCEL_DATE`, `RODS_DATE_INSPECT`, `RODS_STATUS`, `RODS_EVALUATION`, `RODS_SHOW`, `ROD_ID`, `A_ID`) VALUES
-(1, NULL, NULL, 'Pending', NULL, 0, 1, 28),
-(2, NULL, NULL, 'Pending', NULL, 0, 1, 11);
+(1, NULL, '2018-04-29 13:35:02', 'Evaluated', 'For Repair', 0, 1, 20),
+(2, NULL, '2018-04-29 13:35:02', 'Evaluated', 'For Repair', 0, 1, 19),
+(3, NULL, '2018-04-29 13:35:02', 'Evaluated', 'For Repair', 0, 1, 18),
+(4, NULL, '2018-04-29 13:53:43', 'Evaluated', 'For Repair', 0, 2, 21),
+(5, NULL, '2018-04-30 00:02:54', 'Evaluated', 'For Repair', 0, 3, 55),
+(6, NULL, '2018-04-30 00:06:34', 'Pending', NULL, 0, 4, 16),
+(7, NULL, '2018-04-30 00:06:41', 'Pending', NULL, 0, 5, 34),
+(8, NULL, '2018-04-30 00:06:48', 'Pending', NULL, 0, 6, 50),
+(9, NULL, '2018-04-30 00:06:55', 'Pending', NULL, 0, 7, 6),
+(10, NULL, '2018-04-30 23:16:23', 'Pending', NULL, 0, 8, 12),
+(11, NULL, '2018-04-30 23:16:23', 'Pending', NULL, 0, 8, 49);
 
 -- --------------------------------------------------------
 
@@ -812,15 +1049,6 @@ CREATE TABLE `ams_t_transfer_out_ptr` (
   `C_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ams_t_transfer_out_ptr`
---
-
-INSERT INTO `ams_t_transfer_out_ptr` (`PTR_ID`, `PTR_NO`, `PTR_DATE`, `PTR_RECEIVED_BY`, `PTR_REMARKS`, `PTR_TRANSFERRED_BY`, `C_ID`) VALUES
-(1, 'PTR-2018-0001', '2018-04-10', 'AASDSA', 'ASDASDAS', 'Bryan B. Cortesiano', 6),
-(2, 'PTR-2018-0002', '2018-04-10', 'adsa', 'asdasd', 'Bryan B. Cortesiano', 2),
-(3, 'PTR-2018-0003', '2018-04-17', 'sadsa', 'dasda', 'Bryan B. Cortesiano', 4);
-
 -- --------------------------------------------------------
 
 --
@@ -832,17 +1060,6 @@ CREATE TABLE `ams_t_transfer_out_ptr_sub` (
   `A_ID` int(11) NOT NULL,
   `PTR_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ams_t_transfer_out_ptr_sub`
---
-
-INSERT INTO `ams_t_transfer_out_ptr_sub` (`PTRS_ID`, `A_ID`, `PTR_ID`) VALUES
-(1, 35, 1),
-(2, 17, 1),
-(3, 52, 1),
-(4, 31, 2),
-(5, 53, 3);
 
 -- --------------------------------------------------------
 
@@ -867,12 +1084,13 @@ CREATE TABLE `ams_t_user_request` (
 --
 
 INSERT INTO `ams_t_user_request` (`UR_ID`, `UR_UNIT`, `UR_QUANTITY`, `UR_STATUS`, `UR_APPROVED_DATE_BY_PO`, `UR_REJECT_DATE_BY_PO`, `URS_ID`, `AL_ID`, `EP_ID`) VALUES
-(1, 'Piece', 1, 'Approved', '2018-04-26', NULL, 1, 12, 5),
-(2, 'Piece', 1, 'Approved', '2018-04-26', NULL, 2, 13, 4),
-(3, 'Piece', 1, 'Approved', '2018-04-26', NULL, 3, 12, 5),
-(4, 'Piece', 1, 'Approved', '2018-04-26', NULL, 4, 6, 4),
-(5, 'Set', 1, 'Pending', NULL, NULL, 5, 12, 2),
-(6, 'Set', 1, 'Pending', NULL, NULL, 6, 12, 5);
+(1, 'Piece', 5, 'Reject', NULL, '2018-05-01', 1, 7, 2),
+(2, 'Piece', 5, 'Reject', NULL, '2018-05-01', 1, 12, 5),
+(3, 'Set', 5, 'Pending', NULL, NULL, 2, 2, 4),
+(4, 'Piece', 5, 'Pending', NULL, NULL, 3, 5, 4),
+(5, 'Piece', 5, 'Approved', '2018-05-01', NULL, 4, 13, 2),
+(6, 'Piece', 5, 'Pending', NULL, NULL, 5, 11, 4),
+(7, 'Piece', 6, 'Approved', '2018-05-01', NULL, 6, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -895,10 +1113,8 @@ CREATE TABLE `ams_t_user_request_approved_by_po` (
 --
 
 INSERT INTO `ams_t_user_request_approved_by_po` (`URABPO_ID`, `URABPO_STATUS`, `URABPO_APPROVED_DATE_BY_MAIN`, `URABPO_REJECT_DATE_BY_MAIN`, `URA_QUANTITY`, `UR_ID`, `URS_ID`) VALUES
-(1, 'Pending', NULL, NULL, 1, 1, 1),
-(2, 'Pending', NULL, NULL, 1, 2, 2),
-(3, 'Pending', NULL, NULL, 1, 3, 3),
-(4, 'Pending', NULL, NULL, 1, 4, 4);
+(1, 'Pending', NULL, NULL, 6, 7, 6),
+(2, 'Pending', NULL, NULL, 5, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -920,10 +1136,8 @@ CREATE TABLE `ams_t_user_request_status_to_main` (
 --
 
 INSERT INTO `ams_t_user_request_status_to_main` (`URSTM_ID`, `URSTM_STATUS_TO_MAIN`, `URSTM_APPROVED_DATE_BY_MAIN`, `URSTM_REJECT_DATE_BY_MAIN`, `URSTM_REMARKS`, `URS_ID`) VALUES
-(1, 'Pending', NULL, NULL, NULL, 1),
-(2, 'Approved', '2018-04-26', NULL, 'asd', 2),
-(3, 'Pending', NULL, NULL, NULL, 3),
-(4, 'Pending', NULL, NULL, NULL, 4);
+(1, 'Pending', NULL, NULL, NULL, 6),
+(2, 'Pending', NULL, NULL, NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -945,20 +1159,22 @@ CREATE TABLE `ams_t_user_request_summary` (
   `URS_VIEW_BY_USER` int(11) NOT NULL DEFAULT '0',
   `URS_VIEW_BY_PO` int(11) NOT NULL DEFAULT '0',
   `URS_VIEW_BY_USER_MAIN` int(11) NOT NULL DEFAULT '0',
-  `URS_VIEW_CLICKED` int(11) NOT NULL DEFAULT '0'
+  `URS_VIEW_CLICKED` int(11) NOT NULL DEFAULT '0',
+  `URS_VIEW_BY_PO_URGENT` int(11) NOT NULL DEFAULT '0',
+  `URS_VIEW_CLICKED_URGENT` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ams_t_user_request_summary`
 --
 
-INSERT INTO `ams_t_user_request_summary` (`URS_ID`, `URS_NO`, `URS_REQUEST_DATE`, `URS_PURPOSE`, `URS_STATUS_TO_PO`, `URS_APPROVED_DATE`, `URS_REJECT_DATE`, `URS_REMARKS`, `URS_URGENT_DATE`, `URS_URGENT_TYPE`, `URS_VIEW_BY_USER`, `URS_VIEW_BY_PO`, `URS_VIEW_BY_USER_MAIN`, `URS_VIEW_CLICKED`) VALUES
-(1, 'REQ-2018-0001', '2018-04-26', 'Hehe', 'Approved', '2018-04-26', NULL, 'oks', '2018-05-11', 'Urgent (15 Days process)', 1, 1, 0, 1),
-(2, 'REQ-2018-0002', '2018-04-26', 'asdasas', 'Approved', '2018-04-26', NULL, 'dasdasdas', '2018-05-06', 'Very Urgent (10 Days proc', 1, 1, 0, 0),
-(3, 'REQ-2018-0003', '2018-04-26', 'op', 'Approved', '2018-04-26', NULL, '1231231', '2018-05-11', 'Urgent (15 Days process)', 1, 1, 0, 1),
-(4, 'REQ-2018-0004', '2018-04-26', '1', 'Approved', '2018-04-26', NULL, '213', '2018-05-11', 'Urgent (15 Days process)', 1, 1, 0, 1),
-(5, 'REQ-2018-0005', '2018-04-26', '4566456456456654', 'Pending', NULL, NULL, NULL, '2018-05-26', 'Not Urgent (30 Days proce', 0, 1, 0, 1),
-(6, 'REQ-2018-0006', '2018-04-26', '3', 'Pending', NULL, NULL, NULL, '2018-05-11', 'Urgent (15 Days process)', 0, 1, 0, 0);
+INSERT INTO `ams_t_user_request_summary` (`URS_ID`, `URS_NO`, `URS_REQUEST_DATE`, `URS_PURPOSE`, `URS_STATUS_TO_PO`, `URS_APPROVED_DATE`, `URS_REJECT_DATE`, `URS_REMARKS`, `URS_URGENT_DATE`, `URS_URGENT_TYPE`, `URS_VIEW_BY_USER`, `URS_VIEW_BY_PO`, `URS_VIEW_BY_USER_MAIN`, `URS_VIEW_CLICKED`, `URS_VIEW_BY_PO_URGENT`, `URS_VIEW_CLICKED_URGENT`) VALUES
+(1, 'REQ-2018-0001', '2018-04-29', 'Need po.', 'Reject', NULL, '2018-05-01', 'reject', '2018-05-29', 'Not Urgent (30 Days proce', 1, 1, 0, 1, 0, 0),
+(2, 'REQ-2018-0002', '2018-04-29', 'Academic purpose', 'Pending', NULL, NULL, NULL, '2018-05-14', 'Urgent (15 Days process)', 0, 1, 0, 1, 0, 0),
+(3, 'REQ-2018-0003', '2018-04-22', 'please urgent ito', 'Pending', NULL, NULL, NULL, '2018-05-02', 'Very Urgent (10 Days proc', 0, 1, 0, 1, 1, 1),
+(4, 'REQ-2018-0004', '2018-04-26', 'asd', 'Approved', '2018-05-01', NULL, '123', '2018-05-06', 'Very Urgent (10 Days proc', 1, 1, 0, 1, 1, 1),
+(5, 'REQ-2018-0005', '2018-04-24', '2', 'Pending', NULL, NULL, NULL, '2018-05-04', 'Very Urgent (10 Days proc', 0, 1, 0, 1, 1, 1),
+(6, 'REQ-2018-0006', '2018-04-30', 'd', 'Approved', '2018-05-01', NULL, 'hehe', '2018-05-30', 'Not Urgent (30 Days proce', 1, 1, 0, 1, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -1235,31 +1451,31 @@ ALTER TABLE `ams_r_ppmp_period`
 -- AUTO_INCREMENT for table `ams_t_dispose`
 --
 ALTER TABLE `ams_t_dispose`
-  MODIFY `D_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `D_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_job_order`
 --
 ALTER TABLE `ams_t_job_order`
-  MODIFY `JO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `JO_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_job_order_sub`
 --
 ALTER TABLE `ams_t_job_order_sub`
-  MODIFY `JOS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `JOS_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_par`
 --
 ALTER TABLE `ams_t_par`
-  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `PAR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ams_t_par_sub`
 --
 ALTER TABLE `ams_t_par_sub`
-  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `PARS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `ams_t_ppmp`
@@ -1277,55 +1493,55 @@ ALTER TABLE `ams_t_ppmp_sub`
 -- AUTO_INCREMENT for table `ams_t_release_of_asset`
 --
 ALTER TABLE `ams_t_release_of_asset`
-  MODIFY `ROA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ROA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ams_t_release_of_asset_sub`
 --
 ALTER TABLE `ams_t_release_of_asset_sub`
-  MODIFY `ROAS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ROAS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ams_t_report_of_damage`
 --
 ALTER TABLE `ams_t_report_of_damage`
-  MODIFY `ROD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ROD_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ams_t_report_of_damage_sub`
 --
 ALTER TABLE `ams_t_report_of_damage_sub`
-  MODIFY `RODS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `RODS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ams_t_transfer_out_ptr`
 --
 ALTER TABLE `ams_t_transfer_out_ptr`
-  MODIFY `PTR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PTR_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_transfer_out_ptr_sub`
 --
 ALTER TABLE `ams_t_transfer_out_ptr_sub`
-  MODIFY `PTRS_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `PTRS_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request`
 --
 ALTER TABLE `ams_t_user_request`
-  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `UR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_approved_by_po`
 --
 ALTER TABLE `ams_t_user_request_approved_by_po`
-  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `URABPO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_status_to_main`
 --
 ALTER TABLE `ams_t_user_request_status_to_main`
-  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `URSTM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ams_t_user_request_summary`
