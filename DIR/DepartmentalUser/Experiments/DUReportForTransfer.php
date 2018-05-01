@@ -4,7 +4,7 @@
 
     session_start();
 
-    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Departmental User' && !isset($_SESSION['myuser']) && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
+    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Departmental User' && !isset($_SESSION['myuser'])  && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
     {
       echo "<script>window.location.assign('../login.php')</script>";
 
@@ -75,7 +75,7 @@
 
 <section id="container" >
 <?php include 'DUProfileModal.php'; ?> 
-
+    
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
@@ -120,9 +120,6 @@
             ?>
             
         </li>
-
-        <!-- PARA SA ASSIGN -->                
-        <?php include 'AssignNotifUI.php'; ?> 
 
         <!-- PARA SA REPORT -->
         <?php include 'ReportNotifUI.php'; ?>
@@ -218,8 +215,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
-                        <li class="active"><a href="DUReportForTransfer.php">Released Asset</a></li>   
-                        <li><a href="DUListOfRequest.php">List of Request</a></li>
+                        <li class="active"><a href="DUReportForTransfer.php">Released Asset</a></li>                  
                     </ul>
                 </li>
             </ul>            
@@ -253,16 +249,16 @@
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>
                         </header>
+
                         <div class="panel-body">
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                         <tr>
-                                            <th style="display: none;">Date Released</th> 
+                                            <th style="width: 140px;">Date Acquired</th> 
+                                            <th style="width: 300px;">Asset</th> 
                                             <th style="width: 140px;">Date Released</th> 
                                             <th style="">Reason Of Release</th>
-                                            <th style="width: 70px;"></th>
-
                                         </tr>
                                     </thead>
 
@@ -273,7 +269,7 @@
                                             $idofuserhere = $_SESSION['myoid'];
                                             // echo $idofuserhere;
 
-                                            $sqldisp = "SELECT ROA.ROA_ID,A.A_DESCRIPTION, ROA.ROA_REASON, ROA.ROA_DATE, O.O_ID, A.A_DATE, PARS.PARS_CANCEL_DATE FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON ROAS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID where o.o_id =$idofuserhere GROUP BY ROA.ROA_ID"; 
+                                            $sqldisp = "SELECT A.A_DESCRIPTION, ROA.ROA_REASON, O.O_ID, A.A_DATE, PARS.PARS_CANCEL_DATE FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON ROAS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE PARS.PARS_CANCEL_DATE IS NOT NULL AND O.O_ID = $idofuserhere";
 
                                             // TESTING
 
@@ -285,26 +281,18 @@
 
                                             while($rows = mysqli_fetch_assoc($resultdisp))
                                             {
-                                                $id = $rows['ROA_ID'];
                                                 $reldesc = $rows['A_DESCRIPTION'];
                                                 $relreason = $rows['ROA_REASON'];
-                                                $acdate = $rows['ROA_DATE'];
+                                                $acdate = $rows['A_DATE'];
                                                 $reldate = $rows['PARS_CANCEL_DATE'];
                                         ?>
 
                                         <tr class="gradeX">
-                                            <td class="hidden"> <?php echo $id; ?> </td>
                                             <td> <?php echo $acdate; ?> </td>
+                                            <td> <?php echo $reldesc; ?> </td>
+                                            <td> <?php echo $reldate; ?> </td>
                                             <td> <?php echo $relreason; ?> </td>
-                                           <td>
-                                            <center>
-                                                <a class="btn btn-success" style="margin: -5px;" href="DUReleasedAssetsView.php?receiveroasid=<?php echo $id; ?>"><i class="fa fa-eye"></i></a>
-                                            </center>
-
-                                                <!-- <a class="btn btn-success" style="margin: -5px;" onclick="printonly('<?php echo $id; ?>');"><i class="fa fa-print"></i> Print</a> -->
-                                            </td>
                                         </tr>
-                                            
 
                                         <?php
                                             }
@@ -435,7 +423,7 @@
 	<script src="../../js/scripts.js"></script>
 
 	<!--dynamic table initialization -->
-	<script src="DUReportForTransfer/dynamic_table_init.js"></script>
+	<script src="../../js/dynamic_table_init.js"></script>
 
 	<script src="../../js/iCheck/jquery.icheck.js"></script>
 
@@ -492,12 +480,6 @@
         });
 
     </script>
-
-    <<!-- REPORT NOTIF -->
-    <?php include 'ReportNotif.php'; ?> 
-
-    <!-- ASSIGN NOTIF -->
-    <?php include 'AssignNotif.php'; ?> 
 
     <!-- REPORT NOTIF -->
     <?php include 'ReportNotif.php'; ?> 

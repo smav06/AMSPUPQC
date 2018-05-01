@@ -301,7 +301,7 @@
                             </span>
                         </header>
 
-                        <div class="panel-body" id="pnldonation">
+                        <div class="panel-body hidden" id="pnldonation">
                             <table class="display table table-bordered table-striped">                                
                                 <tr>
                                     <td> 
@@ -394,8 +394,31 @@
                             </table>
                         </div>
 
-                        <div class="panel-body hidden" id="pnlrequests">
-                            PANEL REQUESTS
+                        <div class="panel-body " id="pnlrequests">                            
+                            <div class="form-content">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Enter Purchase Request Number</label>
+                                        <input style="color: black;" type="text" class="form-control" id="inpprno" required />
+                                    </div>
+
+                                    <div class="col-md-4" style="margin-top: 22px;">
+                                        <button type="button" class="btn btn-success" id="btnfrompurchaserequest">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="form-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <!-- <div class="panel-body hidden" id="pnlppmp">
@@ -554,6 +577,21 @@
             $('select').on('change',function(){                        
                 $('input[name=place]').val($(this).val());            
             });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $('#btnfrompurchaserequest').click(function() {
+
+                var inpprnos = document.getElementById('inpprno').value;
+
+                alert(inpprnos);
+            });
+
         });
 
     </script>
