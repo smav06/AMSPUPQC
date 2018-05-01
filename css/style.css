@@ -427,6 +427,21 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     border:none;
     left:-10px;
 }
+
+.dropdown-menu.extended21 {
+    max-width:370px !important;
+    min-width:160px !important;
+    top:42px;
+    width:350px !important;
+    padding:0 10px;
+    box-shadow:0 0px 5px rgba(0,0,0,0.1) !important;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    background:#fff;
+    border:none;
+    left:-10px;
+}
+
 .notify-row .notification span.label {
     display:inline-block;
     height:21px;

@@ -20,7 +20,7 @@ POJobOrder.php
  Property Officer UI	
 	✓ - [mica / ron]	- Request Notif dapat may days remaining  									ñ
 	✓ - [Bryan]			- Report Notif dapat mahaba na agad [ALL PAGES / 15mins] 				
-	✓ - [mica / ron]	- Urgent Request Notif dapat lahat meron at ayusin							☼
+	 - [mica / ron]	- Urgent Request Notif dapat lahat meron at ayusin							☼
 	✓ - [mica / ron]	- Profile ni property Officer 												ñ
 	✓ - [Bryan]			- Hide lahat about sa PPMP [ALL PAGES / 5mins]
 
@@ -69,7 +69,7 @@ POJobOrder.php
 
  Departmental User UI	
 	✓ - [mica / ron]	- Profile ni departmental user 												ñ
-	 - [Bryan]			- Notification para sa pag may inassign na item	- kulang pa release
+	 - [Bryan]			- Notification para sa pag may inassign na item	- kulang pa release wala pa kila espe.
 	✓ - [Bryan]			- Notification para sa result ng report of damage [ALL PAGES / 2.30hrs]
 
 
@@ -93,7 +93,7 @@ POJobOrder.php
 
 
 	 - [vigan / jocer]	- DUReportDamagedAsset.php - gawing detailed
-	✓ - [vigan / jocer]	- dapat di per item, dapat by batch
+	✓ - [vigan / jocer]	- dapat di per item, dapat by batch 										ñ
 
 
 	 - [espe / paolo]	- DUReportForTransfer.php
