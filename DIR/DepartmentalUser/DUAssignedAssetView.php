@@ -1,4 +1,4 @@
-        <?php
+    <?php
 
     include('../Connection/db.php');
 
@@ -8,6 +8,10 @@
     {
       echo "<script>window.location.assign('../login.php')</script>";
 
+    }
+      if (isset($_GET['receiveparid']))
+    {   
+        $ids = $_GET['receiveparid']; 
     }
 
 ?>
@@ -22,7 +26,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>Requisition</title>
+    <title>Assigned Asset</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -175,7 +179,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>                
+                <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -208,7 +212,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="DURequest.php">Request</a></li>
-                        <li><a href="DUPpmpRequest.php">PPMP Request</a></li>                  
+                        <!-- <li><a href="DURpmpRequest.php">PPMP Request</a></li>                     -->
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -218,9 +222,9 @@
                     </a>
                     <ul class="sub">
                         <li><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
-                        <li><a href="DUReportForTransfer.php">Released Asset</a></li>    
-                        <li class="active"><a href="DUListOfRequest.php">List of Request</a></li>  
-                        <li><a href="DUAssignedAsset.php">Assigned Asset</a></li> 
+                        <li><a href="DUReportForTransfer.php">Released Asset</a></li>                  
+                        <li><a href="DUListOfRequest.php">List Of Request</a></li>
+                        <li class="active"><a href="DUAssignedAsset.php">Assigned Asset</a></li>
                     </ul>
                 </li>
             </ul>            
@@ -230,121 +234,118 @@
 </aside>
 <!--sidebar end-->
     <!--main content start-->
-    <section id="main-content">
-        <section class="wrapper">
-        <!-- page start-->
-        <div class="row">
-            <div class="col-md-12">
-                <!--breadcrumbs start -->
-                <ul class="breadcrumb">
-                    <li><a href="DUDashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                    <li><a href="DUListOfRequest.php">List Of Request</a></li>
-                </ul>
-                <!--breadcrumbs end -->
-            </div>
+<section id="main-content">
+    <section class="wrapper">
+    <!-- page start-->
+    <div class="row">
+        <div class="col-md-12">
+            <!--breadcrumbs start -->
+            <ul class="breadcrumb">
+                <li><a href="DUDashboard.php"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="DUAssignedAsset.php">Assigned Asset</a></li>
+            </ul>
+            <!--breadcrumbs end -->
         </div>
-        
-        <div class="row">
-            <div class="col-md-12">
-                <section class="panel">
-                    <header class="panel-heading"> 
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading"> 
+                    Assigned Asset
+                      <span class="tools pull-right">
+                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                     </span>
+                </header>
+                
+                <?php
+                    $PARID = $_GET['receiveparid'];
+                    $idofysir = $_SESSION['myoid']; 
+                    $empid = $_SESSION['myid']; 
 
-                        Department Requests
-                          <span class="tools pull-right">
-                            <a class="fa fa-chevron-down" href="javascript:;"></a>
-                         </span>
-                    </header>
+                    $sql = "SELECT * FROM ams_t_par AS PAR INNER JOIN ams_t_par_sub AS PARS ON PAR.PAR_ID = PARS.PAR_ID INNER JOIN ams_r_employee_profile AS EMP ON PARS.EP_ID = EMP.EP_ID INNER JOIN ams_r_office AS O ON EMP.O_ID = O.O_ID WHERE PAR.PAR_ID = $PARID";
 
-                    <div class="panel-body">
-                        <div class="adv-table">
-                            <table class="display table table-bordered table-striped classtbl" id="dynamic-table">
-                                <thead>
-                                    <tr>
-                                        <th style="display: none;">URS ID</th>
-                                        <th style="width: 135px;">Request No.</th>
-                                        <th style="width: 130px;">Request Date</th> 
-                                        <th style="">Purpose Of Request</th>
-                                        <!-- <th style="">Requested By</th> -->
-                                        <th style="width:70px">Status</th>
-                                        <th style="width:70px"></th>
-                                    </tr>
-                                </thead>
+                    $result= mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
-                                <?php
-                                    
-                                     $getuseid = $_SESSION['myoid'];
+                    while($row = mysqli_fetch_assoc($result))  
+                    {                              
+                        $rdate = $row['PAR_DATE'];
+                        $reqno = $row['PAR_NO'];
+                    }                       
+                ?>
 
-                                    $retrievereqs = "SELECT URS.URS_ID,CONCAT(EP.EP_FNAME,' ', EP.EP_LNAME) EPNAME, URS.URS_NO, URS.URS_REQUEST_DATE, URS.URS_PURPOSE, URS.URS_STATUS_TO_PO FROM `ams_t_user_request_summary` AS URS INNER JOIN `ams_t_user_request` AS UR ON UR.URS_ID = URS.URS_ID INNER JOIN `ams_r_employee_profile` AS EP ON UR.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE o.o_id =$aydiopyuser GROUP BY URS.URS_ID ORDER BY URS.URS_REQUEST_DATE DESC, URS.URS_ID DESC";
+                <div class="panel-body">
+                    <div class="row group">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Request No.</label>
+                                <input type="text" value="<?php echo $reqno; ?>" class="form-control" style="color: black;" disabled />
+                            </div>
+                        </div>  
 
-                                    $dispdata = mysqli_query($connection, $retrievereqs);
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Date of Request</label>
+                                <input type="date" value="<?php echo $rdate; ?>" class="form-control" style="color: black;" disabled />
+                            </div>
+                        </div>   
 
-                                    while ($rowdispreq = mysqli_fetch_assoc($dispdata)) 
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped classtbl">
+                            <thead>
+                                <tr>
+                                    <th style="">Assigned Asset</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php 
+                                    $URS_NO = $_GET['receiveparid'];
+                                    $EID = $_SESSION['myid'];
+
+                                    $sql_query = "SELECT * FROM ams_t_par AS PAR INNER JOIN ams_t_par_sub AS PARS ON PAR.PAR_ID = PARS.PAR_ID INNER JOIN ams_r_asset AS A ON PARS.A_ID = A.A_ID INNER JOIN ams_r_employee_profile AS EMP ON PARS.EP_ID = EMP.EP_ID INNER JOIN ams_r_office AS O ON EMP.O_ID = O.O_ID WHERE PAR.PAR_ID = $URS_NO";
+
+                                    $query = mysqli_query($connection,$sql_query);
+
+                                    while($row = mysqli_fetch_array($query))
                                     {
-                                        $ursdispid = $rowdispreq['URS_ID'];
-                                        $ursdispno = $rowdispreq['URS_NO'];
-                                        $ursdispreqdate = $rowdispreq['URS_REQUEST_DATE'];
-                                        $ursdisppurpose = $rowdispreq['URS_PURPOSE'];
-                                        $ursdispstatus = $rowdispreq['URS_STATUS_TO_PO'];
-                                        $EmpName = $rowdispreq['EPNAME'];
-
                                 ?>
 
                                     <tr>
-                                        <td style="display: none;"> <?php echo $ursdispid; ?> </td>
-                                        <td> <?php echo $ursdispno; ?> </td>
-                                        <td> <?php echo $ursdispreqdate; ?> </td>
-                                        <td> <?php echo $ursdisppurpose; ?> </td>
-                                        <!-- <td> <?php echo $EmpName; ?> </td> -->
-                                        <?php  
-                                            if ($ursdispstatus == 'Approved')
-                                            {
-                                        ?>
-
-                                            <td> <p class="label label-success label-mini" style="font-size: 11px;"> <?php echo $ursdispstatus; ?> </p> </td>
-
-                                        <?php  
-                                            }
-                                            elseif ($ursdispstatus == 'Reject') 
-                                            {
-                                        ?>
-
-                                            <td> <p class="label label-danger label-mini" style="font-size: 11px;"> <?php echo $ursdispstatus; ?> </p> </td>
-
-                                        <?php  
-                                            }
-                                            elseif ($ursdispstatus == 'Pending') 
-                                            {
-                                        ?>
-
-                                            <td> <p class="label label-warning label-mini" style="font-size: 11px;"> <?php echo $ursdispstatus; ?> </p> </td>
-
-                                        <?php  
-                                            }
-                                        ?> 
-
-                                        <td>
-                                            <center>
-                                                <a class="btn btn-success" style="margin: -5px;" href="DUListOfRequestView.php?receiveursid=<?php echo $ursdispid; ?>&requestby=<?php echo $EmpName; ?>"><i class="fa fa-eye"></i></a>
-                                            </center>
-                                        </td>    
+                                        <td id="alname"> <?php echo $row['A_DESCRIPTION']; ?></td>
                                     </tr>
 
-                                <?php
+                                <?php 
                                     }
                                 ?>
+                            </tbody>
+                        </table>
+                    </div>
 
-                                </tbody>
-                            </table>
+                    <div class="row group">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <a class="btn btn-default" href="DUAssignedAsset.php">Back</a>
+                            </div>
                         </div>
                     </div>
-                </section>
-            </div>
 
-        </div>                        
-
-        <!-- page end-->
-        </section>
+                </div>
+            </section>
+        </div>                   
+    </div>
+    <!-- page end-->
     </section>
+</section>
     <!--main content end-->
 <!--right sidebar start-->
 <div class="right-sidebar">
@@ -432,6 +433,7 @@
 
 </section>
 
+
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
@@ -458,7 +460,7 @@
     <script src="../../js/scripts.js"></script>
 
     <!--dynamic table initialization -->
-    <script src="DUListOfRequest/dynamic_table_init.js"></script>
+    <script src="DURequest/dynamic_table_init.js"></script>
 
     <script src="../../js/iCheck/jquery.icheck.js"></script>
 
@@ -645,7 +647,7 @@
     <?php include 'ReportNotifClickedBtnScript.php'; ?> 
 
     <!-- ASSIGN CLICKED STATUS -->
-    <?php include 'AssignNotifClickedBtnScript.php'; ?>
+    <?php include 'AssignNotifClickedBtnScript.php'; ?> 
 
 </body>
 </html>

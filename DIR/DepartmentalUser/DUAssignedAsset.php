@@ -4,37 +4,17 @@
 
     session_start();
 
-    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Property Officer' && !isset($_SESSION['myuser'])  && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
+    if (!isset($_SESSION['mysesi']) && !isset($_SESSION['mytype']) == 'Departmental User' && !isset($_SESSION['myuser'])  && !isset($_SESSION['myid']) && !isset($_SESSION['myoid']))
     {
       echo "<script>window.location.assign('../login.php')</script>";
 
     }
-
-    if (isset($_GET['receiverodid'])) 
-    {
-        $ids = $_GET['receiverodid'];
-    } 
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <style type="text/css" media="print">
-        @media print
-          {
-             @page {
-               margin-top: 0;
-               margin-bottom: 0;
-             }
-             body  {
-               padding-top: 72px;
-               padding-bottom: 72px ;
-             }
-          } 
-    </style>
-
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +22,7 @@
     <meta name="author">
     <link rel="shortcut icon" href="../../images/favicon.png">
 
-    <title>RDA</title>
+    <title>Assigned Asset</title>
 
     <!--Core CSS -->
     <link href="../../bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -94,7 +74,7 @@
 <body>
 
 <section id="container" >
-<?php include 'DUProfileModal.php'; ?>
+<?php include 'DUProfileModal.php'; ?> 
 
 <!--header start-->
 <header class="header fixed-top clearfix">
@@ -109,7 +89,6 @@
     </div>
 </div>
 <!--logo end-->
-
 <input type="hidden" name="" id="officeidofuser" value="<?php echo $_SESSION["myoid"]; ?>">
 
 <div class="nav notify-row" id="top_menu">
@@ -143,7 +122,7 @@
         </li>
 
         <!-- PARA SA ASSIGN -->                
-        <?php include 'AssignNotifUI.php'; ?>   
+        <?php include 'AssignNotifUI.php'; ?> 
 
         <!-- PARA SA REPORT -->
         <?php include 'ReportNotifUI.php'; ?>
@@ -197,6 +176,7 @@
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="#ModalProfile" id="profilebtn" data-toggle="modal"><i class=" fa fa-suitcase"></i>Profile</a></li>
+
                 <li><a href="../logout.php"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
@@ -229,7 +209,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="DURequest.php">Request</a></li>
-                        <li><a href="DURpmpRequest.php">PPMP Request</a></li>                    
+                        <!-- <li><a href="DURpmpRequest.php">PPMP Request</a></li>                     -->
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -238,10 +218,10 @@
                         <span>Queries</span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
+                        <li><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
                         <li><a href="DUReportForTransfer.php">Released Asset</a></li>                  
                         <li><a href="DUListOfRequest.php">List Of Request</a></li>
-                        <li><a href="DUAssignedAsset.php">Assigned Asset</a></li>
+                        <li class="active"><a href="DUAssignedAsset.php">Assigned Asset</a></li>
                     </ul>
                 </li>
             </ul>            
@@ -260,7 +240,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="DUDashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="DUReportDamagedAsset.php">Reported Damaged Asset</a></li>
+                        <li><a href="DUReportDamagedAsset.php">Report Damaged Asset</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -270,91 +250,188 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Reported Damaged Assets
+                            List of Reported Damaged Asset
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            </span>
+                             </span>
                         </header>
+
                         <div class="panel-body">
-                            <div class="row group">
-                                <div class="col-md-12">
-                                    <div class="adv-table">
-                                        <table class="display table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Assets</th>
-                                                </tr>
-                                            </thead>
+                            <div class="adv-table">
+                                <table class="display table table-bordered table-striped classtbl2" id="dynamic-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="display: none;">PAR ID</th>
+                                            <th style="width: 350px;">PAR No</th>
+                                            <th style="">Date Assigned</th>
+                                            <th style="width: 70px;"></th>
+                                        </tr>
+                                    </thead>
 
-                                            <tbody>
+                                    <tbody>                                        
 
-                                            <?php  
-                                                $sql1 = "SELECT * FROM `ams_r_asset` AS A INNER JOIN `ams_t_report_of_damage_sub` AS RODS 
-                                                ON RODS.A_ID = A.A_ID WHERE RODS.ROD_ID = $ids";
+                                        <?php  
 
-                                                $result1 = mysqli_query($connection, $sql1) or die("Bad Query: $sql");
+                                            $getuserid = $_SESSION['myoid'];
 
-                                                while($row1 = mysqli_fetch_assoc($result1))
-                                                {
-                                                    $adesc = $row1['A_DESCRIPTION'];
-                                            ?>
-                                                <tr>
-                                                    <td> <?php echo $adesc; ?> </td>
-                                                </tr>
+                                            $sql = "SELECT PAR.PAR_ID, PAR.PAR_NO, PAR.PAR_DATE, EMP.EP_FNAME, EMP.EP_MNAME, EMP.EP_LNAME, O.O_NAME FROM ams_t_par AS PAR INNER JOIN ams_t_par_sub AS PARS ON PAR.PAR_ID = PARS.PAR_ID INNER JOIN ams_r_employee_profile AS EMP ON PARS.EP_ID = EMP.EP_ID INNER JOIN ams_r_office AS O ON EMP.O_ID = O.O_ID WHERE O.O_ID = $getuserid GROUP BY PAR.PAR_ID";
 
-                                            <?php
-                                                }
-                                            ?>
+                                            $result = mysqli_query($connection, $sql) or die("Bad Query: $sql");
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                            while($row = mysqli_fetch_assoc($result))
+                                            {
+                                                $parid = $row['PAR_ID'];
+                                                $parno = $row['PAR_NO'];
+                                                $pardate = $row['PAR_DATE'];
+                                        ?>
+
+                                        <tr class="gradeX">
+                                            <td style="display: none;"> <?php echo $parid; ?> </td>
+                                            <td style=""> <?php echo $parno; ?> </td>
+                                            <td style=""> <?php echo $pardate; ?> </td>
+
+                                            <td>
+                                                 <a class="btn btn-success" style="margin: -5px;" href="DUAssignedAssetView.php?receiveparid=<?php echo $parid; ?>"><i class="fa fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <?php
+                                            }
+                                        ?>
+
+                                    </tbody>
+                                </table>
+
                             </div>
-
-                            <span class="pull-right">
-                                <a class="btn btn-default" href="DUReportDamagedAsset.php">Back</a>
-                            </span>
-                            
                         </div>
 
-
-                        
                     </section>
                 </div>
             </div>
+        <!-- page end-->
         </section>
     </section>
+    <!--main content end-->
+<!--right sidebar start-->
+<div class="right-sidebar">
+	<div class="search-row">
+	    <input type="text" placeholder="Search" class="form-control">
+	</div>
+	<div class="right-stat-bar">
+		<ul class="right-side-accordion">
+		<li class="widget-collapsible">
+		    <ul class="widget-container">
+		        <li>
+		            <div class="prog-row side-mini-stat clearfix">
+		                <div class="side-graph-info">
+		                    <h4>Target sell</h4>
+		                    <p>
+		                        25%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="target-sell">
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="side-graph-info">
+		                    <h4>product delivery</h4>
+		                    <p>
+		                        55%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="p-delivery">
+		                        <div class="sparkline" data-type="bar" data-resize="true" data-height="30" data-width="90%" data-bar-color="#39b7ab" data-bar-width="5" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="side-graph-info payment-info">
+		                    <h4>payment collection</h4>
+		                    <p>
+		                        25%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="p-collection">
+								<span class="pc-epie-chart" data-percent="45">
+								<span class="percent"></span>
+								</span>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="side-graph-info">
+		                    <h4>delivery pending</h4>
+		                    <p>
+		                        44%, Deadline 12 june 13
+		                    </p>
+		                </div>
+		                <div class="side-mini-graph">
+		                    <div class="d-pending">
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="prog-row side-mini-stat">
+		                <div class="col-md-12">
+		                    <h4>total progress</h4>
+		                    <p>
+		                        50%, Deadline 12 june 13
+		                    </p>
+		                    <div class="progress progress-xs mtop10">
+		                        <div style="width: 50%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-info">
+		                            <span class="sr-only">50% Complete</span>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </li>
+		    </ul>
+		</li>
+		</ul>
+	</div>
+</div>
+<!--right sidebar end-->
+
+</section>
 
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!--Core js-->
-    <script src="../../js/jquery.js"></script>
-    <script src="../../bs3/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="../../js/jquery.scrollTo.min.js"></script>
-    <script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-    <script src="../../js/jquery.nicescroll.js"></script>
-    <!--Easy Pie Chart-->
-    <script src="../../js/easypiechart/jquery.easypiechart.js"></script>
-    <!--Sparkline Chart-->
-    <script src="../../js/sparkline/jquery.sparkline.js"></script>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../bs3/js/bootstrap.min.js"></script>
+	<script class="include" type="text/javascript" src="../../js/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="../../js/jquery.scrollTo.min.js"></script>
+	<script src="../../js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+	<script src="../../js/jquery.nicescroll.js"></script>
+	<!--Easy Pie Chart-->
+	<script src="../../js/easypiechart/jquery.easypiechart.js"></script>
+	<!--Sparkline Chart-->
+	<script src="../../js/sparkline/jquery.sparkline.js"></script>
+	<!--jQuery Flot Chart-->
+	<script src="../../js/flot-chart/jquery.flot.js"></script>
+	<script src="../../js/flot-chart/jquery.flot.tooltip.min.js"></script>
+	<script src="../../js/flot-chart/jquery.flot.resize.js"></script>
+	<script src="../../js/flot-chart/jquery.flot.pie.resize.js"></script>
 
-    <!--dynamic table-->
-    <script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
-    <!--common script init for all pages-->
-    <script src="../../js/scripts.js"></script>
+	<!--dynamic table-->
+	<script type="text/javascript" language="javascript" src="../../js/advanced-datatable/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../../js/data-tables/DT_bootstrap.js"></script>
+	<!--common script init for all pages-->
+	<script src="../../js/scripts.js"></script>
 
-    <!--dynamic table initialization -->
-    <script src="../../js/dynamic_table_init.js"></script>
+	<!--dynamic table initialization -->
+	<script src="DUReportDamagedAsset/dynamic_table_init.js"></script>
 
-    <script src="../../js/iCheck/jquery.icheck.js"></script>
+	<script src="../../js/iCheck/jquery.icheck.js"></script>
 
-    <script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="../../js/ckeditor/ckeditor.js"></script>
 
-    <!--icheck init -->
-    <script src="../../js/icheck-init.js"></script>
+	<!--icheck init -->
+	<script src="../../js/icheck-init.js"></script>
 
     <script type="text/javascript" src="../../js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -365,70 +442,74 @@
 
     <script type="text/javascript" src="../../js/plugins/sweetalert/sweetalert.min.js"></script>   
 
-    <script src="../../js/jquery.multifield.min.js"></script>
-    <script src="../../js/jquery.multifield.js"></script>
+    <script type="text/javascript" src="DUReportDamagedAsset.js"></script>
 
     <script>
+        $(document).ready(function() {
+            $('#drpcat').change(function() {
+                var e = document.getElementById("drpcat");
+                var getcat = e.options[e.selectedIndex].text;
+                if (getcat == 'Academic Organization')
+                    $('#course').removeClass('hidden');
+                else
+                    $('#course').addClass('hidden');
 
-        $('.form-content').multifield({
-            section: '.group',
-            btnAdd:'#btnAdd',
-            btnRemove:'.btnRemove',
-        });
 
-        $(function(){
-            $('select').on('change',function(){                        
-                $('input[name=place]').val($(this).val());            
             });
-        });
+            $('#drpupdcat').change(function() {
+                var e = document.getElementById("drpupdcat");
+                var getcat = e.options[e.selectedIndex].text;
+                if (getcat == 'Academic Organization')
+                    $('#updcourse').removeClass('hidden');
+                else
+                    $('#updcourse').addClass('hidden');
 
-        function myFunction(id) {
-            var id = id;
-             // alert(id);
+            });
+            $('.btncancels').click(function() {
 
-             $.ajax({
-                type: 'POST',
-                url: 'UpdateNotifByClicked.php',
-                async: false,
-                data: {
-                    _id: id
-                },
-                success: function(data2) {
-                    // alert(data2);                              
-                    // alert("tama");
-                },
-                error: function(response2) {
-                    // alert(response2);  
-                    // alert("mali");                                
+            });
+            $('.damagedmodal').click(function() {
+
+            });
+            // // $('#submit-data').click(function() { // // // });
+
+            function load_unseen_notification(view = '') {
+
+                var officeidofuser = document.getElementById('officeidofuser').value;
+
+                $.ajax({
+                    url:"fetchreqDU.php",
+                    method:"POST",
+                    data:{view:view, officeidofuser: officeidofuser},
+                    dataType:"json",
+               
+                success:function(data)
+                {
+                    $('.dispnotif').html(data.notification);
+
+                    if(data.unseen_notification > 0)
+                    {
+                        $('.count').html(data.unseen_notification);
+                    }
                 }
 
+                });
+            }
+             
+            load_unseen_notification();
+             
+            $(document).on('click', '.dropdown-toggles', function() {
+                $('.count').html('');
+                load_unseen_notification('yes');
             });
-        }
+             
+            setInterval(function(){ 
+                load_unseen_notification();; 
+            }, 1000);
 
-        function myFunction2(id) {
-             var id = id;
-             // alert(id);
+        });
 
-             $.ajax({
-                type: 'POST',
-                url: 'UpdateNotifByClickedReport.php',
-                async: false,
-                data: {
-                    _id: id
-                },
-                success: function(data2) {
-                    // alert(data2);                              
-                    // alert("tama");
-                },
-                error: function(response2) {
-                    // alert(response2);  
-                    // alert("mali");                                
-                }
-
-            });
-        }
-
-    </script>    
+    </script>
 
     <<!-- REPORT NOTIF -->
     <?php include 'ReportNotif.php'; ?> 
@@ -444,69 +525,3 @@
 
 </body>
 </html>
-
-<script>
-
-$(document).ready(function(){
-
-    // btnsubmitthedonation
-
-    // $('#btnsubmitthedonation').click(function(e) {
-    //     // alert();
-    // });
- 
-    function load_unseen_notification(view = '') {
-
-        var officeidofuser = document.getElementById('officeidofuser').value;
-
-        $.ajax({
-            url:"fetchreqDU.php",
-            method:"POST",
-            data:{view:view, officeidofuser: officeidofuser},
-            dataType:"json",
-       
-        success:function(data)
-        {
-            $('.dispnotif').html(data.notification);
-
-            if(data.unseen_notification > 0)
-            {
-                $('.count').html(data.unseen_notification);
-            }
-        }
-
-        });
-    }
-     
-    load_unseen_notification();
-     
-    $(document).on('click', '.dropdown-toggles', function() {
-        $('.count').html('');
-        load_unseen_notification('yes');
-    });
-     
-    setInterval(function(){ 
-        load_unseen_notification();; 
-    }, 1000);
-
-});
-</script>
-
-<script>
-
-    function printonly() {
-
-        var restorepage = document.body.innerHTML;
-        var printcont = document.getElementById('printdisbook').innerHTML;
-        document.body.innerHTML = printcont;
-        window.print();
-        document.body.innerHTML = restorepage;
-
-            setTimeout(function() 
-            {
-                window.location = window.location;
-            }, 100);
-
-    }
-
-</script>

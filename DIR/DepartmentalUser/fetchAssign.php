@@ -28,7 +28,7 @@ if(isset($_POST["view2"]))
 
     if ($ifuserclicked == 0) 
     {
-      $output .= '<a href="#" onclick="myFunction2('.$id.')">
+      $output .= '<a href="DUAssignedAssetView.php?receiveparid='.$id.'" onclick="myFunction2('.$id.')">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-success clearfix" style="background-color: #D9EDF7; color: gray;">
                         Date: <strong> '.$pardate.' </strong> </br>
@@ -41,7 +41,7 @@ if(isset($_POST["view2"]))
     }
     else
     {
-      $output .= '<a href="#">
+      $output .= '<a href="DUAssignedAssetView.php?receiveparid='.$id.'">
                     <li style="margin-top: 10px;">
                       <div class="alert alert-warning clearfix" style="background-color: #F8F8F8; color: gray;">
                         Date: <strong> '.$pardate.' </strong> </br>

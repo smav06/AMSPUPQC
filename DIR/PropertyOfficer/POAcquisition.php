@@ -301,7 +301,7 @@
                             </span>
                         </header>
 
-                        <div class="panel-body hidden" id="pnldonation">
+                        <div class="panel-body" id="pnldonation">
                             <table class="display table table-bordered table-striped">                                
                                 <tr>
                                     <td> 
@@ -394,18 +394,48 @@
                             </table>
                         </div>
 
-                        <div class="panel-body " id="pnlrequests">                            
+                        <div class="panel-body hidden" id="pnlrequests">                            
                             <div class="form-content">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>Enter Purchase Request Number</label>
-                                        <input style="color: black;" type="text" class="form-control" id="inpprno" required />
+                                        <input style="color: black;" maxlength="15" type="text" class="form-control" id="inpprno" required />
                                     </div>
 
-                                    <div class="col-md-4" style="margin-top: 22px;">
+                                    <div class="col-md-3">
+                                        <label></label>
+                                        <h4 id="checkinggg" style="color: red;"></h4>
+                                        <!-- <input style="color: black;" type="text" class="form-control" id="checkinggg" required /> -->
+                                    </div>
+
+                                    <br/>
+
+                                    <!-- <div class="col-md-4" style="margin-top: 22px;">
                                         <button type="button" class="btn btn-success" id="btnfrompurchaserequest">Submit</button>
+                                    </div> -->                                    
+                                </div>
+                                
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div style="padding: 0.5px; margin-bottom: 10px; background-color: #757575;">
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Date Requested</label>
+                                        <input style="color: black;" type="date" class="form-control" required="" disabled="" />
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Requested By</label>
+                                        <input style="color: black;" type="text" class="form-control" id="inpreqby" required="" disabled="" />
+                                    </div>
+                                </div>
+
                             </div>
 
                             <br>
@@ -417,6 +447,10 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div id="showtherequestdata">
+                                
                             </div>
 
                         </div>
@@ -698,11 +732,61 @@ function myFunction3(id) {
 
 $(document).ready(function(){
 
-    // btnsubmitthedonation
+    // KEYPRESS NG PR NO
+    $(function(){
 
-    // $('#btnsubmitthedonation').click(function(e) {
-    //     // alert();
-    // });
+        $('#inpprno').on('input',function(){                        
+
+            var inpprnos = document.getElementById('inpprno').value;
+            // alert(inpprnos);
+
+            if (document.getElementById('inpprno').value == '') 
+            {
+                document.getElementById('checkinggg').value = '';
+                document.getElementById('checkinggg').innerHTML = '';
+                document.getElementById('inpreqby').value = '';
+            }
+            else
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: 'AjaxGetDataOfPurchaseRequest.php',
+                    async: false,
+                    data: {
+                        _id: inpprnos
+                    },
+                    success: function(data2) {
+                        // alert(data2);                              
+                        // alert("tama");
+
+                        if (data2 == 'NO DATA') 
+                        {
+                            document.getElementById('checkinggg').value = 'NO DATA';
+                            document.getElementById('checkinggg').innerHTML = 'NO DATA';
+                            document.getElementById('inpreqby').value = '';
+
+                            document.getElementById('showtherequestdata').innerHTML = '';
+                        }
+                        else
+                        {
+                            document.getElementById('inpreqby').value = data2;
+                            document.getElementById('checkinggg').value = '';
+                            document.getElementById('checkinggg').innerHTML = '';
+
+                            document.getElementById('showtherequestdata').innerHTML = 'HAHAHAHA';
+                        }             
+
+                    },
+                    error: function(response2) {
+                        // alert(response2);  
+                        // alert("mali");                                
+                    }
+
+                });
+            }
+
+        });
+    });
  
     function load_unseen_notification(view = '') {
         $.ajax({

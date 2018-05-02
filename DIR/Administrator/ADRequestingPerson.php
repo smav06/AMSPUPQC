@@ -143,7 +143,7 @@
                         <li class="active"><a href="ADRequestingPerson.php">Disposal Location</a></li>  
                     </ul>
                 </li>
-                <li class="sub-menu">
+               <!--  <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-gears"></i>
                         <span>Configuration</span>
@@ -151,7 +151,7 @@
                     <ul class="sub">
                         <li><a href="ADPpmp.php">PPMP</a></li>  
                     </ul>
-                </li>
+                </li> -->
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-list"></i>
