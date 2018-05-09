@@ -240,7 +240,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="DUDashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                        <li><a href="DUReportDamagedAsset.php">Report Damaged Asset</a></li>
+                        <li><a href="DUAssignedAsset.php">Assigned Asset</a></li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
@@ -250,7 +250,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            List of Reported Damaged Asset
+                            Assigned Asset
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                              </span>

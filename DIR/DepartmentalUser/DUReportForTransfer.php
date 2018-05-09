@@ -274,7 +274,7 @@
                                             $idofuserhere = $_SESSION['myoid'];
                                             // echo $idofuserhere;
 
-                                            $sqldisp = "SELECT ROA.ROA_ID,A.A_DESCRIPTION, ROA.ROA_REASON, ROA.ROA_DATE, O.O_ID, A.A_DATE, PARS.PARS_CANCEL_DATE FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON ROAS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID where o.o_id =$idofuserhere GROUP BY ROA.ROA_ID"; 
+                                            $sqldisp = "SELECT ROA.ROA_ID,A.A_DESCRIPTION, ROA.ROA_REASON, ROA.ROA_DATE, O.O_ID, A.A_DATE, PARS.PARS_CANCEL_DATE FROM `ams_t_release_of_asset_sub` AS ROAS INNER JOIN `ams_t_release_of_asset` AS ROA ON ROAS.ROA_ID = ROA.ROA_ID INNER JOIN `ams_r_asset` AS A ON ROAS.A_ID = A.A_ID INNER JOIN `ams_t_par_sub` AS PARS ON ROAS.A_ID = PARS.A_ID INNER JOIN `ams_r_employee_profile` AS EP ON PARS.EP_ID = EP.EP_ID INNER JOIN `ams_r_office` AS O ON EP.O_ID = O.O_ID WHERE O.O_ID = $idofuserhere AND PARS.PARS_CANCEL_BY IS NOT NULL GROUP BY ROA.ROA_ID"; 
 
                                             // TESTING
 

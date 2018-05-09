@@ -278,14 +278,14 @@
                     <div class="row group">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Request No.</label>
+                                <label>PAR No.</label>
                                 <input type="text" value="<?php echo $reqno; ?>" class="form-control" style="color: black;" disabled />
                             </div>
                         </div>  
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Date of Request</label>
+                                <label>Assigned Date</label>
                                 <input type="date" value="<?php echo $rdate; ?>" class="form-control" style="color: black;" disabled />
                             </div>
                         </div>   
